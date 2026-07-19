@@ -152,7 +152,6 @@ function nav(sid){
 
 function update(){
   let total=SEC.length-1,doneCount=Object.keys(done).length,pct=total?Math.round(doneCount/total*100):0;
-  document.getElementById('pPct').textContent=pct+'%';
   document.getElementById('pFill').style.width=pct+'%';
   document.getElementById('pCount').textContent=doneCount+'/'+total;
   document.getElementById('ringPct').textContent=pct+'%';
@@ -876,7 +875,7 @@ function initAnimations(){
       p.style.width=(4+Math.random()*8)+'px';
       p.style.height=(4+Math.random()*8)+'px';
       document.body.appendChild(p);
-      setTimeout(function(el){el.remove()},3000);
+      setTimeout(function(){p.remove()},3000);
     }
   };
 
