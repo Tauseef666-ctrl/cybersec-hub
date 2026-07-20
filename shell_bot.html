@@ -25,6 +25,7 @@
 <nav class="bottom-nav" id="bottomNav">
   <div class="bn-item active" data-tab="home"><span class="bn-icon">&#9670;</span>Home</div>
   <div class="bn-item" data-tab="modules"><span class="bn-icon">&#9776;</span>Topics</div>
+  <div class="bn-item" data-tab="notes"><span class="bn-icon">&#9998;</span>Notes</div>
   <div class="bn-item" data-tab="labs"><span class="bn-icon">&#9881;</span>Labs</div>
   <div class="bn-item" data-tab="progress"><span class="bn-icon">&#9733;</span>Progress</div>
 </nav>
@@ -54,6 +55,7 @@ function hideInstallBanner(){var b=document.getElementById('installBanner');if(b
 (function(){
 const SEC=[
 {s:'home',t:'Home',c:'&#9670;',d:'Learning hub overview'},
+{s:'notes',t:'My Notes',c:'&#9998;',d:'Personal study notes'},
 {s:'foundations',t:'01. Cybersecurity Foundations',c:'&#9670;',d:'Core concepts & mindset',p:'home'},
 {s:'linux',t:'02. Linux Fundamentals',c:'&#9670;',d:'Linux from scratch',p:'home'},
 {s:'termux',t:'03. Termux Mastery',c:'&#9670;',d:'Android terminal',p:'home'},
@@ -82,30 +84,30 @@ const SEC=[
 ];
 
 const VIDS=[
-{id:'foundations',vids:[{vid:'Oielgo_hvRE',ch:'Networking Course'},{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'}]},
-{id:'linux',vids:[{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'},{vid:'tKJhn2iVpXE',ch:'LearnLinuxTV'}]},
-{id:'termux',vids:[{vid:'HElZqb3Mq1g',ch:'NetworkChuck'},{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'}]},
-{id:'networking',vids:[{vid:'Oielgo_hvRE',ch:'Networking Course'},{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'}]},
-{id:'recon',vids:[{vid:'qwA6MmbeGNo',ch:'The Cyber Mentor'},{vid:'LkA3H3caE8Y',ch:'John Hammond'}]},
+{id:'foundations',vids:[{vid:'Oielgo_hvRE',ch:'Tech Guru Manjit'},{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'}]},
+{id:'linux',vids:[{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'},{vid:'PPurMircqsc',ch:'Vector M'}]},
+{id:'termux',vids:[{vid:'PPurMircqsc',ch:'Vector M'},{vid:'Oielgo_hvRE',ch:'Tech Guru Manjit'}]},
+{id:'networking',vids:[{vid:'Oielgo_hvRE',ch:'Tech Guru Manjit'},{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'}]},
+{id:'recon',vids:[{vid:'qwA6MmbeGNo',ch:'The Cyber Mentor'}]},
 {id:'scanning',vids:[{vid:'wNA4CLG-OSM',ch:'whitesec'},{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'}]},
 {id:'ethicalhack',vids:[{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'},{vid:'TTw-EY7F1rM',ch:'Ryan John'}]},
 {id:'exploitation',vids:[{vid:'wNA4CLG-OSM',ch:'whitesec'},{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'}]},
 {id:'bugbounty',vids:[{vid:'TTw-EY7F1rM',ch:'Ryan John'},{vid:'FqnSAa2KmBI',ch:'HackerOne'}]},
-{id:'tools',vids:[{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'},{vid:'HElZqb3Mq1g',ch:'NetworkChuck'}]},
+{id:'tools',vids:[{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'},{vid:'v3iUx2SNspY',ch:'WsCube Cyber'}]},
 {id:'privesc',vids:[{vid:'wNA4CLG-OSM',ch:'whitesec'},{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'}]},
-{id:'postexp',vids:[{vid:'56NDgBOSpUg',ch:'The Cyber Mentor'},{vid:'LH0Y4Y7yOhI',ch:'John Hammond'}]},
-{id:'websecurity',vids:[{vid:'X4eRbHgRawI',ch:'freeCodeCamp'},{vid:'qiQRmQ7B8tM',ch:'HackerSploit'}]},
-{id:'ossecurity',vids:[{vid:'v3iUx2SNspY',ch:'WsCube Cyber'},{vid:'S0V4aOmkNzY',ch:'The Cyber Mentor'}]},
-{id:'malware',vids:[{vid:'qA0YcYMRWyI',ch:'HuskyHacks'},{vid:'ePHChGthcvk',ch:'John Hammond'}]},
-{id:'forensics',vids:[{vid:'jrYFwBU7Xrc',ch:'Simplilearn'},{vid:'McF3T8Z8n0M',ch:'John Hammond'}]},
-{id:'wireless',vids:[{vid:'wsa8N_lREN8',ch:'WsCube Cyber'},{vid:'XQrMK8m1vYc',ch:'NetworkChuck'}]},
-{id:'crypto',vids:[{vid:'C7vmouDOJYM',ch:'Simplilearn'},{vid:'H9KTK2s7NiY',ch:'NetworkChuck'}]},
-{id:'cloud',vids:[{vid:'XsRBDJ5hcdg',ch:'Tech With Soleyman'},{vid:'IA2YqasHQhI',ch:'NetworkChuck'}]},
-{id:'mobile',vids:[{vid:'qA0YcYMRWyI',ch:'HuskyHacks'},{vid:'ePHChGthcvk',ch:'John Hammond'}]},
-{id:'redteam',vids:[{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'},{vid:'d1fnoJfQpHo',ch:'HackerSploit'}]},
-{id:'blueteam',vids:[{vid:'56NDgBOSpUg',ch:'The Cyber Mentor'},{vid:'LH0Y4Y7yOhI',ch:'John Hammond'}]},
-{id:'homelab',vids:[{vid:'v3iUx2SNspY',ch:'WsCube Cyber'},{vid:'kGHbmASJ4yU',ch:'The Cyber Mentor'}]},
-{id:'career',vids:[{vid:'gXKNHYTgFnA',ch:'The Cyber Mentor'},{vid:'EhJUfHSj9fM',ch:'Professor Messer'}]},
+{id:'postexp',vids:[{vid:'56NDgBOSpUg',ch:'The Cyber Mentor'},{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'}]},
+{id:'websecurity',vids:[{vid:'X4eRbHgRawI',ch:'freeCodeCamp'},{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'}]},
+{id:'ossecurity',vids:[{vid:'UMOw0XVnWG8',ch:'Tutorial'},{vid:'v3iUx2SNspY',ch:'WsCube Cyber'}]},
+{id:'malware',vids:[{vid:'qA0YcYMRWyI',ch:'HuskyHacks'}]},
+{id:'forensics',vids:[{vid:'jrYFwBU7Xrc',ch:'EINITIAL24 Academy'},{vid:'VHhb4SCtEhQ',ch:'freeCodeCamp'}]},
+{id:'wireless',vids:[{vid:'wsa8N_lREN8',ch:'WsCube Cyber'}]},
+{id:'crypto',vids:[{vid:'C7vmouDOJYM',ch:'Simplilearn'},{vid:'j_8PLI_wCVU',ch:'Nerd\'s lesson'}]},
+{id:'cloud',vids:[{vid:'XsRBDJ5hcdg',ch:'Tech With Soleyman'},{vid:'NhDYbskXRgc',ch:'freeCodeCamp'}]},
+{id:'mobile',vids:[{vid:'qA0YcYMRWyI',ch:'HuskyHacks'},{vid:'PPurMircqsc',ch:'Vector M'}]},
+{id:'redteam',vids:[{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'}]},
+{id:'blueteam',vids:[{vid:'56NDgBOSpUg',ch:'The Cyber Mentor'}]},
+{id:'homelab',vids:[{vid:'g5JL2RIbThM',ch:'Josh Madakor'},{vid:'v3iUx2SNspY',ch:'WsCube Cyber'}]},
+{id:'career',vids:[{vid:'gXKNHYTgFnA',ch:'Cyber Mind Space'},{vid:'5xWnmUEi1Qw',ch:'NetworkChuck'}]},
 {id:'legal',vids:[{vid:'Y373bTp1j3w',ch:'PTP'},{vid:'76fcelayw00',ch:'Prabh Nair'}]}
 ];
 
@@ -173,7 +175,8 @@ function nav(sid){
     var active=false;
     if(sid==='home'&&tab==='home')active=true;
     else if(sid==='websecurity'&&tab==='labs')active=true;
-    else if(sid!=='home'&&tab==='modules')active=true;
+    else if(sid==='notes'&&tab==='notes')active=true;
+    else if(sid!=='home'&&sid!=='notes'&&tab==='modules')active=true;
     b.classList.toggle('active',active);
   });
 }
@@ -317,6 +320,7 @@ function initHomeCards(){
 }
 
 function initBoot(){
+  try{var bootAudio=new Audio('boot.wav');bootAudio.volume=0.3;bootAudio.play().catch(function(){})}catch(e){}
   var lines=document.querySelectorAll('.boot-line');
   if(!lines.length)return;
   var i=0;
@@ -447,7 +451,6 @@ function initTerminal(){
   var vw=window.visualViewport;
   var kbActive=false;
   var isMaximized=false;
-  var savedStyles={};
 
   // --- Keyboard handling ---
   function adjustForKeyboard(){
@@ -581,24 +584,10 @@ function initTerminal(){
       document.getElementById('termMin').title='Minimize';
     }
   }
-  function toggleMaximize(){
-    if(isMaximized){
-      isMaximized=false;
-      panel.classList.remove('maximized');
-      if(savedStyles.cssText){panel.style.cssText=savedStyles.cssText}
-      else{panel.style.cssText=''}
-    }else{
-      savedStyles={cssText:panel.style.cssText};
-      isMaximized=true;
-      panel.classList.add('maximized');
-      panel.style.cssText='top:60px!important;left:0!important;right:0!important;width:100%!important;height:calc(100vh - 60px)!important';
-    }
-  }
 
   document.getElementById('termTog').onclick=function(){if(panel.classList.contains('show'))closeTerminal();else openTerminal()};
   document.getElementById('termClose').onclick=closeTerminal;
   document.getElementById('termMin').onclick=toggleMinimize;
-  document.getElementById('termMax').onclick=toggleMaximize;
 
   input.onkeydown=function(e){
     e.stopPropagation();
@@ -651,6 +640,10 @@ function initBottomNav(){
         document.getElementById('sNav').scrollTop=0;
         if(window.innerWidth<769){document.getElementById('sb').classList.add('open');document.getElementById('sOv').classList.add('show')}
       }
+      else if(tab==='notes'){
+        var noteSec=document.getElementById('sec-notes');
+        if(noteSec)window.S('notes');
+      }
       else if(tab==='labs'){window.S('websecurity')}
       else if(tab==='progress'){
         var first=Object.keys(done).length>0?Object.keys(done)[0]:null;
@@ -671,7 +664,6 @@ function initVideoPlayer(){
   var drag=document.getElementById('vidDrag');
   var closeBtn=document.getElementById('vidClose');
   var minBtn=document.getElementById('vidMin');
-  var maxBtn=document.getElementById('vidMax');
   var resizeEl=document.getElementById('vidResize');
   var onlineDot=document.getElementById('onlineDot');
   if(!panel)return;
@@ -790,24 +782,8 @@ function initVideoPlayer(){
       list.style.display='';
       document.getElementById('vidPlayer').style.display='';
       panel.style.height='';panel.style.minHeight='';panel.style.overflow='';
-      minimized=false;
-      minBtn.innerHTML='&#8722;';minBtn.title='Minimize';
-    }
-  });
-
-  // --- Maximize ---
-  var savedStyles={};
-  maxBtn.addEventListener('click',function(){
-    if(isMaximized){
-      isMaximized=false;
-      panel.classList.remove('maximized');
-      if(savedStyles.cssText){panel.style.cssText=savedStyles.cssText}
-      else{panel.style.cssText=''}
-    }else{
-      savedStyles={cssText:panel.style.cssText};
-      isMaximized=true;
-      panel.classList.add('maximized');
-      panel.style.cssText='top:60px!important;left:0!important;right:0!important;width:100%!important;height:calc(100vh - 60px)!important';
+    minimized=false;
+    minBtn.innerHTML='&#8722;';minBtn.title='Minimize';
     }
   });
 
@@ -854,6 +830,49 @@ function initVideoPlayer(){
 
 window.S=nav;
 buildNav();initSearch();initNav();initCollapsibles();initCopyButtons();initQuizzes();initTerminal();initVideoPlayer();initHomeCards();initBoot();initBottomNav();initReadingTime();initSync();
+function initNotes(){
+  var container=document.getElementById('notesContainer');
+  var addBtn=document.getElementById('addNoteBtn');
+  var saveInd=document.getElementById('noteSaveInd');
+  if(!container||!addBtn)return;
+  var notes=JSON.parse(localStorage.getItem('cs_notes')||'[]');
+  function save(){
+    localStorage.setItem('cs_notes',JSON.stringify(notes));
+    if(saveInd){saveInd.classList.add('show');setTimeout(function(){saveInd.classList.remove('show')},1500)}
+  }
+  function render(){
+    container.innerHTML='';
+    if(notes.length===0){
+      container.innerHTML='<div class="note-empty">No notes yet. Click "+ New Note" to start taking notes about any topic.</div>';
+      return;
+    }
+    notes.forEach(function(n,i){
+      var card=document.createElement('div');
+      card.className='note-card';
+      card.innerHTML='<textarea placeholder="Write your note here..." data-idx="'+i+'">'+(n.text||'')+'</textarea><div class="note-meta"><span class="note-date">'+(n.date||'Just now')+'</span><span class="note-del" data-idx="'+i+'">Delete</span></div>';
+      var ta=card.querySelector('textarea');
+      ta.addEventListener('input',function(){
+        notes[i].text=ta.value;
+        notes[i].date=new Date().toLocaleDateString()+' '+new Date().toLocaleTimeString();
+        card.querySelector('.note-date').textContent=notes[i].date;
+        save();
+      });
+      card.querySelector('.note-del').addEventListener('click',function(){
+        notes.splice(i,1);save();render();
+      });
+      container.appendChild(card);
+    });
+  }
+  addBtn.addEventListener('click',function(){
+    notes.unshift({text:'',date:new Date().toLocaleDateString()+' '+new Date().toLocaleTimeString()});
+    save();render();
+    var firstTa=container.querySelector('textarea');
+    if(firstTa)firstTa.focus();
+  });
+  render();
+  window._notesRender=render;
+}
+initNotes();
 initAnimations();
 updateStreakUI();
 nav(cur);update();

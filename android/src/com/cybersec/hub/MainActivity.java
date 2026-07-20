@@ -81,16 +81,12 @@ public class MainActivity extends Activity {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                if (!request.isForMainFrame()) return false;
                 String url = request.getUrl().toString();
                 if (url.startsWith("file:///android_asset")) return false;
                 if (url.startsWith("http://localhost") || url.startsWith("http://127.")) return false;
                 if (url.startsWith("http://10.") || url.startsWith("http://192.") ||
                     url.startsWith("http://172.")) return false;
-                if (url.startsWith("https://")) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                    startActivity(intent);
-                    return true;
-                }
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
                 return true;
@@ -133,8 +129,6 @@ public class MainActivity extends Activity {
         });
 
         webView.addJavascriptInterface(new AndroidBridge(), "AndroidBridge");
-
-        webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 
         String url = getIntent().getDataString();
         if (url == null || url.isEmpty()) {

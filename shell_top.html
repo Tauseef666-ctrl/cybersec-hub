@@ -283,7 +283,6 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
 .vid-panel{display:none;position:fixed;top:60px;right:16px;width:min(420px,calc(100vw - 32px));height:380px;background:#0d1117;border:1px solid rgba(74,222,128,.3);border-radius:12px;z-index:200;flex-direction:column;box-shadow:0 8px 40px rgba(0,0,0,.6),0 0 20px rgba(74,222,128,.1);overflow:hidden;min-width:280px;min-height:240px}
 .vid-panel.show{display:flex;animation:fadeIn .2s ease}
 .vid-panel.hide-anim{animation:slideDown .2s ease forwards}
-.vid-panel.maximized{top:60px!important;right:0!important;left:0!important;width:100%!important;height:calc(100vh - 60px)!important;border-radius:0 0 12px 12px;resize:none}
 .vid-bar{background:rgba(74,222,128,.08);padding:6px 10px;display:flex;align-items:center;gap:6px;border-bottom:1px solid rgba(74,222,128,.2);flex-shrink:0;cursor:move;user-select:none}
 .vid-title{color:var(--grn);font-family:var(--mono);font-size:.68rem;flex:1;letter-spacing:.3px;cursor:move;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .vid-list{padding:6px;overflow-y:auto;max-height:45%;border-bottom:1px solid rgba(74,222,128,.1)}
@@ -305,7 +304,24 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
 .vid-btn:hover{background:rgba(74,222,128,.18);border-color:var(--grn);box-shadow:0 0 15px rgba(74,222,128,.12)}
 .vid-btn:active{transform:scale(.95)}
 
+.notes-section{padding:0}
+.notes-sec-title{color:var(--grn);font-family:var(--mono);font-size:.78rem;margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid rgba(74,222,128,.15);letter-spacing:.3px;display:flex;align-items:center;justify-content:space-between}
+.notes-sec-title:first-child{margin-top:0}
+.note-add{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2);color:var(--grn);font-family:var(--mono);font-size:.65rem;padding:4px 10px;border-radius:4px;cursor:pointer;transition:all .15s}
+.note-add:hover{background:rgba(74,222,128,.18)}
+.note-card{background:rgba(74,222,128,.04);border:1px solid rgba(74,222,128,.1);border-radius:8px;padding:10px 12px;margin:6px 0;position:relative}
+.note-card textarea{width:100%;background:none;border:none;color:var(--txt);font-family:var(--mono);font-size:.72rem;line-height:1.5;resize:vertical;min-height:60px;outline:none}
+.note-card .note-meta{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.note-card .note-date{color:var(--txt3);font-size:.6rem;font-family:var(--mono)}
+.note-card .note-del{color:var(--red);font-size:.6rem;cursor:pointer;opacity:.5;transition:opacity .15s}
+.note-card .note-del:hover{opacity:1}
+.note-empty{color:var(--txt3);font-size:.75rem;font-family:var(--mono);text-align:center;padding:40px 20px}
+.note-save-indicator{color:var(--grn);font-size:.6rem;font-family:var(--mono);opacity:0;transition:opacity .3s}
+.note-save-indicator.show{opacity:1}
+
 .vid-embeds{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin:12px 0}
+.vid-embed{margin:12px 0;border-radius:8px;overflow:hidden;max-width:400px}
+.subtopic-title{color:var(--cyn);font-size:.88rem;margin:20px 0 8px;padding-bottom:4px;border-bottom:1px solid rgba(56,189,248,.12)}
 .vid-thumb{position:relative;border-radius:8px;overflow:hidden;cursor:pointer;border:1px solid rgba(74,222,128,.15);transition:all .2s;background:#0d1117}
 .vid-thumb:hover{border-color:var(--grn);box-shadow:0 0 20px rgba(74,222,128,.15);transform:translateY(-2px)}
 .vid-thumb img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
@@ -434,7 +450,6 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
           <div class="td r"></div><div class="td y"></div><div class="td g"></div>
           <span class="term-title">TERMINAL</span>
           <button class="term-ctrl-btn minimize" id="termMin" title="Minimize">&#8722;</button>
-          <button class="term-ctrl-btn maximize" id="termMax" title="Maximize">&#9633;</button>
           <button class="term-ctrl-btn close" id="termClose" title="Close">&#10005;</button>
         </div>
         <div class="term-body" id="termBody"></div>
@@ -449,7 +464,6 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
           <div class="td r"></div><div class="td y"></div><div class="td g"></div>
           <span class="vid-title" id="vidPanelTitle">Videos</span>
           <button class="term-ctrl-btn minimize" id="vidMin">&#8722;</button>
-          <button class="term-ctrl-btn maximize" id="vidMax">&#9633;</button>
           <button class="term-ctrl-btn close" id="vidClose">&#10005;</button>
         </div>
         <div class="vid-list" id="vidList"></div>
