@@ -257,7 +257,7 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
 .qstart h3{color:var(--grn);font-family:var(--mono);font-size:.9rem;margin-bottom:8px}
 .qstart ol{margin-left:16px;color:var(--txt2);font-size:.85rem}.qstart li{margin-bottom:6px;line-height:1.4}.qstart li strong{color:var(--txt)}
 
-.term-panel{display:none;position:fixed;top:60px;left:16px;width:min(380px,calc(100vw - 32px));height:320px;background:#0d1117;border:1px solid rgba(192,132,252,.3);border-radius:12px;z-index:200;flex-direction:column;transition:none;box-shadow:0 8px 40px rgba(0,0,0,.6),0 0 20px rgba(192,132,252,.1);overflow:hidden;resize:both;min-width:260px;min-height:180px}
+.term-panel{display:none;position:fixed;top:60px;left:16px;width:min(380px,calc(100vw - 32px));height:320px;background:#0d1117;border:1px solid rgba(192,132,252,.3);border-radius:12px;z-index:201;flex-direction:column;transition:none;box-shadow:0 8px 40px rgba(0,0,0,.6),0 0 20px rgba(192,132,252,.1);overflow:hidden;min-width:260px;min-height:180px}
 .term-panel.kb-active{transition:none}
 .term-panel.show{display:flex;animation:fadeIn .2s ease}
 .term-panel.hide-anim{animation:slideDown .2s ease forwards}
@@ -280,7 +280,7 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
 .online-dot.on{background:var(--grn);animation:onlinePulse 2s infinite}
 @keyframes onlinePulse{0%,100%{opacity:1;box-shadow:0 0 4px var(--grn)}50%{opacity:.4;box-shadow:none}}
 
-.vid-panel{display:none;position:fixed;top:60px;right:16px;width:min(420px,calc(100vw - 32px));height:380px;background:#0d1117;border:1px solid rgba(74,222,128,.3);border-radius:12px;z-index:200;flex-direction:column;box-shadow:0 8px 40px rgba(0,0,0,.6),0 0 20px rgba(74,222,128,.1);overflow:hidden;resize:both;min-width:280px;min-height:240px}
+.vid-panel{display:none;position:fixed;top:60px;right:16px;width:min(420px,calc(100vw - 32px));height:380px;background:#0d1117;border:1px solid rgba(74,222,128,.3);border-radius:12px;z-index:200;flex-direction:column;box-shadow:0 8px 40px rgba(0,0,0,.6),0 0 20px rgba(74,222,128,.1);overflow:hidden;min-width:280px;min-height:240px}
 .vid-panel.show{display:flex;animation:fadeIn .2s ease}
 .vid-panel.hide-anim{animation:slideDown .2s ease forwards}
 .vid-panel.maximized{top:60px!important;right:0!important;left:0!important;width:100%!important;height:calc(100vh - 60px)!important;border-radius:0 0 12px 12px;resize:none}
