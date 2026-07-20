@@ -1,0 +1,24 @@
+# Build artifacts
+android/build/
+android/dex/
+android/gen/
+android/obj/
+android/*.idsig
+android/CyberSecHub.apk.idsig
+
+# Debug keystore (regenerated during build)
+android/build/debug.keystore
+
+# Cloudflare tunnel logs
+cf_log.txt
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+*.tmp
+*.bak

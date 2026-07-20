@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,6 +31,7 @@ import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -87,6 +90,7 @@ public class MainActivity extends Activity {
                 if (url.startsWith("http://localhost") || url.startsWith("http://127.")) return false;
                 if (url.startsWith("http://10.") || url.startsWith("http://192.") ||
                     url.startsWith("http://172.")) return false;
+                if (url.contains("youtube.com") || url.contains("youtu.be") || url.contains("ytimg.com")) return false;
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
                 return true;
@@ -94,17 +98,31 @@ public class MainActivity extends Activity {
 
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                view.loadUrl("file:///android_asset/index.html");
+                if (request.isForMainFrame()) {
+                    view.loadUrl("file:///android_asset/index.html");
+                }
+            }
+
+            @Override
+            public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+                return super.shouldInterceptRequest(view, request);
             }
         });
 
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
-            public boolean onConsoleMessage(ConsoleMessage msg) { return true; }
+            public boolean onConsoleMessage(ConsoleMessage msg) {
+                android.util.Log.d("WebView", msg.message() + " -- line " + msg.lineNumber() + " of " + msg.sourceId());
+                return true;
+            }
 
             @Override
             public void onProgressChanged(WebView view, int newProgress) {}
         });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WebView.setWebContentsDebuggingEnabled(true);
+        }
 
         webView.setDownloadListener(new DownloadListener() {
             @Override
@@ -173,10 +191,7 @@ public class MainActivity extends Activity {
         CookieManager.getInstance().setAcceptCookie(true);
         CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true);
 
-        String ua = s.getUserAgentString();
-        if (!ua.contains("CyberSecHub")) {
-            s.setUserAgentString(ua + " CyberSecHubApp/2.0");
-        }
+        s.setUserAgentString("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 CyberSecHub/3.0");
     }
 
     private void applyImmersiveMode() {
@@ -382,6 +397,18 @@ public class MainActivity extends Activity {
         }
 
         @JavascriptInterface
+        public void openInNewPipe(String videoId) {
+            try {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://www.youtube.com/watch?v=" + videoId));
+                intent.setPackage("org.schabi.newpipe");
+                startActivity(intent);
+            } catch (Exception e) {
+                openUrl("https://www.youtube.com/watch?v=" + videoId);
+            }
+        }
+
+        @JavascriptInterface
         public void copyToClipboard(String text) {
             ClipboardManager cb = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
             ClipData clip = ClipData.newPlainText("CyberSec", text);
@@ -407,6 +434,17 @@ public class MainActivity extends Activity {
         public void openInBrowser(String url) {
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(intent);
+        }
+
+        @JavascriptInterface
+        public boolean isOnline() {
+            try {
+                ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                android.net.NetworkInfo ni = cm.getActiveNetworkInfo();
+                return ni != null && ni.isConnected();
+            } catch (Exception e) {
+                return false;
+            }
         }
     }
 

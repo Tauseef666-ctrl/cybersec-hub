@@ -289,7 +289,7 @@ public class SplashActivity extends Activity {
             // Version
             vPaint.setTextSize(Math.min(12f, w * 0.018f));
             vPaint.setAlpha((int)(authorAlpha * 120));
-            canvas.drawText("v2.0  |  Android", cx, h * 0.90f, vPaint);
+            canvas.drawText("v3.0  |  Android", cx, h * 0.90f, vPaint);
 
             // Loading dots
             float loadAlpha = ease(progress, 0.0f, 0.3f);

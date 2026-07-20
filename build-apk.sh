@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-PROJ="/storage/emulated/0/git/ai/cybersecurity-hub/android"
+PROJ="$(dirname "$0")/android"
 BUILD="$PROJ/build"
 ANDROID_JAR="$PROJ/toolz/android.jar"
 

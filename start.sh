@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /storage/emulated/0/git/ai/cybersecurity-hub
+cd "$(dirname "$0")"
 while true; do
   node server.js 2>/dev/null
   sleep 2

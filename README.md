@@ -1,55 +1,95 @@
-# CyberSec Hub
+<p align="center">
+  <img src="icon-512.svg" alt="CyberSec Hub Logo" width="200">
+</p>
 
-A self-contained cybersecurity learning platform packaged as a native Android app. Learn ethical hacking, networking, forensics, and more — all offline, right from your phone.
+<h1 align="center">CyberSec Hub</h1>
 
-## What It Is
+<p align="center">
+  <strong>Learn Cybersecurity From Scratch — On Your Phone, Offline</strong>
+</p>
 
-CyberSec Hub is a single-page web application wrapped in an Android WebView shell. It delivers a full cybersecurity course with 25 topic sections, interactive quizzes, a sandbox terminal, progress tracking, and a polished hacker-themed UI — no server required.
+<p align="center">
+  <img src="https://img.shields.io/badge/version-3.0.0-green?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/badge/android-5.0%2B-blue?style=for-the-badge&logo=android" alt="Android">
+  <img src="https://img.shields.io/badge/size-367KB-orange?style=for-the-badge" alt="APK Size">
+  <img src="https://img.shields.io/badge/license-Educational%20Use-red?style=for-the-badge" alt="License">
+</p>
+
+---
+
+## What Is This?
+
+**CyberSec Hub** is a self-contained cybersecurity learning platform packaged as a native Android app. It delivers a **complete cybersecurity course with 25 in-depth sections** — covering everything from the CIA Triad and Linux fundamentals to exploitation, malware analysis, digital forensics, red/blue teaming, and career guidance — all running **100% offline** on your phone. No server, no internet required after install. Just open the app and start learning.
+
+Built as a single-page vanilla HTML/CSS/JS web application wrapped in an Android Java WebView shell, CyberSec Hub is designed to be lightweight, fast, and accessible to anyone with an Android device. Whether you're a complete beginner or an intermediate learner, the structured curriculum, interactive quizzes, and built-in sandbox terminal give you a hands-on cybersecurity lab that fits in your pocket.
+
+---
+
+## Download
+
+| Platform | Link |
+|----------|------|
+| Android APK | [**Download v3.0.0**](../../releases/latest) |
+
+> Requires Android 5.0 (Lollipop) or higher. Install the APK directly — no Play Store needed.
+
+---
+
+## Screenshots
+
+The app features a dark hacker-themed UI with green, cyan, and purple accents:
+
+- **Home Screen** — Matrix rain animation, boot terminal, course stats, and quick-start guide
+- **Course Sections** — 25 topics with subtopics, code blocks, collapsible details, and inline quizzes
+- **Sandbox Terminal** — Floating, draggable, resizable terminal with 20+ simulated commands
+- **Progress Tracking** — Ring progress, streak counter, per-section completion, and cloud sync
+- **Navigation** — Sidebar, bottom nav bar, breadcrumbs, global search, and keyboard shortcuts
+
+---
 
 ## Features
 
 ### Learning Content
 - **25 cybersecurity sections** covering:
   - Foundations, Linux, Termux, Networking
-  - Scanning, Reconnaissance, Web Security
-  - Exploitation, Post-Exploitation, Privilege Escalation
+  - Reconnaissance & OSINT, Scanning & Enumeration
+  - Ethical Hacking, Exploitation, Post-Exploitation
+  - Privilege Escalation, Bug Bounty, Essential Tools
+  - Web Application Security, Operating System Security
   - Malware Analysis, Digital Forensics, Cryptography
   - Wireless Security, Cloud Security, Mobile Security
-  - Operating System Security, Red Team, Blue Team
-  - Bug Bounty, Home Lab Setup, Tools & Resources
-  - Legal & Ethics, Career Guidance
-- **6 interactive quizzes** with instant feedback and explanations
+  - Red Teaming, Blue Teaming, Home Lab Setup
+  - Career Guidance, Legal & Ethics
+- **Interactive quizzes** with instant feedback, explanations, and streak tracking
 - **234 code blocks** with one-tap copy buttons
 - **173 collapsible sections** for organized content delivery
+- **Embedded YouTube video** thumbnails for supplementary learning
 - Terminal-style code boxes with traffic-light dots
 
-### Terminal
-- **Floating sandbox terminal** — draggable, resizable, works anywhere
-- **20+ built-in commands**: `help`, `ls`, `cd`, `cat`, `whoami`, `nmap`, `ping`, `curl`, `hash`, `base64`, `ifconfig`, `netstat`, `ps`, `grep`, `find`, `echo`, `date`, `uname`, `apt`, `clear`
+### Sandbox Terminal
+- **Floating, draggable, resizable** — works anywhere in the app
+- **20+ built-in commands**: `help`, `ls`, `cat`, `whoami`, `nmap`, `ping`, `curl`, `ifconfig`, `netstat`, `ps`, `netstat`, `hash`, `base64`, `sudo`, `tree`, `score`, and more
 - Keyboard-aware — stays visible above the Android keyboard
 - Maximize mode for full-screen terminal
+- Command history with arrow key navigation and tab completion
 
 ### Progress Tracking
 - Per-section completion checkboxes
-- Progress ring with percentage display
-- Quiz streak counter
-- Streak calendar (last 7 days)
-- **Local storage persistence** — progress survives app restarts
-- **Cloud sync** — generate a shareable sync link to backup/restore progress across devices
-- **Export/Import** JSON data
+- SVG progress ring with percentage display
+- Quiz streak counter with fire animation
+- **localStorage persistence** — progress survives app restarts
+- **Shareable sync links** — QR code + URL for cross-device backup/restore
+- **Export/Import** JSON data for full data portability
 
-### Navigation
+### Navigation & UI
 - Sidebar with collapsible chapter groups
 - Top bar with back/forward history navigation
 - Bottom navigation bar (Home, Topics, Labs, Progress) with active glow indicator
 - Breadcrumb trail
-- Global search (Ctrl+K)
-- Keyboard shortcuts modal (?)
-
-### UI/UX
-- Dark hacker theme with green/cyan/purple accent colors
-- Matrix rain canvas animation on home
-- Boot-up typewriter animation
+- Global search (`Ctrl+K`)
+- Keyboard shortcuts modal (`?`)
+- Dark hacker theme with Matrix rain canvas animation
+- Boot-up typewriter animation on launch
 - Confetti on correct quiz answers
 - Toast notifications
 - Card parallax tilt on hover
@@ -57,62 +97,90 @@ CyberSec Hub is a single-page web application wrapped in an Android WebView shel
 - Ripple effects on buttons
 - Responsive design (phone, tablet, desktop, landscape)
 
+---
+
 ## Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
 | Frontend | Vanilla HTML/CSS/JS (no frameworks) |
-| Styling | CSS custom properties, animations, flexbox/grid |
-| Android Shell | Java WebView (API 21+) |
-| Build | Shell script using `aapt`, `javac`, `dx`, `apksigner` |
+| Styling | CSS custom properties, 40+ keyframe animations, flexbox/grid |
+| Android Shell | Java WebView (API 21+) with JavaScript bridge |
+| Splash Screen | Custom animated Canvas rendering |
+| Build | Shell script using `aapt`, `javac`, `d8`, `zipalign`, `apksigner` |
 | Storage | localStorage (client-side) |
-| Sync | Firebase Realtime Database (anonymous, optional) |
+| Sync | Base64-encoded shareable URLs with QR codes |
+| PWA | Service worker for offline web caching |
+
+---
 
 ## Project Structure
 
 ```
-cybersecurity-hub/
-├── shell_top.html          # CSS + HTML header/nav/terminal markup
-├── sections.html           # All 25 course sections (content)
-├── shell_bot.html          # All JavaScript (nav, quizzes, terminal, sync)
-├── index.html              # Combined output (shell_top + sections + shell_bot)
-├── build-apk.sh            # Android APK build script
-├── android/
-│   ├── AndroidManifest.xml
-│   ├── src/com/cybersec/hub/
-│   │   ├── MainActivity.java      # WebView wrapper
-│   │   └── SplashActivity.java    # Animated splash screen
-│   ├── res/drawable/ic_launcher.xml
-│   ├── res/values/styles.xml
-│   ├── assets/
-│   │   ├── index.html             # Copied from root
-│   │   ├── manifest.json          # PWA manifest
-│   │   └── sw.js                  # Service worker (unused in APK)
-│   └── toolz/android.jar          # Android SDK stub for compilation
-├── manifest.json           # PWA manifest
-├── sw.js                   # Service worker
-└── build-apk.sh            # Build script
+cybersec-hub/
+├── shell_top.html              # CSS + HTML header/nav/terminal markup
+├── sections.html               # All 25 course sections (content)
+├── shell_bot.html              # All JavaScript (nav, quizzes, terminal, sync)
+├── index.html                  # Combined output (shell_top + sections + shell_bot)
+├── server.js                   # Local Node.js dev server
+├── start.sh                    # Auto-restart server script
+├── build-apk.sh                # Android APK build script
+├── manifest.json               # PWA manifest
+├── sw.js                       # Service worker
+├── icon-192.svg                # App icon (192x192)
+├── icon-512.svg                # App icon (512x512)
+├── hackacademy-prototype.jsx   # React prototype (reference only)
+└── android/
+    ├── AndroidManifest.xml
+    ├── CyberSecHub.apk          # Built APK
+    ├── src/com/cybersec/hub/
+    │   ├── MainActivity.java    # WebView wrapper + AndroidBridge
+    │   └── SplashActivity.java  # Animated splash screen
+    ├── res/
+    │   ├── drawable/            # Adaptive icon
+    │   └── mipmap-*/            # Launcher icons (all densities)
+    ├── assets/
+    │   ├── index.html           # Copied from root
+    │   ├── boot.wav             # Boot sound effect
+    │   ├── fonts/               # JetBrains Mono + Inter
+    │   ├── manifest.json        # PWA manifest
+    │   ├── sw.js                # Service worker
+    │   └── icon-*.svg           # Icons
+    └── toolz/android.jar        # Android SDK stub for compilation
 ```
+
+---
 
 ## Building
 
 ### Prerequisites
-- Linux/Termux environment
-- `aapt`, `apksigner`, `dx` (Android build tools)
+- Linux or [Termux](https://f-droid.org/en/packages/com.termux/) environment
+- Android build tools: `aapt`, `javac`, `d8`, `zipalign`, `apksigner`
 
 ### Build Steps
 ```bash
-# Concatenate source files
+# 1. Concatenate source files into index.html
 cat shell_top.html sections.html shell_bot.html > index.html
 
-# Copy to Android assets
+# 2. Copy to Android assets
 cp index.html android/assets/
 
-# Build APK
+# 3. Build the APK
 bash build-apk.sh
 ```
 
-Output: `android/CyberSecHub.apk`
+**Output:** `android/CyberSecHub.apk`
+
+### Install on Android
+```bash
+# Copy to shared storage
+cp android/CyberSecHub.apk ~/storage/shared/
+
+# Open with package installer
+termux-open ~/storage/shared/CyberSecHub.apk
+```
+
+---
 
 ## Keyboard Shortcuts
 
@@ -120,29 +188,40 @@ Output: `android/CyberSecHub.apk`
 |----------|--------|
 | `Ctrl+K` | Open search |
 | `Ctrl+`` ` | Toggle terminal |
-| `?` | Show shortcuts |
+| `?` | Show shortcuts modal |
 | `Esc` | Close active panel |
 | `Alt+Left` | Navigate back |
 | `Alt+Right` | Navigate forward |
 
+---
+
 ## Version History
 
-### v1.0.0 (Current)
+### v3.0.0 (Latest)
+- Full course restructure with subtopics, embedded videos, and notes
+- Boot sound effect and splash screen improvements
+- Video panel with YouTube integration
+- Floating terminal with drag, resize, minimize, and keyboard awareness
+- Online status indicator
+- Cloudflare tunnel support for remote access
+
+### v1.0.0
 - Initial release with 25 cybersecurity sections
 - Floating draggable/resizable terminal
 - Quiz system with streak tracking
-- Progress sync via Firebase
+- Progress sync via shareable URLs
 - Bottom navigation with active glow states
-- Button audit: fixed next/back navigation, removed dead handlers
-- Bug fixes: pPct crash, confetti memory leak, missing CSS classes (tbox-bt, tg.pk, hide-anim), tbox-bar traffic dots
 
-## Git Log
-```
-a245dce fix: 6 bugs - pPct crash, confetti leak, tbox-bt/tg.pk CSS, tbox-bar dots, hide-anim
-5be747c fix: button audit - next/back nav, dead copyCode handlers, dead toggleCol handlers
-dad97bb baseline: current app state before button audit
-```
+---
 
 ## License
 
-Educational use only. Built with Termux on Android.
+**Educational use only.** Built with Termux on Android.
+
+---
+
+<p align="center">
+  <img src="icon-192.svg" alt="CyberSec Hub" width="80">
+  <br>
+  <sub>Made with passion for cybersecurity education</sub>
+</p>
