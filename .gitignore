@@ -22,3 +22,14 @@ Thumbs.db
 # Temp
 *.tmp
 *.bak
+
+# Large SDK/build tools (too big for git)
+android/toolz/
+android/CyberSecHub.apk
+android/build/apk/
+android/build/debug.keystore
+
+# Compiled class files (tracked in history)
+android/build/obj/
+android/build/gen/
+android/build/dex/
