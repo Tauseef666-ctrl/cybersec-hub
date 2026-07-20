@@ -14,7 +14,6 @@
     <h3>&#9881; Keyboard Shortcuts</h3>
     <div class="shortcut-row"><span class="sc-label">Search</span><kbd>Ctrl + K</kbd></div>
     <div class="shortcut-row"><span class="sc-label">Terminal</span><kbd>Ctrl + `</kbd></div>
-    <div class="shortcut-row"><span class="sc-label">Videos</span><kbd>Ctrl + Shift + V</kbd></div>
     <div class="shortcut-row"><span class="sc-label">Previous section</span><kbd>Alt + &#8592;</kbd></div>
     <div class="shortcut-row"><span class="sc-label">Next section</span><kbd>Alt + &#8594;</kbd></div>
     <div class="shortcut-row"><span class="sc-label">Close panel</span><kbd>Esc</kbd></div>
@@ -26,7 +25,6 @@
 <nav class="bottom-nav" id="bottomNav">
   <div class="bn-item active" data-tab="home"><span class="bn-icon">&#9670;</span>Home</div>
   <div class="bn-item" data-tab="modules"><span class="bn-icon">&#9776;</span>Topics</div>
-  <div class="bn-item" data-tab="videos"><span class="bn-icon">&#9654;</span>Videos</div>
   <div class="bn-item" data-tab="labs"><span class="bn-icon">&#9881;</span>Labs</div>
   <div class="bn-item" data-tab="progress"><span class="bn-icon">&#9733;</span>Progress</div>
 </nav>
@@ -84,31 +82,31 @@ const SEC=[
 ];
 
 const VIDS=[
-{id:'net',vids:[{vid:'Oielgo_hvRE',ch:'Networking Course'},{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'}]},
+{id:'foundations',vids:[{vid:'Oielgo_hvRE',ch:'Networking Course'},{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'}]},
 {id:'linux',vids:[{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'},{vid:'tKJhn2iVpXE',ch:'LearnLinuxTV'}]},
-{id:'web',vids:[{vid:'X4eRbHgRawI',ch:'freeCodeCamp'},{vid:'qiQRmQ7B8tM',ch:'HackerSploit'}]},
-{id:'osint',vids:[{vid:'qwA6MmbeGNo',ch:'The Cyber Mentor'},{vid:'LkA3H3caE8Y',ch:'John Hammond'}]},
+{id:'termux',vids:[{vid:'HElZqb3Mq1g',ch:'NetworkChuck'},{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'}]},
+{id:'networking',vids:[{vid:'Oielgo_hvRE',ch:'Networking Course'},{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'}]},
+{id:'recon',vids:[{vid:'qwA6MmbeGNo',ch:'The Cyber Mentor'},{vid:'LkA3H3caE8Y',ch:'John Hammond'}]},
+{id:'scanning',vids:[{vid:'wNA4CLG-OSM',ch:'whitesec'},{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'}]},
+{id:'ethicalhack',vids:[{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'},{vid:'TTw-EY7F1rM',ch:'Ryan John'}]},
+{id:'exploitation',vids:[{vid:'wNA4CLG-OSM',ch:'whitesec'},{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'}]},
+{id:'bugbounty',vids:[{vid:'TTw-EY7F1rM',ch:'Ryan John'},{vid:'FqnSAa2KmBI',ch:'HackerOne'}]},
+{id:'tools',vids:[{vid:'sWbUDq4S6Y8',ch:'freeCodeCamp'},{vid:'HElZqb3Mq1g',ch:'NetworkChuck'}]},
+{id:'privesc',vids:[{vid:'wNA4CLG-OSM',ch:'whitesec'},{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'}]},
+{id:'postexp',vids:[{vid:'56NDgBOSpUg',ch:'The Cyber Mentor'},{vid:'LH0Y4Y7yOhI',ch:'John Hammond'}]},
+{id:'websecurity',vids:[{vid:'X4eRbHgRawI',ch:'freeCodeCamp'},{vid:'qiQRmQ7B8tM',ch:'HackerSploit'}]},
+{id:'ossecurity',vids:[{vid:'v3iUx2SNspY',ch:'WsCube Cyber'},{vid:'S0V4aOmkNzY',ch:'The Cyber Mentor'}]},
 {id:'malware',vids:[{vid:'qA0YcYMRWyI',ch:'HuskyHacks'},{vid:'ePHChGthcvk',ch:'John Hammond'}]},
-{id:'cisco',vids:[{vid:'7zRkUa1eSOA',ch:'Go Cloud Architects'},{vid:'HElZqb3Mq1g',ch:'NetworkChuck'}]},
-{id:'pentest',vids:[{vid:'wNA4CLG-OSM',ch:'whitesec'},{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'}]},
-{id:'cloud',vids:[{vid:'XsRBDJ5hcdg',ch:'Tech With Soleyman'},{vid:'IA2YqasHQhI',ch:'NetworkChuck'}]},
-{id:'netsec',vids:[{vid:'NqgqJj9bpWc',ch:'Network Security Course'},{vid:'kGHbmASJ4yU',ch:'The Cyber Mentor'}]},
-{id:'crypto',vids:[{vid:'C7vmouDOJYM',ch:'Simplilearn'},{vid:'H9KTK2s7NiY',ch:'NetworkChuck'}]},
-{id:'wireless',vids:[{vid:'wsa8N_lREN8',ch:'WsCube Cyber'},{vid:'XQrMK8m1vYc',ch:'NetworkChuck'}]},
 {id:'forensics',vids:[{vid:'jrYFwBU7Xrc',ch:'Simplilearn'},{vid:'McF3T8Z8n0M',ch:'John Hammond'}]},
-{id:'soc',vids:[{vid:'56NDgBOSpUg',ch:'The Cyber Mentor'},{vid:'BcMcM9bR1xc',ch:'John Hammond'}]},
-{id:'risk',vids:[{vid:'J-su239XmCE',ch:'Inside Cloud and Security'},{vid:'K3EJEO3mOGY',ch:'Prabh Nair'}]},
-{id:'ids',vids:[{vid:'druq1s-OkI4',ch:'Alpha Brains'},{vid:'VR2EdYqfmkg',ch:'Professor Messer'}]},
-{id:'incident',vids:[{vid:'MsGl6lX-YaI',ch:'Google Career Certs'},{vid:'4s454p6rXyI',ch:'The Cyber Mentor'}]},
-{id:'appsec',vids:[{vid:'ajLk4Hg0lCM',ch:'Simplilearn'},{vid:'JHfOArU0Y4k',ch:'HackerSploit'}]},
-{id:'blue',vids:[{vid:'56NDgBOSpUg',ch:'The Cyber Mentor'},{vid:'LH0Y4Y7yOhI',ch:'John Hammond'}]},
-{id:'red',vids:[{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'},{vid:'d1fnoJfQpHo',ch:'HackerSploit'}]},
-{id:'hack',vids:[{vid:'TTw-EY7F1rM',ch:'Ryan John'},{vid:'FqnSAa2KmBI',ch:'HackerOne'}]},
-{id:'defence',vids:[{vid:'v3iUx2SNspY',ch:'WsCube Cyber'},{vid:'S0V4aOmkNzY',ch:'The Cyber Mentor'}]},
-{id:'ai',vids:[{vid:'aUfRHxeA15I',ch:'SANS Institute'},{vid:'XWuP5Yf5ILI',ch:'Python for Hackers'}]},
-{id:'privacy',vids:[{vid:'76fcelayw00',ch:'Prabh Nair'},{vid:'u2Kwc0YG7YQ',ch:'Professor Messer'}]},
+{id:'wireless',vids:[{vid:'wsa8N_lREN8',ch:'WsCube Cyber'},{vid:'XQrMK8m1vYc',ch:'NetworkChuck'}]},
+{id:'crypto',vids:[{vid:'C7vmouDOJYM',ch:'Simplilearn'},{vid:'H9KTK2s7NiY',ch:'NetworkChuck'}]},
+{id:'cloud',vids:[{vid:'XsRBDJ5hcdg',ch:'Tech With Soleyman'},{vid:'IA2YqasHQhI',ch:'NetworkChuck'}]},
+{id:'mobile',vids:[{vid:'qA0YcYMRWyI',ch:'HuskyHacks'},{vid:'ePHChGthcvk',ch:'John Hammond'}]},
+{id:'redteam',vids:[{vid:'fNzpcB7ODxQ',ch:'The Cyber Mentor'},{vid:'d1fnoJfQpHo',ch:'HackerSploit'}]},
+{id:'blueteam',vids:[{vid:'56NDgBOSpUg',ch:'The Cyber Mentor'},{vid:'LH0Y4Y7yOhI',ch:'John Hammond'}]},
+{id:'homelab',vids:[{vid:'v3iUx2SNspY',ch:'WsCube Cyber'},{vid:'kGHbmASJ4yU',ch:'The Cyber Mentor'}]},
 {id:'career',vids:[{vid:'gXKNHYTgFnA',ch:'The Cyber Mentor'},{vid:'EhJUfHSj9fM',ch:'Professor Messer'}]},
-{id:'legal',vids:[{vid:'Y373bTp1j3w',ch:'PTP'},{vid:'3zA8bC0eDfQ',ch:'Prabh Nair'}]}
+{id:'legal',vids:[{vid:'Y373bTp1j3w',ch:'PTP'},{vid:'76fcelayw00',ch:'Prabh Nair'}]}
 ];
 
 let cur='home';
@@ -600,12 +598,6 @@ document.addEventListener('keydown',function(e){
     if(panel.classList.contains('show')){if(window._closeTerminal)window._closeTerminal()}
     else{if(window._openTerminal)window._openTerminal()}
   }
-  if((e.ctrlKey||e.metaKey)&&e.shiftKey&&(e.key==='V'||e.key==='v')){
-    e.preventDefault();
-    var panel=document.getElementById('vidPanel');
-    if(panel.classList.contains('show')){panel.classList.remove('show');panel.classList.add('hide-anim');document.getElementById('vidFrame').src=''}
-    else{if(window._openVidPanel)window._openVidPanel(cur==='home'?'net':cur)}
-  }
   if(e.key==='?'&&!e.ctrlKey&&!e.metaKey&&!e.target.matches('input,textarea,select')){
     e.preventDefault();
     var sc=document.getElementById('shortcutModal');
@@ -627,9 +619,6 @@ function initBottomNav(){
         if(window.innerWidth<769){document.getElementById('sb').classList.add('open');document.getElementById('sOv').classList.add('show')}
       }
       else if(tab==='labs'){window.S('websecurity')}
-      else if(tab==='videos'){
-        if(window._openVidPanel){window._openVidPanel(cur==='home'?'net':cur)}
-      }
       else if(tab==='progress'){
         var first=Object.keys(done).length>0?Object.keys(done)[0]:null;
         if(first)window.S(first);else window.S('foundations');
@@ -647,13 +636,12 @@ function initVideoPlayer(){
   var placeholder=document.getElementById('vidPlaceholder');
   var titleEl=document.getElementById('vidPanelTitle');
   var drag=document.getElementById('vidDrag');
-  var tog=document.getElementById('vidTog');
   var closeBtn=document.getElementById('vidClose');
   var minBtn=document.getElementById('vidMin');
   var maxBtn=document.getElementById('vidMax');
   var resizeEl=document.getElementById('vidResize');
   var onlineDot=document.getElementById('onlineDot');
-  if(!panel||!tog)return;
+  if(!panel)return;
 
   function updateOnline(){
     if(navigator.onLine){onlineDot.className='online-dot on'}
@@ -689,53 +677,73 @@ function initVideoPlayer(){
     e.preventDefault();e.stopPropagation();
   });
 
-  tog.addEventListener('click',function(){
-    if(panel.classList.contains('show')){panel.classList.remove('show');panel.classList.add('hide-anim');frame.src=''}
-    else{panel.classList.remove('hide-anim');panel.classList.add('show');loadVidList(cur)}
-  });
-
   closeBtn.addEventListener('click',function(){
-    panel.classList.remove('show');panel.classList.add('hide-anim');frame.src='';
+    panel.classList.remove('show');
+    panel.classList.add('hide-anim');
+    frame.src='';
+    list.style.display='';
+    panel.style.height='';
+    panel.style.minHeight='';
+    panel.style.overflow='';
+    minimized=false;
+    if(panel.classList.contains('maximized'))panel.classList.remove('maximized');
   });
 
-  var minimized=false,prevStyle='';
+  var minimized=false;
   minBtn.addEventListener('click',function(){
-    if(!minimized){prevStyle=panel.style.cssText;list.style.display='none';panel.style.height='36px';panel.style.minHeight='36px';panel.style.overflow='hidden';minimized=true}
-    else{panel.style.cssText=prevStyle;list.style.display='';panel.style.minHeight='';panel.style.overflow='';minimized=false}
+    if(!minimized){
+      list.style.display='none';
+      panel.style.height='36px';
+      panel.style.minHeight='36px';
+      panel.style.overflow='hidden';
+      minimized=true;
+      minBtn.innerHTML='&#43;';
+      minBtn.title='Restore';
+    }else{
+      list.style.display='';
+      panel.style.height='';
+      panel.style.minHeight='';
+      panel.style.overflow='';
+      minimized=false;
+      minBtn.innerHTML='&#8722;';
+      minBtn.title='Minimize';
+    }
   });
 
   maxBtn.addEventListener('click',function(){
     panel.classList.toggle('maximized');
   });
 
-  function loadVidList(secId){
+  function loadVidList(secId,vidId){
     var vEntry=VIDS.find(function(v){return v.id===secId});
     var secEntry=SEC.find(function(s){return s.s===secId});
     titleEl.textContent=secEntry?secEntry.t.replace(/^\d+\.\s*/,''):'Videos';
     list.innerHTML='';
     if(!vEntry||!vEntry.vids.length){list.innerHTML='<div class="vid-empty" style="position:static;padding:20px">No videos available for this section</div>';return}
+    var playIdx=0;
+    if(vidId){var fi=vEntry.vids.findIndex(function(v){return v.vid===vidId});if(fi>=0)playIdx=fi}
     vEntry.vids.forEach(function(v,i){
       var item=document.createElement('div');
-      item.className='vid-item'+(i===0?' active':'');
+      item.className='vid-item'+(i===playIdx?' active':'');
       item.innerHTML='<span class="vi-play">&#9654;</span><div class="vi-info"><span class="vi-nam">'+v.ch+'</span><span class="vi-ch">YouTube</span></div>';
       item.addEventListener('click',function(){
         list.querySelectorAll('.vid-item').forEach(function(el){el.classList.remove('active')});
         item.classList.add('active');
         placeholder.style.display='none';
         frame.style.display='block';
-        frame.src='https://www.youtube.com/embed/'+v.id+'?autoplay=1&rel=0';
+        frame.src='https://www.youtube.com/embed/'+v.vid+'?autoplay=1&rel=0';
       });
       list.appendChild(item);
     });
     if(vEntry.vids.length>0){
       placeholder.style.display='none';frame.style.display='block';
-      frame.src='https://www.youtube.com/embed/'+vEntry.vids[0].id+'?autoplay=1&rel=0';
+      frame.src='https://www.youtube.com/embed/'+vEntry.vids[playIdx].vid+'?autoplay=1&rel=0';
     }
   }
 
-  window._openVidPanel=function(secId){
+  window._openVidPanel=function(secId,vidId){
     if(!panel.classList.contains('show')){panel.classList.remove('hide-anim');panel.classList.add('show')}
-    loadVidList(secId);
+    loadVidList(secId,vidId);
   };
 }
 

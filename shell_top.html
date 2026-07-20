@@ -305,6 +305,16 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
 .vid-btn:hover{background:rgba(74,222,128,.18);border-color:var(--grn);box-shadow:0 0 15px rgba(74,222,128,.12)}
 .vid-btn:active{transform:scale(.95)}
 
+.vid-embeds{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin:12px 0}
+.vid-thumb{position:relative;border-radius:8px;overflow:hidden;cursor:pointer;border:1px solid rgba(74,222,128,.15);transition:all .2s;background:#0d1117}
+.vid-thumb:hover{border-color:var(--grn);box-shadow:0 0 20px rgba(74,222,128,.15);transform:translateY(-2px)}
+.vid-thumb img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.vid-thumb .play-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);transition:background .2s}
+.vid-thumb:hover .play-overlay{background:rgba(74,222,128,.15)}
+.play-btn-icon{width:48px;height:48px;border-radius:50%;background:rgba(74,222,128,.9);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#000;box-shadow:0 0 20px rgba(74,222,128,.4);transition:transform .2s}
+.vid-thumb:hover .play-btn-icon{transform:scale(1.1)}
+.vid-thumb .ch-label{position:absolute;bottom:0;left:0;right:0;padding:6px 10px;background:linear-gradient(transparent,rgba(0,0,0,.85));color:var(--txt2);font-size:.65rem;font-family:var(--mono);letter-spacing:.3px}
+
 #sm{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);align-items:flex-start;justify-content:center;padding-top:14vh}
 #sm.show{display:flex;animation:fadeIn .15s}
 .sbox{background:var(--bg1);border:1px solid var(--bdr);border-radius:10px;width:90%;max-width:480px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.4);animation:fadeInUp .2s ease}
@@ -414,7 +424,6 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
         <button class="tb-btn sync-btn-icon" id="syncTrig" title="Sync Progress" style="border-color:rgba(249,115,22,.2)!important">&#8644;</button>
         <button class="tb-btn" id="shareBtn" title="Share" style="border-color:rgba(56,189,248,.2)!important;font-size:.7rem">&#8599;</button>
         <button class="tb-btn term-btn" id="termTog" title="Terminal (Ctrl+`)">&#9618;</button>
-        <button class="tb-btn" id="vidTog" title="Videos (Ctrl+Shift+V)" style="border-color:rgba(74,222,128,.2)!important">&#9654;</button>
         <button class="tb-btn" id="pB" title="Previous">&#8592;</button>
         <button class="tb-btn" id="nB" title="Next">&#8594;</button>
       </div>
