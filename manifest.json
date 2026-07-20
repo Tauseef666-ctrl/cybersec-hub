@@ -1,0 +1,49 @@
+{
+  "name": "CyberSec Hub",
+  "short_name": "CyberSec",
+  "description": "Learn Cybersecurity From Scratch",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0a0d0d",
+  "theme_color": "#4ade80",
+  "categories": ["education", "security"],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Continue Learning",
+      "short_name": "Continue",
+      "url": "/index.html#foundations",
+      "description": "Jump back to your last section"
+    },
+    {
+      "name": "Terminal",
+      "short_name": "Terminal",
+      "url": "/index.html#terminal",
+      "description": "Open the sandbox terminal"
+    }
+  ]
+}

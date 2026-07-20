@@ -1,0 +1,35 @@
+# Build artifacts
+android/build/
+android/dex/
+android/gen/
+android/obj/
+android/*.idsig
+android/CyberSecHub.apk.idsig
+
+# Debug keystore (regenerated during build)
+android/build/debug.keystore
+
+# Cloudflare tunnel logs
+cf_log.txt
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+*.tmp
+*.bak
+
+# Large SDK/build tools (too big for git)
+android/toolz/
+android/CyberSecHub.apk
+android/build/apk/
+android/build/debug.keystore
+
+# Compiled class files (tracked in history)
+android/build/obj/
+android/build/gen/
+android/build/dex/
