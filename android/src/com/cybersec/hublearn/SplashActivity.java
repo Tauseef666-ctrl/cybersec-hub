@@ -1,12 +1,11 @@
-package com.cybersec.hub;
+package com.cybersec.hublearn;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
 import android.graphics.Paint;
-import android.graphics.Shader;
+import android.graphics.Path;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,8 +34,8 @@ public class SplashActivity extends Activity {
         }
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        getWindow().setStatusBarColor(Color.parseColor("#0a0d0d"));
-        getWindow().setNavigationBarColor(Color.parseColor("#0a0d0d"));
+        getWindow().setStatusBarColor(Color.parseColor("#1B2440"));
+        getWindow().setNavigationBarColor(Color.parseColor("#1B2440"));
 
         splashView = new SplashView(this);
         setContentView(splashView);
@@ -73,25 +72,25 @@ public class SplashActivity extends Activity {
                 public void run() {
                     if (isFinishing()) return;
                     long elapsed = System.currentTimeMillis() - splashView.startTime;
-                    splashView.progress = Math.min(elapsed / 2200f, 1f);
+                    splashView.progress = Math.min(elapsed / 2000f, 1f);
                     splashView.invalidate();
-                    if (elapsed < 2400) {
+                    if (elapsed < 2200) {
                         splashView.postDelayed(this, 16);
                     }
                 }
             };
             splashView.postDelayed(animator, 50);
-            handler.postDelayed(transitionRunnable, 3000);
+            handler.postDelayed(transitionRunnable, 2800);
         }
     }
 
     class SplashView extends View {
-        Paint hexStroke, hexFill, centerDot, namePaint, subPaint, authorPaint;
-        Paint glowPaint, dotPaint, linePaint, bgPaint, vPaint;
+        Paint hexStroke, centerDot, namePaint, subPaint, authorPaint;
+        Paint glowPaint, dotPaint, linePaint;
         Typeface mono, sans;
         float progress = 0f;
         long startTime = 0;
-        float[][] particles = new float[25][4];
+        float[][] particles = new float[20][4];
 
         public SplashView(Activity ctx) {
             super(ctx);
@@ -99,22 +98,15 @@ public class SplashActivity extends Activity {
             mono = Typeface.create("monospace", Typeface.BOLD);
             sans = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL);
 
-            bgPaint = new Paint();
-            bgPaint.setColor(Color.parseColor("#0a0d0d"));
-
             hexStroke = new Paint(Paint.ANTI_ALIAS_FLAG);
-            hexStroke.setColor(Color.parseColor("#4ade80"));
+            hexStroke.setColor(Color.parseColor("#E8542A"));
             hexStroke.setStyle(Paint.Style.STROKE);
             hexStroke.setStrokeWidth(4f);
             hexStroke.setStrokeCap(Paint.Cap.ROUND);
             hexStroke.setStrokeJoin(Paint.Join.ROUND);
 
-            hexFill = new Paint(Paint.ANTI_ALIAS_FLAG);
-            hexFill.setColor(Color.parseColor("#4ade80"));
-            hexFill.setStyle(Paint.Style.FILL);
-
             centerDot = new Paint(Paint.ANTI_ALIAS_FLAG);
-            centerDot.setColor(Color.parseColor("#4ade80"));
+            centerDot.setColor(Color.parseColor("#E8542A"));
             centerDot.setStyle(Paint.Style.FILL);
 
             namePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -123,37 +115,32 @@ public class SplashActivity extends Activity {
             namePaint.setTextAlign(Paint.Align.CENTER);
 
             subPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            subPaint.setColor(Color.parseColor("#4ade80"));
+            subPaint.setColor(Color.parseColor("#E8542A"));
             subPaint.setTypeface(mono);
             subPaint.setTextAlign(Paint.Align.CENTER);
 
             authorPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            authorPaint.setColor(Color.parseColor("#777777"));
+            authorPaint.setColor(Color.parseColor("#7A88B8"));
             authorPaint.setTypeface(sans);
             authorPaint.setTextAlign(Paint.Align.CENTER);
 
             linePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            linePaint.setColor(Color.parseColor("#4ade80"));
+            linePaint.setColor(Color.parseColor("#E8542A"));
             linePaint.setStrokeWidth(1.5f);
             linePaint.setStrokeCap(Paint.Cap.ROUND);
 
             glowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            glowPaint.setColor(Color.parseColor("#4ade80"));
-            glowPaint.setMaskFilter(new android.graphics.BlurMaskFilter(80, android.graphics.BlurMaskFilter.Blur.NORMAL));
+            glowPaint.setColor(Color.parseColor("#E8542A"));
+            glowPaint.setMaskFilter(new android.graphics.BlurMaskFilter(60, android.graphics.BlurMaskFilter.Blur.NORMAL));
 
             dotPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            dotPaint.setColor(Color.parseColor("#4ade80"));
-
-            vPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            vPaint.setColor(Color.parseColor("#444444"));
-            vPaint.setTypeface(sans);
-            vPaint.setTextAlign(Paint.Align.CENTER);
+            dotPaint.setColor(Color.parseColor("#E8542A"));
 
             for (int i = 0; i < particles.length; i++) {
                 particles[i][0] = (float)(Math.random());
                 particles[i][1] = (float)(Math.random());
-                particles[i][2] = (float)(Math.random() * 2.5f + 0.5f);
-                particles[i][3] = (float)(Math.random() * 0.004f + 0.001f);
+                particles[i][2] = (float)(Math.random() * 2f + 0.5f);
+                particles[i][3] = (float)(Math.random() * 0.003f + 0.001f);
             }
         }
 
@@ -165,32 +152,16 @@ public class SplashActivity extends Activity {
 
             float cx = w / 2f;
             float cy = h * 0.36f;
-            float hexR = Math.min(w, h) * 0.12f;
+            float hexR = Math.min(w, h) * 0.13f;
 
-            canvas.drawColor(Color.parseColor("#0a0d0d"));
+            canvas.drawColor(Color.parseColor("#1B2440"));
 
-            // Background glow
             float glowA = ease(progress, 0.05f, 0.5f);
-            glowPaint.setAlpha((int)(glowA * 25));
-            canvas.drawCircle(cx, cy, h * 0.22f, glowPaint);
+            glowPaint.setAlpha((int)(glowA * 20));
+            canvas.drawCircle(cx, cy, h * 0.20f, glowPaint);
 
-            // Grid lines (subtle)
-            Paint gridPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            gridPaint.setColor(Color.parseColor("#4ade80"));
-            gridPaint.setStrokeWidth(0.5f);
-            float gridAlpha = ease(progress, 0.0f, 0.3f);
-            gridPaint.setAlpha((int)(gridAlpha * 15));
-            float gridSpacing = 30f;
-            for (float x = cx - hexR * 2; x <= cx + hexR * 2; x += gridSpacing) {
-                canvas.drawLine(x, cy - hexR * 1.5f, x, cy + hexR * 1.5f, gridPaint);
-            }
-            for (float y = cy - hexR * 1.5f; y <= cy + hexR * 1.5f; y += gridSpacing) {
-                canvas.drawLine(cx - hexR * 2, y, cx + hexR * 2, y, gridPaint);
-            }
-
-            // Floating particles
             float partAlpha = ease(progress, 0.1f, 1f);
-            dotPaint.setAlpha((int)(partAlpha * 45));
+            dotPaint.setAlpha((int)(partAlpha * 40));
             for (int i = 0; i < particles.length; i++) {
                 particles[i][1] -= particles[i][3];
                 if (particles[i][1] < -0.05f) {
@@ -201,7 +172,6 @@ public class SplashActivity extends Activity {
                     particles[i][2], dotPaint);
             }
 
-            // Outer hexagon
             float hexProgress = ease(progress, 0.02f, 0.75f);
             float[][] pts = hexPoints(cx, cy, hexR);
             hexStroke.setStrokeWidth(4f);
@@ -209,7 +179,6 @@ public class SplashActivity extends Activity {
             hexStroke.setAlpha((int)(hexAlpha * 255));
             drawHexAnim(canvas, pts, hexProgress);
 
-            // Inner hexagon
             float innerR = hexR * 0.55f;
             float innerProgress = ease(progress, 0.25f, 0.85f);
             float[][] ipt = hexPoints(cx, cy, innerR);
@@ -217,12 +186,11 @@ public class SplashActivity extends Activity {
             hexStroke.setAlpha((int)(innerProgress * 140));
             drawHexAnim(canvas, ipt, innerProgress);
 
-            // Connecting lines between outer and inner
             float connAlpha = ease(progress, 0.4f, 0.8f);
             Paint connPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            connPaint.setColor(Color.parseColor("#4ade80"));
+            connPaint.setColor(Color.parseColor("#E8542A"));
             connPaint.setStrokeWidth(1f);
-            connPaint.setAlpha((int)(connAlpha * 40));
+            connPaint.setAlpha((int)(connAlpha * 35));
             if (connAlpha > 0) {
                 for (int i = 0; i < 6; i++) {
                     canvas.drawLine(pts[i][0], pts[i][1], ipt[i][0], ipt[i][1], connPaint);
@@ -231,73 +199,67 @@ public class SplashActivity extends Activity {
 
             hexStroke.setStrokeWidth(4f);
 
-            // Center dot
             float dotAlpha = ease(progress, 0.45f, 1f);
             centerDot.setAlpha((int)(dotAlpha * 255));
             float dotSize = hexR * 0.12f * Math.min(dotAlpha * 2f, 1f);
             canvas.drawCircle(cx, cy, dotSize, centerDot);
 
-            // Ring around center
             Paint ringPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            ringPaint.setColor(Color.parseColor("#4ade80"));
+            ringPaint.setColor(Color.parseColor("#E8542A"));
             ringPaint.setStyle(Paint.Style.STROKE);
             ringPaint.setStrokeWidth(1.5f);
             ringPaint.setAlpha((int)(dotAlpha * 100));
             float ringR = hexR * 0.2f * Math.min(dotAlpha * 2f, 1f);
             canvas.drawCircle(cx, cy, ringR, ringPaint);
 
-            // Scan line
             float scanP = ease(progress, 0.5f, 0.95f);
             if (scanP > 0 && scanP < 1) {
-                float scanY2 = cy - hexR * 1.3f + (hexR * 2.6f) * scanP;
+                float scanY = cy - hexR * 1.3f + (hexR * 2.6f) * scanP;
                 Paint scanLine = new Paint(Paint.ANTI_ALIAS_FLAG);
-                scanLine.setColor(Color.parseColor("#4ade80"));
+                scanLine.setColor(Color.parseColor("#E8542A"));
                 scanLine.setStrokeWidth(1f);
-                scanLine.setAlpha((int)((1f - Math.abs(scanP - 0.5f) * 2) * 80));
-                canvas.drawLine(cx - hexR * 1.5f, scanY2, cx + hexR * 1.5f, scanY2, scanLine);
+                scanLine.setAlpha((int)((1f - Math.abs(scanP - 0.5f) * 2) * 70));
+                canvas.drawLine(cx - hexR * 1.5f, scanY, cx + hexR * 1.5f, scanY, scanLine);
             }
 
-            // Text section
             float textY = cy + hexR + h * 0.05f;
 
-            // Divider line
             float lineAlpha = ease(progress, 0.5f, 0.8f);
             linePaint.setAlpha((int)(lineAlpha * 180));
             float lineW = w * 0.2f;
             float lineFrac = ease(progress, 0.5f, 0.8f);
             canvas.drawLine(cx - lineW * lineFrac, textY, cx + lineW * lineFrac, textY, linePaint);
 
-            // App name
             float nameAlpha = ease(progress, 0.55f, 0.88f);
             namePaint.setAlpha((int)(nameAlpha * 255));
-            float nameSize = Math.min(48f, w * 0.06f);
+            float nameSize = Math.min(44f, w * 0.055f);
             namePaint.setTextSize(nameSize);
-            canvas.drawText("CyberSec Hub", cx, textY + nameSize + 4, namePaint);
+            canvas.drawText("CYBERSEC HUB", cx, textY + nameSize + 4, namePaint);
 
-            // Subtitle
             float subAlpha = ease(progress, 0.62f, 0.92f);
             subPaint.setAlpha((int)(subAlpha * 180));
-            subPaint.setTextSize(Math.min(12f, w * 0.019f));
-            canvas.drawText("LEARN  CYBERSECURITY  FROM  SCRATCH", cx, textY + nameSize + 30, subPaint);
+            subPaint.setTextSize(Math.min(11f, w * 0.018f));
+            canvas.drawText("LEARN  CYBERSECURITY  FROM  SCRATCH", cx, textY + nameSize + 28, subPaint);
 
-            // Author
             float authorAlpha = ease(progress, 0.72f, 1f);
             authorPaint.setAlpha((int)(authorAlpha * 200));
-            authorPaint.setTextSize(Math.min(20f, w * 0.028f));
+            authorPaint.setTextSize(Math.min(18f, w * 0.025f));
             canvas.drawText("Made by Tauseef Khan", cx, h * 0.86f, authorPaint);
 
-            // Version
-            vPaint.setTextSize(Math.min(12f, w * 0.018f));
+            Paint vPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            vPaint.setColor(Color.parseColor("#4A5280"));
+            vPaint.setTypeface(sans);
+            vPaint.setTextAlign(Paint.Align.CENTER);
+            vPaint.setTextSize(Math.min(11f, w * 0.017f));
             vPaint.setAlpha((int)(authorAlpha * 120));
-            canvas.drawText("v3.0  |  Android", cx, h * 0.90f, vPaint);
+            canvas.drawText("v1.0  |  Android", cx, h * 0.90f, vPaint);
 
-            // Loading dots
             float loadAlpha = ease(progress, 0.0f, 0.3f);
             if (loadAlpha > 0 && progress < 0.98f) {
                 Paint loadPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-                loadPaint.setColor(Color.parseColor("#4ade80"));
+                loadPaint.setColor(Color.parseColor("#E8542A"));
                 loadPaint.setStyle(Paint.Style.FILL);
-                loadPaint.setAlpha((int)(150));
+                loadPaint.setAlpha(150);
                 int dotCount = 3;
                 float dotSpacing = 14f;
                 float totalW = dotCount * 6f + (dotCount - 1) * dotSpacing;

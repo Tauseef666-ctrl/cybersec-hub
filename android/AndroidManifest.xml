@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cybersec.hub"
-    android:versionCode="3"
-    android:versionName="3.0">
+    package="com.cybersec.hublearn"
+    android:versionCode="1"
+    android:versionName="1.0">
 
     <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="34" />
 
@@ -19,8 +19,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="CyberSec Hub"
+        android:icon="@mipmap/ic_launcher"
+        android:label="cybersec-hub"
+        android:roundIcon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         android:supportsRtl="true"
@@ -46,14 +47,7 @@
             android:screenOrientation="unspecified"
             android:windowSoftInputMode="adjustResize"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="cybersec" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme" />
 
     </application>
 </manifest>

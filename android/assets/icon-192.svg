@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
-  <rect fill="#0a0d0d" width="192" height="192" rx="32"/>
-  <path d="M96 28 L140 52 L140 104 L96 128 L52 104 L52 52 Z" fill="none" stroke="#4ade80" stroke-width="4" opacity="0.3"/>
-  <path d="M96 40 L132 58 L132 100 L96 118 L60 100 L60 58 Z" fill="none" stroke="#4ade80" stroke-width="3" opacity="0.6"/>
-  <path d="M96 52 L124 64 L124 96 L96 108 L68 96 L68 64 Z" fill="#4ade80" opacity="0.15"/>
-  <path d="M96 64 L112 72 L112 92 L96 100 L80 92 L80 72 Z" fill="#4ade80" opacity="0.4"/>
-  <path d="M96 72 L104 76 L104 88 L96 92 L88 88 L88 76 Z" fill="#4ade80"/>
-  <text x="96" y="158" text-anchor="middle" fill="#4ade80" font-family="monospace" font-size="18" font-weight="bold" letter-spacing="2">CYBERSEC</text>
-</svg>
