@@ -1,11 +1,14 @@
-const CACHE_NAME = 'cybersec-hub-v2';
+const CACHE_NAME = 'cybersec-hub-v3';
 const ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
   '/icon-192.svg',
   '/icon-512.svg',
-  '/sw.js'
+  '/fonts/JetBrainsMono-Regular.ttf',
+  '/fonts/JetBrainsMono-Bold.ttf',
+  '/fonts/Inter-Regular.ttf',
+  '/fonts/Inter-Bold.ttf'
 ];
 
 self.addEventListener('install', e => {
@@ -26,32 +29,20 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
+
   e.respondWith(
-    caches.match(e.request).then(r => {
-      return r || fetch(e.request).then(response => {
+    caches.match(e.request).then(cached => {
+      const fetchPromise = fetch(e.request).then(response => {
         if (response.ok) {
           const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(e.request, clone).catch(() => {});
+          });
         }
         return response;
-      });
-    }).catch(() => {
-      if (e.request.destination === 'document') {
-        return caches.match('/index.html');
-      }
+      }).catch(() => cached);
+
+      return cached || fetchPromise;
     })
   );
 });
-
-self.addEventListener('periodicsync', e => {
-  if (e.tag === 'sync-progress') {
-    e.waitUntil(syncProgress());
-  }
-});
-
-async function syncProgress() {
-  const clients = await self.clients.matchAll();
-  clients.forEach(client => {
-    client.postMessage({ type: 'SYNC_PROGRESS' });
-  });
-}

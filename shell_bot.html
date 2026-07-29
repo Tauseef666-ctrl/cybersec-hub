@@ -46,7 +46,7 @@
 </nav>
 
 <script>
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').then(function(reg){navigator.serviceWorker.addEventListener('message',function(e){if(e.data&&e.data.type==='SYNC_PROGRESS'){}})})}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(err){console.warn('SW registration failed:',err)})}
 window._isAndroid=!!window.AndroidBridge;
 if(window._isAndroid){localStorage.setItem('cs_installed','1');localStorage.setItem('cs_platform','android')}
 window._deferredPrompt=null;
