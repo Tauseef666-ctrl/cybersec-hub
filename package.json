@@ -1,10 +1,10 @@
 {
   "name": "cybersec-hub",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "CyberSec Hub — Learn Cybersecurity From Scratch",
   "author": {
-  "name": "Tauseef Khan",
-  "email": "tauseef@cybersec-hub.dev"
+  "name": "Tauseef666-ctrl",
+  "email": "tauseef666-ctrl@users.noreply.github.com"
 },
   "license": "Educational Use Only",
   "main": "electron/main.js",
