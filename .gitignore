@@ -33,3 +33,15 @@ android/build/debug.keystore
 android/build/obj/
 android/build/gen/
 android/build/dex/
+
+# Electron build output
+release/
+*.exe
+*.msi
+*.dmg
+*.AppImage
+*.deb
+*.snap
+dist/
+out/
+electron/icon.png

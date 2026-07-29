@@ -27,11 +27,17 @@ Built as a single-page vanilla HTML/CSS/JS web application wrapped in an Android
 
 ## Download
 
-| Platform | Link |
-|----------|------|
-| Android APK | [**Download v3.0.0**](../../releases/latest) |
+| Platform | Format | Link |
+|----------|--------|------|
+| Android | APK | [**Download v3.0.0**](../../releases/latest) |
+| Windows | Portable EXE | [**Download v3.0.0**](../../releases/latest) |
+| Windows | Installer (NSIS) | [**Download v3.0.0**](../../releases/latest) |
+| Linux | AppImage | [**Download v3.0.0**](../../releases/latest) |
+| Linux | DEB | [**Download v3.0.0**](../../releases/latest) |
 
-> Requires Android 5.0 (Lollipop) or higher. Install the APK directly — no Play Store needed.
+> **Android**: Requires Android 5.0+ (Lollipop). Install the APK directly.
+> **Windows 11/10**: Download the portable archive, extract it, and run `CyberSec Hub.exe`. No installation needed.
+> **Linux**: Run the `.AppImage` (any distro) or install the `.deb` (Debian/Ubuntu).
 
 ---
 
@@ -106,8 +112,10 @@ The app features a dark hacker-themed UI with green, cyan, and purple accents:
 | Frontend | Vanilla HTML/CSS/JS (no frameworks) |
 | Styling | CSS custom properties, 40+ keyframe animations, flexbox/grid |
 | Android Shell | Java WebView (API 21+) with JavaScript bridge |
+| Desktop Shell | Electron (Windows EXE, macOS DMG, Linux AppImage/deb) |
 | Splash Screen | Custom animated Canvas rendering |
-| Build | Shell script using `aapt`, `javac`, `d8`, `zipalign`, `apksigner` |
+| Build (Android) | Shell script using `aapt`, `javac`, `d8`, `zipalign`, `apksigner` |
+| Build (Desktop) | electron-builder (NSIS, DMG, AppImage) |
 | Storage | localStorage (client-side) |
 | Sync | Base64-encoded shareable URLs with QR codes |
 | PWA | Service worker for offline web caching |
@@ -125,11 +133,18 @@ cybersec-hub/
 ├── server.js                   # Local Node.js dev server
 ├── start.sh                    # Auto-restart server script
 ├── build-apk.sh                # Android APK build script
+├── build-electron.sh           # Windows/macOS/Linux Electron build script
+├── package.json                # Electron + electron-builder config
 ├── manifest.json               # PWA manifest
 ├── sw.js                       # Service worker
 ├── icon-192.svg                # App icon (192x192)
 ├── icon-512.svg                # App icon (512x512)
 ├── hackacademy-prototype.jsx   # React prototype (reference only)
+├── electron/
+│   ├── main.js                 # Electron main process
+│   ├── preload.js              # Preload script (context bridge)
+│   ├── generate-icon.js        # Icon generator (pure Node.js)
+│   └── icon.png                # Generated app icon (256x256)
 └── android/
     ├── AndroidManifest.xml
     ├── CyberSecHub.apk          # Built APK
@@ -153,11 +168,13 @@ cybersec-hub/
 
 ## Building
 
-### Prerequisites
+### Android APK
+
+#### Prerequisites
 - Linux or [Termux](https://f-droid.org/en/packages/com.termux/) environment
 - Android build tools: `aapt`, `javac`, `d8`, `zipalign`, `apksigner`
 
-### Build Steps
+#### Build Steps
 ```bash
 # 1. Concatenate source files into index.html
 cat shell_top.html sections.html shell_bot.html > index.html
@@ -171,13 +188,49 @@ bash build-apk.sh
 
 **Output:** `android/CyberSecHub.apk`
 
-### Install on Android
+#### Install on Android
 ```bash
 # Copy to shared storage
 cp android/CyberSecHub.apk ~/storage/shared/
 
 # Open with package installer
 termux-open ~/storage/shared/CyberSecHub.apk
+```
+
+---
+
+### Windows / macOS / Linux (Electron)
+
+The same web app can be packaged as a native desktop application for **Windows (EXE installer)**, **macOS (DMG)**, and **Linux (AppImage/deb)**.
+
+#### Prerequisites
+- [Node.js](https://nodejs.org/) 18+
+- npm (ships with Node.js)
+
+#### Build Steps
+```bash
+# 1. Generate index.html from sources
+cat shell_top.html sections.html shell_bot.html > index.html
+
+# 2. Install dependencies and build
+bash build-electron.sh
+```
+
+Or step by step:
+```bash
+cat shell_top.html sections.html shell_bot.html > index.html
+npm install
+npx electron-builder --win       # Windows EXE
+npx electron-builder --linux     # Linux AppImage/deb
+npx electron-builder --mac       # macOS DMG
+```
+
+**Output:** `release/` directory containing the installer(s).
+
+#### Run Locally (Development)
+```bash
+cat shell_top.html sections.html shell_bot.html > index.html
+npm start
 ```
 
 ---

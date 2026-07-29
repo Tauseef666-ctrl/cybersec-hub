@@ -1,0 +1,66 @@
+{
+  "name": "cybersec-hub",
+  "version": "3.0.0",
+  "description": "CyberSec Hub — Learn Cybersecurity From Scratch",
+  "author": {
+  "name": "Tauseef Khan",
+  "email": "tauseef@cybersec-hub.dev"
+},
+  "license": "Educational Use Only",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:win": "electron-builder --win",
+    "build:linux": "electron-builder --linux",
+    "build:mac": "electron-builder --mac",
+    "build:all": "electron-builder --win --linux --mac"
+  },
+  "build": {
+    "appId": "com.cybersec.hub",
+    "productName": "CyberSec Hub",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "electron/**/*",
+      "index.html",
+      "icon-*.svg",
+      "manifest.json",
+      "sw.js"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "electron/icon.png"
+    },
+    "linux": {
+      "target": ["AppImage", "deb"],
+      "icon": "electron/icon.png",
+      "category": "Education"
+    },
+    "mac": {
+      "target": ["dmg"],
+      "icon": "electron/icon.icns",
+      "category": "public.app-category.education"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "CyberSec Hub",
+      "installerIcon": "electron/icon.png",
+      "uninstallerIcon": "electron/icon.png",
+      "installerHeaderIcon": "electron/icon.png"
+    }
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.0.0"
+  }
+}
