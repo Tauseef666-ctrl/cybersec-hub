@@ -2606,16 +2606,41 @@ function initReadingTime(){
 }
 
 var TERM_CMDS={
-help:'Available commands:\n  help     - Show this help\n  clear    - Clear terminal\n  whoami   - Current user info\n  uname    - System information\n  ls       - List files\n  cat      - Read file contents\n  pwd      - Print working directory\n  echo      - Echo text\n  ping     - Ping a host\n  nmap     - Network mapper\n  curl     - Transfer URL\n  wget     - Download file\n  ifconfig - Network interface info\n  ps       - Running processes\n  netstat  - Network connections\n  id       - User identity\n  history  - Command history\n  date     - Current date/time\n  tree     - Directory tree\n  ip       - IP address info\n  ss       - Socket statistics\n  man      - Manual pages\n  sudo     - Execute as superuser\n  score    - Quiz statistics',
+help:'Available commands:\n  help       - Show this help\n  clear      - Clear terminal\n  whoami     - Current user info\n  uname      - System information\n  ls         - List files\n  cat        - Read file contents\n  pwd        - Print working directory\n  echo       - Echo text\n  date       - Current date/time\n  id         - User identity\n  history    - Command history\n  tree       - Directory tree\n  score      - Quiz statistics\n  sudo       - Execute as superuser\n  man        - Manual pages\n  -- Network --\n  ping       - Ping a host\n  nmap       - Network mapper\n  ifconfig   - Network interface info\n  ip         - IP address info\n  ss         - Socket statistics\n  netstat    - Network connections\n  curl       - Transfer URL\n  wget       - Download file\n  ssh        - SSH connection\n  traceroute - Trace network path\n  dig        - DNS lookup\n  host       - DNS lookup\n  nslookup   - DNS lookup\n  whois      - Domain/IP information\n  -- System --\n  ps         - Running processes\n  tcpdump    - Packet capture\n  nc         - Netcat connection\n  grep       - Search text\n  base64     - Base64 encode/decode\n  python     - Python interpreter\n  hashcat    - Hash cracker\n  exit       - Exit terminal',
 clear:null,
 whoami:'visitor@cybersec-hub',
 uname:'Linux cybersec-hub 5.15.0-kali1-amd64 x86_64 GNU/Linux',
-ls:'Desktop  Documents  Downloads  exploit.db  notes.txt  scripts/  tools/  wordlists/',
+ls:function(args){
+  if(args==='-l'||args==='-la'||args==='-al'){
+    return 'drwxr-xr-x  2 visitor visitor 4096 Jan 15 10:22 Desktop\n'+
+      'drwxr-xr-x  2 visitor visitor 4096 Jan 15 10:22 Documents\n'+
+      'drwxr-xr-x  2 visitor visitor 4096 Jan 15 10:22 Downloads\n'+
+      '-rw-r--r--  1 visitor visitor 1337 Jan 15 10:22 exploit.db\n'+
+      '-rw-r--r--  1 visitor visitor  420 Jan 15 10:22 notes.txt\n'+
+      'drwxr-xr-x  2 visitor visitor 4096 Jan 15 10:22 scripts\n'+
+      'drwxr-xr-x  2 visitor visitor 4096 Jan 15 10:22 tools\n'+
+      'drwxr-xr-x  2 visitor visitor 4096 Jan 15 10:22 wordlists';
+  }
+  if(args==='-a'){
+    return '.  ..  .bashrc  .profile  .ssh  Desktop  Documents  Downloads  exploit.db  notes.txt  scripts  tools  wordlists';
+  }
+  return 'Desktop  Documents  Downloads  exploit.db  notes.txt  scripts  tools  wordlists';
+},
 pwd:'/home/visitor',
 id:'uid=1000(visitor) gid=1000(visitor) groups=1000(visitor),27(sudo)',
 date:new Date().toString(),
 ifconfig:'eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>\n        inet 192.168.1.105  netmask 255.255.255.0\n        ether 08:00:27:4e:66:a1\n\nlo: flags=73<UP,LOOPBACK,RUNNING>\n        inet 127.0.0.1  netmask 255.0.0.0',
-ps:'  PID TTY          TIME CMD\n    1 ?        00:00:02 systemd\n  342 ?        00:00:00 sshd\n  567 ?        00:00:01 apache2\n  891 ?        00:00:00 mysql\n 1024 pts/0    00:00:00 bash',
+ps:function(args){
+  if(args==='aux'||args==='-aux'||args==='-ef'){
+    return 'USER       PID %CPU %MEM  VSZ  RSS TTY  STAT START TIME COMMAND\n'+
+      'root         1  0.0  0.2 100M 4.2M ?    Ss   Jan15 0:02 systemd\n'+
+      'root       342  0.0  0.1  50M 2.1M ?    Ss   Jan15 0:00 sshd\n'+
+      'www-data   567  0.0  0.3 120M 5.6M ?    S    Jan15 0:01 apache2\n'+
+      'mysql      891  0.0  0.5 200M 8.2M ?    Ssl  Jan15 0:00 mysql\n'+
+      'visitor   1024  0.0  0.1  30M 1.8M pts/0 Ss   Jan15 0:00 bash';
+  }
+  return '  PID TTY          TIME CMD\n    1 ?        00:00:02 systemd\n  342 ?        00:00:00 sshd\n  567 ?        00:00:01 apache2\n  891 ?        00:00:00 mysql\n 1024 pts/0    00:00:00 bash';
+},
 netstat:'Active Internet connections:\nProto Recv-Q Send-Q Local Address  Foreign Address  State\nTCP   0      0  192.168.1.105:22  10.0.0.1:49832   ESTABLISHED\nTCP   0      0  192.168.1.105:80  10.0.0.1:50122   ESTABLISHED\nUDP   0      0  192.168.1.105:53  0.0.0.0:*',
 history:null,
 tree:'.\n├── Desktop/\n├── Documents/\n├── Downloads/\n├── exploit.db\n├── notes.txt\n├── scripts/\n│   ├── recon.sh\n│   ├── exploit.py\n│   └── payload.bin\n├── tools/\n│   ├── nmap\n│   ├── sqlmap\n│   └── burpsuite/\n└── wordlists/\n    ├── rockyou.txt\n    └── common.txt',
@@ -2629,19 +2654,30 @@ score:function(){
 },
 cat:function(args){
   if(!args)return'cat: missing file operand';
-  var files={'notes.txt':'# Security Notes\n- Always get written permission before testing\n- Document everything\n- Use VPN during recon','exploit.db':'Database loaded: 1,337 exploits\n[1] vsftpd_backdoor - vsftpd 2.3.4\n[2] ms17_010_eternalblue - SMB\n[3] shellshock_cve_2014_6271 - Bash','recon.sh':'#!/bin/bash\necho "[*] Starting recon..."\nnmap -sV -sC -O -A $1\necho "[*] Done."','exploit.py':'#!/usr/bin/env python3\nimport socket\n\ndef exploit(target, port):\n    payload = b"\\x90" * 64\n    print(f"[*] Sending to {target}:{port}")\n    return payload'};
+  var files={'notes.txt':'# Security Notes\n- Always get written permission before testing\n- Document everything\n- Use VPN during recon','exploit.db':'Database loaded: 1,337 exploits\n[1] vsftpd_backdoor - vsftpd 2.3.4\n[2] ms17_010_eternalblue - SMB\n[3] shellshock_cve_2014_6271 - Bash','recon.sh':'#!/bin/bash\necho "[*] Starting recon..."\nnmap -sV -sC -O -A $1\necho "[*] Done."','exploit.py':'#!/usr/bin/env python3\nimport socket\n\ndef exploit(target, port):\n    payload = b"\\x90" * 64\n    print(f"[*] Sending to {target}:{port}")\n    return payload','payload.bin':'\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\n\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\n[shellcode] nop sled + reverse shell payload\nArch: x64 | Size: 256 bytes','rockyou.txt':'[rockyou.txt truncated — 14,344,391 lines]\n123456\n12345\n123456789\npassword\niloveyou\nprincess\n1234567\nrockyou\n12345678\nabc123\n...','common.txt':'admin\nlogin\nwp-admin\nadministrator\nroot\nbackup\nadmin123\nmanager\ncontrol\nadmin1\n...'};
   var f=args.split(' ').pop();
   if(files[f])return files[f];
   return 'cat: '+f+': No such file or directory';
 },
 nmap:function(args){
-  if(!args)return 'Usage: nmap [options] <target>';
-  var tgt=args.includes(' ')?args.split(' ').pop():'192.168.1.1';
+  if(!args)return 'Usage: nmap [options] <target>\n\nCommon options:\n  -sV    Version detection\n  -sS    SYN scan (default)\n  -sT    TCP connect scan\n  -sU    UDP scan\n  -sC    Default scripts\n  -O     OS detection\n  -A     Aggressive scan\n  -p     Port range (e.g. -p 1-1000)\n  -sn    Ping sweep\n  -T4    Faster timing';
+  var tgt=args.includes(' ')?args.split(' ').pop():args;
+  var a=args.toLowerCase();
+  if(a.indexOf('-sn')>=0)return 'Starting Nmap 7.93\n\nNmap scan report for '+tgt+'\nHost is up (0.0012s latency).\nMAC Address: 08:00:27:4e:66:a1\nNmap done: 1 IP address scanned';
+  if(a.indexOf('-su')>=0)return 'Starting Nmap 7.93\n\nNmap scan report for '+tgt+'\nHost is up (0.0041s latency).\n\nPORT     STATE         SERVICE\n53/udp   open          domain\n67/udp   open|filtered dhcp\n161/udp  open          snmp\n\nNmap done: 1 IP address scanned';
+  if(a.indexOf('-o')>=0)return 'Starting Nmap 7.93\n\nNmap scan report for '+tgt+'\nHost is up (0.0038s latency).\n\nPORT     STATE  SERVICE\n22/tcp   open   ssh\n80/tcp   open   http\n443/tcp  open   https\n\nOS detection:\nRunning: Linux 5.x\nOS details: Linux 5.15.0 (Kali)\n\nNmap done: 1 IP address scanned';
+  if(a.indexOf('-a')>=0)return 'Starting Nmap 7.93\n\nNmap scan report for '+tgt+'\nHost is up (0.0034s latency).\n\nPORT     STATE  SERVICE       VERSION\n22/tcp   open   ssh           OpenSSH 8.4p1\n80/tcp   open   http          Apache/2.4.51\n443/tcp  open   ssl/https     Apache/2.4.51\n3306/tcp open   mysql         MySQL 8.0.28\n8080/tcp open   http-proxy    Squid 4.14\n\nOS details: Linux 5.15.0 (Kali)\nService Info: OS: Linux\n\nNmap done: 1 IP address scanned';
   return 'Starting Nmap 7.93\n\nNmap scan report for '+tgt+'\nHost is up (0.0034s latency).\n\nPORT     STATE  SERVICE       VERSION\n22/tcp   open   ssh           OpenSSH 8.4p1\n80/tcp   open   http          Apache/2.4.51\n443/tcp  open   ssl/https     Apache/2.4.51\n3306/tcp open   mysql         MySQL 8.0.28\n8080/tcp open   http-proxy    Squid 4.14\n\nNmap done: 1 IP address scanned';
 },
-curl:function(){return '  % Total    % Received  Average Speed\n100  1256  100  1256    0   8520\n<!DOCTYPE html>\n<html><head><title>Target</title></head>\n<body><h1>Welcome</h1></body></html>'},
+curl:function(args){
+  if(!args)return 'curl: try \'curl --help\' or \'curl --manual\' for more information';
+  if(args.indexOf('--help')>=0)return 'Usage: curl [options] <url>\n  -X METHOD  HTTP method\n  -H HEADER  Custom header\n  -d DATA    POST data\n  -o FILE    Output file\n  -v         Verbose';
+  if(args.indexOf('-v')>=0)return '*   Trying 93.184.216.34:80...\n* Connected to target\n> GET / HTTP/1.1\n> Host: target\n> User-Agent: curl/7.88.1\n>\n< HTTP/1.1 200 OK\n< Server: Apache/2.4.51\n< Content-Type: text/html\n< Content-Length: 1256\n<\n<!DOCTYPE html>\n<html><head><title>Target</title></head>\n<body><h1>Welcome</h1></body></html>\n* Connection #0 to host target left intact';
+  return '  % Total    % Received  Average Speed\n100  1256  100  1256    0   8520\n<!DOCTYPE html>\n<html><head><title>Target</title></head>\n<body><h1>Welcome</h1></body></html>';
+},
 wget:function(args){
   if(!args)return 'wget: missing URL';
+  if(args.indexOf('-r')>=0||args.indexOf('--recursive')>=0)return 'WARNING: recursive download not simulated in sandbox';
   var u=args.split(' ').pop(),f=u.split('/').pop()||'index.html';
   return 'Connecting to target... 200 OK\nLength: 1256 (1.2K)\nSaving to: \''+f+'\'\n'+f+'  100%  1.2K  in 0s\n(15.2 MB/s) - saved [1256/1256]';
 },
@@ -2651,18 +2687,128 @@ sudo:function(args){
   if(c==='ls')return '[sudo] password:\nroot  etc  var  usr  opt  boot  home  lib';
   if(c==='cat /etc/shadow')return 'sudo: not allowed by security policy';
   if(c.indexOf('rm -rf')>=0)return 'Nice try! ;)';
+  if(c==='whoami')return 'root';
   return 'root@cybersec:~# '+c+'\nCommand executed.';
 },
 ping:function(args){
   if(!args)return 'ping: usage: ping <host>';
+  if(args.indexOf('-c')>=0){
+    var count=parseInt(args.match(/-c\s+(\d+)/)?.[1])||4;
+    var lines='';
+    for(var i=1;i<=count;i++)lines+='64 bytes from 93.184.216.34: icmp_seq='+i+' ttl=56 time='+(10+Math.random()*5).toFixed(1)+' ms\n';
+    return 'PING '+args.split(' ').pop()+' (93.184.216.34)\n'+lines+'\n--- '+args.split(' ').pop()+' ping statistics ---\n'+count+' packets transmitted, '+count+' received, 0% loss';
+  }
   var h=args.split(' ').pop();
   return 'PING '+h+' (93.184.216.34)\n64 bytes from 93.184.216.34: icmp_seq=1 ttl=56 time=12.3 ms\n64 bytes from 93.184.216.34: icmp_seq=2 ttl=56 time=11.8 ms\n\n--- '+h+' ping statistics ---\n2 packets transmitted, 2 received, 0% loss\nrtt min/avg/max = 11.8/12.1/12.3 ms';
 },
 man:function(args){
   if(!args)return 'What manual page? Try \'man man\'.';
-  return 'NAME\n    '+args+' - Manual\n\nSYNOPSIS\n    '+args+' [OPTIONS]\n\nDESCRIPTION\n    Simulated man page for learning.';
+  var pages={
+    nmap:'NAME\n    nmap - Network exploration tool and security scanner\n\nSYNOPSIS\n    nmap [Scan Type(s)] [Options] {target specification}\n\nDESCRIPTION\n    Nmap is a utility for network discovery and security auditing.\n    It uses raw IP packets to determine available hosts, services,\n    operating systems, and packet filters on a network.\n\nEXAMPLES\n    nmap -sV 192.168.1.1       Version detection\n    nmap -A 10.0.0.1           Aggressive scan\n    nmap -sn 192.168.1.0/24    Ping sweep\n    nmap -p 1-1000 target      Port range',
+    ssh:'NAME\n    ssh - OpenSSH remote login client\n\nSYNOPSIS\n    ssh [options] user@host [command]\n\nDESCRIPTION\n    ssh connects and logs into the specified host.\n    It provides encrypted communication over an insecure network.\n\nEXAMPLES\n    ssh user@192.168.1.1       Interactive login\n    ssh -p 2222 user@host      Custom port\n    ssh user@host command      Execute remote command',
+    ping:'NAME\n    ping - send ICMP ECHO_REQUEST to network hosts\n\nSYNOPSIS\n    ping [options] destination\n\nDESCRIPTION\n    ping sends ICMP ECHO_REQUEST packets to measure\n    round-trip time and packet loss to a network host.\n\nEXAMPLES\n    ping google.com           Ping until Ctrl+C\n    ping -c 4 host            Send 4 packets\n    ping -s 128 host          Set packet size',
+    grep:'NAME\n    grep - print lines matching a pattern\n\nSYNOPSIS\n    grep [options] pattern [file]\n\nDESCRIPTION\n    grep searches input files for lines containing a match\n    to the given pattern.\n\nEXAMPLES\n    grep root /etc/passwd     Find root in file\n    grep -r \"TODO\" ./         Recursive search\n    grep -i \"error\" log.txt   Case-insensitive'
+  };
+  if(pages[args])return pages[args];
+  return 'NAME\n    '+args+' - Manual reference\n\nSYNOPSIS\n    '+args+' [OPTIONS]\n\nDESCRIPTION\n    No manual entry for '+args+'. Try \'man\' on: nmap, ssh, ping, grep.';
 },
-echo:function(args){return args||''}
+echo:function(args){return args||''},
+ssh:function(args){
+  if(!args)return 'usage: ssh [-p port] user@host';
+  var m=args.match(/(\w+)@([\w\.]+)/);
+  if(!m)return 'ssh: Could not resolve hostname';
+  var user=m[1],host=m[2];
+  return 'Connecting to '+host+'...\nThe authenticity of host \''+host+' ('+host+')\' can\'t be established.\nED25519 key fingerprint: SHA256:W3vNe3h6jq9Qa8R7z2X5yK1mF4cB0nL8pS6dJ2gA.\nAre you sure you want to continue connecting (yes/no)? [simulated]\n\n'+user+'@'+host+'\'s password:\n[ssh connection established]\n'+user+'@'+host+':~$ ';
+},
+traceroute:function(args){
+  if(!args)return 'usage: traceroute [-n] <host>';
+  var h=args.split(' ').pop();
+  if(args.indexOf('-n')>=0)return 'traceroute to '+h+' (93.184.216.34)\n 1  192.168.1.1    1.234 ms  1.123 ms  1.456 ms\n 2  10.0.0.1      3.567 ms  3.234 ms  3.890 ms\n 3  72.14.204.1   8.901 ms  8.567 ms  9.123 ms\n 4  209.85.252.1  12.345 ms 12.123 ms 12.567 ms\n 5  93.184.216.34 15.678 ms 15.234 ms 15.890 ms';
+  return 'traceroute to '+h+' (93.184.216.34)\n 1  gateway (192.168.1.1)  1.234 ms  1.123 ms  1.456 ms\n 2  core-router (10.0.0.1)  3.567 ms  3.234 ms  3.890 ms\n 3  isp-gw (72.14.204.1)  8.901 ms  8.567 ms  9.123 ms\n 4  edge-router (209.85.252.1)  12.345 ms 12.123 ms 12.567 ms\n 5  target (93.184.216.34)  15.678 ms 15.234 ms 15.890 ms';
+},
+dig:function(args){
+  if(!args)return 'Usage: dig [@server] <name> [type]';
+  var h=args.split(' ').pop();
+  return '; <<>> DiG 9.18.0 <<>> '+h+'\n;; global options: +cmd\n;; Got answer:\n\n;; QUESTION SECTION:\n;'+h+'.              IN      A\n\n;; ANSWER SECTION:\n'+h+'.       300     IN      A       93.184.216.34\n'+h+'.       300     IN      A       93.184.216.35\n\n;; SERVER: 1.1.1.1#53(1.1.1.1)\n;; Query time: 34 msec\n;; WHEN: '+new Date().toString()+'\n;; MSG SIZE  rcvd: 72';
+},
+host:function(args){
+  if(!args)return 'Usage: host <name>';
+  var h=args.split(' ').pop();
+  return h+' has address 93.184.216.34\n'+h+' has IPv6 address 2606:2800:220:1:248:1893:25c8:1946\nMail handler 10 mail.'+h;
+},
+nslookup:function(args){
+  if(!args)return 'Usage: nslookup <host>';
+  var h=args.split(' ').pop();
+  return 'Server:    1.1.1.1\nAddress:   1.1.1.1#53\n\nNon-authoritative answer:\nName:    '+h+'\nAddress: 93.184.216.34\nName:    '+h+'\nAddress: 2606:2800:220:1:248:1893:25c8:1946';
+},
+whois:function(args){
+  if(!args)return 'Usage: whois <domain>';
+  var d=args.split(' ').pop();
+  return 'Domain Name: '+d.toUpperCase()+'\nRegistry Domain ID: 123456789_DOMAIN_COM\nRegistrar: Example Registrar Inc\nRegistrar WHOIS Server: whois.example.com\nRegistrar URL: https://www.example.com\nUpdated Date: 2025-06-15T10:30:00Z\nCreation Date: 2010-01-01T00:00:00Z\nRegistry Expiry Date: 2027-01-01T00:00:00Z\nName Server: NS1.EXAMPLE.COM\nName Server: NS2.EXAMPLE.COM\nDNSSEC: unsigned\n\n>>> Sandbox WHOIS -- simulated data <<<';
+},
+grep:function(args){
+  if(!args)return 'Usage: grep [options] <pattern> [file]';
+  var parts=args.match(/(?:-[a-z]+\s+)?(\S+)\s*(.*)/);
+  if(!parts)return 'grep: invalid pattern';
+  var pat=parts[1],file=parts[2];
+  var data={'notes.txt':'# Security Notes\n- Always get written permission before testing\n- Document everything\n- Use VPN during recon','exploit.db':'Database loaded: 1,337 exploits\n[1] vsftpd_backdoor - vsftpd 2.3.4\n[2] ms17_010_eternalblue - SMB\n[3] shellshock_cve_2014_6271 - Bash','recon.sh':'#!/bin/bash\necho "[*] Starting recon..."\nnmap -sV -sC -O -A $1\necho "[*] Done."','exploit.py':'#!/usr/bin/env python3\nimport socket\n\ndef exploit(target, port):\n    payload = b"\\x90" * 64\n    print(f"[*] Sending to {target}:{port}")\n    return payload'};
+  if(!file||file==='')return '(sandbox) grep: searching in current directory...\n'+pat+'\nMatches found in:\n  notes.txt:3 lines\n  exploit.db:2 lines';
+  if(!data[file])return 'grep: '+file+': No such file or directory';
+  var lines=data[file].split('\n').filter(function(l){return l.toLowerCase().includes(pat.toLowerCase())});
+  if(!lines.length)return 'grep: no matches for "'+pat+'" in '+file;
+  return lines.join('\n');
+},
+tcpdump:function(args){
+  if(!args)return 'tcpdump: listening on eth0\n\n11:23:45.123456 IP 192.168.1.105.54321 > 93.184.216.34.80: Flags [S], seq 123456789\n11:23:45.234567 IP 93.184.216.34.80 > 192.168.1.105.54321: Flags [S.], seq 987654321\n11:23:45.345678 IP 192.168.1.105.54321 > 93.184.216.34.80: Flags [.], ack 1\n^C\n4 packets captured, 4 received, 0% packet loss';
+  if(args.indexOf('-i')>=0)return 'tcpdump: listening on '+args.split(' ').pop()+'\n\n11:23:45.123456 ARP, Request who-has 192.168.1.1 tell 192.168.1.105, length 46\n11:23:45.234567 ARP, Reply 192.168.1.1 is-at 08:00:27:4e:66:a1, length 28\n^C\n2 packets captured';
+  if(args.indexOf('-n')>=0)return 'tcpdump: listening on eth0\n\n11:23:45.123456 IP 192.168.1.105.54321 > 93.184.216.34.80: Flags [S], seq 123456789\n11:23:45.234567 IP 93.184.216.34.80 > 192.168.1.105.54321: Flags [S.], seq 987654321\n^C\n2 packets captured';
+  return 'tcpdump: listening on eth0\n\n11:23:45.123456 IP 192.168.1.105.54321 > target.com.80: Flags [S], seq 123456789\n11:23:45.234567 IP target.com.80 > 192.168.1.105.54321: Flags [S.], seq 987654321\n^C\n2 packets captured';
+},
+nc:function(args){
+  if(!args)return 'usage: nc [-options] <host> <port>';
+  var parts=args.split(' ');
+  var host=parts[0],port=parts[1];
+  if(!port)return 'nc: missing port number';
+  if(port==='22')return 'SSH-2.0-OpenSSH_8.4p1\nProtocol mismatch.';
+  if(port==='80')return 'HTTP/1.1 200 OK\nServer: Apache/2.4.51\nContent-Type: text/html\n\n<html><body><h1>Connected via Netcat</h1></body></html>';
+  if(port==='443')return 'TLS handshake failed: not an SSL/TLS connection';
+  return 'Connection to '+host+' '+port+' port [tcp/'+port+'] succeeded!\n[data stream - press Ctrl+C to close]';
+},
+base64:function(args){
+  if(!args)return 'Usage:\n  base64 encode <text>\n  base64 decode <base64>';
+  if(args.indexOf('encode')===0){
+    var txt=args.slice(7);
+    if(!txt)return 'base64: missing input';
+    return btoa(txt);
+  }
+  if(args.indexOf('decode')===0){
+    var b64=args.slice(7);
+    if(!b64)return 'base64: missing input';
+    try{return atob(b64)}catch(e){return 'base64: invalid input'}
+  }
+  return btoa(args);
+},
+python:function(args){
+  if(!args)return 'Python 3.11.5 (main, Aug 24 2025, 15:30:00)\n[GCC 12.2.0] on linux\nType "help", "copyright", "credits" or "license" for more information.\n>>> ';
+  if(args==='--version')return 'Python 3.11.5';
+  if(args==='-c'||args.indexOf('-c ')>-1){
+    var code=args.replace(/^-c\s+/,'');
+    return '>>> '+code+'\n[Python execution simulated in sandbox]';
+  }
+  return 'Python 3.11.5\n>>> '+(args||'');
+},
+hashcat:function(args){
+  if(!args)return 'hashcat (v6.2.6) starting...\n\nUsage: hashcat [options] <hashfile> <wordlist>\n  -m 0     MD5\n  -m 100   SHA1\n  -m 1400  SHA256\n  -a 0     Straight attack\n  -a 3     Brute force\n\nExample: hashcat -m 0 hash.txt wordlist.txt';
+  if(args.indexOf('-m 0')>=0||args.indexOf('-m 100')>=0||args.indexOf('-m 1400')>=0){
+    var mode='',hash='';
+    if(args.indexOf('-m 0')>=0){mode='MD5';hash='5d41402abc4b2a76b9719d911017c592'}
+    else if(args.indexOf('-m 100')>=0){mode='SHA1';hash='aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d'}
+    else{mode='SHA256';hash='ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb'}
+    return 'hashcat (v6.2.6) starting...\n\nOpenCL API: 1 device loaded\n* Device #1: GPU, 8192 MB\n\nHash-mode: '+mode+'\nHash.Target: '+hash+'\n\nSession..........: hashcat\nStatus...........: Running\nHash.Mode........: '+mode+'\nTime.Estimated...: 0 secs (0.00s)\n\nPerformance: 15.4 GH/s\nProgress: 1024/14344391\n[password]  [qwerty]  [123456]  [letmein]  [admin]\n\nCracked: password';
+  }
+  return 'hashcat (v6.2.6) starting...\n\nNo hashes loaded. Use -m to specify hash type.';
+},
+exit:function(){return 'logout\n\n[Terminal session ended. Type Ctrl+` to reopen.]'}
 };
 
 var termHist=[];
