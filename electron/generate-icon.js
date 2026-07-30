@@ -136,6 +136,25 @@ const png = Buffer.concat([
   pngChunk('IEND', Buffer.alloc(0))
 ])
 
-const outPath = path.join(__dirname, 'icon.png')
-fs.writeFileSync(outPath, png)
-console.log('Generated icon:', outPath, `(${png.length} bytes)`)
+// --- Write PNG ---
+const pngOut = path.join(__dirname, 'icon.png')
+fs.writeFileSync(pngOut, png)
+console.log('Generated icon:', pngOut, `(${png.length} bytes)`)
+
+// --- Write .icns (wraps PNG in macOS icon container) ---
+function writeIcns(pngData, outPath) {
+  const iconEntry = Buffer.alloc(8)
+  iconEntry.write('ic08', 0, 4, 'ascii')
+  iconEntry.writeUInt32BE(8 + pngData.length, 4)
+  const icns = Buffer.concat([
+    Buffer.from('icns', 'ascii'),
+    Buffer.alloc(4),
+    iconEntry,
+    pngData
+  ])
+  icns.writeUInt32BE(icns.length, 4)
+  fs.writeFileSync(outPath, icns)
+  console.log('Generated icon:', outPath, `(${icns.length} bytes)`)
+}
+
+writeIcns(png, path.join(__dirname, 'icon.icns'))

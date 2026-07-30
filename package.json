@@ -3,9 +3,9 @@
   "version": "3.1.0",
   "description": "CyberSec Hub — Learn Cybersecurity From Scratch",
   "author": {
-  "name": "Tauseef666-ctrl",
-  "email": "tauseef666-ctrl@users.noreply.github.com"
-},
+    "name": "Tauseef666-ctrl",
+    "email": "tauseef666-ctrl@users.noreply.github.com"
+  },
   "license": "Educational Use Only",
   "main": "electron/main.js",
   "scripts": {
@@ -32,20 +32,32 @@
       "target": [
         {
           "target": "nsis",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         }
       ],
       "icon": "electron/icon.png"
     },
     "linux": {
-      "target": ["AppImage", "deb"],
+      "target": [
+        "AppImage",
+        "deb"
+      ],
       "icon": "electron/icon.png",
       "category": "Education"
     },
     "mac": {
-      "target": ["dmg"],
+      "target": [
+        "dmg"
+      ],
       "icon": "electron/icon.icns",
       "category": "public.app-category.education"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "Tauseef666-ctrl",
+      "repo": "cybersec-hub"
     },
     "nsis": {
       "oneClick": false,
@@ -58,6 +70,9 @@
       "uninstallerIcon": "electron/icon.png",
       "installerHeaderIcon": "electron/icon.png"
     }
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.9"
   },
   "devDependencies": {
     "electron": "^33.0.0",
