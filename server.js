@@ -6,7 +6,8 @@ const DIR = __dirname;
 const MIME = {'.html':'text/html','.css':'text/css','.js':'application/javascript','.json':'application/json','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml','.ico':'image/x-icon','.ttf':'font/ttf','.wav':'audio/wav'};
 const server = http.createServer((req, res) => {
   let url = req.url === '/' ? '/index.html' : req.url;
-  let fp = path.join(DIR, url);
+  let fp = path.normalize(path.join(DIR, url.split('?')[0]));
+  if (!fp.startsWith(DIR)) { res.writeHead(403); res.end('Forbidden'); return; }
   fs.readFile(fp, (err, data) => {
     if (err) { res.writeHead(404); res.end('Not found'); return; }
     let ext = path.extname(fp);

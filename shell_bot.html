@@ -406,8 +406,9 @@ nmap:function(args){
 },
 curl:function(args){
   if(!args)return 'curl: try \'curl --help\' or \'curl --manual\' for more information';
-  if(args.indexOf('--help')>=0)return 'Usage: curl [options] <url>\n  -X METHOD  HTTP method\n  -H HEADER  Custom header\n  -d DATA    POST data\n  -o FILE    Output file\n  -v         Verbose';
-  if(args.indexOf('-v')>=0)return '*   Trying 93.184.216.34:80...\n* Connected to target\n> GET / HTTP/1.1\n> Host: target\n> User-Agent: curl/7.88.1\n>\n< HTTP/1.1 200 OK\n< Server: Apache/2.4.51\n< Content-Type: text/html\n< Content-Length: 1256\n<\n<!DOCTYPE html>\n<html><head><title>Target</title></head>\n<body><h1>Welcome</h1></body></html>\n* Connection #0 to host target left intact';
+  var a=args.toLowerCase();
+  if(a.indexOf('-v')>=0||a.indexOf('--verbose')>=0)return '*   Trying 93.184.216.34:80...\n* Connected to target\n> GET / HTTP/1.1\n> Host: target\n> User-Agent: curl/7.88.1\n>\n< HTTP/1.1 200 OK\n< Server: Apache/2.4.51\n< Content-Type: text/html\n< Content-Length: 1256\n<\n<!DOCTYPE html>\n<html><head><title>Target</title></head>\n<body><h1>Welcome</h1></body></html>\n* Connection #0 to host target left intact';
+  if(a.indexOf('--help')>=0)return 'Usage: curl [options] <url>\n  -X METHOD  HTTP method\n  -H HEADER  Custom header\n  -d DATA    POST data\n  -o FILE    Output file\n  -v         Verbose';
   return '  % Total    % Received  Average Speed\n100  1256  100  1256    0   8520\n<!DOCTYPE html>\n<html><head><title>Target</title></head>\n<body><h1>Welcome</h1></body></html>';
 },
 wget:function(args){
@@ -543,7 +544,7 @@ hashcat:function(args){
   }
   return 'hashcat (v6.2.6) starting...\n\nNo hashes loaded. Use -m to specify hash type.';
 },
-exit:function(){return 'logout\n\n[Terminal session ended. Type Ctrl+` to reopen.]'}
+exit:function(){if(window._closeTerminal)window._closeTerminal();return null}
 };
 
 var termHist=[];
@@ -721,9 +722,9 @@ function initTerminal(){
   document.getElementById('termClose').onclick=closeTerminal;
   document.getElementById('termMin').onclick=toggleMinimize;
   var tc=document.getElementById('termClose');
-  if(tc){tc.addEventListener('touchstart',function(e){e.preventDefault();closeTerminal()},{passive:false});tc.addEventListener('mousedown',closeTerminal);tc.setAttribute('onclick','window._closeTerminal()')}
+  if(tc){tc.addEventListener('click',function(e){e.stopPropagation();closeTerminal()})}
   var tm=document.getElementById('termMin');
-  if(tm){tm.addEventListener('touchstart',function(e){e.preventDefault();toggleMinimize()},{passive:false});tm.addEventListener('mousedown',toggleMinimize);tm.setAttribute('onclick','window._toggleTermMinimize()')}
+  if(tm){tm.addEventListener('click',function(e){e.stopPropagation();toggleMinimize()})}
   window._closeTerminal=closeTerminal;
   window._toggleTermMinimize=toggleMinimize;
 
@@ -861,19 +862,11 @@ nav(cur);update();
 })();
 
 // Document-level event delegation for Android WebView (catches touch/click events that per-element handlers miss)
-document.body.addEventListener('touchstart',function(e){
+  document.body.addEventListener('touchstart',function(e){
   var t=e.target;
-  // Terminal close
   if(t.id==='termClose'||t.closest('#termClose')){e.preventDefault();if(window._closeTerminal)window._closeTerminal();return}
-  // Terminal minimize
   if(t.id==='termMin'||t.closest('#termMin')){e.preventDefault();if(window._toggleTermMinimize)window._toggleTermMinimize();return}
 },{passive:false});
-// Also catch clicks as fallback
-document.body.addEventListener('click',function(e){
-  var t=e.target;
-  if(t.id==='termClose'||t.closest('#termClose')){e.preventDefault();if(window._closeTerminal)window._closeTerminal();return}
-  if(t.id==='termMin'||t.closest('#termMin')){e.preventDefault();if(window._toggleTermMinimize)window._toggleTermMinimize();return}
-});
 window._toast=toast;
 })();
 

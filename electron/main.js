@@ -53,9 +53,11 @@ function createWindow() {
 
   mainWindow.once('ready-to-show', () => mainWindow.show())
 
+  var stateSaveTimer=null;
+  function debouncedSaveState(){if(stateSaveTimer)clearTimeout(stateSaveTimer);stateSaveTimer=setTimeout(saveWindowState,300)}
   mainWindow.on('close', saveWindowState)
-  mainWindow.on('resize', saveWindowState)
-  mainWindow.on('move', saveWindowState)
+  mainWindow.on('resize', debouncedSaveState)
+  mainWindow.on('move', debouncedSaveState)
 
   mainWindow.on('closed', () => { mainWindow = null })
 }
