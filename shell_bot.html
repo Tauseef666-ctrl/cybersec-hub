@@ -773,10 +773,17 @@ function initBottomNav(){
       var tab=b.dataset.tab;
       if(tab==='home'){window.S('home')}
       else if(tab==='modules'){
+        var sb=document.getElementById('sb');
+        if(window.innerWidth<769){
+          sb.classList.toggle('open');
+          document.getElementById('sOv').classList.toggle('show');
+        }else{
+          sb.classList.toggle('sb-hidden');
+          document.body.classList.toggle('sb-hidden');
+        }
         document.querySelectorAll('.n-ch').forEach(function(ch){ch.classList.add('exp')});
         document.querySelectorAll('.n-items').forEach(function(i){i.classList.add('show')});
         document.getElementById('sNav').scrollTop=0;
-        if(window.innerWidth<769){document.getElementById('sb').classList.add('open');document.getElementById('sOv').classList.add('show')}
       }
       else if(tab==='labs'){window.S('websecurity')}
       else if(tab==='progress'){
