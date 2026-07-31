@@ -518,25 +518,71 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
 .sync-btn:hover{border-color:var(--grn);color:var(--grn)}
 .sync-btn.primary{background:var(--grn);color:var(--bg);border-color:var(--grn);font-weight:600}
 .sync-btn.primary:hover{opacity:.9}
-.progress-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);align-items:flex-start;justify-content:center;padding-top:60px}
+.progress-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);align-items:center;justify-content:center}
 .progress-overlay.show{display:flex;animation:fadeIn .15s}
-.progress-box{background:var(--bg1);border:1px solid var(--bdr);border-radius:12px;width:90%;max-width:480px;padding:24px;box-shadow:0 16px 48px rgba(0,0,0,.5);max-height:70vh;overflow-y:auto}
-.progress-stats{display:flex;gap:16px;margin-bottom:16px}
-.progress-stat{flex:1;text-align:center;padding:12px;background:var(--bg);border-radius:8px;border:1px solid var(--bdr)}
-.ps-num{font-family:var(--mono);font-size:1.3rem;font-weight:700;color:var(--grn)}
-.ps-lbl{font-size:.65rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
-.progress-bar-big{height:8px;background:var(--bg);border-radius:4px;margin-bottom:20px;overflow:hidden}
-.pb-fill{height:100%;background:var(--grn);border-radius:4px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.progress-box{background:var(--bg1);border:1px solid var(--bdr);border-radius:14px;width:92%;max-width:560px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.6);max-height:86vh;overflow-y:auto}
+.progress-box::-webkit-scrollbar{width:6px}
+.progress-box::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:3px}
+.progress-box-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.progress-box-hdr h3{margin:0;font-family:var(--mono);font-size:.82rem;color:var(--grn);letter-spacing:1px}
+.progress-box-hdr h3::before{content:'[root@cybersec ~]# ';color:var(--cyn);font-weight:400}
+.progress-close{padding:6px 14px;border:1px solid var(--bdr);border-radius:6px;background:var(--bg);color:var(--txt2);font-family:var(--mono);font-size:.72rem;cursor:pointer;transition:all .15s}
+.progress-close:hover{border-color:var(--red);color:var(--red)}
+.rank-hdr{display:flex;align-items:center;gap:14px;padding:14px;background:linear-gradient(135deg,rgba(74,222,128,.08),rgba(34,211,238,.06));border:1px solid var(--bdr);border-radius:12px;margin-bottom:16px}
+.rank-icon{width:52px;height:52px;border-radius:50%;background:var(--bg);border:1px solid rgba(250,204,21,.35);display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 0 18px rgba(250,204,21,.15);flex-shrink:0}
+.rank-meta{flex:1;min-width:0}
+.rank-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px;gap:8px}
+.rank-name{font-family:var(--mono);font-size:.95rem;font-weight:700;color:var(--yel);letter-spacing:1px}
+.rank-total{font-family:var(--mono);font-size:.7rem;color:var(--txt3);white-space:nowrap}
+.rank-bar{height:8px;background:var(--bg);border-radius:4px;overflow:hidden}
+.rank-fill{height:100%;background:linear-gradient(90deg,var(--grn),var(--yel));border-radius:4px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.rank-sub{font-size:.65rem;color:var(--txt3);margin-top:6px;font-family:var(--mono)}
+.prog-hero{display:flex;align-items:center;gap:18px;padding:4px 4px 16px}
+.prog-ring{position:relative;width:120px;height:120px;flex-shrink:0}
+.prog-ring svg{transform:rotate(-90deg)}
+.ring-bg{fill:none;stroke:var(--bg);stroke-width:10}
+.ring-fill{fill:none;stroke:var(--grn);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset .8s cubic-bezier(.4,0,.2,1)}
+.ring-label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring-label b{font-family:var(--mono);font-size:1.15rem;color:var(--txt)}
+.ring-label span{font-size:.6rem;color:var(--txt3);text-transform:uppercase;letter-spacing:1px}
+.prog-hero-meta{flex:1;display:flex;flex-direction:column;gap:10px;min-width:0}
+.hero-line{display:flex;align-items:center;gap:6px;font-size:.75rem;color:var(--txt3)}
+.hero-line b{font-family:var(--mono);color:var(--grn);white-space:nowrap}
+.next-up{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--bg);border:1px dashed var(--bdr);border-radius:8px;cursor:pointer;font-size:.75rem;color:var(--txt2);transition:all .15s}
+.next-up:hover{border-color:var(--grn);color:var(--grn)}
+.next-up b{font-family:var(--mono);font-size:.72rem;color:var(--cyn);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prog-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.prog-stat{text-align:center;padding:12px 8px;background:var(--bg);border-radius:10px;border:1px solid var(--bdr)}
+.ps-ico{font-size:1.1rem;margin-bottom:4px}
+.prog-stat .ps-num{font-family:var(--mono);font-size:1rem;font-weight:700;color:var(--grn)}
+.prog-stat .ps-lbl{font-size:.6rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.5px;margin-top:3px}
+.prog-sec{margin-bottom:20px}
+.prog-sec-hdr{display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:.7rem;color:var(--cyn);letter-spacing:1px;margin-bottom:10px;border-bottom:1px solid var(--bdr);padding-bottom:6px}
+.prog-track-pct{color:var(--txt3);font-size:.65rem}
+.prog-cat{display:flex;align-items:center;gap:10px;padding:8px 0}
+.prog-cat-name{width:44%;font-size:.75rem;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prog-cat-num{width:46px;text-align:right;font-family:var(--mono);font-size:.7rem;color:var(--txt3);flex-shrink:0}
+.prog-cat-bar{flex:1;height:7px;background:var(--bg);border-radius:4px;overflow:hidden}
+.prog-cat-fill{height:100%;background:var(--cyn);border-radius:4px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.prog-lab{display:flex;align-items:center;gap:10px;padding:9px 10px;background:var(--bg);border-radius:8px;margin-bottom:6px;cursor:pointer;border:1px solid transparent;transition:all .15s}
+.prog-lab:hover{border-color:var(--bdr)}
+.prog-lab.done{opacity:.9}
+.prog-lab.locked{opacity:.55}
+.prog-lab-ico{font-size:1rem}
+.prog-lab-mid{flex:1;min-width:0}
+.prog-lab-title{font-size:.75rem;color:var(--txt);font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prog-lab-bar{height:5px;background:var(--bdr);border-radius:3px;margin-top:5px;overflow:hidden}
+.prog-lab-fill{height:100%;background:var(--grn);border-radius:3px;transition:width .4s}
+.prog-lab-st{font-family:var(--mono);font-size:.62rem;color:var(--txt3);white-space:nowrap}
 .progress-sections{display:flex;flex-direction:column;gap:6px}
 .progress-section{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg);border-radius:8px;cursor:pointer;transition:all .15s;border:1px solid transparent}
 .progress-section:hover{border-color:var(--bdr);background:var(--card)}
-.progress-section .ps-icon{font-size:.8rem;color:var(--grn)}
-.progress-section .ps-name{flex:1;font-size:.78rem;color:var(--txt);font-family:var(--mono)}
-.ps-status{font-size:.65rem;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px}
+.progress-section.done .ps-name{color:var(--txt3);text-decoration:line-through;text-decoration-color:rgba(74,222,128,.4)}
+.progress-section .ps-icon{font-size:.8rem;color:var(--grn);width:16px;text-align:center}
+.progress-section .ps-name{flex:1;font-size:.78rem;color:var(--txt);font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ps-status{font-size:.65rem;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0}
 .ps-status.done{background:rgba(74,222,128,.15);color:var(--grn)}
 .ps-status.pending{background:rgba(255,255,255,.06);color:var(--txt3)}
-.progress-close{padding:6px 14px;border:1px solid var(--bdr);border-radius:6px;background:var(--bg);color:var(--txt);font-family:var(--mono);font-size:.72rem;cursor:pointer;transition:all .15s}
-.progress-close:hover{border-color:var(--grn);color:var(--grn)}
 .sync-or{text-align:center;color:var(--txt3);font-size:.75rem;margin:12px 0}
 .sync-status{text-align:center;font-size:.75rem;color:var(--txt2);margin-top:8px;min-height:20px}
 .sync-status.ok{color:var(--grn)}.sync-status.err{color:var(--red)}
@@ -2498,17 +2544,57 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
 
 <div class="progress-overlay" id="progressPanel">
   <div class="progress-box">
-    <div class="progress-box-hdr" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
-      <h3 style="margin:0;font-family:var(--mono);font-size:.9rem;color:var(--grn);letter-spacing:.5px">&#9733; My Progress</h3>
+    <div class="progress-box-hdr">
+      <h3>&#9733; MY PROGRESS</h3>
       <button class="progress-close" onclick="document.getElementById('progressPanel').classList.remove('show')">Close</button>
     </div>
-    <div class="progress-stats">
-      <div class="progress-stat"><div class="ps-num" id="progPctNum">0%</div><div class="ps-lbl">Complete</div></div>
-      <div class="progress-stat"><div class="ps-num" id="progDoneNum">0</div><div class="ps-lbl">Done</div></div>
-      <div class="progress-stat"><div class="ps-num" id="progTotalNum">25</div><div class="ps-lbl">Total</div></div>
+
+    <div class="rank-hdr" id="rankHdr">
+      <div class="rank-icon" id="rankIcon">&#129398;</div>
+      <div class="rank-meta">
+        <div class="rank-top"><span class="rank-name" id="rankName">RECRUIT</span><span class="rank-total" id="rankTotal">0 XP</span></div>
+        <div class="rank-bar"><div class="rank-fill" id="rankFill" style="width:0%"></div></div>
+        <div class="rank-sub" id="rankSub">0 / 100 XP to next rank</div>
+      </div>
     </div>
-    <div class="progress-bar-big"><div class="pb-fill" id="progBigFill" style="width:0%"></div></div>
-    <div class="progress-sections" id="progSecList"></div>
+
+    <div class="prog-hero">
+      <div class="prog-ring">
+        <svg viewBox="0 0 120 120" width="120" height="120">
+          <circle class="ring-bg" cx="60" cy="60" r="54"></circle>
+          <circle class="ring-fill" id="ringFill" cx="60" cy="60" r="54"></circle>
+        </svg>
+        <div class="ring-label"><b id="progPctNum">0%</b><span>complete</span></div>
+      </div>
+      <div class="prog-hero-meta">
+        <div class="hero-line"><span>Modules done</span><b id="progDoneNum">0</b>&nbsp;/&nbsp;<b id="progTotalNum">25</b></div>
+        <div class="next-up" id="nextUpBtn">Next up: <b id="nextUpName">&mdash;</b> &#8594;</div>
+      </div>
+    </div>
+
+    <div class="prog-stats">
+      <div class="prog-stat"><div class="ps-ico">&#9889;</div><div class="ps-num" id="progExNum">0/25</div><div class="ps-lbl">Exercises</div></div>
+      <div class="prog-stat"><div class="ps-ico">&#127918;</div><div class="ps-num" id="progCtfNum">0/8</div><div class="ps-lbl">CTF Flags</div></div>
+      <div class="prog-stat"><div class="ps-ico">&#128737;</div><div class="ps-num" id="progLabNum">0/6</div><div class="ps-lbl">Labs</div></div>
+      <div class="prog-stat"><div class="ps-ico">&#127919;</div><div class="ps-num" id="progQuizNum">0</div><div class="ps-lbl">Quizzes</div></div>
+      <div class="prog-stat"><div class="ps-ico">&#127993;</div><div class="ps-num" id="progAccNum">0%</div><div class="ps-lbl">Accuracy</div></div>
+      <div class="prog-stat"><div class="ps-ico">&#128293;</div><div class="ps-num" id="progStreakNum">0</div><div class="ps-lbl">Streak</div></div>
+    </div>
+
+    <div class="prog-sec">
+      <div class="prog-sec-hdr"><span>TRACK BREAKDOWN</span><span class="prog-track-pct" id="trackOverallPct">0/25 (0%)</span></div>
+      <div id="progCatList"></div>
+    </div>
+
+    <div class="prog-sec">
+      <div class="prog-sec-hdr"><span>MISSION LABS</span></div>
+      <div id="progLabList"></div>
+    </div>
+
+    <div class="prog-sec">
+      <div class="prog-sec-hdr"><span>ALL MODULES</span></div>
+      <div class="progress-sections" id="progSecList"></div>
+    </div>
   </div>
 </div>
 
@@ -4060,24 +4146,102 @@ window.S=nav;
 buildNav();initSearch();initNav();initCollapsibles();initCopyButtons();initQuizzes();initTerminal();initHomeCards();initExercises();initBoot();initBottomNav();initReadingTime();initSync();
 migrateLegacyXp();updateXpBadge();
 // Progress module
-// Progress module
+var RANKS=[
+  {min:0,name:'RECRUIT',icon:'&#129398;'},
+  {min:100,name:'LEARNER',icon:'&#128218;'},
+  {min:250,name:'ANALYST',icon:'&#128200;'},
+  {min:500,name:'DEFENDER',icon:'&#128737;'},
+  {min:800,name:'WHITE HAT',icon:'&#127993;'},
+  {min:1200,name:'SPECIALIST',icon:'&#128300;'},
+  {min:1600,name:'RED TEAMER',icon:'&#129513;'},
+  {min:2000,name:'CYBER GUARDIAN',icon:'&#128142;'}
+];
+var TRACKS=[
+  {name:'Foundation',icon:'&#128218;',ids:['foundations','linux','termux','networking']},
+  {name:'Recon & OSINT',icon:'&#128373;',ids:['recon','scanning']},
+  {name:'Offensive Security',icon:'&#127993;',ids:['ethicalhack','exploitation','bugbounty','tools','privesc','postexp','websecurity']},
+  {name:'Defense & Analysis',icon:'&#128737;',ids:['ossecurity','malware','forensics','wireless','blueteam']},
+  {name:'Advanced & Crypto',icon:'&#128272;',ids:['crypto','cloud','mobile','redteam']},
+  {name:'Career & Practice',icon:'&#127919;',ids:['homelab','career','legal']}
+];
 window.Progress={
   render:function(){
     var doneObj=done||{},total=25,doneCount=Object.keys(doneObj).length,pct=total?Math.round(doneCount/total*100):0;
+    var circ=2*Math.PI*54;
+    var ring=document.getElementById('ringFill');
+    if(ring){ring.style.strokeDasharray=circ;ring.style.strokeDashoffset=circ*(1-pct/100)}
     document.getElementById('progPctNum').textContent=pct+'%';
     document.getElementById('progDoneNum').textContent=doneCount;
     document.getElementById('progTotalNum').textContent=total;
-    document.getElementById('progBigFill').style.width=pct+'%';
-    var list=document.getElementById('progSecList');if(!list)return;
-    var h='';
-    var secs=SEC.filter(function(s){return s.s!=='home'});
-    secs.forEach(function(s){
-      var isDone=doneObj[s.s]===true;
-      var icon=isDone?'&#10003;':'&#9670;';
-      var status=isDone?'<span class="ps-status done">Done</span>':'<span class="ps-status pending">Pending</span>';
-      h+='<div class="progress-section" onclick="window.S(\''+s.s+'\');document.getElementById(\'progressPanel\').classList.remove(\'show\')"><span class="ps-icon">'+icon+'</span><span class="ps-name">'+s.t+'</span>'+status+'</div>'
-    });
-    list.innerHTML=h;
+    var xp=totalXp();
+    var cur=RANKS[0],next=null;
+    for(var i=0;i<RANKS.length;i++){if(xp>=RANKS[i].min){cur=RANKS[i];next=RANKS[i+1]||null}}
+    document.getElementById('rankIcon').innerHTML=cur.icon;
+    document.getElementById('rankName').textContent=cur.name;
+    document.getElementById('rankTotal').textContent=xp+' XP';
+    var rankFill=document.getElementById('rankFill'),rankSub=document.getElementById('rankSub');
+    if(next){rankFill.style.width=Math.min(100,Math.round((xp-cur.min)/(next.min-cur.min)*100))+'%';rankSub.textContent=(xp-cur.min)+' / '+(next.min-cur.min)+' XP to '+next.name}
+    else{rankFill.style.width='100%';rankSub.textContent='MAX RANK REACHED'}
+    var ex=JSON.parse(localStorage.getItem('cs_ex')||'{}');
+    var labs=JSON.parse(localStorage.getItem('cs_labs')||'{}');
+    var mlab=getLabState();
+    var exDone=Object.keys(ex).length,ctfDone=Object.keys(labs).length;
+    var labDone=0;MISSION_LABS.forEach(function(l){if((mlab[l.id]||0)>=l.steps.length)labDone++});
+    document.getElementById('progExNum').textContent=exDone+'/25';
+    document.getElementById('progCtfNum').textContent=ctfDone+'/8';
+    document.getElementById('progLabNum').textContent=labDone+'/6';
+    document.getElementById('progQuizNum').textContent=totalQuizzes;
+    document.getElementById('progStreakNum').textContent=quizStreak;
+    document.getElementById('progAccNum').textContent=(totalQuizzes?Math.round(correctQuizzes/totalQuizzes*100):0)+'%';
+    var catEl=document.getElementById('progCatList');
+    if(catEl){
+      var h='',overallDone=0,overallTotal=0;
+      TRACKS.forEach(function(t){
+        var td=0;t.ids.forEach(function(id){if(doneObj[id]===true)td++});
+        var tp=Math.round(td/t.ids.length*100);
+        overallDone+=td;overallTotal+=t.ids.length;
+        h+='<div class="prog-cat"><span class="prog-cat-name">'+t.icon+' '+t.name+'</span><div class="prog-cat-bar"><div class="prog-cat-fill" style="width:'+tp+'%"></div></div><span class="prog-cat-num">'+td+'/'+t.ids.length+'</span></div>';
+      });
+      catEl.innerHTML=h;
+      var top=document.querySelector('.prog-track-pct');
+      if(top)top.textContent=overallDone+'/'+overallTotal+' ('+Math.round(overallDone/overallTotal*100)+'%)';
+    }
+    var labEl=document.getElementById('progLabList');
+    if(labEl){
+      var lh='';
+      MISSION_LABS.forEach(function(l,i){
+        var count=mlab[l.id]||0;
+        var ldone=count>=l.steps.length;
+        var locked=i>0&&(mlab[MISSION_LABS[i-1].id]||0)<MISSION_LABS[i-1].steps.length;
+        var lp=Math.round(count/l.steps.length*100);
+        lh+='<div class="prog-lab '+(ldone?'done':locked?'locked':'')+'" onclick="window.S(\'labs\');document.getElementById(\'progressPanel\').classList.remove(\'show\')"><span class="prog-lab-ico">'+(locked?'&#128274;':l.icon)+'</span><div class="prog-lab-mid"><div class="prog-lab-title">'+l.title+'</div><div class="prog-lab-bar"><div class="prog-lab-fill" style="width:'+lp+'%"></div></div></div><span class="prog-lab-st">'+(ldone?'&#10003; DONE':locked?'LOCKED':count+'/'+l.steps.length)+'</span></div>';
+      });
+      labEl.innerHTML=lh;
+    }
+    var list=document.getElementById('progSecList');
+    if(list){
+      var mh='';
+      SEC.forEach(function(s){
+        if(s.s==='home')return;
+        var isDone=doneObj[s.s]===true;
+        var icon=isDone?'&#10003;':'';
+        var status=isDone?'<span class="ps-status done">Done</span>':'<span class="ps-status pending">Pending</span>';
+        mh+='<div class="progress-section'+(isDone?' done':'')+'" onclick="window.S(\''+s.s+'\');document.getElementById(\'progressPanel\').classList.remove(\'show\')"><span class="ps-icon">'+icon+'</span><span class="ps-name">'+s.t+'</span>'+status+'</div>';
+      });
+      list.innerHTML=mh;
+    }
+    var nextUp=null;
+    SEC.forEach(function(s){if(s.s!=='home'&&!doneObj[s.s]&&!nextUp)nextUp=s});
+    var nextBtn=document.getElementById('nextUpBtn');
+    if(nextBtn){
+      if(nextUp){
+        document.getElementById('nextUpName').textContent=nextUp.t;
+        nextBtn.onclick=function(){window.S(nextUp.s);document.getElementById('progressPanel').classList.remove('show')};
+      }else{
+        document.getElementById('nextUpName').textContent='All modules complete!';
+        nextBtn.onclick=null;
+      }
+    }
   }
 };
 initAnimations();
