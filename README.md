@@ -150,7 +150,6 @@ cybersec-hub/
 ├── sw.js                       # Service worker
 ├── icon-192.svg                # App icon (192x192)
 ├── icon-512.svg                # App icon (512x512)
-├── hackacademy-prototype.jsx   # React prototype (reference only)
 ├── electron/
 │   ├── main.js                 # Electron main process
 │   ├── preload.js              # Preload script (context bridge)
