@@ -33,19 +33,26 @@ jobs:
       - name: Build Windows packages (NSIS + portable)
         shell: bash
         run: |
-          npx electron-builder --win --publish never --config.win.target=nsis --config.win.signAndEditExecutable=false 2>&1 | tee nsis.log
-          nsis_rc=${PIPESTATUS[0]}
-          npx electron-builder --win --publish never --config.win.target=zip --config.win.signAndEditExecutable=false 2>&1 | tee zip.log
-          zip_rc=${PIPESTATUS[0]}
+          set +e
+          npx electron-builder --win --publish never --config.win.target=nsis --config.win.signAndEditExecutable=false > nsis.log 2>&1
+          nsis_rc=$?
+          npx electron-builder --win --publish never --config.win.target=zip --config.win.signAndEditExecutable=false > zip.log 2>&1
+          zip_rc=$?
+          set -e
           if [ $nsis_rc -ne 0 ]; then
-            echo "## NSIS installer build failed (continuing with portable zip)" >> "$GITHUB_STEP_SUMMARY"
-            tail -30 nsis.log >> "$GITHUB_STEP_SUMMARY"
+            echo "::error::NSIS build failed (rc=$nsis_rc)"
+            tail -20 nsis.log | sed 's/^/::error::/'
+          else
+            echo "NSIS build OK"
           fi
           if [ $zip_rc -ne 0 ]; then
-            echo "## Portable zip build failed" >> "$GITHUB_STEP_SUMMARY"
-            tail -30 zip.log >> "$GITHUB_STEP_SUMMARY"
+            echo "::error::ZIP build failed (rc=$zip_rc)"
+            tail -20 zip.log | sed 's/^/::error::/'
+          else
+            echo "ZIP build OK"
           fi
           if [ $nsis_rc -ne 0 ] && [ $zip_rc -ne 0 ]; then
+            echo "::error::Both Windows targets failed"
             exit 1
           fi
 
