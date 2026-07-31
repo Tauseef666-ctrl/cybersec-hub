@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-PROJ="$(dirname "$0")/android"
+PROJ="$(cd "$(dirname "$0")" && pwd)/android"
 BUILD="$PROJ/build"
 ANDROID_JAR="$PROJ/toolz/android.jar"
 
