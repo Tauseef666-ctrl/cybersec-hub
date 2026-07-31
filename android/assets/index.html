@@ -46,6 +46,7 @@ a{color:var(--cyn);text-decoration:none}a:hover{color:var(--grn)}
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 @keyframes cardIn{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
 @keyframes progressFill{from{width:0}}
+@keyframes exFlash{0%,100%{box-shadow:0 0 0 2px rgba(250,204,21,.3)}50%{box-shadow:0 0 0 4px rgba(250,204,21,.55)}}
 @keyframes rippleAnim{to{transform:scale(4);opacity:0}}
 @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
@@ -123,7 +124,7 @@ a{color:var(--cyn);text-decoration:none}a:hover{color:var(--grn)}
 
 .app{display:flex;height:100vh;height:100dvh;background:var(--bg);background-image:radial-gradient(circle at 50% 0%,rgba(74,222,128,.04),transparent 60%)}
 .sidebar{width:260px;min-width:260px;background:var(--bg1);border-right:1px solid var(--bdr);display:flex;flex-direction:column;height:100vh;height:100dvh;flex-shrink:0;z-index:100;padding-bottom:52px;transition:width .25s cubic-bezier(.4,0,.2,1),min-width .25s cubic-bezier(.4,0,.2,1),opacity .2s}
-.sidebar.sb-hidden{width:0;min-width:0;overflow:hidden;opacity:0;pointer-events:none}
+.sidebar.sb-hidden{width:0;min-width:0;overflow:hidden;opacity:0;pointer-events:none;padding:0;border:none}
 body.sb-hidden .bottom-nav{left:0;width:100%}
 .sidebar-hdr{padding:14px 16px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:8px}
 .logo{font-family:var(--mono);font-size:.85rem;font-weight:700;color:var(--txt);letter-spacing:2px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:8px}
@@ -210,6 +211,40 @@ code{font-family:var(--mono);background:var(--grn2);color:var(--grn);padding:1px
 .q-opt.correct{background:rgba(74,222,128,.08);border-color:var(--grn);color:var(--grn);cursor:default}
 .q-opt.wrong{background:rgba(239,68,68,.08);border-color:var(--red);color:var(--red);cursor:default}
 .q-explain{display:none;margin-top:6px;padding:6px 10px;background:rgba(0,0,0,.3);border-radius:5px;font-size:.78rem;color:var(--txt2)}.q-explain.show{display:block;animation:fadeIn .2s}
+
+.ex-block{background:rgba(56,189,248,.03);border:1px solid rgba(56,189,248,.18);border-radius:10px;padding:16px 18px;margin:14px 0;position:relative}
+.ex-block h4{color:var(--cyn);font-family:var(--mono);margin-top:4px;margin-bottom:8px;font-size:.85rem}
+.ex-task{font-size:.82rem;color:var(--txt2);margin-bottom:8px}
+.ex-task code,.ex-data code{color:var(--cyn);background:rgba(0,0,0,.3);padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:.75rem}
+.ex-data{font-family:var(--mono);font-size:.75rem;color:var(--grn);background:rgba(0,0,0,.3);border:1px solid var(--bdr);border-radius:6px;padding:8px 12px;margin:8px 0;word-break:break-all;user-select:all}
+.ex-verify{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.ex-input{flex:1;min-width:160px;padding:8px 12px;background:var(--bg);border:1px solid var(--bdr);border-radius:6px;color:var(--txt);font-family:var(--mono);font-size:.78rem;outline:none}
+.ex-input:focus{border-color:var(--cyn)}
+.ex-btn{padding:8px 16px;background:var(--cyn);color:var(--bg);border:none;border-radius:6px;font-family:var(--mono);font-size:.78rem;font-weight:700;cursor:pointer;transition:all .15s}
+.ex-btn:hover{opacity:.85;transform:translateY(-1px)}
+.ex-status{margin-top:8px;font-size:.75rem;min-height:18px;display:none}
+.ex-status.show{display:block;animation:fadeIn .2s}
+.ex-status.ok{color:var(--grn)}
+.ex-status.no{color:var(--red)}
+.ex-block.done{border-color:var(--grn);background:rgba(74,222,128,.04)}
+.ex-block.done .ex-btn{background:var(--grn);pointer-events:none;opacity:.6}
+.lab-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:16px 0}
+.lab-card{background:var(--bg1);border:1px solid var(--bdr);border-radius:12px;padding:18px;transition:all .2s}
+.lab-card:hover{border-color:var(--grn);transform:translateY(-2px)}
+.lab-icon{font-size:1.5rem;margin-bottom:8px}
+.lab-card h3{font-family:var(--mono);font-size:.9rem;color:var(--grn);margin-bottom:6px}
+.lab-card p{font-size:.78rem;color:var(--txt2);margin-bottom:12px}
+.lab-list{display:flex;flex-direction:column;gap:6px;margin:8px 0 20px}
+.lab-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg1);border:1px solid var(--bdr);border-radius:8px;cursor:pointer;transition:all .15s}
+.lab-row:hover{border-color:var(--cyn);transform:translateX(3px)}
+.lab-row .lab-st{width:22px;text-align:center;color:var(--grn);font-size:.9rem}
+.lab-row.pending .lab-st{color:var(--txt3)}
+.lab-row .lab-name{flex:1;font-size:.8rem;font-family:var(--mono);color:var(--txt)}
+.lab-row .lab-diff{font-size:.6rem;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px;font-family:var(--mono)}
+.lab-row .lab-diff.easy{background:rgba(74,222,128,.12);color:var(--grn)}
+.lab-row .lab-diff.medium{background:rgba(250,204,21,.12);color:var(--yel)}
+.lab-row .lab-diff.hard{background:rgba(239,68,68,.12);color:var(--red)}
+.ex-block.ex-flash{border-color:var(--yel);box-shadow:0 0 0 2px rgba(250,204,21,.3);animation:exFlash 1.6s ease}
 
 .col{border:1px solid var(--bdr);border-radius:6px;margin:5px 0;overflow:hidden}
 .col-h{display:flex;align-items:center;gap:6px;padding:8px 12px;background:var(--bg1);cursor:pointer;user-select:none;transition:all .15s}
@@ -395,6 +430,25 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
 .sync-btn:hover{border-color:var(--grn);color:var(--grn)}
 .sync-btn.primary{background:var(--grn);color:var(--bg);border-color:var(--grn);font-weight:600}
 .sync-btn.primary:hover{opacity:.9}
+.progress-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);align-items:flex-start;justify-content:center;padding-top:60px}
+.progress-overlay.show{display:flex;animation:fadeIn .15s}
+.progress-box{background:var(--bg1);border:1px solid var(--bdr);border-radius:12px;width:90%;max-width:480px;padding:24px;box-shadow:0 16px 48px rgba(0,0,0,.5);max-height:70vh;overflow-y:auto}
+.progress-stats{display:flex;gap:16px;margin-bottom:16px}
+.progress-stat{flex:1;text-align:center;padding:12px;background:var(--bg);border-radius:8px;border:1px solid var(--bdr)}
+.ps-num{font-family:var(--mono);font-size:1.3rem;font-weight:700;color:var(--grn)}
+.ps-lbl{font-size:.65rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+.progress-bar-big{height:8px;background:var(--bg);border-radius:4px;margin-bottom:20px;overflow:hidden}
+.pb-fill{height:100%;background:var(--grn);border-radius:4px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.progress-sections{display:flex;flex-direction:column;gap:6px}
+.progress-section{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg);border-radius:8px;cursor:pointer;transition:all .15s;border:1px solid transparent}
+.progress-section:hover{border-color:var(--bdr);background:var(--card)}
+.progress-section .ps-icon{font-size:.8rem;color:var(--grn)}
+.progress-section .ps-name{flex:1;font-size:.78rem;color:var(--txt);font-family:var(--mono)}
+.ps-status{font-size:.65rem;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px}
+.ps-status.done{background:rgba(74,222,128,.15);color:var(--grn)}
+.ps-status.pending{background:rgba(255,255,255,.06);color:var(--txt3)}
+.progress-close{padding:6px 14px;border:1px solid var(--bdr);border-radius:6px;background:var(--bg);color:var(--txt);font-family:var(--mono);font-size:.72rem;cursor:pointer;transition:all .15s}
+.progress-close:hover{border-color:var(--grn);color:var(--grn)}
 .sync-or{text-align:center;color:var(--txt3);font-size:.75rem;margin:12px 0}
 .sync-status{text-align:center;font-size:.75rem;color:var(--txt2);margin-top:8px;min-height:20px}
 .sync-status.ok{color:var(--grn)}.sync-status.err{color:var(--red)}
@@ -2265,6 +2319,32 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   </div>
 </div>
 
+<div class="sc" id="sec-labs" data-cat="Labs" data-title="Interactive Labs">
+  <h1>Interactive Labs</h1>
+  <p class="ssub">Hands-on challenges and practical exercises to sharpen your offensive and defensive skills.</p>
+
+  <div class="lab-grid">
+    <div class="lab-card">
+      <div class="lab-icon">&#128187;</div>
+      <h3>Terminal Challenges</h3>
+      <p>Solve CTF-style puzzles using the built-in terminal. Crack hashes, decode messages, and find flags.</p>
+      <button class="vid-btn" onclick="if(window._openTerminal)window._openTerminal();setTimeout(function(){if(window._termRunChallenge)window._termRunChallenge()},300)">Open Terminal &#9654;</button>
+    </div>
+    <div class="lab-card">
+      <div class="lab-icon">&#128221;</div>
+      <h3>Practical Exercises</h3>
+      <p>Complete the practical lab at the bottom of each learning section. Verify your answers for XP.</p>
+      <button class="vid-btn" onclick="if(window._scrollToEx)window._scrollToEx()">Find Exercises</button>
+    </div>
+  </div>
+
+  <h3 class="subtopic-title">&#9873; Challenge Progress</h3>
+  <div id="labsCtfList" class="lab-list"></div>
+
+  <h3 class="subtopic-title">&#9889; Exercise Progress</h3>
+  <div id="labsExList" class="lab-list"></div>
+</div>
+
 </div>
 </div>
 </div>
@@ -2429,6 +2509,7 @@ function nav(sid){
     let el=document.getElementById('sec-'+sid);
     if(el){el.classList.add('vis');el.style.animation='none';void el.offsetHeight;el.style.animation='';document.getElementById('cw').scrollTop=0}
     if(sid==='home'&&window._replayCounters)setTimeout(window._replayCounters,200);
+    if(sid==='labs'&&window.renderLabs)window.renderLabs();
   },180);
   document.querySelectorAll('.n-it').forEach(n=>n.classList.remove('act'));
   let navEl=document.querySelector('.n-it[data-s="'+sid+'"]');
@@ -2441,7 +2522,7 @@ function nav(sid){
     var tab=b.dataset.tab;
     var active=false;
     if(sid==='home'&&tab==='home')active=true;
-    else if(sid==='websecurity'&&tab==='labs')active=true;
+    else if(sid==='labs'&&tab==='labs')active=true;
     else if(tab==='progress'&&document.getElementById('progressPanel')&&document.getElementById('progressPanel').classList.contains('show'))active=true;
     else if(sid!=='home'&&tab==='modules')active=true;
     b.classList.toggle('active',active);
@@ -2571,6 +2652,129 @@ function initQuizzes(){
   });
 }
 
+var EXERCISES=[
+  {sec:'foundations',task:'Name the three pillars of the <strong>CIA Triad</strong> (comma-separated).',ans:'confidentiality, integrity, availability',hint:'The three pillars start with C, I, A.'},
+  {sec:'linux',task:'Use <code>ls</code> in the terminal. How many <strong>directories</strong> are in /home/visitor?',cmd:'ls',ans:'6',hint:'Count only the directory names (Desktop, Documents, Downloads, scripts, tools, wordlists).'},
+  {sec:'termux',task:'Run <code>whoami</code> in the terminal and enter the username it returns.',cmd:'whoami',ans:'visitor',hint:'The output is the part before the @ symbol.'},
+  {sec:'networking',task:'In the OSI model, which <strong>layer</strong> number does IP addressing live on?',ans:'3',hint:'Network layer — IP, ICMP, routing.'},
+  {sec:'recon',task:'Run <code>whois target.com</code> in the terminal and enter the Registrar name.',cmd:'whois target.com',ans:'example registrar inc',hint:'Look for the "Registrar:" line in the whois output.'},
+  {sec:'scanning',task:'Run <code>nmap -sV 192.168.1.1</code>. Which <strong>service</strong> is open on port 22?',cmd:'nmap -sV 192.168.1.1',ans:'ssh',hint:'Port 22 is the SSH service.'},
+  {sec:'ethicalhack',task:'In the Cyber Kill Chain, which phase comes <strong>first</strong>?',ans:'reconnaissance',hint:'Information gathering about the target.'},
+  {sec:'exploitation',task:'From <code>cat exploit.db</code>, which exploit targets SMB (MS17-010)?',cmd:'cat exploit.db',ans:'ms17_010_eternalblue',hint:'It is the second exploit in the database list.'},
+  {sec:'bugbounty',task:'Which 2021 OWASP Top 10 category is #1?',ans:'broken access control',hint:'Authorization failures, IDOR, privilege issues.'},
+  {sec:'tools',task:'Run <code>cat exploit.db</code> — how many <strong>exploits</strong> is the database loaded with?',cmd:'cat exploit.db',ans:'1,337',hint:'It is a comma-separated number.'},
+  {sec:'privesc',task:'Run <code>sudo whoami</code> in the terminal. What user does it return?',cmd:'sudo whoami',ans:'root',hint:'The sudo command runs as the superuser.'},
+  {sec:'postexp',task:'Run <code>ps aux</code>. What is the PID of the <strong>sshd</strong> process?',cmd:'ps aux',ans:'342',hint:'Look at the second column (PID) next to sshd.'},
+  {sec:'websecurity',task:'Which OWASP category do SQL injection attacks belong to?',ans:'injection',hint:'It ranks #3 in the OWASP Top 10.'},
+  {sec:'ossecurity',task:'Run <code>ss</code> in the terminal. How many ports are in <strong>LISTEN</strong> state?',cmd:'ss',ans:'3',hint:'Count the LISTEN lines (22, 80, 443).'},
+  {sec:'malware',task:'What file extension is commonly used for captured network packet files?',ans:'pcap',hint:'Wireshark uses this capture format.'},
+  {sec:'forensics',task:'Decode this hex string to find the flag: <code>4354467b666f72656e736963737d</code>',data:'4354467b666f72656e736963737d',ans:'ctf{forensics}',hint:'Try: echo <hex> | xxd -r -p  or  use the base64/python command.'},
+  {sec:'wireless',task:'Which encryption protocol replaced the broken <strong>WEP</strong> standard?',ans:'wpa2',hint:'It starts with WPA and is the second version.'},
+  {sec:'crypto',task:'Decode this Base64 string: <code>Q1RGe2NyeXB0b3NlY3VyaXR5fQ==</code>',data:'Q1RGe2NyeXB0b3NlY3VyaXR5fQ==',ans:'ctf{cryptosecurity}',hint:'Try: echo <data> | base64 -d'},
+  {sec:'cloud',task:'What does the acronym <strong>IAM</strong> stand for in cloud security?',ans:'identity and access management',hint:'Managing who can access cloud resources.'},
+  {sec:'mobile',task:'What sandboxed runtime do modern Android apps run in?',ans:'android runtime',hint:'Abbreviated ART.'},
+  {sec:'redteam',task:'Which tool (SET) simulates phishing attacks for red teams?',ans:'social engineering toolkit',hint:'The full name of SET.'},
+  {sec:'blueteam',task:'What does <strong>SIEM</strong> stand for?',ans:'security information and event management',hint:'Collects and analyzes security logs centrally.'},
+  {sec:'homelab',task:'Which free hypervisor is popular for home security labs?',ans:'virtualbox',hint:'Oracle makes it — you run Kali VMs on it.'},
+  {sec:'career',task:'What is the entry-level CompTIA certification for cybersecurity?',ans:'security+',hint:'Shortened: Sec+.'},
+  {sec:'legal',task:'Which US federal law criminalizes unauthorized computer access?',ans:'computer fraud and abuse act',hint:'Abbreviated CFAA.'}
+];
+
+function initExercises(){
+  EXERCISES.forEach(function(ex){
+    var sec=document.getElementById('sec-'+ex.sec);
+    if(!sec)return;
+    var block=document.createElement('div');
+    block.className='ex-block';
+    block.setAttribute('data-sec',ex.sec);
+    block.setAttribute('data-ans',ex.ans);
+    block.setAttribute('data-hint',ex.hint);
+    var html='<h4>&#128187; Practical Lab</h4><div class="ex-task">'+ex.task+'</div>';
+    if(ex.cmd)html+='<div class="ex-data">$ '+ex.cmd+'</div>';
+    if(ex.data)html+='<div class="ex-data">'+ex.data+'</div>';
+    html+='<div class="ex-verify"><input type="text" class="ex-input" placeholder="Type your answer..." autocomplete="off" spellcheck="false"><button class="ex-btn">Verify</button></div><div class="ex-status"></div>';
+    block.innerHTML=html;
+    sec.appendChild(block);
+  });
+  document.querySelectorAll('.ex-block').forEach(function(block){
+    var secId=block.getAttribute('data-sec')||'';
+    var input=block.querySelector('.ex-input');
+    var btn=block.querySelector('.ex-btn');
+    var status=block.querySelector('.ex-status');
+    var stored=JSON.parse(localStorage.getItem('cs_ex')||'{}');
+    if(stored[secId]){block.classList.add('done');if(status){status.textContent='Completed';status.classList.add('show','ok')}}
+    btn.onclick=function(){
+      var val=(input.value||'').trim().toLowerCase();
+      var ans=(block.getAttribute('data-ans')||'').toLowerCase();
+      if(!val){if(status){status.textContent='Enter your answer first.';status.classList.add('show','no')}return}
+      if(val===ans){
+        stored[secId]=true;localStorage.setItem('cs_ex',JSON.stringify(stored));
+        block.classList.add('done');
+        status.textContent='Correct! Lab completed. +25 XP';
+        status.className='ex-status show ok';
+        if(window._spawnConfetti){var r=block.getBoundingClientRect();window._spawnConfetti(r.left+r.width/2,r.top)}
+        toast('Lab complete!','success','&#10003;');
+      }else{
+        var hint=block.getAttribute('data-hint')||'';
+        status.textContent='Not quite. Hint: '+hint;
+        status.className='ex-status show no';
+        if(input)input.select();
+      }
+    };
+    if(input){input.addEventListener('keydown',function(e){if(e.key==='Enter')btn.click()})}
+  });
+}
+
+function renderLabs(){
+  var ctfEl=document.getElementById('labsCtfList');
+  if(ctfEl){
+    var done=JSON.parse(localStorage.getItem('cs_labs')||'{}');
+    var h='';
+    CTF_CHALLENGES.forEach(function(c){
+      var isDone=!!done[c.id];
+      h+='<div class="lab-row '+(isDone?'':'pending')+'" data-lid="'+c.id+'"><span class="lab-st">'+(isDone?'&#10003;':'&#9670;')+'</span><span class="lab-name">'+c.title+'</span><span class="lab-diff '+c.diff+'">'+c.diff+'</span></div>';
+    });
+    ctfEl.innerHTML=h||'<p style="font-size:.78rem;color:var(--txt3)">No challenges available.</p>';
+    ctfEl.querySelectorAll('.lab-row').forEach(function(row){
+      row.onclick=function(){
+        var id=row.getAttribute('data-lid');
+        if(window._openTerminal)window._openTerminal();
+        setTimeout(function(){
+          if(window._termRunCommand)window._termRunCommand('challenge '+id);
+        },300);
+      };
+    });
+  }
+  var exEl=document.getElementById('labsExList');
+  if(exEl){
+    var doneEx=JSON.parse(localStorage.getItem('cs_ex')||'{}');
+    var h2='';
+    EXERCISES.forEach(function(ex){
+      var sec=SEC.filter(function(s){return s.s===ex.sec})[0];
+      var isDone=!!doneEx[ex.sec];
+      h2+='<div class="lab-row '+(isDone?'':'pending')+'" data-sec="'+ex.sec+'"><span class="lab-st">'+(isDone?'&#10003;':'&#9670;')+'</span><span class="lab-name">'+(sec?sec.t.replace(/^\d+\.\s*/,''):ex.sec)+'</span></div>';
+    });
+    exEl.innerHTML=h2||'<p style="font-size:.78rem;color:var(--txt3)">No exercises available.</p>';
+    exEl.querySelectorAll('.lab-row').forEach(function(row){
+      row.onclick=function(){window.S(row.getAttribute('data-sec'))};
+    });
+  }
+}
+window.renderLabs=renderLabs;
+window._scrollToEx=function(){
+  var sec=document.querySelector('.sc.vis .ex-block');
+  if(sec){sec.scrollIntoView({behavior:'smooth',block:'center'});sec.classList.add('ex-flash');setTimeout(function(){sec.classList.remove('ex-flash')},1600)}
+  else toast('Open a section to find its practical lab','info');
+};
+window._termRunChallenge=function(){if(window._termRunCommand)window._termRunCommand('challenge')};
+window._termRunCommand=function(cmd){
+  var input=document.getElementById('termInput');
+  if(!input)return;
+  input.value=cmd;
+  if(window._openTerminal)window._openTerminal();
+  setTimeout(function(){termProcess(cmd);input.value='';input.focus()},250);
+};
+
 function initHomeCards(){
   var container=document.getElementById('homeCards');
   if(!container)return;
@@ -2621,8 +2825,37 @@ function initReadingTime(){
   });
 }
 
+var CTF_CHALLENGES=[
+  {id:'b64_easy',title:'Base64 Beginner',diff:'easy',hint:'Try base64 decode with echo | base64 -d',
+    desc:'Decode this Base64 string to reveal the flag (CTF{...}).\n  echo "<data>" | base64 -d',
+    data:'Q1RGe2I2NF8zZHQzaW9uXzFzXzR3MzNzb21lfQ==',answer:'CTF{b64_3dt30n_1s_4w3s0me}'},
+  {id:'hex_decode',title:'Hex Decoder',diff:'easy',hint:'hex can be decoded with python3',
+    desc:'Decode this hex string to find the flag.\n  python3 -c "print(bytes.fromhex(\'<hex>\'))"  OR  echo <hex> | xxd -r -p',
+    data:'4354467b6833785f31645f316e5f3768335f68337861646563696d616c7d',answer:'CTF{h3x_1d_1n_7h3_h3xadecimal}'},
+  {id:'rot13',title:'ROT13 Cipher',diff:'easy',hint:'tr \'A-Za-z\' \'N-ZA-Mn-za-m\' is the ROT13 transform',
+    desc:'This flag is ROT13 encrypted. Decrypt it.\n  echo "<data>" | tr \'A-Za-z\' \'N-ZA-Mn-za-m\'',
+    data:'PGS{ebg13_vf_abg_qnatrebhf}',answer:'CTF{rot13_is_not_dangerous}'},
+  {id:'binary_decode',title:'Binary to ASCII',diff:'easy',hint:'Convert each 8-bit binary to a character',
+    desc:'Decode this binary message to ASCII.\n  python3 -c "print(\'\'.join(chr(int(b,2))for b in \'<bits>\'.split()))"',
+    data:'01000011 01010100 01000110 01111011 01100010 00110001 01101110 00110100 01110010 01111001 01011111 01101001 01110011 01011111 01101101 00110011 01110100 01100001 00110111 00111000 01111001 01111101',
+    answer:'CTF{b1n4ry_1s_m3ta78y}'},
+  {id:'caesar_shift',title:'Caesar Cipher',diff:'easy',hint:'Try shift 7: tr \'A-Za-z\' \'H-ZA-Gh-za-g\'',
+    desc:'Decrypt this Caesar cipher (shift 7).\n  echo "<data>" | tr \'A-Za-z\' \'H-ZA-Gh-za-g\'',
+    data:'JAM{jhzhy_pz_avv_lzfd_mvy_aol_lythzu}',answer:'CTF{caesar_is_too_easy_for_the_romans}'},
+  {id:'hash_md5_1',title:'MD5 Hash Crack',diff:'medium',hint:'Try common weak passwords like "password","admin","123456"',
+    desc:'Crack this MD5 hash. It is a common weak password.\n  echo -n "<guess>" | md5sum  (compare hash)',
+    data:'5f4dcc3b5aa765d61d8327deb882cf99',answer:'password'},
+  {id:'hash_md5_2',title:'MD5 Hash Crack 2',diff:'medium',hint:'This one is a number. Try 4+ digit numbers.',
+    desc:'Crack this MD5 hash. It is a numeric password.\n  echo -n "<num>" | md5sum',
+    data:'5e8667a439c68f5145dd2fcbecf02209',answer:'87654321'},
+  {id:'rev_text',title:'Reverse Text',diff:'easy',hint:'Try echo "<text>" | rev in the terminal',
+    desc:'The flag is hidden in this reversed string. Reverse it back!\n  echo "<data>" | rev',
+    data:'}emosewa_si_3md0m_r0F{ FTC',
+    answer:'CTF{F0r_m0d3_is_awesome}'}
+];
+
 var TERM_CMDS={
-help:'Available commands:\n  help       - Show this help\n  clear      - Clear terminal\n  whoami     - Current user info\n  uname      - System information\n  ls         - List files\n  cat        - Read file contents\n  pwd        - Print working directory\n  echo       - Echo text\n  date       - Current date/time\n  id         - User identity\n  history    - Command history\n  tree       - Directory tree\n  score      - Quiz statistics\n  sudo       - Execute as superuser\n  man        - Manual pages\n  -- Network --\n  ping       - Ping a host\n  nmap       - Network mapper\n  ifconfig   - Network interface info\n  ip         - IP address info\n  ss         - Socket statistics\n  netstat    - Network connections\n  curl       - Transfer URL\n  wget       - Download file\n  ssh        - SSH connection\n  traceroute - Trace network path\n  dig        - DNS lookup\n  host       - DNS lookup\n  nslookup   - DNS lookup\n  whois      - Domain/IP information\n  -- System --\n  ps         - Running processes\n  tcpdump    - Packet capture\n  nc         - Netcat connection\n  grep       - Search text\n  base64     - Base64 encode/decode\n  python     - Python interpreter\n  hashcat    - Hash cracker\n  exit       - Exit terminal',
+help:'Available commands:\n  help       - Show this help\n  clear      - Clear terminal\n  whoami     - Current user info\n  uname      - System information\n  ls         - List files\n  cat        - Read file contents\n  pwd        - Print working directory\n  echo       - Echo text\n  date       - Current date/time\n  id         - User identity\n  history    - Command history\n  tree       - Directory tree\n  score      - Quiz statistics\n  sudo       - Execute as superuser\n  man        - Manual pages\n  challenge  - CTF challenges\n  hint       - Command usage hints\n  hints      - Toggle auto-hints\n  -- Network --\n  ping       - Ping a host\n  nmap       - Network mapper\n  ifconfig   - Network interface info\n  ip         - IP address info\n  ss         - Socket statistics\n  netstat    - Network connections\n  curl       - Transfer URL\n  wget       - Download file\n  ssh        - SSH connection\n  traceroute - Trace network path\n  dig        - DNS lookup\n  host       - DNS lookup\n  nslookup   - DNS lookup\n  whois      - Domain/IP information\n  -- Security Tools --\n  hydra      - Brute force login\n  john       - Password cracker\n  sqlmap     - SQL injection tool\n  gobuster   - Directory brute force\n  nikto      - Web server scanner\n  -- System --\n  ps         - Running processes\n  tcpdump    - Packet capture\n  nc         - Netcat connection\n  grep       - Search text\n  base64     - Base64 encode/decode\n  python     - Python interpreter\n  hashcat    - Hash cracker\n  exit       - Exit terminal',
 clear:null,
 whoami:'visitor@cybersec-hub',
 uname:'Linux cybersec-hub 5.15.0-kali1-amd64 x86_64 GNU/Linux',
@@ -2825,8 +3058,116 @@ hashcat:function(args){
   }
   return 'hashcat (v6.2.6) starting...\n\nNo hashes loaded. Use -m to specify hash type.';
 },
-exit:function(){if(window._closeTerminal)window._closeTerminal();return null}
+challenge:function(args){
+  if(!args||args==='list'){
+    var done=JSON.parse(localStorage.getItem('cs_labs')||'{}');
+    var out='=== CTF Challenges ===\nUsage: challenge <id>       - View challenge\n       challenge <id> <ans>  - Submit answer\n\nID'.padEnd(18)+'DIFF    TITLE\n'+''.padEnd(50,'─')+'\n';
+    CTF_CHALLENGES.forEach(function(c){
+      var s=done[c.id]?'✓':' ';
+      out+=' '+s+' '+c.id.padEnd(16)+c.diff.padEnd(7).toUpperCase()+c.title+'\n';
+    });
+    return out+'\n'+Object.keys(done).length+'/'+CTF_CHALLENGES.length+' completed';
+  }
+  var sp=args.indexOf(' '),id=sp<0?args:args.slice(0,sp),ans=sp<0?'':args.slice(sp+1).trim();
+  var c=CTF_CHALLENGES.filter(function(x){return x.id===id})[0];
+  if(!c)return 'challenge: unknown "'+id+'". Use "challenge" to list all challenges.';
+  if(!ans){
+    var done=JSON.parse(localStorage.getItem('cs_labs')||'{}');
+    var st=done[c.id]?'[✓ COMPLETED]':'[ ] PENDING';
+    return '=== '+c.title+' ('+c.diff.toUpperCase()+') ===\n'+st+'\n\n'+c.desc+'\n\nData: '+c.data+'\n\nSubmit: challenge '+c.id+' <your_answer>';
+  }
+  if(ans.toLowerCase().trim()===c.answer.toLowerCase()){
+    var done=JSON.parse(localStorage.getItem('cs_labs')||'{}');
+    done[c.id]=true;localStorage.setItem('cs_labs',JSON.stringify(done));
+    if(window._spawnConfetti){var cw=document.getElementById('cw');if(cw)window._spawnConfetti(cw.scrollLeft+cw.clientWidth/2,cw.scrollTop+cw.clientHeight/2)}
+    return '✓ CORRECT! "'+c.title+'" completed! Flag accepted.\n+50 XP earned!';
+  }
+  return '✗ INCORRECT. Try again.\nHint: '+c.hint;
+},
+hydra:function(args){
+  if(!args)return 'Hydra v9.5 (c) 2023 by van Hauser/THC\n\nUsage: hydra -l <user> -P <wordlist> <target> <service>\n\nExamples:\n  hydra -l admin -P wordlist.txt 192.168.1.1 ssh\n  hydra -l root -P rockyou.txt 10.0.0.1 ftp\n\nCommon services: ssh, ftp, http-post-form, mysql, smb';
+  if(args.indexOf('ssh')>=0)return 'Hydra v9.5 starting...\n[DATA] max 16 tasks per 1 server, overall 16 tasks\n[DATA] attacking ssh://192.168.1.1:22/\n[22][ssh] host: 192.168.1.1 login: admin password: P@ssw0rd!\n[STATUS] 1024 tries completed\n1 of 1 target successfully completed, 1 valid password found';
+  if(args.indexOf('ftp')>=0)return 'Hydra v9.5 starting...\n[DATA] max 16 tasks per 1 server, overall 16 tasks\n[DATA] attacking ftp://10.0.0.1:21/\n[21][ftp] host: 10.0.0.1 login: root password: t0or\n[STATUS] 512 tries completed\n1 of 1 target successfully completed, 1 valid password found';
+  if(args.indexOf('http')>=0||args.indexOf('post')>=0)return 'Hydra v9.5 starting...\n[DATA] max 16 tasks per 1 server, overall 16 tasks\n[DATA] attacking http-post-form://192.168.1.1/login.php\n[80][http-post-form] host: 192.168.1.1 login: admin password: secret123\n[STATUS] 2048 tries completed\n1 of 1 target successfully completed, 1 valid password found';
+  return 'Hydra v9.5 starting...\n[DATA] max 16 tasks per 1 server, overall 16 tasks\n[DATA] attacking '+args.split(' ').pop()+'...\n[STATUS] 256 tries completed\nNo valid passwords found yet. Try a larger wordlist.';
+},
+john:function(args){
+  if(!args)return 'John the Ripper 1.9.0-jumbo-1 OMP [linux-gnu]\n\nUsage: john [options] <hashfile>\n  --wordlist=<file>    Use wordlist mode\n  --format=<type>      Hash type (raw-md5, raw-sha1, bcrypt, nt)\n  --show               Show cracked passwords\n\nExamples:\n  john --wordlist=rockyou.txt hashes.txt\n  john --format=raw-md5 hash.txt';
+  if(args.indexOf('--show')>=0)return 'Cracked passwords:\nadmin:password123:1000\nroot:secret:0\nuser:letmein:1001\njohnny:abc123:1002\n\n4 password hashes cracked, 0 left';
+  if(args.indexOf('--wordlist')>=0||args.indexOf('rockyou')>=0){
+    var h=args.match(/rockyou\.txt\s+(.+)/)||args.match(/--wordlist=\S+\s+(.+)/);
+    var hashfile=h?h[1]:'hashes.txt';
+    return 'John the Ripper 1.9.0-jumbo-1 OMP [linux-gnu]\nUsing default input encoding: UTF-8\nLoaded 3 password hashes with 3 different salts (raw-md5 [MD5 256/256 AVX2 8x3])\nRemaining 3 password hashes with 3 different salts\nProceeding with wordlist mode...\nPress \'q\' or Ctrl-C to abort, almost any other key for status\n0g 0:00:00:01 3.45% (ETA: 2026-07-30 12:00) 0.03450g/s 43560p/s 43560c/s 43560C/s 123456..password\n0g 0:00:00:02 12.8% (ETA: 2026-07-30 12:00) 0.06400g/s 52480p/s 52480c/s 52480C/s monkey..sunshine\n1g 0:00:00:04 45.2% (ETA: 2026-07-30 12:00) 0.2500g/s 78400p/s 78400c/s 78400C/s letmein..trustno1\n2g 0:00:00:06 78.3% (ETA: 2026-07-30 12:00) 0.3333g/s 89600p/s 89600c/s 89600C/s dragon..master\n\nCracked: password123, letmein, dragon (3 of 3 passwords)';
+  }
+  return 'John the Ripper 1.9.0-jumbo-1 OMP [linux-gnu]\nLoaded 2 password hashes (raw-md5 [MD5 256/256 AVX2 8x3])\nProceeding with wordlist mode...\nSession aborted';
+},
+sqlmap:function(args){
+  if(!args)return 'sqlmap/1.7.2 - automatic SQL injection tool\n\nUsage: sqlmap -u <url> [options]\n\nOptions:\n  -u <url>         Target URL\n  --dbs            Enumerate databases\n  --tables         Enumerate tables\n  --dump           Dump data\n  --forms          Parse forms\n  --batch          Never ask for input\n  --level=1-5      Test intensity\n\nExample: sqlmap -u "http://target.com/page?id=1" --dbs';
+  var u=args.match(/-u\s+(\S+)/)?.[1]||'';
+  if(args.indexOf('--dbs')>=0)return 'sqlmap/1.7.2 starting...\n[INFO] testing connection to: '+u+'\n[INFO] testing SQL injection on GET parameter \'id\'\n[INFO] testing MySQL, Oracle, PostgreSQL, MSSQL\n[INFO] confirming MySQL\n[INFO] the back-end DBMS is MySQL\n[INFO] fetching database names\n\navailable databases [5]:\n[*] information_schema\n[*] mysql\n[*] performance_schema\n[*] security\n[*] wordpress\n\n[INFO] fetched 5 databases';
+  if(args.indexOf('--tables')>=0)return 'sqlmap/1.7.2 starting...\n[INFO] fetching tables for database: security\n\nDatabase: security\n[3 tables]\n+------------+\n| users      |\n| posts      |\n| comments   |\n+------------+\n\n[INFO] fetched 3 tables';
+  if(args.indexOf('--dump')>=0)return 'sqlmap/1.7.2 starting...\n[INFO] dumping table: users\n\nDatabase: security\nTable: users\n[3 entries]\n+----+-----------+----------+----------------------------+\n| id | username  | password | email                      |\n+----+-----------+----------+----------------------------+\n| 1  | admin     | P@ss123  | admin@security.local        |\n| 2  | analyst   | sec2026  | analyst@security.local      |\n| 3  | pentester | h4ckth1s | pentester@security.local    |\n+----+-----------+----------+----------------------------+\n\n[INFO] dumped 3 rows';
+  return '[INFO] testing connection to: '+(u||args)+'\n[INFO] GET parameter \'id\' appears to be injectable\n[INFO] web server OS: Linux\n[INFO] web application technology: PHP 8.1, Apache 2.4\n[INFO] back-end DBMS: MySQL >= 5.0\n[INFO] all tested parameters appear to be injectable';
+},
+gobuster:function(args){
+  if(!args)return 'Gobuster v3.6 by OJ Reeves (@TheColonial)\n\nUsage: gobuster dir -u <url> -w <wordlist>\n       gobuster dns -d <domain> -w <wordlist>\n\nExamples:\n  gobuster dir -u http://target.com -w common.txt\n  gobuster dns -d target.com -w subdomains.txt';
+  if(args.indexOf('dir')>=0||args.indexOf('-u')>=0){
+    var u=args.match(/-u\s+(\S+)/)?.[1]||'target.com';
+    return 'Gobuster v3.6 starting...\n[+] Url:                     '+u+'\n[+] Method:                  GET\n[+] Threads:                 10\n[+] Wordlist:                /usr/share/wordlists/common.txt\n\n============================================================\nStarting gobuster\n============================================================\n/admin                (Status: 301) [Size: 234]\n/login                (Status: 200) [Size: 4561]\n/images               (Status: 301) [Size: 178]\n/css                  (Status: 301) [Size: 156]\n/js                   (Status: 301) [Size: 152]\n/backup               (Status: 200) [Size: 1234]\n/config               (Status: 403) [Size: 89]\n/wp-admin             (Status: 301) [Size: 234]\n/api                  (Status: 200) [Size: 567]\n/uploads              (Status: 301) [Size: 178]\n============================================================\nProgress: 4521 / 10000 (45.21%)';
+  }
+  if(args.indexOf('dns')>=0||args.indexOf('-d')>=0){
+    return 'Gobuster v3.6 starting...\n[+] Domain:                 target.com\n[+] Threads:                 10\n[+] Wordlist:                /usr/share/wordlists/subdomains.txt\n\n============================================================\nStarting gobuster\n============================================================\nFound: mail.target.com\nFound: www.target.com\nFound: admin.target.com\nFound: dev.target.com\nFound: blog.target.com\nFound: api.target.com\nFound: vpn.target.com\n============================================================\nProgress: 3024 / 10000 (30.24%)';
+  }
+  return 'Gobuster v3.6 starting...\n[!] Missing required flags: -u or -d\nUsage: gobuster dir -u <url> -w <wordlist>';
+},
+nikto:function(args){
+  if(!args)return 'Nikto v2.5.0 - Web server scanner\n\nUsage: nikto -h <host> [options]\n\nOptions:\n  -h <host>        Target host\n  -p <port>        Port number\n  -ssl             Force SSL\n  -output <file>   Save report\n\nExample: nikto -h http://target.com';
+  var h=args.match(/-h\s+(\S+)/)?.[1]||args.split(' ').pop();
+  return '- Nikto v2.5.0\n---------------------------------------------------------------------------\n+ Target IP:           93.184.216.34\n+ Target Hostname:     '+h.replace(/^https?:\/\//,'')+'\n+ Target Port:         80\n+ Start Time:          '+(new Date().toISOString())+'\n---------------------------------------------------------------------------\n- Server: Apache/2.4.51\n- /: Server banner reveals: Apache/2.4.51\n- /: The X-XSS-Protection header is not defined.\n- /: The X-Content-Type-Options header is not set.\n- /admin/: Directory listing might be enabled.\n- /backup/: Directory listing might be enabled.\n- /config/: Potentially interesting directory found.\n- /wp-admin/: Found WordPress admin interface.\n- /: PHP 8.1.0 may be vulnerable to multiple CVEs.\n- /: Apache/2.4.51 is outdated and may have vulnerabilities.\n- 755 requests completed in 2.4 seconds\n- 12 alerts identified, 4 medium, 8 low';
+},
+exit:function(){if(window._closeTerminal)window._closeTerminal();return null},
+hint:function(args){
+  if(!args)return 'Usage: hint <command>\n\nhint shows a quick usage tip for any command.\nExample: hint nmap\n\nTry hint on: ping, nmap, hydra, john, sqlmap, gobuster, nikto, cat, grep, base64, hashcat';
+  var h=CMD_HINTS[args.toLowerCase()];
+  return h?'hint: '+h:'No hint available for "'+args+'". Try: '+Object.keys(CMD_HINTS).slice(0,12).join(', ');
+},
+hints:function(args){
+  if(args==='off'){hintsEnabled=false;return 'Auto-hints disabled. Type "hints on" to re-enable.'}
+  if(args==='on'){hintsEnabled=true;return 'Auto-hints enabled.'}
+  return 'Auto-hints: '+(hintsEnabled?'ON':'OFF')+'\nUsage: hints on | hints off';
+}
 };
+
+var CMD_HINTS={
+  ping:'ping <host>  — e.g. ping -c 4 google.com',
+  nmap:'nmap [options] <target>  — e.g. nmap -sV -sC 192.168.1.1',
+  curl:'curl [options] <url>  — e.g. curl -v http://target.com',
+  ssh:'ssh [-p port] user@host  — e.g. ssh root@192.168.1.1',
+  hydra:'hydra -l <user> -P <wordlist> <target> <service>  — e.g. hydra -l admin -P rockyou.txt 192.168.1.1 ssh',
+  john:'john [options] <hashfile>  — e.g. john --wordlist=rockyou.txt hashes.txt',
+  sqlmap:'sqlmap -u <url> [options]  — e.g. sqlmap -u "http://target.com/page?id=1" --dbs',
+  gobuster:'gobuster dir -u <url> -w <wordlist>  — e.g. gobuster dir -u http://target.com -w common.txt',
+  nikto:'nikto -h <host>  — e.g. nikto -h http://target.com',
+  nc:'nc <host> <port>  — e.g. nc 192.168.1.1 80',
+  cat:'cat <file>  — e.g. cat notes.txt (files: notes.txt, exploit.db, recon.sh, exploit.py, payload.bin, rockyou.txt, common.txt)',
+  grep:'grep [options] <pattern> [file]  — e.g. grep password rockyou.txt',
+  base64:'base64 encode <text> | base64 decode <base64>',
+  hashcat:'hashcat -m <mode> <hashfile> <wordlist>  — modes: -m 0 (MD5), -m 100 (SHA1), -m 1400 (SHA256)',
+  challenge:'challenge             list challenges\nchallenge <id>       view challenge\nchallenge <id> <ans> submit answer',
+  python:'python3 -c "<code>"  or  python3 script.py',
+  ls:'ls [options]  — e.g. ls -l  |  ls -a',
+  traceroute:'traceroute [-n] <host>  — e.g. traceroute -n google.com',
+  dig:'dig [@server] <name> [type]  — e.g. dig target.com A',
+  tcpdump:'tcpdump [-i interface]  — e.g. tcpdump -i eth0',
+  wget:'wget <url>  — e.g. wget http://target.com/file'
+};
+
+var hintsEnabled=true;
+function showHint(cmd){
+  if(!hintsEnabled)return;
+  var h=CMD_HINTS[cmd];
+  if(h)termPrint('💡 hint: '+h,'hi');
+}
 
 var termHist=[];
 var termHistIdx=-1;
@@ -2853,8 +3194,10 @@ function termProcess(cmd){
   if(TERM_CMDS[c]){
     var result=typeof TERM_CMDS[c]==='function'?TERM_CMDS[c](args):TERM_CMDS[c];
     if(result!==null&&result!==undefined)termPrint(result,'out');
+    if(result&&result.indexOf('Usage:')>=0)showHint(c);
   }else{
     termPrint('command not found: '+c+'. Type help for available commands.','err');
+    showHint(c);
   }
 }
 
@@ -2978,7 +3321,11 @@ function initTerminal(){
     setTimeout(function(){panel.classList.remove('show','hide-anim','kb-active');panel.style.top='60px';panel.style.height='';panel.style.left='16px';panel.style.right='';panel.style.width=''},200);
   }
   var termMinimized=false;
+  var termLastToggle=0;
   function toggleMinimize(){
+    var now=Date.now();
+    if(now-termLastToggle<300)return;
+    termLastToggle=now;
     var body2=document.getElementById('termBody');
     var inputLine=panel.querySelector('.term-input-line');
     if(!termMinimized){
@@ -3001,7 +3348,6 @@ function initTerminal(){
 
   document.getElementById('termTog').onclick=function(){if(panel.classList.contains('show'))closeTerminal();else openTerminal()};
   document.getElementById('termClose').onclick=closeTerminal;
-  document.getElementById('termMin').onclick=toggleMinimize;
   var tc=document.getElementById('termClose');
   if(tc){tc.addEventListener('click',function(e){e.stopPropagation();closeTerminal()})}
   var tm=document.getElementById('termMin');
@@ -3067,7 +3413,7 @@ function initBottomNav(){
         document.querySelectorAll('.n-items').forEach(function(i){i.classList.add('show')});
         document.getElementById('sNav').scrollTop=0;
       }
-      else if(tab==='labs'){window.S('websecurity')}
+      else if(tab==='labs'){window.S('labs')}
       else if(tab==='progress'){
         if(document.getElementById('progressPanel')){
           document.getElementById('progressPanel').classList.add('show');
@@ -3098,12 +3444,12 @@ window._openVidPanel=function(secId,vidId){_openYoutube(vidId)};
 window._openYoutube=_openYoutube;
 
 window.S=nav;
-buildNav();initSearch();initNav();initCollapsibles();initCopyButtons();initQuizzes();initTerminal();initHomeCards();initBoot();initBottomNav();initReadingTime();initSync();
+buildNav();initSearch();initNav();initCollapsibles();initCopyButtons();initQuizzes();initTerminal();initHomeCards();initExercises();initBoot();initBottomNav();initReadingTime();initSync();
 // Progress module
 // Progress module
 window.Progress={
   render:function(){
-    var done=window.done||{},total=25,doneCount=Object.keys(done).length,pct=total?Math.round(doneCount/total*100):0;
+    var doneObj=done||{},total=25,doneCount=Object.keys(doneObj).length,pct=total?Math.round(doneCount/total*100):0;
     document.getElementById('progPctNum').textContent=pct+'%';
     document.getElementById('progDoneNum').textContent=doneCount;
     document.getElementById('progTotalNum').textContent=total;
@@ -3112,7 +3458,7 @@ window.Progress={
     var h='';
     var secs=SEC.filter(function(s){return s.s!=='home'});
     secs.forEach(function(s){
-      var isDone=done[s.s]===true;
+      var isDone=doneObj[s.s]===true;
       var icon=isDone?'&#10003;':'&#9670;';
       var status=isDone?'<span class="ps-status done">Done</span>':'<span class="ps-status pending">Pending</span>';
       h+='<div class="progress-section" onclick="window.S(\''+s.s+'\');document.getElementById(\'progressPanel\').classList.remove(\'show\')"><span class="ps-icon">'+icon+'</span><span class="ps-name">'+s.t+'</span>'+status+'</div>'

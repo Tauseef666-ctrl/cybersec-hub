@@ -1794,6 +1794,32 @@
   </div>
 </div>
 
+<div class="sc" id="sec-labs" data-cat="Labs" data-title="Interactive Labs">
+  <h1>Interactive Labs</h1>
+  <p class="ssub">Hands-on challenges and practical exercises to sharpen your offensive and defensive skills.</p>
+
+  <div class="lab-grid">
+    <div class="lab-card">
+      <div class="lab-icon">&#128187;</div>
+      <h3>Terminal Challenges</h3>
+      <p>Solve CTF-style puzzles using the built-in terminal. Crack hashes, decode messages, and find flags.</p>
+      <button class="vid-btn" onclick="if(window._openTerminal)window._openTerminal();setTimeout(function(){if(window._termRunChallenge)window._termRunChallenge()},300)">Open Terminal &#9654;</button>
+    </div>
+    <div class="lab-card">
+      <div class="lab-icon">&#128221;</div>
+      <h3>Practical Exercises</h3>
+      <p>Complete the practical lab at the bottom of each learning section. Verify your answers for XP.</p>
+      <button class="vid-btn" onclick="if(window._scrollToEx)window._scrollToEx()">Find Exercises</button>
+    </div>
+  </div>
+
+  <h3 class="subtopic-title">&#9873; Challenge Progress</h3>
+  <div id="labsCtfList" class="lab-list"></div>
+
+  <h3 class="subtopic-title">&#9889; Exercise Progress</h3>
+  <div id="labsExList" class="lab-list"></div>
+</div>
+
 </div>
 </div>
 </div>

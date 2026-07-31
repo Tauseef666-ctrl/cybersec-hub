@@ -45,3 +45,6 @@ release/
 dist/
 out/
 electron/icon.png
+
+# Local plan file (not for commit)
+plan/

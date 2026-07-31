@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cybersec-hub-v3';
+const CACHE_NAME = 'cybersec-hub-v4';
 const ASSETS = [
   '/',
   '/index.html',
