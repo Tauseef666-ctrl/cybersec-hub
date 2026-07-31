@@ -105,7 +105,7 @@ let quizStreak=parseInt(localStorage.getItem('cs_streak')||'0');
 let totalQuizzes=parseInt(localStorage.getItem('cs_totalq')||'0');
 let correctQuizzes=parseInt(localStorage.getItem('cs_correctq')||'0');
 
-function save(){localStorage.setItem('cs_current',cur);localStorage.setItem('cs_done',JSON.stringify(done));localStorage.setItem('cs_streak',quizStreak);localStorage.setItem('cs_totalq',totalQuizzes);localStorage.setItem('cs_correctq',correctQuizzes);if(window.AndroidBridge){try{window.AndroidBridge.saveToFile('cs_backup.json',JSON.stringify({d:done,s:quizStreak,t:cur,q:totalQuizzes,c:correctQuizzes,ts:Date.now()}))}catch(e){}}}
+function save(){localStorage.setItem('cs_current',cur);localStorage.setItem('cs_done',JSON.stringify(done));localStorage.setItem('cs_streak',quizStreak);localStorage.setItem('cs_totalq',totalQuizzes);localStorage.setItem('cs_correctq',correctQuizzes);if(window.AndroidBridge){try{window.AndroidBridge.saveToFile('cs_backup.json',JSON.stringify({d:done,s:quizStreak,t:cur,q:totalQuizzes,c:correctQuizzes,x:totalXp(),e:JSON.parse(localStorage.getItem('cs_ex')||'{}'),l:JSON.parse(localStorage.getItem('cs_labs')||'{}'),m:JSON.parse(localStorage.getItem('cs_mlabs')||'{}'),a:JSON.parse(localStorage.getItem('cs_xpaward')||'{}'),ts:Date.now()}))}catch(e){}}}
 function closeMobile(){document.getElementById('sb').classList.remove('open');document.getElementById('sOv').classList.remove('show')}
 
 function tryRestoreBackup(){
@@ -122,6 +122,11 @@ function tryRestoreBackup(){
     if(data.t)localStorage.setItem('cs_current',data.t);
     if(data.q)localStorage.setItem('cs_totalq',String(data.q));
     if(data.c)localStorage.setItem('cs_correctq',String(data.c));
+    if(data.x!==undefined)localStorage.setItem('cs_xp',String(data.x));
+    if(data.e)localStorage.setItem('cs_ex',JSON.stringify(data.e));
+    if(data.l)localStorage.setItem('cs_labs',JSON.stringify(data.l));
+    if(data.m)localStorage.setItem('cs_mlabs',JSON.stringify(data.m));
+    if(data.a)localStorage.setItem('cs_xpaward',JSON.stringify(data.a));
     toast('Progress restored from device backup','success','&#10003;');
   }catch(e){}
 }
@@ -215,8 +220,23 @@ function buildNav(){
     if(done[s.s])it.classList.add('done');
     if(cur===s.s)it.classList.add('act');
     it.onclick=function(e){if(e.target.classList.contains('n-ck'))return;window.S(s.s)};
-    it.querySelector('.n-ck').onclick=function(e){e.stopPropagation();done[s.s]=!done[s.s];it.classList.toggle('done');e.target.innerHTML=done[s.s]?'&#10003;':'';save();update();
-      if(done[s.s]){toast('Section completed!','success','&#10003;')}
+    it.querySelector('.n-ck').onclick=function(e){
+      e.stopPropagation();
+      var was=!!done[s.s];
+      done[s.s]=!was;
+      it.classList.toggle('done');
+      e.target.innerHTML=done[s.s]?'&#10003;':'';
+      if(done[s.s]&&!was){
+        var awarded=JSON.parse(localStorage.getItem('cs_xpaward')||'{}');
+        if(!awarded[s.s]){
+          awarded[s.s]=true;localStorage.setItem('cs_xpaward',JSON.stringify(awarded));
+          addXp(XP_SECTION);
+          toast('Section completed! +'+XP_SECTION+' XP','success','&#11088;');
+        }else{
+          toast('Section completed!','success','&#10003;');
+        }
+      }
+      save();update();
     };
     items.appendChild(it);
     ch.onclick=function(){ch.classList.toggle('exp');items.classList.toggle('show')};
@@ -354,16 +374,21 @@ function initExercises(){
     var stored=JSON.parse(localStorage.getItem('cs_ex')||'{}');
     if(stored[secId]){block.classList.add('done');if(status){status.textContent='Completed';status.classList.add('show','ok')}}
     btn.onclick=function(){
+      if(stored[secId]){
+        if(status){status.textContent='Already completed — no extra XP.';status.className='ex-status show ok'}
+        return;
+      }
       var val=(input.value||'').trim().toLowerCase();
       var ans=(block.getAttribute('data-ans')||'').toLowerCase();
       if(!val){if(status){status.textContent='Enter your answer first.';status.classList.add('show','no')}return}
       if(val===ans){
         stored[secId]=true;localStorage.setItem('cs_ex',JSON.stringify(stored));
         block.classList.add('done');
-        status.textContent='Correct! Lab completed. +25 XP';
+        addXp(XP_EXERCISE);
+        status.textContent='Correct! Lab completed. +'+XP_EXERCISE+' XP';
         status.className='ex-status show ok';
         if(window._spawnConfetti){var r=block.getBoundingClientRect();window._spawnConfetti(r.left+r.width/2,r.top)}
-        toast('Lab complete!','success','&#10003;');
+        toast('Lab complete! +'+XP_EXERCISE+' XP','success','&#10003;');
       }else{
         var hint=block.getAttribute('data-hint')||'';
         status.textContent='Not quite. Hint: '+hint;
@@ -445,9 +470,35 @@ window._termRunCommand=function(cmd){
 
 // ===== Lab Center =====
 var LAB_STATE_KEY='cs_mlabs';
-var LAB_XP_KEY='cs_labxp';
 var LAB_STEP_XP=15;
 var LAB_BONUS_XP=40;
+var XP_SECTION=10;
+var XP_EXERCISE=25;
+var XP_CHALLENGE=50;
+
+function totalXp(){return parseInt(localStorage.getItem('cs_xp')||'0')}
+function updateXpBadge(){
+  var el=document.getElementById('xpNum');
+  if(!el)return;
+  var v=totalXp();
+  if(el.textContent!==String(v)){
+    el.textContent=v;
+    var badge=document.getElementById('xpBadge');
+    if(badge){badge.classList.remove('pulse');void badge.offsetWidth;badge.classList.add('pulse')}
+  }
+}
+function addXp(n){
+  var v=totalXp()+n;
+  localStorage.setItem('cs_xp',String(v));
+  updateXpBadge();
+  return v;
+}
+function migrateLegacyXp(){
+  if(localStorage.getItem('cs_xp')!==null)return;
+  var legacy=parseInt(localStorage.getItem('cs_labxp')||'0');
+  if(legacy>0)localStorage.setItem('cs_xp',String(legacy));
+  localStorage.removeItem('cs_labxp');
+}
 
 var MISSION_LABS=[
   {
@@ -598,8 +649,8 @@ var MISSION_LABS=[
 function labTotalXp(lab){return lab.steps.length*LAB_STEP_XP+LAB_BONUS_XP}
 function getLabState(){try{return JSON.parse(localStorage.getItem(LAB_STATE_KEY)||'{}')}catch(e){return {}}}
 function saveLabState(s){localStorage.setItem(LAB_STATE_KEY,JSON.stringify(s))}
-function getLabXp(){return parseInt(localStorage.getItem(LAB_XP_KEY)||'0')}
-function addLabXp(n){var v=getLabXp()+n;localStorage.setItem(LAB_XP_KEY,String(v));return v}
+function getLabXp(){return totalXp()}
+function addLabXp(n){return addXp(n)}
 function escapeHtml(str){return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function normAns(v){return String(v||'').trim().toLowerCase().replace(/\s+/g,' ').replace(/[.,;:!?]+$/,'')}
 function checkLabAnswer(val,s){
@@ -1161,10 +1212,14 @@ challenge:function(args){
     return h;
   }
   if(rest.toLowerCase().trim()===c.answer.toLowerCase()){
+    if(done[c.id]){
+      return 'You already solved "'+c.title+'" — no extra XP for repeats.';
+    }
     done[c.id]=true;localStorage.setItem('cs_labs',JSON.stringify(done));
+    addXp(XP_CHALLENGE);
     if(window._spawnConfetti){var cw=document.getElementById('cw');if(cw)window._spawnConfetti(cw.scrollLeft+cw.clientWidth/2,cw.scrollTop+cw.clientHeight/2)}
     var n=Object.keys(done).length;
-    return '✓ CORRECT! "'+c.title+'" solved! +50 XP\n\nProgress: '+n+'/'+CTF_CHALLENGES.length+' solved.\nRun "challenge" to see the next one.';
+    return '✓ CORRECT! "'+c.title+'" solved! +'+XP_CHALLENGE+' XP\n\nTotal XP: '+totalXp()+'\nProgress: '+n+'/'+CTF_CHALLENGES.length+' solved.\nRun "challenge" to see the next one.';
   }
   return '✗ That answer is not correct.\n\nWork through it again:\n'+c.steps.map(function(s){return '  • '+s}).join('\n')+'\n\nStuck? Get a hint: challenge '+c.id+' hint';
 },
@@ -1529,6 +1584,7 @@ window._openYoutube=_openYoutube;
 
 window.S=nav;
 buildNav();initSearch();initNav();initCollapsibles();initCopyButtons();initQuizzes();initTerminal();initHomeCards();initExercises();initBoot();initBottomNav();initReadingTime();initSync();
+migrateLegacyXp();updateXpBadge();
 // Progress module
 // Progress module
 window.Progress={
@@ -1648,7 +1704,7 @@ function initSync(){
   }
 
   document.getElementById('syncExport').onclick=function(){
-    var data={d:JSON.parse(localStorage.getItem('cs_done')||'{}'),s:localStorage.getItem('cs_streak')||'0',t:localStorage.getItem('cs_current')||'home',q:localStorage.getItem('cs_totalq')||'0',c:localStorage.getItem('cs_correctq')||'0',ts:Date.now()};
+    var data={d:JSON.parse(localStorage.getItem('cs_done')||'{}'),s:localStorage.getItem('cs_streak')||'0',t:localStorage.getItem('cs_current')||'home',q:localStorage.getItem('cs_totalq')||'0',c:localStorage.getItem('cs_correctq')||'0',x:localStorage.getItem('cs_xp')||'0',e:JSON.parse(localStorage.getItem('cs_ex')||'{}'),l:JSON.parse(localStorage.getItem('cs_labs')||'{}'),m:JSON.parse(localStorage.getItem('cs_mlabs')||'{}'),a:JSON.parse(localStorage.getItem('cs_xpaward')||'{}'),ts:Date.now()};
     var json=JSON.stringify(data);
     if(window.AndroidBridge){
       window.AndroidBridge.exportProgress(json);
@@ -1675,6 +1731,11 @@ function initSync(){
           localStorage.setItem('cs_current',data.t||'home');
           if(data.q)localStorage.setItem('cs_totalq',data.q);
           if(data.c)localStorage.setItem('cs_correctq',data.c);
+          if(data.x!==undefined)localStorage.setItem('cs_xp',String(data.x));
+          if(data.e)localStorage.setItem('cs_ex',JSON.stringify(data.e));
+          if(data.l)localStorage.setItem('cs_labs',JSON.stringify(data.l));
+          if(data.m)localStorage.setItem('cs_mlabs',JSON.stringify(data.m));
+          if(data.a)localStorage.setItem('cs_xpaward',JSON.stringify(data.a));
           status.className='sync-status ok';status.textContent='Progress imported! Reloading...';
           toast('Progress imported!','success','&#10003;');
           setTimeout(function(){location.reload()},1000);
@@ -1706,6 +1767,11 @@ function initSync(){
         localStorage.setItem('cs_done',JSON.stringify(data.d));
         localStorage.setItem('cs_streak',data.s||'0');
         localStorage.setItem('cs_current',data.t||'home');
+        if(data.x!==undefined)localStorage.setItem('cs_xp',String(data.x));
+        if(data.e)localStorage.setItem('cs_ex',JSON.stringify(data.e));
+        if(data.l)localStorage.setItem('cs_labs',JSON.stringify(data.l));
+        if(data.m)localStorage.setItem('cs_mlabs',JSON.stringify(data.m));
+        if(data.a)localStorage.setItem('cs_xpaward',JSON.stringify(data.a));
         toast('Progress synced from link!','success','&#10003;');
         window.location.hash='';
         setTimeout(function(){location.reload()},1500);
