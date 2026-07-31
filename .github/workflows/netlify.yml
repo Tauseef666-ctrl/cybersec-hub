@@ -1,0 +1,30 @@
+name: Deploy to Netlify
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Build and deploy site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build static site
+        run: |
+          mkdir -p deploy
+          cat shell_top.html sections.html shell_bot.html > deploy/index.html
+          cp manifest.json sw.js icon-192.svg icon-512.svg netlify.toml deploy/
+          cp -r fonts deploy/
+
+      - name: Deploy to Netlify
+        if: ${{ secrets.NETLIFY_AUTH_TOKEN != '' }}
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: bbf5c4dd-a26a-4515-a8b7-bc01aaa75a28
+        run: python3 scripts/netlify_deploy.py deploy

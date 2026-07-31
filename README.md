@@ -9,10 +9,19 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-3.0.0-green?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/badge/version-3.2.0-green?style=for-the-badge" alt="Version">
   <img src="https://img.shields.io/badge/android-5.0%2B-blue?style=for-the-badge&logo=android" alt="Android">
   <img src="https://img.shields.io/badge/size-367KB-orange?style=for-the-badge" alt="APK Size">
   <img src="https://img.shields.io/badge/license-Educational%20Use-red?style=for-the-badge" alt="License">
+</p>
+
+<p align="center">
+  <a href="https://cybersec-hub-website.netlify.app">
+    <img src="https://img.shields.io/badge/Website-Visit%20Live%20Site-brightgreen?style=for-the-badge" alt="Live Website">
+  </a>
+  <a href="https://github.com/Tauseef666-ctrl/cybersec-hub/releases">
+    <img src="https://img.shields.io/badge/Releases-Download-purple?style=for-the-badge" alt="Releases">
+  </a>
 </p>
 
 ---
@@ -27,13 +36,15 @@ Built as a single-page vanilla HTML/CSS/JS web application wrapped in an Android
 
 ## Download
 
+> **🌐 Live website (web view):** [cybersec-hub-website.netlify.app](https://cybersec-hub-website.netlify.app) — updated automatically on every push to this repo.
+
 | Platform | Format | Link |
 |----------|--------|------|
-| Android | APK | [**Download v3.0.0**](../../releases/latest) |
-| Windows | Portable EXE | [**Download v3.0.0**](../../releases/latest) |
-| Windows | Installer (NSIS) | [**Download v3.0.0**](../../releases/latest) |
-| Linux | AppImage | [**Download v3.0.0**](../../releases/latest) |
-| Linux | DEB | [**Download v3.0.0**](../../releases/latest) |
+| Android | APK | [**Download v3.2.0**](../../releases/latest) |
+| Windows | Portable EXE | [**Download v3.2.0**](../../releases/latest) |
+| Windows | Installer (NSIS) | [**Download v3.2.0**](../../releases/latest) |
+| Linux | AppImage | [**Download v3.2.0**](../../releases/latest) |
+| Linux | DEB | [**Download v3.2.0**](../../releases/latest) |
 
 > **Android**: Requires Android 5.0+ (Lollipop). Install the APK directly.
 > **Windows 11/10**: Download the portable archive, extract it, and run `CyberSec Hub.exe`. No installation needed.
@@ -250,7 +261,7 @@ npm start
 
 ## Version History
 
-### v3.0.0 (Latest)
+### v3.2.0 (Latest)
 - Full course restructure with subtopics, embedded videos, and notes
 - Boot sound effect and splash screen improvements
 - Video panel with YouTube integration
