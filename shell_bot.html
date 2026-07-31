@@ -22,62 +22,6 @@
   </div>
 </div>
 
-<div class="progress-overlay" id="progressPanel">
-  <div class="progress-box">
-    <div class="progress-box-hdr">
-      <h3>&#9733; MY PROGRESS</h3>
-      <button class="progress-close" onclick="document.getElementById('progressPanel').classList.remove('show')">Close</button>
-    </div>
-
-    <div class="rank-hdr" id="rankHdr">
-      <div class="rank-icon" id="rankIcon">&#129398;</div>
-      <div class="rank-meta">
-        <div class="rank-top"><span class="rank-name" id="rankName">RECRUIT</span><span class="rank-total" id="rankTotal">0 XP</span></div>
-        <div class="rank-bar"><div class="rank-fill" id="rankFill" style="width:0%"></div></div>
-        <div class="rank-sub" id="rankSub">0 / 100 XP to next rank</div>
-      </div>
-    </div>
-
-    <div class="prog-hero">
-      <div class="prog-ring">
-        <svg viewBox="0 0 120 120" width="120" height="120">
-          <circle class="ring-bg" cx="60" cy="60" r="54"></circle>
-          <circle class="ring-fill" id="ringFill" cx="60" cy="60" r="54"></circle>
-        </svg>
-        <div class="ring-label"><b id="progPctNum">0%</b><span>complete</span></div>
-      </div>
-      <div class="prog-hero-meta">
-        <div class="hero-line"><span>Modules done</span><b id="progDoneNum">0</b>&nbsp;/&nbsp;<b id="progTotalNum">25</b></div>
-        <div class="next-up" id="nextUpBtn">Next up: <b id="nextUpName">&mdash;</b> &#8594;</div>
-      </div>
-    </div>
-
-    <div class="prog-stats">
-      <div class="prog-stat"><div class="ps-ico">&#9889;</div><div class="ps-num" id="progExNum">0/25</div><div class="ps-lbl">Exercises</div></div>
-      <div class="prog-stat"><div class="ps-ico">&#127918;</div><div class="ps-num" id="progCtfNum">0/8</div><div class="ps-lbl">CTF Flags</div></div>
-      <div class="prog-stat"><div class="ps-ico">&#128737;</div><div class="ps-num" id="progLabNum">0/6</div><div class="ps-lbl">Labs</div></div>
-      <div class="prog-stat"><div class="ps-ico">&#127919;</div><div class="ps-num" id="progQuizNum">0</div><div class="ps-lbl">Quizzes</div></div>
-      <div class="prog-stat"><div class="ps-ico">&#127993;</div><div class="ps-num" id="progAccNum">0%</div><div class="ps-lbl">Accuracy</div></div>
-      <div class="prog-stat"><div class="ps-ico">&#128293;</div><div class="ps-num" id="progStreakNum">0</div><div class="ps-lbl">Streak</div></div>
-    </div>
-
-    <div class="prog-sec">
-      <div class="prog-sec-hdr"><span>TRACK BREAKDOWN</span><span class="prog-track-pct" id="trackOverallPct">0/25 (0%)</span></div>
-      <div id="progCatList"></div>
-    </div>
-
-    <div class="prog-sec">
-      <div class="prog-sec-hdr"><span>MISSION LABS</span></div>
-      <div id="progLabList"></div>
-    </div>
-
-    <div class="prog-sec">
-      <div class="prog-sec-hdr"><span>ALL MODULES</span></div>
-      <div class="progress-sections" id="progSecList"></div>
-    </div>
-  </div>
-</div>
-
 <nav class="bottom-nav" id="bottomNav">
   <div class="bn-item active" data-tab="home"><span class="bn-icon">&#9670;</span>Home</div>
   <div class="bn-item" data-tab="modules"><span class="bn-icon">&#9776;</span>Topics</div>
@@ -205,6 +149,7 @@ function nav(sid){
     if(el){el.classList.add('vis');el.style.animation='none';void el.offsetHeight;el.style.animation='';document.getElementById('cw').scrollTop=0}
     if(sid==='home'&&window._replayCounters)setTimeout(window._replayCounters,200);
     if(sid==='labs'&&window.renderLabs)window.renderLabs();
+    if(sid==='progress'&&window.Progress)window.Progress.render();
   },180);
   document.querySelectorAll('.n-it').forEach(n=>n.classList.remove('act'));
   let navEl=document.querySelector('.n-it[data-s="'+sid+'"]');
@@ -218,8 +163,8 @@ function nav(sid){
     var active=false;
     if(sid==='home'&&tab==='home')active=true;
     else if(sid==='labs'&&tab==='labs')active=true;
-    else if(tab==='progress'&&document.getElementById('progressPanel')&&document.getElementById('progressPanel').classList.contains('show'))active=true;
-    else if(sid!=='home'&&tab==='modules')active=true;
+    else if(sid==='progress'&&tab==='progress')active=true;
+    else if(sid!=='home'&&sid!=='labs'&&sid!=='progress'&&tab==='modules')active=true;
     b.classList.toggle('active',active);
   });
 }
@@ -238,7 +183,9 @@ function update(){
   else ring.style.stroke='var(--grn)';
   let sec=SEC.find(s=>s.s===cur);
   let bc=document.getElementById('bc');
-  if(sec&&sec.p!=='home'){
+  if(cur==='labs'){bc.innerHTML='<span class="bc">'+(sec?sec.t:'Home')+'</span><span class="bc-s">/</span><span>Lab Center</span>'}
+  else if(cur==='progress'){bc.innerHTML='<span class="bc">'+(sec?sec.t:'Home')+'</span><span class="bc-s">/</span><span>My Progress</span>'}
+  else if(sec&&sec.p!=='home'){
     bc.innerHTML='<span class="bc" style="cursor:pointer" onclick="window.S(\'home\')">'+sec.t.split('.')[0]+'</span><span class="bc-s">/</span><span>'+sec.t.replace(/^\d+\.\s*/,'')+'</span>';
   }else{
     bc.innerHTML='<span class="bc">'+(sec?sec.t:'Home')+'</span>';
@@ -921,7 +868,7 @@ function initBoot(){
 
 function initReadingTime(){
   document.querySelectorAll('.sc').forEach(function(sec){
-    if(sec.id==='sec-home')return;
+    if(sec.id==='sec-home'||sec.id==='sec-labs'||sec.id==='sec-progress')return;
     var text=sec.textContent||sec.innerText;
     var words=text.trim().split(/\s+/).length;
     var mins=Math.ceil(words/200);
@@ -1593,12 +1540,7 @@ function initBottomNav(){
         document.getElementById('sNav').scrollTop=0;
       }
       else if(tab==='labs'){window.S('labs')}
-      else if(tab==='progress'){
-        if(document.getElementById('progressPanel')){
-          document.getElementById('progressPanel').classList.add('show');
-          if(window.Progress)Progress.render();
-        }
-      }
+      else if(tab==='progress'){window.S('progress')}
       document.querySelectorAll('.bn-item').forEach(function(x){x.classList.remove('active')});
       b.classList.add('active');
     };
@@ -1694,7 +1636,7 @@ window.Progress={
         var ldone=count>=l.steps.length;
         var locked=i>0&&(mlab[MISSION_LABS[i-1].id]||0)<MISSION_LABS[i-1].steps.length;
         var lp=Math.round(count/l.steps.length*100);
-        lh+='<div class="prog-lab '+(ldone?'done':locked?'locked':'')+'" onclick="window.S(\'labs\');document.getElementById(\'progressPanel\').classList.remove(\'show\')"><span class="prog-lab-ico">'+(locked?'&#128274;':l.icon)+'</span><div class="prog-lab-mid"><div class="prog-lab-title">'+l.title+'</div><div class="prog-lab-bar"><div class="prog-lab-fill" style="width:'+lp+'%"></div></div></div><span class="prog-lab-st">'+(ldone?'&#10003; DONE':locked?'LOCKED':count+'/'+l.steps.length)+'</span></div>';
+        lh+='<div class="prog-lab '+(ldone?'done':locked?'locked':'')+'" onclick="window.S(\'labs\')"><span class="prog-lab-ico">'+(locked?'&#128274;':l.icon)+'</span><div class="prog-lab-mid"><div class="prog-lab-title">'+l.title+'</div><div class="prog-lab-bar"><div class="prog-lab-fill" style="width:'+lp+'%"></div></div></div><span class="prog-lab-st">'+(ldone?'&#10003; DONE':locked?'LOCKED':count+'/'+l.steps.length)+'</span></div>';
       });
       labEl.innerHTML=lh;
     }
@@ -1706,7 +1648,7 @@ window.Progress={
         var isDone=doneObj[s.s]===true;
         var icon=isDone?'&#10003;':'';
         var status=isDone?'<span class="ps-status done">Done</span>':'<span class="ps-status pending">Pending</span>';
-        mh+='<div class="progress-section'+(isDone?' done':'')+'" onclick="window.S(\''+s.s+'\');document.getElementById(\'progressPanel\').classList.remove(\'show\')"><span class="ps-icon">'+icon+'</span><span class="ps-name">'+s.t+'</span>'+status+'</div>';
+        mh+='<div class="progress-section'+(isDone?' done':'')+'" onclick="window.S(\''+s.s+'\')"><span class="ps-icon">'+icon+'</span><span class="ps-name">'+s.t+'</span>'+status+'</div>';
       });
       list.innerHTML=mh;
     }
@@ -1716,7 +1658,7 @@ window.Progress={
     if(nextBtn){
       if(nextUp){
         document.getElementById('nextUpName').textContent=nextUp.t;
-        nextBtn.onclick=function(){window.S(nextUp.s);document.getElementById('progressPanel').classList.remove('show')};
+        nextBtn.onclick=function(){window.S(nextUp.s)};
       }else{
         document.getElementById('nextUpName').textContent='All modules complete!';
         nextBtn.onclick=null;

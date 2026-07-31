@@ -518,17 +518,10 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
 .sync-btn:hover{border-color:var(--grn);color:var(--grn)}
 .sync-btn.primary{background:var(--grn);color:var(--bg);border-color:var(--grn);font-weight:600}
 .sync-btn.primary:hover{opacity:.9}
-.progress-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);align-items:center;justify-content:center}
-.progress-overlay.show{display:flex;animation:fadeIn .15s}
-.progress-box{background:var(--bg1);border:1px solid var(--bdr);border-radius:14px;width:92%;max-width:560px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.6);max-height:86vh;overflow-y:auto}
-.progress-box::-webkit-scrollbar{width:6px}
-.progress-box::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:3px}
-.progress-box-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.progress-box-hdr h3{margin:0;font-family:var(--mono);font-size:.82rem;color:var(--grn);letter-spacing:1px}
-.progress-box-hdr h3::before{content:'[root@cybersec ~]# ';color:var(--cyn);font-weight:400}
-.progress-close{padding:6px 14px;border:1px solid var(--bdr);border-radius:6px;background:var(--bg);color:var(--txt2);font-family:var(--mono);font-size:.72rem;cursor:pointer;transition:all .15s}
-.progress-close:hover{border-color:var(--red);color:var(--red)}
-.rank-hdr{display:flex;align-items:center;gap:14px;padding:14px;background:linear-gradient(135deg,rgba(74,222,128,.08),rgba(34,211,238,.06));border:1px solid var(--bdr);border-radius:12px;margin-bottom:16px}
+.prog-page{max-width:720px;margin:0 auto;padding:20px 6px}
+.prog-page h1{font-family:var(--mono);font-size:1.15rem;color:var(--txt);letter-spacing:1px;margin:0 0 6px}
+.prog-page h1::before{content:'[root@cybersec ~]# ';color:var(--cyn);font-weight:400;font-size:.85rem}
+.rank-hdr{display:flex;align-items:center;gap:14px;padding:14px;background:linear-gradient(135deg,rgba(74,222,128,.08),rgba(34,211,238,.06));border:1px solid var(--bdr);border-radius:12px;margin:18px 0 16px}
 .rank-icon{width:52px;height:52px;border-radius:50%;background:var(--bg);border:1px solid rgba(250,204,21,.35);display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 0 18px rgba(250,204,21,.15);flex-shrink:0}
 .rank-meta{flex:1;min-width:0}
 .rank-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px;gap:8px}

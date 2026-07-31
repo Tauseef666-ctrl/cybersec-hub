@@ -518,17 +518,10 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
 .sync-btn:hover{border-color:var(--grn);color:var(--grn)}
 .sync-btn.primary{background:var(--grn);color:var(--bg);border-color:var(--grn);font-weight:600}
 .sync-btn.primary:hover{opacity:.9}
-.progress-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);align-items:center;justify-content:center}
-.progress-overlay.show{display:flex;animation:fadeIn .15s}
-.progress-box{background:var(--bg1);border:1px solid var(--bdr);border-radius:14px;width:92%;max-width:560px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.6);max-height:86vh;overflow-y:auto}
-.progress-box::-webkit-scrollbar{width:6px}
-.progress-box::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:3px}
-.progress-box-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.progress-box-hdr h3{margin:0;font-family:var(--mono);font-size:.82rem;color:var(--grn);letter-spacing:1px}
-.progress-box-hdr h3::before{content:'[root@cybersec ~]# ';color:var(--cyn);font-weight:400}
-.progress-close{padding:6px 14px;border:1px solid var(--bdr);border-radius:6px;background:var(--bg);color:var(--txt2);font-family:var(--mono);font-size:.72rem;cursor:pointer;transition:all .15s}
-.progress-close:hover{border-color:var(--red);color:var(--red)}
-.rank-hdr{display:flex;align-items:center;gap:14px;padding:14px;background:linear-gradient(135deg,rgba(74,222,128,.08),rgba(34,211,238,.06));border:1px solid var(--bdr);border-radius:12px;margin-bottom:16px}
+.prog-page{max-width:720px;margin:0 auto;padding:20px 6px}
+.prog-page h1{font-family:var(--mono);font-size:1.15rem;color:var(--txt);letter-spacing:1px;margin:0 0 6px}
+.prog-page h1::before{content:'[root@cybersec ~]# ';color:var(--cyn);font-weight:400;font-size:.85rem}
+.rank-hdr{display:flex;align-items:center;gap:14px;padding:14px;background:linear-gradient(135deg,rgba(74,222,128,.08),rgba(34,211,238,.06));border:1px solid var(--bdr);border-radius:12px;margin:18px 0 16px}
 .rank-icon{width:52px;height:52px;border-radius:50%;background:var(--bg);border:1px solid rgba(250,204,21,.35);display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 0 18px rgba(250,204,21,.15);flex-shrink:0}
 .rank-meta{flex:1;min-width:0}
 .rank-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px;gap:8px}
@@ -2515,39 +2508,10 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div id="labDetail" style="display:none"></div>
 </div>
 
-</div>
-</div>
-</div>
-    </div>
-  </div>
-</div>
-
-<div class="quiz-streak" id="quizStreak">
-  <span class="streak-fire">&#128293;</span>
-  <span>Streak: <span class="streak-num" id="streakNum">0</span></span>
-</div>
-
-<div class="toast-container" id="toastContainer"></div>
-
-<div class="shortcut-modal" id="shortcutModal">
-  <div class="shortcut-box">
-    <h3>&#9881; Keyboard Shortcuts</h3>
-    <div class="shortcut-row"><span class="sc-label">Search</span><kbd>Ctrl + K</kbd></div>
-    <div class="shortcut-row"><span class="sc-label">Terminal</span><kbd>Ctrl + `</kbd></div>
-    <div class="shortcut-row"><span class="sc-label">Previous section</span><kbd>Alt + &#8592;</kbd></div>
-    <div class="shortcut-row"><span class="sc-label">Next section</span><kbd>Alt + &#8594;</kbd></div>
-    <div class="shortcut-row"><span class="sc-label">Close panel</span><kbd>Esc</kbd></div>
-    <div class="shortcut-row"><span class="sc-label">Shortcuts</span><kbd>?</kbd></div>
-    <button class="sc-close" onclick="document.getElementById('shortcutModal').classList.remove('show')">Close</button>
-  </div>
-</div>
-
-<div class="progress-overlay" id="progressPanel">
-  <div class="progress-box">
-    <div class="progress-box-hdr">
-      <h3>&#9733; MY PROGRESS</h3>
-      <button class="progress-close" onclick="document.getElementById('progressPanel').classList.remove('show')">Close</button>
-    </div>
+<div class="sc" id="sec-progress" data-cat="Progress" data-title="My Progress">
+  <div class="prog-page">
+    <h1>&#9733; My Progress</h1>
+    <p class="ssub">Your journey across modules, labs, challenges and quizzes &mdash; climb the ranks as you go.</p>
 
     <div class="rank-hdr" id="rankHdr">
       <div class="rank-icon" id="rankIcon">&#129398;</div>
@@ -2595,6 +2559,33 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
       <div class="prog-sec-hdr"><span>ALL MODULES</span></div>
       <div class="progress-sections" id="progSecList"></div>
     </div>
+  </div>
+</div>
+
+</div>
+</div>
+</div>
+    </div>
+  </div>
+</div>
+
+<div class="quiz-streak" id="quizStreak">
+  <span class="streak-fire">&#128293;</span>
+  <span>Streak: <span class="streak-num" id="streakNum">0</span></span>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<div class="shortcut-modal" id="shortcutModal">
+  <div class="shortcut-box">
+    <h3>&#9881; Keyboard Shortcuts</h3>
+    <div class="shortcut-row"><span class="sc-label">Search</span><kbd>Ctrl + K</kbd></div>
+    <div class="shortcut-row"><span class="sc-label">Terminal</span><kbd>Ctrl + `</kbd></div>
+    <div class="shortcut-row"><span class="sc-label">Previous section</span><kbd>Alt + &#8592;</kbd></div>
+    <div class="shortcut-row"><span class="sc-label">Next section</span><kbd>Alt + &#8594;</kbd></div>
+    <div class="shortcut-row"><span class="sc-label">Close panel</span><kbd>Esc</kbd></div>
+    <div class="shortcut-row"><span class="sc-label">Shortcuts</span><kbd>?</kbd></div>
+    <button class="sc-close" onclick="document.getElementById('shortcutModal').classList.remove('show')">Close</button>
   </div>
 </div>
 
@@ -2725,6 +2716,7 @@ function nav(sid){
     if(el){el.classList.add('vis');el.style.animation='none';void el.offsetHeight;el.style.animation='';document.getElementById('cw').scrollTop=0}
     if(sid==='home'&&window._replayCounters)setTimeout(window._replayCounters,200);
     if(sid==='labs'&&window.renderLabs)window.renderLabs();
+    if(sid==='progress'&&window.Progress)window.Progress.render();
   },180);
   document.querySelectorAll('.n-it').forEach(n=>n.classList.remove('act'));
   let navEl=document.querySelector('.n-it[data-s="'+sid+'"]');
@@ -2738,8 +2730,8 @@ function nav(sid){
     var active=false;
     if(sid==='home'&&tab==='home')active=true;
     else if(sid==='labs'&&tab==='labs')active=true;
-    else if(tab==='progress'&&document.getElementById('progressPanel')&&document.getElementById('progressPanel').classList.contains('show'))active=true;
-    else if(sid!=='home'&&tab==='modules')active=true;
+    else if(sid==='progress'&&tab==='progress')active=true;
+    else if(sid!=='home'&&sid!=='labs'&&sid!=='progress'&&tab==='modules')active=true;
     b.classList.toggle('active',active);
   });
 }
@@ -2758,7 +2750,9 @@ function update(){
   else ring.style.stroke='var(--grn)';
   let sec=SEC.find(s=>s.s===cur);
   let bc=document.getElementById('bc');
-  if(sec&&sec.p!=='home'){
+  if(cur==='labs'){bc.innerHTML='<span class="bc">'+(sec?sec.t:'Home')+'</span><span class="bc-s">/</span><span>Lab Center</span>'}
+  else if(cur==='progress'){bc.innerHTML='<span class="bc">'+(sec?sec.t:'Home')+'</span><span class="bc-s">/</span><span>My Progress</span>'}
+  else if(sec&&sec.p!=='home'){
     bc.innerHTML='<span class="bc" style="cursor:pointer" onclick="window.S(\'home\')">'+sec.t.split('.')[0]+'</span><span class="bc-s">/</span><span>'+sec.t.replace(/^\d+\.\s*/,'')+'</span>';
   }else{
     bc.innerHTML='<span class="bc">'+(sec?sec.t:'Home')+'</span>';
@@ -3441,7 +3435,7 @@ function initBoot(){
 
 function initReadingTime(){
   document.querySelectorAll('.sc').forEach(function(sec){
-    if(sec.id==='sec-home')return;
+    if(sec.id==='sec-home'||sec.id==='sec-labs'||sec.id==='sec-progress')return;
     var text=sec.textContent||sec.innerText;
     var words=text.trim().split(/\s+/).length;
     var mins=Math.ceil(words/200);
@@ -4113,12 +4107,7 @@ function initBottomNav(){
         document.getElementById('sNav').scrollTop=0;
       }
       else if(tab==='labs'){window.S('labs')}
-      else if(tab==='progress'){
-        if(document.getElementById('progressPanel')){
-          document.getElementById('progressPanel').classList.add('show');
-          if(window.Progress)Progress.render();
-        }
-      }
+      else if(tab==='progress'){window.S('progress')}
       document.querySelectorAll('.bn-item').forEach(function(x){x.classList.remove('active')});
       b.classList.add('active');
     };
@@ -4214,7 +4203,7 @@ window.Progress={
         var ldone=count>=l.steps.length;
         var locked=i>0&&(mlab[MISSION_LABS[i-1].id]||0)<MISSION_LABS[i-1].steps.length;
         var lp=Math.round(count/l.steps.length*100);
-        lh+='<div class="prog-lab '+(ldone?'done':locked?'locked':'')+'" onclick="window.S(\'labs\');document.getElementById(\'progressPanel\').classList.remove(\'show\')"><span class="prog-lab-ico">'+(locked?'&#128274;':l.icon)+'</span><div class="prog-lab-mid"><div class="prog-lab-title">'+l.title+'</div><div class="prog-lab-bar"><div class="prog-lab-fill" style="width:'+lp+'%"></div></div></div><span class="prog-lab-st">'+(ldone?'&#10003; DONE':locked?'LOCKED':count+'/'+l.steps.length)+'</span></div>';
+        lh+='<div class="prog-lab '+(ldone?'done':locked?'locked':'')+'" onclick="window.S(\'labs\')"><span class="prog-lab-ico">'+(locked?'&#128274;':l.icon)+'</span><div class="prog-lab-mid"><div class="prog-lab-title">'+l.title+'</div><div class="prog-lab-bar"><div class="prog-lab-fill" style="width:'+lp+'%"></div></div></div><span class="prog-lab-st">'+(ldone?'&#10003; DONE':locked?'LOCKED':count+'/'+l.steps.length)+'</span></div>';
       });
       labEl.innerHTML=lh;
     }
@@ -4226,7 +4215,7 @@ window.Progress={
         var isDone=doneObj[s.s]===true;
         var icon=isDone?'&#10003;':'';
         var status=isDone?'<span class="ps-status done">Done</span>':'<span class="ps-status pending">Pending</span>';
-        mh+='<div class="progress-section'+(isDone?' done':'')+'" onclick="window.S(\''+s.s+'\');document.getElementById(\'progressPanel\').classList.remove(\'show\')"><span class="ps-icon">'+icon+'</span><span class="ps-name">'+s.t+'</span>'+status+'</div>';
+        mh+='<div class="progress-section'+(isDone?' done':'')+'" onclick="window.S(\''+s.s+'\')"><span class="ps-icon">'+icon+'</span><span class="ps-name">'+s.t+'</span>'+status+'</div>';
       });
       list.innerHTML=mh;
     }
@@ -4236,7 +4225,7 @@ window.Progress={
     if(nextBtn){
       if(nextUp){
         document.getElementById('nextUpName').textContent=nextUp.t;
-        nextBtn.onclick=function(){window.S(nextUp.s);document.getElementById('progressPanel').classList.remove('show')};
+        nextBtn.onclick=function(){window.S(nextUp.s)};
       }else{
         document.getElementById('nextUpName').textContent='All modules complete!';
         nextBtn.onclick=null;
