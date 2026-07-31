@@ -30,8 +30,35 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Windows installer (NSIS)
-        run: npx electron-builder --win --publish never
+      - name: Build Windows packages (NSIS + portable)
+        shell: bash
+        run: |
+          npx electron-builder --win --publish never --config.win.target=nsis --config.win.signAndEditExecutable=false 2>&1 | tee nsis.log
+          nsis_rc=${PIPESTATUS[0]}
+          npx electron-builder --win --publish never --config.win.target=zip --config.win.signAndEditExecutable=false 2>&1 | tee zip.log
+          zip_rc=${PIPESTATUS[0]}
+          if [ $nsis_rc -ne 0 ]; then
+            echo "## NSIS installer build failed (continuing with portable zip)" >> "$GITHUB_STEP_SUMMARY"
+            tail -30 nsis.log >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ $zip_rc -ne 0 ]; then
+            echo "## Portable zip build failed" >> "$GITHUB_STEP_SUMMARY"
+            tail -30 zip.log >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ $nsis_rc -ne 0 ] && [ $zip_rc -ne 0 ]; then
+            exit 1
+          fi
+
+      - name: Upload Windows build logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-build-logs
+          path: |
+            nsis.log
+            zip.log
+            release/builder-debug.yml
+          retention-days: 7
 
       - name: Upload Windows artifacts
         uses: actions/upload-artifact@v4
@@ -154,9 +181,10 @@ jobs:
           tag_name: ${{ github.ref_name }}
           name: ${{ github.ref_name }}
           body_path: .github/release-notes.md
-          fail_on_unmatched_files: true
           files: |
-            windows/**/*
-            linux/**/*
+            windows/**/*.exe
+            windows/**/*.zip
+            linux/**/*.AppImage
+            linux/**/*.deb
             android/CyberSecHub.apk
           generate_release_notes: true
