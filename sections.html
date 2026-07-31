@@ -1794,30 +1794,65 @@
   </div>
 </div>
 
-<div class="sc" id="sec-labs" data-cat="Labs" data-title="Interactive Labs">
-  <h1>Interactive Labs</h1>
-  <p class="ssub">Hands-on challenges and practical exercises to sharpen your offensive and defensive skills.</p>
+<div class="sc" id="sec-labs" data-cat="Labs" data-title="Lab Center">
+  <div id="labMenu">
+    <h1>Lab Center</h1>
+    <p class="ssub">Complete scenario-based mission labs to earn XP. Each lab chains a story, real terminal commands, and questions — one step at a time.</p>
 
-  <div class="lab-grid">
-    <div class="lab-card">
-      <div class="lab-icon">&#128187;</div>
-      <h3>Terminal Challenges</h3>
-      <p>Solve CTF-style puzzles using the built-in terminal. Crack hashes, decode messages, and find flags.</p>
-      <button class="vid-btn" onclick="if(window._openTerminal)window._openTerminal();setTimeout(function(){if(window._termRunChallenge)window._termRunChallenge()},300)">Open Terminal &#9654;</button>
+    <div class="lab-ov">
+      <div class="lab-ov-card"><span class="ov-num" id="labOvDone">0/6</span><span class="ov-lbl">Labs completed</span></div>
+      <div class="lab-ov-card"><span class="ov-num" id="labOvSteps">0/0</span><span class="ov-lbl">Steps mastered</span></div>
+      <div class="lab-ov-card"><span class="ov-num" id="labOvXp">0</span><span class="ov-lbl">XP earned</span></div>
     </div>
-    <div class="lab-card">
-      <div class="lab-icon">&#128221;</div>
-      <h3>Practical Exercises</h3>
-      <p>Complete the practical lab at the bottom of each learning section. Verify your answers for XP.</p>
-      <button class="vid-btn" onclick="if(window._scrollToEx)window._scrollToEx()">Find Exercises</button>
+    <div class="lab-prog"><div class="lab-prog-fill" id="labProgFill"></div></div>
+
+    <div class="lab-guide" id="labGuide">
+      <div class="lab-guide-head" onclick="var g=document.getElementById('labGuide');g.classList.toggle('open')">
+        <span>&#128161; How to play — new here?</span>
+        <span class="lab-guide-arrow">&#9654;</span>
+      </div>
+      <div class="lab-guide-body">
+        <div class="lab-guide-col">
+          <h4>&#128187; CTF Terminal Challenges</h4>
+          <ol>
+            <li>Open the terminal and type <code>challenge</code></li>
+            <li>Open one: <code>challenge b64_easy</code></li>
+            <li>Read the GOAL and DATA, follow HOW TO SOLVE</li>
+            <li>Submit: <code>challenge b64_easy CTF{...}</code></li>
+          </ol>
+        </div>
+        <div class="lab-guide-col">
+          <h4>&#128221; Section Exercises</h4>
+          <ol>
+            <li>Open any topic from the menu</li>
+            <li>Scroll to the <strong>Practical Lab</strong> at the bottom</li>
+            <li>Type your answer and press <strong>Verify</strong></li>
+            <li>Each one earns +25 XP</li>
+          </ol>
+        </div>
+        <div class="lab-guide-col">
+          <h4>&#128640; Mission Labs</h4>
+          <ol>
+            <li>Pick a lab card above (they unlock in order)</li>
+            <li>Complete each step to advance the story</li>
+            <li>Command steps: type the command, press <strong>Run</strong></li>
+            <li>Question steps: type the answer, press <strong>Submit</strong></li>
+          </ol>
+        </div>
+      </div>
     </div>
+
+    <div id="labCards" class="lab-cards"></div>
+
+    <h3 class="subtopic-title">&#9873; Terminal Challenges</h3>
+    <p class="lab-sub">Short CTF puzzles you can solve directly in the terminal with the <code>challenge</code> command.</p>
+    <div id="labsCtfList" class="lab-list"></div>
+
+    <h3 class="subtopic-title">&#9889; Section Exercises</h3>
+    <p class="lab-sub">The practical lab at the bottom of each learning section — revisit any you missed.</p>
+    <div id="labsExList" class="lab-list"></div>
   </div>
-
-  <h3 class="subtopic-title">&#9873; Challenge Progress</h3>
-  <div id="labsCtfList" class="lab-list"></div>
-
-  <h3 class="subtopic-title">&#9889; Exercise Progress</h3>
-  <div id="labsExList" class="lab-list"></div>
+  <div id="labDetail" style="display:none"></div>
 </div>
 
 </div>

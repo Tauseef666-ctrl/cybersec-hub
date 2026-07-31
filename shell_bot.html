@@ -376,18 +376,30 @@ function initExercises(){
 }
 
 function renderLabs(){
+  renderLabMenu();
   var ctfEl=document.getElementById('labsCtfList');
   if(ctfEl){
     var done=JSON.parse(localStorage.getItem('cs_labs')||'{}');
+    var groups={easy:'Easy',medium:'Medium',hard:'Hard'};
     var h='';
-    CTF_CHALLENGES.forEach(function(c){
-      var isDone=!!done[c.id];
-      h+='<div class="lab-row '+(isDone?'':'pending')+'" data-lid="'+c.id+'"><span class="lab-st">'+(isDone?'&#10003;':'&#9670;')+'</span><span class="lab-name">'+c.title+'</span><span class="lab-diff '+c.diff+'">'+c.diff+'</span></div>';
+    ['easy','medium','hard'].forEach(function(d){
+      var chs=CTF_CHALLENGES.filter(function(c){return c.diff===d});
+      if(!chs.length)return;
+      var dn=chs.filter(function(c){return done[c.id]}).length;
+      var pct=Math.round(dn/chs.length*100);
+      h+='<div class="lab-group" data-diff="'+d+'">'
+        +'<div class="lab-group-head"><span class="lab-group-title">'+groups[d]+'</span><span class="lab-group-count">'+dn+'/'+chs.length+'</span></div>'
+        +'<div class="lab-group-prog"><div class="lab-group-prog-fill" style="width:'+pct+'%"></div></div>'
+        +'<div class="lab-chip-row">';
+      chs.forEach(function(c){
+        h+='<div class="lab-chip '+(done[c.id]?'done':'')+'" data-lid="'+c.id+'">'+(done[c.id]?'&#10003; ':'')+c.title+'</div>';
+      });
+      h+='</div></div>';
     });
     ctfEl.innerHTML=h||'<p style="font-size:.78rem;color:var(--txt3)">No challenges available.</p>';
-    ctfEl.querySelectorAll('.lab-row').forEach(function(row){
-      row.onclick=function(){
-        var id=row.getAttribute('data-lid');
+    ctfEl.querySelectorAll('.lab-chip[data-lid]').forEach(function(chip){
+      chip.onclick=function(){
+        var id=chip.getAttribute('data-lid');
         if(window._openTerminal)window._openTerminal();
         setTimeout(function(){
           if(window._termRunCommand)window._termRunCommand('challenge '+id);
@@ -398,15 +410,21 @@ function renderLabs(){
   var exEl=document.getElementById('labsExList');
   if(exEl){
     var doneEx=JSON.parse(localStorage.getItem('cs_ex')||'{}');
-    var h2='';
+    var dn=Object.keys(doneEx).length;
+    var pct2=EXERCISES.length?Math.round(dn/EXERCISES.length*100):0;
+    var h2='<div class="lab-group" data-diff="all">'
+      +'<div class="lab-group-head"><span class="lab-group-title">All Sections</span><span class="lab-group-count">'+dn+'/'+EXERCISES.length+'</span></div>'
+      +'<div class="lab-group-prog"><div class="lab-group-prog-fill" style="width:'+pct2+'%"></div></div>'
+      +'<div class="lab-chip-row">';
     EXERCISES.forEach(function(ex){
       var sec=SEC.filter(function(s){return s.s===ex.sec})[0];
-      var isDone=!!doneEx[ex.sec];
-      h2+='<div class="lab-row '+(isDone?'':'pending')+'" data-sec="'+ex.sec+'"><span class="lab-st">'+(isDone?'&#10003;':'&#9670;')+'</span><span class="lab-name">'+(sec?sec.t.replace(/^\d+\.\s*/,''):ex.sec)+'</span></div>';
+      var label=sec?sec.t.replace(/^\d+\.\s*/,''):ex.sec;
+      h2+='<div class="lab-chip '+(doneEx[ex.sec]?'done':'')+'" data-sec="'+ex.sec+'">'+(doneEx[ex.sec]?'&#10003; ':'')+label+'</div>';
     });
-    exEl.innerHTML=h2||'<p style="font-size:.78rem;color:var(--txt3)">No exercises available.</p>';
-    exEl.querySelectorAll('.lab-row').forEach(function(row){
-      row.onclick=function(){window.S(row.getAttribute('data-sec'))};
+    h2+='</div></div>';
+    exEl.innerHTML=h2;
+    exEl.querySelectorAll('.lab-chip[data-sec]').forEach(function(chip){
+      chip.onclick=function(){window.S(chip.getAttribute('data-sec'))};
     });
   }
 }
@@ -424,6 +442,358 @@ window._termRunCommand=function(cmd){
   if(window._openTerminal)window._openTerminal();
   setTimeout(function(){termProcess(cmd);input.value='';input.focus()},250);
 };
+
+// ===== Lab Center =====
+var LAB_STATE_KEY='cs_mlabs';
+var LAB_XP_KEY='cs_labxp';
+var LAB_STEP_XP=15;
+var LAB_BONUS_XP=40;
+
+var MISSION_LABS=[
+  {
+    id:'crypto',icon:'&#128272;',title:'Cryptography Lab',diff:'beginner',
+    tag:'Encoding, ciphers & hash cracking',
+    story:'You\'re a junior SOC analyst at SecureNet. A phishing email contained a strange encoded message. The attacker layered several encodings — decode each one to reveal the C2 domain before the next wave hits.',
+    steps:[
+      {mode:'cmd',task:'<strong>Layer 1</strong> — The message ends with <code>==</code>, a classic sign of Base64. Decode it using the terminal:',
+       cmd:'echo aGFja2VyLm9yZw== | base64 -d',out:'hacker.org',
+       hint:'Feed the Base64 string through base64 -d. Example: echo &lt;value&gt; | base64 -d'},
+      {mode:'ans',task:'<strong>Layer 2</strong> — Base64 revealed <code>hacker.org</code>. An attacker\'s log also contained <code>6861636b65722e6f7267</code>, which spells the same domain. Which encoding uses pairs of hex digits (0-9, a-f)?',
+       q:'Which encoding uses pairs of hex digits (0-9, a-f)?',ans:'hex',vars:['hexadecimal'],
+       hint:'16 symbols, 4 bits each — used all over Linux and memory dumps.'},
+      {mode:'ans',task:'<strong>Layer 3</strong> — The username was hidden as binary: <code>01101000 01100001 01100011 01101011 01100101 01110010</code>. Convert it (8-bit ASCII) — what username is it?',
+       q:'What username does the binary decode to?',ans:'hacker',
+       hint:'Each group of 8 bits is one ASCII character. 01101000 = "h".'},
+      {mode:'cmd',task:'<strong>Layer 4</strong> — A password hash was captured. Crack it with John the Ripper using the rockyou wordlist:',
+       cmd:'john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt',
+       out:'Loaded 1 password hash (raw-md5 [MD5 128/128])\npress \'q\' or Ctrl-C to abort\nf@ll3n          (admin)',
+       hint:'John the Ripper cracks offline hashes. --wordlist gives it a dictionary.'},
+      {mode:'ans',strict:true,task:'<strong>Final layer</strong> — Attacker: <code>hacker</code>, password: <code>f@ll3n</code>, domain: <code>hacker.org</code>. Submit the lab flag:',
+       q:'Enter the lab flag:',ans:'CTF{lay3r_by_lay3r}',
+       hint:'Flags follow the pattern CTF{...} — case matters.'}
+    ]
+  },
+  {
+    id:'websecurity',icon:'&#127760;',title:'Web Security Lab',diff:'intermediate',
+    tag:'Recon, scanning & SQL injection',
+    story:'A customer reported the company shop (shopping.example.com) serving defaced pages. You\'re the hired pentester. Reconstruct the attack path — fingerprint the stack, find the hole, and confirm the SQL injection.',
+    steps:[
+      {mode:'cmd',task:'<strong>Step 1</strong> — Fingerprint the target\'s technology stack:',
+       cmd:'whatweb https://shopping.example.com',
+       out:'http://shopping.example.com [200 OK]\nApache[2.4.29] PHP[7.2.10] WordPress[5.4]',
+       hint:'whatweb reads HTTP headers and page code to identify technologies.'},
+      {mode:'ans',task:'<strong>Step 2</strong> — The site is WordPress 5.4. An attacker can tamper with SQL statements through a vulnerable input field. Which OWASP Top 10 category is this?',
+       q:'Which OWASP Top 10 category is this?',ans:'injection',vars:['sql injection','sqli'],
+       hint:'OWASP ranks it #3 (2021). Untrusted data gets executed as code or queries.'},
+      {mode:'cmd',task:'<strong>Step 3</strong> — Find hidden paths with a directory brute-forcer:',
+       cmd:'gobuster dir -u https://shopping.example.com -w /usr/share/wordlists/dirb/common.txt',
+       out:'/admin     (Status: 301)\n/backup    (Status: 200)\n/config    (Status: 200)',
+       hint:'gobuster "dir" mode brute-forces directory names using a wordlist.'},
+      {mode:'ans',task:'<strong>Step 4</strong> — You found <code>/admin</code>. The login form echoes "You have an error in your SQL syntax". What attack lets you bypass login by submitting <code>\' OR 1=1 --</code>?',
+       q:'What attack bypasses the login with \' OR 1=1 --?',ans:'sql injection',vars:['sqli','injection'],
+       hint:'It\'s a form of Injection — the OR 1=1 makes the WHERE clause always true.'},
+      {mode:'ans',strict:true,task:'<strong>Step 5</strong> — Confirmed SQL injection. Submit the lab flag to close the report:',
+       q:'Enter the lab flag:',ans:'CTF{qu3ry_br34ch}',
+       hint:'Flags follow the pattern CTF{...} — case matters.'}
+    ]
+  },
+  {
+    id:'password',icon:'&#128274;',title:'Password Attack Lab',diff:'intermediate',
+    tag:'Offline & online password cracking',
+    story:'An account was compromised in a breach. You have the captured password hashes and a weak SSH service to audit. Recover the weak passwords so the client can fix them before real attackers do.',
+    steps:[
+      {mode:'ans',task:'<strong>Step 1</strong> — A captured hash <code>5f4dcc3b5aa765d61d8327deb882cf99</code> looks like MD5. Which tool cracks offline hashes by testing them against a wordlist?',
+       q:'Which tool cracks offline hashes with a wordlist?',ans:'john',vars:['john the ripper','johnny'],
+       hint:'Think of a famous "ripper" tool.'},
+      {mode:'cmd',task:'<strong>Step 2</strong> — Crack the MD5 hashes offline with the rockyou wordlist:',
+       cmd:'john --format=raw-md5 --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt',
+       out:'Loaded 2 password hashes with no different salts (raw-md5 [MD5 128/128])\npassword123     (alice)\nletmein         (bob)',
+       hint:'--format tells John the hash type; --wordlist gives the dictionary.'},
+      {mode:'ans',task:'<strong>Step 3</strong> — Bob\'s password is <code>letmein</code> — too weak. What attack tries every possible combination of characters systematically?',
+       q:'What attack tries every possible combination?',ans:'brute force',vars:['bruteforce','brute-force','brute forcing'],
+       hint:'It exhaustively tries every combination until something matches.'},
+      {mode:'cmd',task:'<strong>Step 4</strong> — Now test SSH with an online attack. Try each password from the wordlist against the server using Hydra:',
+       cmd:'hydra -l root -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.10',
+       out:'[22][ssh] host: 192.168.1.10   login: root   password: toor\n1 of 1 target successfully completed, 1 valid password found',
+       hint:'-l sets the login name, -P sets the password wordlist, ssh:// is the target service.'},
+      {mode:'ans',strict:true,task:'<strong>Step 5</strong> — Root password is <code>toor</code> — unacceptable. Submit the lab flag:',
+       q:'Enter the lab flag:',ans:'CTF{crack_1s_2_3}',
+       hint:'Flags follow the pattern CTF{...} — case matters.'}
+    ]
+  },
+  {
+    id:'network',icon:'&#128225;',title:'Network Recon Lab',diff:'intermediate',
+    tag:'Scanning, services & vulnerabilities',
+    story:'A rogue device is broadcasting on the office subnet 192.168.1.0/24. Map the network, identify the device, and profile its exposed services before the sysadmin pulls it.',
+    steps:[
+      {mode:'cmd',task:'<strong>Step 1</strong> — Discover which hosts are alive on the subnet with a ping sweep:',
+       cmd:'nmap -sn 192.168.1.0/24',
+       out:'Nmap scan report for 192.168.1.1\nNmap scan report for 192.168.1.10\nNmap scan report for 192.168.1.15',
+       hint:'-sn disables port scanning and only checks which hosts respond (host discovery).'},
+      {mode:'ans',task:'<strong>Step 2</strong> — Port 22 is open on 192.168.1.15. Which service runs on TCP port 22?',
+       q:'Which service runs on TCP port 22?',ans:'ssh',vars:['secure shell'],
+       hint:'The standard remote administration protocol for Linux.'},
+      {mode:'cmd',task:'<strong>Step 3</strong> — Probe the open ports for service versions on the rogue device:',
+       cmd:'nmap -sV 192.168.1.15',
+       out:'PORT   STATE SERVICE VERSION\n22/tcp  open  ssh     OpenSSH 7.9\n80/tcp  open  http    Apache httpd 2.4.25\n443/tcp open  ssl/http Apache httpd 2.4.25',
+       hint:'-sV enables version detection.'},
+      {mode:'ans',task:'<strong>Step 4</strong> — OpenSSH 7.9 is years out of date. Old, unpatched software is exploitable because it has published...?',
+       q:'Old software has published...?',ans:'vulnerabilities',vars:['vulnerability','known vulnerabilities','cves','cve'],
+       hint:'CVE databases list these by ID.'},
+      {mode:'ans',strict:true,task:'<strong>Step 5</strong> — Profile complete. Submit the lab flag:',
+       q:'Enter the lab flag:',ans:'CTF{n3tw0rk_f00tpr1nt}',
+       hint:'Flags follow the pattern CTF{...} — case matters.'}
+    ]
+  },
+  {
+    id:'osint',icon:'&#128269;',title:'OSINT Lab',diff:'beginner',
+    tag:'Passive information gathering',
+    story:'Before any pentest, you gather freely available public information. For a client engagement on acme-corp.com, collect what\'s exposed without touching their servers.',
+    steps:[
+      {mode:'ans',task:'<strong>Step 1</strong> — Which DNS record type maps a domain name to an IPv4 address?',
+       q:'Which DNS record maps a domain to an IPv4 address?',ans:'a',vars:['a record','address record','address'],
+       hint:'Short for "address" record.'},
+      {mode:'cmd',task:'<strong>Step 2</strong> — Query the DNS records for acme-corp.com:',
+       cmd:'dig acme-corp.com ANY',
+       out:';; ANSWER SECTION:\nacme-corp.com.   3600  IN  A    192.0.2.44\nacme-corp.com.   3600  IN  MX   10 mail.acme-corp.com.',
+       hint:'dig performs DNS lookups.'},
+      {mode:'ans',task:'<strong>Step 3</strong> — The MX record reveals a mail server. Which public archive lets you see snapshots of old website versions?',
+       q:'Which public archive stores old website versions?',ans:'wayback machine',vars:['web archive','archive.org','internet archive','wayback'],
+       hint:'Run by the Internet Archive — think of a "time machine" for the web.'},
+      {mode:'cmd',task:'<strong>Step 4</strong> — The main site is offline. Recover the A record from the DNS cache of a public resolver:',
+       cmd:'nslookup acme-corp.com 8.8.8.8',
+       out:'Server:  8.8.8.8\nName:    acme-corp.com\nAddress: 192.0.2.44',
+       hint:'nslookup queries DNS — you can target a specific resolver like 8.8.8.8.'},
+      {mode:'ans',strict:true,task:'<strong>Step 5</strong> — Recon dossier complete. Submit the lab flag:',
+       q:'Enter the lab flag:',ans:'CTF{0sint_pwn}',
+       hint:'Flags follow the pattern CTF{...} — case matters.'}
+    ]
+  },
+  {
+    id:'system',icon:'&#128295;',title:'System Hardening Lab',diff:'advanced',
+    tag:'Linux defense & lockdown',
+    story:'An admin left the production Linux box with dangerously open services and weak SSH settings. Your job: harden it. Audit what\'s exposed, then lock it down.',
+    steps:[
+      {mode:'cmd',task:'<strong>Step 1</strong> — Audit which ports are listening on the box:',
+       cmd:'ss -tulpn',
+       out:'Netid  State   Recv-Q  Send-Q  Local Address:Port\ntcp    LISTEN  0       128     *:22\ntcp    LISTEN  0       128     *:21\ntcp    LISTEN  0       128     *:80\ntcp    LISTEN  0       128     *:443',
+       hint:'-tulpn shows TCP/UDP listening ports with the owning process.'},
+      {mode:'ans',task:'<strong>Step 2</strong> — FTP (port 21) sends passwords in cleartext. Which secure protocol uses SSH to transfer files instead?',
+       q:'Which secure protocol transfers files over SSH?',ans:'sftp',vars:['ssh file transfer protocol','ssh file transfer'],
+       hint:'It\'s FTP over SSH — starts with an "S".'},
+      {mode:'cmd',task:'<strong>Step 3</strong> — Disable password authentication so only keys can log in via SSH:',
+       cmd:"sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config",
+       out:'sshd_config updated — PasswordAuthentication disabled.',
+       hint:'The setting lives in /etc/ssh/sshd_config.'},
+      {mode:'ans',task:'<strong>Step 4</strong> — Now firewall the host to only allow ports 22 and 443. Which tool is the classic Linux firewall command?',
+       q:'Which tool is the classic Linux firewall command?',ans:'iptables',vars:['ufw','nftables'],
+       hint:'It\'s the netfilter front-end used with -A INPUT rules.'},
+      {mode:'ans',strict:true,task:'<strong>Step 5</strong> — Hardening checklist complete. Submit the lab flag:',
+       q:'Enter the lab flag:',ans:'CTF{hard3n_th3_c4stl3}',
+       hint:'Flags follow the pattern CTF{...} — case matters.'}
+    ]
+  }
+];
+
+function labTotalXp(lab){return lab.steps.length*LAB_STEP_XP+LAB_BONUS_XP}
+function getLabState(){try{return JSON.parse(localStorage.getItem(LAB_STATE_KEY)||'{}')}catch(e){return {}}}
+function saveLabState(s){localStorage.setItem(LAB_STATE_KEY,JSON.stringify(s))}
+function getLabXp(){return parseInt(localStorage.getItem(LAB_XP_KEY)||'0')}
+function addLabXp(n){var v=getLabXp()+n;localStorage.setItem(LAB_XP_KEY,String(v));return v}
+function escapeHtml(str){return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function normAns(v){return String(v||'').trim().toLowerCase().replace(/\s+/g,' ').replace(/[.,;:!?]+$/,'')}
+function checkLabAnswer(val,s){
+  if(s.strict)return val.trim()===s.ans;
+  var v=normAns(val);
+  if(v===normAns(s.ans))return true;
+  if(s.vars){return s.vars.some(function(x){return v===normAns(x)})}
+  return false;
+}
+
+function renderLabMenu(){
+  var el=document.getElementById('labCards');
+  if(!el)return;
+  var st=getLabState();
+  var h='';
+  MISSION_LABS.forEach(function(lab,i){
+    var count=st[lab.id]||0;
+    var total=lab.steps.length;
+    var done=count>=total;
+    var locked=i>0&&(st[MISSION_LABS[i-1].id]||0)<MISSION_LABS[i-1].steps.length;
+    var pct=Math.round(count/total*100);
+    h+='<div class="mlab-card '+(locked?'locked':done?'done':'')+'" data-lid="'+lab.id+'">'
+      +'<div class="mlab-top"><span class="mlab-icon">'+(locked?'&#128274;':lab.icon)+'</span><span class="lab-diff '+lab.diff+'">'+lab.diff+'</span></div>'
+      +'<div class="mlab-title">'+lab.title+'</div>'
+      +'<div class="mlab-tag">'+lab.tag+'</div>'
+      +'<div class="mlab-prog"><div class="mlab-prog-fill" style="width:'+pct+'%"></div></div>'
+      +'<div class="mlab-foot"><span class="mlab-count">'+(done?'&#10003; Complete':'')+(count>0&&!done?count+'/'+total+' steps':'')+'</span><span class="mlab-xp">+'+labTotalXp(lab)+' XP</span></div>'
+      +'</div>';
+  });
+  el.innerHTML=h;
+  el.querySelectorAll('.mlab-card').forEach(function(card){
+    card.onclick=function(){openLab(card.getAttribute('data-lid'))};
+  });
+  var labsDone=0,stepsDone=0,stepsTotal=0;
+  MISSION_LABS.forEach(function(lab){
+    var c=st[lab.id]||0;
+    if(c>=lab.steps.length)labsDone++;
+    stepsDone+=c;stepsTotal+=lab.steps.length;
+  });
+  var ov=document.getElementById('labOvDone');if(ov)ov.textContent=labsDone+'/'+MISSION_LABS.length;
+  var ov2=document.getElementById('labOvSteps');if(ov2)ov2.textContent=stepsDone+'/'+stepsTotal;
+  var ov3=document.getElementById('labOvXp');if(ov3)ov3.textContent=getLabXp();
+  var pf=document.getElementById('labProgFill');if(pf)pf.style.width=(stepsTotal?Math.round(stepsDone/stepsTotal*100):0)+'%';
+}
+
+function openLab(id){
+  var lab=null;
+  MISSION_LABS.forEach(function(l){if(l.id===id)lab=l});
+  if(!lab)return;
+  var i=MISSION_LABS.indexOf(lab);
+  var st=getLabState();
+  if(i>0&&(st[MISSION_LABS[i-1].id]||0)<MISSION_LABS[i-1].steps.length){
+    toast('Complete "'+MISSION_LABS[i-1].title+'" to unlock this lab.','info');
+    return;
+  }
+  var menu=document.getElementById('labMenu');if(menu)menu.style.display='none';
+  var det=document.getElementById('labDetail');
+  if(det){det.style.display='block';renderLabDetail(lab);setTimeout(function(){det.scrollIntoView({behavior:'smooth',block:'start'})},50)}
+}
+
+function closeLab(){
+  var menu=document.getElementById('labMenu');if(menu)menu.style.display='';
+  var det=document.getElementById('labDetail');
+  if(det){det.style.display='none';det.innerHTML=''}
+  renderLabMenu();
+}
+
+function renderLabDetail(lab){
+  var det=document.getElementById('labDetail');
+  if(!det)return;
+  var st=getLabState();
+  var count=st[lab.id]||0;
+  var total=lab.steps.length;
+  var complete=count>=total;
+  var h='';
+  h+='<button class="lab-back">&#8592; Back to Labs</button>';
+  h+='<div class="lab-head"><span class="lab-big-icon">'+lab.icon+'</span><div class="lab-head-txt"><h2>'+lab.title+'</h2><div class="lab-meta"><span class="lab-diff '+lab.diff+'">'+lab.diff+'</span><span>'+count+'/'+total+' steps</span><span>+'+labTotalXp(lab)+' XP</span></div></div></div>';
+  h+='<div class="lab-story">'+lab.story+'</div>';
+  h+='<div class="lab-steps">';
+  lab.steps.forEach(function(s,si){
+    var cls='lab-step';
+    if(si<count)cls+=' done';
+    else if(si===count&&!complete)cls+=' active';
+    else cls+=' locked';
+    h+='<div class="'+cls+'" data-idx="'+si+'">';
+    h+='<div class="lab-step-top"><span class="lab-step-num">'+(si<count?'&#10003;':(si+1))+'</span><div class="lab-step-task">'+s.task+'</div></div>';
+    if(si<count){
+      h+='<div class="lab-out">'+(s.mode==='cmd'?'$ '+escapeHtml(s.cmd)+'\n'+escapeHtml(s.out):'&#10003; Completed')+'</div>';
+    }else if(si===count&&!complete){
+      if(s.mode==='cmd'){
+        h+='<div class="lab-miniterm"><span class="mt-prompt">root@cybersec:~#</span><input class="mt-input" placeholder="type the command" autocomplete="off" spellcheck="false" autocapitalize="off"><button class="mt-run">Run</button></div>';
+      }else{
+        h+='<div class="lab-q"><input class="lab-q-input" placeholder="Type your answer..." autocomplete="off" spellcheck="false" autocapitalize="off"><button class="lab-q-btn">Submit</button></div>';
+      }
+      h+='<div class="lab-msg"></div>';
+      h+='<button class="lab-hint-btn">&#128161; Hint</button><div class="lab-hint" style="display:none">'+s.hint+'</div>';
+    }else{
+      h+='<div class="lab-out">&#128274; Complete the previous step to continue</div>';
+    }
+    h+='</div>';
+  });
+  h+='</div>';
+  if(complete){
+    h+='<div class="lab-complete"><div class="lab-complete-icon">&#127942;</div><h3>Lab Complete!</h3><p>You mastered '+lab.title+' and earned +'+labTotalXp(lab)+' XP.</p></div>';
+  }
+  det.innerHTML=h;
+  det.querySelector('.lab-back').onclick=closeLab;
+  wireLabStep(lab);
+}
+
+function wireLabStep(lab){
+  var det=document.getElementById('labDetail');
+  if(!det)return;
+  var st=getLabState();
+  var count=st[lab.id]||0;
+  if(count>=lab.steps.length)return;
+  var s=lab.steps[count];
+  var msg=det.querySelector('.lab-msg');
+  var hintBtn=det.querySelector('.lab-hint-btn');
+  var hint=det.querySelector('.lab-hint');
+  if(hintBtn&&hint){
+    hintBtn.onclick=function(){
+      var sh=hint.style.display;
+      hint.style.display=(sh==='none'||!sh)?'block':'none';
+    };
+  }
+  function setMsg(m,txt,cls){
+    if(!m)return;
+    m.textContent=txt;
+    m.className='lab-msg show '+cls;
+  }
+  if(s.mode==='cmd'){
+    var inp=det.querySelector('.mt-input');
+    var run=det.querySelector('.mt-run');
+    function submit(){
+      var val=(inp.value||'').trim().replace(/\s+/g,' ');
+      if(!val){setMsg(msg,'Type a command first.','no');return}
+      if(val===s.cmd){
+        setMsg(msg,escapeHtml(s.out),'ok');
+        completeLabStep(lab,count);
+      }else{
+        setMsg(msg,'That command doesn\'t match this step. Read the task and try again.','no');
+        inp.select();
+      }
+    }
+    run.onclick=submit;
+    inp.addEventListener('keydown',function(e){if(e.key==='Enter')submit()});
+    setTimeout(function(){inp.focus()},200);
+  }else{
+    var inp=det.querySelector('.lab-q-input');
+    var btn=det.querySelector('.lab-q-btn');
+    function submit(){
+      var val=(inp.value||'').trim();
+      if(!val){setMsg(msg,'Enter your answer first.','no');return}
+      if(checkLabAnswer(val,s)){
+        setMsg(msg,'&#10003; Correct!','ok');
+        completeLabStep(lab,count);
+      }else{
+        setMsg(msg,'Not quite. Tap the hint if you need help.','no');
+        inp.select();
+      }
+    }
+    btn.onclick=submit;
+    inp.addEventListener('keydown',function(e){if(e.key==='Enter')submit()});
+    setTimeout(function(){inp.focus()},200);
+  }
+}
+
+function completeLabStep(lab,idx){
+  var st=getLabState();
+  var count=st[lab.id]||0;
+  if(idx!==count)return;
+  st[lab.id]=count+1;
+  saveLabState(st);
+  addLabXp(LAB_STEP_XP);
+  var isLabComplete=(count+1)>=lab.steps.length;
+  var det=document.getElementById('labDetail');
+  if(window._spawnConfetti&&det){
+    var r=det.getBoundingClientRect();
+    window._spawnConfetti(r.left+r.width/2,r.top);
+  }
+  if(isLabComplete){
+    toast(lab.title+' complete! +'+labTotalXp(lab)+' XP','success','&#127942;');
+    setTimeout(function(){
+      if(window._spawnConfetti){
+        var cw=document.getElementById('cw');
+        if(cw)window._spawnConfetti(cw.scrollLeft+cw.clientWidth/2,cw.scrollTop+cw.clientHeight/2);
+      }
+    },600);
+  }else{
+    toast('Step '+(count+1)+' complete! +'+LAB_STEP_XP+' XP','success','&#10003;');
+  }
+  renderLabDetail(lab);
+}
 
 function initHomeCards(){
   var container=document.getElementById('homeCards');
@@ -476,32 +846,79 @@ function initReadingTime(){
 }
 
 var CTF_CHALLENGES=[
-  {id:'b64_easy',title:'Base64 Beginner',diff:'easy',hint:'Try base64 decode with echo | base64 -d',
-    desc:'Decode this Base64 string to reveal the flag (CTF{...}).\n  echo "<data>" | base64 -d',
-    data:'Q1RGe2I2NF8zZHQzaW9uXzFzXzR3MzNzb21lfQ==',answer:'CTF{b64_3dt30n_1s_4w3s0me}'},
-  {id:'hex_decode',title:'Hex Decoder',diff:'easy',hint:'hex can be decoded with python3',
-    desc:'Decode this hex string to find the flag.\n  python3 -c "print(bytes.fromhex(\'<hex>\'))"  OR  echo <hex> | xxd -r -p',
-    data:'4354467b6833785f31645f316e5f3768335f68337861646563696d616c7d',answer:'CTF{h3x_1d_1n_7h3_h3xadecimal}'},
-  {id:'rot13',title:'ROT13 Cipher',diff:'easy',hint:'tr \'A-Za-z\' \'N-ZA-Mn-za-m\' is the ROT13 transform',
-    desc:'This flag is ROT13 encrypted. Decrypt it.\n  echo "<data>" | tr \'A-Za-z\' \'N-ZA-Mn-za-m\'',
-    data:'PGS{ebg13_vf_abg_qnatrebhf}',answer:'CTF{rot13_is_not_dangerous}'},
-  {id:'binary_decode',title:'Binary to ASCII',diff:'easy',hint:'Convert each 8-bit binary to a character',
-    desc:'Decode this binary message to ASCII.\n  python3 -c "print(\'\'.join(chr(int(b,2))for b in \'<bits>\'.split()))"',
-    data:'01000011 01010100 01000110 01111011 01100010 00110001 01101110 00110100 01110010 01111001 01011111 01101001 01110011 01011111 01101101 00110011 01110100 01100001 00110111 00111000 01111001 01111101',
-    answer:'CTF{b1n4ry_1s_m3ta78y}'},
-  {id:'caesar_shift',title:'Caesar Cipher',diff:'easy',hint:'Try shift 7: tr \'A-Za-z\' \'H-ZA-Gh-za-g\'',
-    desc:'Decrypt this Caesar cipher (shift 7).\n  echo "<data>" | tr \'A-Za-z\' \'H-ZA-Gh-za-g\'',
-    data:'JAM{jhzhy_pz_avv_lzfd_mvy_aol_lythzu}',answer:'CTF{caesar_is_too_easy_for_the_romans}'},
-  {id:'hash_md5_1',title:'MD5 Hash Crack',diff:'medium',hint:'Try common weak passwords like "password","admin","123456"',
-    desc:'Crack this MD5 hash. It is a common weak password.\n  echo -n "<guess>" | md5sum  (compare hash)',
-    data:'5f4dcc3b5aa765d61d8327deb882cf99',answer:'password'},
-  {id:'hash_md5_2',title:'MD5 Hash Crack 2',diff:'medium',hint:'This one is a number. Try 4+ digit numbers.',
-    desc:'Crack this MD5 hash. It is a numeric password.\n  echo -n "<num>" | md5sum',
-    data:'5e8667a439c68f5145dd2fcbecf02209',answer:'87654321'},
-  {id:'rev_text',title:'Reverse Text',diff:'easy',hint:'Try echo "<text>" | rev in the terminal',
-    desc:'The flag is hidden in this reversed string. Reverse it back!\n  echo "<data>" | rev',
-    data:'}emosewa_si_3md0m_r0F{ FTC',
-    answer:'CTF{F0r_m0d3_is_awesome}'}
+  {id:'b64_easy',title:'Base64 Beginner',diff:'easy',
+   goal:'Decode the Base64 string to reveal the flag. Flags look like CTF{...}.',
+   hint:'The "==" at the end means Base64. Decode it with: echo "<data>" | base64 -d',
+   data:'Q1RGe2I2NF8zZHQzaW9uXzFzXzR3MzNzb21lfQ==',answer:'CTF{b64_3dt30n_1s_4w3s0me}',
+   steps:[
+     'Look at the DATA — it ends with "==". That is the signature of Base64 encoding.',
+     'Run this in the terminal:\n  echo "Q1RGe2I2NF8zZHQzaW9uXzFzXzR3MzNzb21lfQ==" | base64 -d',
+     'The output is the flag. Submit it exactly as printed (case matters).'
+   ]},
+  {id:'hex_decode',title:'Hex Decoder',diff:'easy',
+   goal:'Decode the hexadecimal string to reveal the flag.',
+   hint:'Run: python3 -c "print(bytes.fromhex(\'<hex>\').decode())"',
+   data:'4354467b6833785f31645f316e5f3768335f68337861646563696d616c7d',answer:'CTF{h3x_1d_1n_7h3_h3xadecimal}',
+   steps:[
+     'This DATA is hexadecimal — it only uses the symbols 0-9 and a-f.',
+     'Run this in the terminal:\n  echo "4354467b6833785f31645f316e5f3768335f68337861646563696d616c7d" | xxd -r -p',
+     'The result is the flag. Submit it exactly as printed.'
+   ]},
+  {id:'rot13',title:'ROT13 Cipher',diff:'easy',
+   goal:'Decrypt the ROT13 message to reveal the flag.',
+   hint:'ROT13 shifts letters by 13. Run: echo "<data>" | tr \'A-Za-z\' \'N-ZA-Mn-za-m\'',
+   data:'PGS{ebg13_vf_abg_qnatrebhf}',answer:'CTF{rot13_is_not_dangerous}',
+   steps:[
+     'ROT13 shifts every letter 13 positions. Notice "CTF" became "PGS" in the DATA.',
+     'Run this in the terminal:\n  echo "PGS{ebg13_vf_abg_qnatrebhf}" | tr \'A-Za-z\' \'N-ZA-Mn-za-m\'',
+     'The output is the flag. Submit it exactly as printed.'
+   ]},
+  {id:'binary_decode',title:'Binary to ASCII',diff:'easy',
+   goal:'Convert the binary message to ASCII to reveal the flag.',
+   hint:'Each 8-bit group is one letter. Use python3 to convert.',
+   data:'01000011 01010100 01000110 01111011 01100010 00110001 01101110 00110100 01110010 01111001 01011111 01101001 01110011 01011111 01101101 00110011 01110100 01100001 00110111 00111000 01111001 01111101',
+   answer:'CTF{b1n4ry_1s_m3ta78y}',
+   steps:[
+     'The DATA is binary — each group of 8 bits (like 01000011) spells one character.',
+     'Run this in the terminal to decode it:\n  python3 -c "print(\'\'.join(chr(int(b,2))for b in \'01000011 01010100 01000110 01111011 01100010 00110001 01101110 00110100 01110010 01111001 01011111 01101001 01110011 01011111 01101101 00110011 01110100 01100001 00110111 00111000 01111001 01111101\'.split()))"',
+     'The output is the flag. Submit it exactly as printed.'
+   ]},
+  {id:'caesar_shift',title:'Caesar Cipher',diff:'easy',
+   goal:'Decrypt the Caesar cipher (shift 7) to reveal the flag.',
+   hint:'Shift each letter back by 7: echo "<data>" | tr \'A-Za-z\' \'H-ZA-Gh-za-g\'',
+   data:'JAM{jhzhy_pz_avv_lzfd_mvy_aol_lythzu}',answer:'CTF{caesar_is_too_easy_for_the_romans}',
+   steps:[
+     'This is a Caesar cipher — every letter was shifted 7 places forward.',
+     'Run this in the terminal to shift it back:\n  echo "JAM{jhzhy_pz_avv_lzfd_mvy_aol_lythzu}" | tr \'A-Za-z\' \'H-ZA-Gh-za-g\'',
+     'The output is the flag. Submit it exactly as printed.'
+   ]},
+  {id:'hash_md5_1',title:'MD5 Hash Crack',diff:'medium',
+   goal:'Find the original password that produces this MD5 hash. Submit the password, not the hash.',
+   hint:'Try very common passwords like "password", "admin", "123456", "qwerty".',
+   data:'5f4dcc3b5aa765d61d8327deb882cf99',answer:'password',
+   steps:[
+     'The DATA is an MD5 hash — always 32 hex characters. Your job is to find the password that produced it.',
+     'Test a guess with this command:\n  echo -n "password" | md5sum\n  Then compare the hash with the DATA.',
+     'When the hash matches, submit the password itself (for example: challenge hash_md5_1 password).'
+   ]},
+  {id:'hash_md5_2',title:'MD5 Hash Crack 2',diff:'medium',
+   goal:'Find the numeric password that produces this MD5 hash. Submit the number.',
+   hint:'This one is a number. Try 4, then 5, then 6, 7, 8 digit numbers.',
+   data:'5e8667a439c68f5145dd2fcbecf02209',answer:'87654321',
+   steps:[
+     'Another MD5 hash — but this password is a NUMBER, not a word.',
+     'Test guesses with this command:\n  echo -n "12345678" | md5sum\n  Compare the output with the DATA.',
+     'Keep trying numbers until one matches, then submit that number (for example: challenge hash_md5_2 87654321).'
+   ]},
+  {id:'rev_text',title:'Reverse Text',diff:'easy',
+   goal:'The flag is hidden in a reversed string. Reverse it back to read it.',
+   hint:'Run: echo "<data>" | rev',
+   data:'}emosewa_si_3md0m_r0F{ FTC',answer:'CTF{F0r_m0d3_is_awesome}',
+   steps:[
+     'The DATA is written BACKWARDS — read it from right to left and you will see it.',
+     'Run this in the terminal to flip it around:\n  echo "}emosewa_si_3md0m_r0F{ FTC" | rev',
+     'The output is the flag. Submit it exactly as printed.'
+   ]}
 ];
 
 var TERM_CMDS={
@@ -709,30 +1126,47 @@ hashcat:function(args){
   return 'hashcat (v6.2.6) starting...\n\nNo hashes loaded. Use -m to specify hash type.';
 },
 challenge:function(args){
-  if(!args||args==='list'){
-    var done=JSON.parse(localStorage.getItem('cs_labs')||'{}');
-    var out='=== CTF Challenges ===\nUsage: challenge <id>       - View challenge\n       challenge <id> <ans>  - Submit answer\n\nID'.padEnd(18)+'DIFF    TITLE\n'+''.padEnd(50,'─')+'\n';
+  var done=JSON.parse(localStorage.getItem('cs_labs')||'{}');
+  if(!args||args==='list'||args==='help'){
+    var out='=== CTF CHALLENGES ===\n'
+      +'HOW TO PLAY (read this if you are new):\n'
+      +'  1. Open a challenge   ->  challenge <id>\n'
+      +'  2. Read the GOAL and DATA\n'
+      +'  3. Follow the HOW TO SOLVE steps\n'
+      +'  4. Submit the answer  ->  challenge <id> <answer>\n'
+      +'  Flags look like CTF{...} (hash challenges need a password)\n\n'
+      +'ID'.padEnd(18)+'DIFF    TITLE\n'+''.padEnd(50,'─')+'\n';
     CTF_CHALLENGES.forEach(function(c){
       var s=done[c.id]?'✓':' ';
       out+=' '+s+' '+c.id.padEnd(16)+c.diff.padEnd(7).toUpperCase()+c.title+'\n';
     });
-    return out+'\n'+Object.keys(done).length+'/'+CTF_CHALLENGES.length+' completed';
+    var n=Object.keys(done).length;
+    return out+'\nProgress: '+n+'/'+CTF_CHALLENGES.length+' ('+Math.round(n/CTF_CHALLENGES.length*100)+'%)\n\nStart with: challenge b64_easy';
   }
-  var sp=args.indexOf(' '),id=sp<0?args:args.slice(0,sp),ans=sp<0?'':args.slice(sp+1).trim();
+  var sp=args.indexOf(' '),id=sp<0?args:args.slice(0,sp),rest=sp<0?'':args.slice(sp+1).trim();
   var c=CTF_CHALLENGES.filter(function(x){return x.id===id})[0];
-  if(!c)return 'challenge: unknown "'+id+'". Use "challenge" to list all challenges.';
-  if(!ans){
-    var done=JSON.parse(localStorage.getItem('cs_labs')||'{}');
-    var st=done[c.id]?'[✓ COMPLETED]':'[ ] PENDING';
-    return '=== '+c.title+' ('+c.diff.toUpperCase()+') ===\n'+st+'\n\n'+c.desc+'\n\nData: '+c.data+'\n\nSubmit: challenge '+c.id+' <your_answer>';
+  if(!c)return 'challenge: unknown "'+id+'". Run "challenge" to see the full list.';
+  if(rest==='hint'||rest==='help'){
+    return '=== HINT — '+c.title+' ===\n'+c.hint+'\n\nUsing hints never costs XP. Try again: challenge '+c.id+' <answer>';
   }
-  if(ans.toLowerCase().trim()===c.answer.toLowerCase()){
-    var done=JSON.parse(localStorage.getItem('cs_labs')||'{}');
+  if(!rest){
+    var st=done[c.id]?'[✓ COMPLETED]':'[ ] NOT SOLVED YET';
+    var h='=== '+c.title+'  ['+c.diff.toUpperCase()+'] ===\n'+st+'\n\n';
+    h+='GOAL\n'+c.goal+'\n\n';
+    h+='DATA\n  '+c.data+'\n\n';
+    h+='HOW TO SOLVE\n';
+    c.steps.forEach(function(s,i){h+='  '+(i+1)+'. '+s+'\n'});
+    h+='\nNeed a hint?   ->  challenge '+c.id+' hint\n';
+    h+='Submit answer ->  challenge '+c.id+' <your_answer>';
+    return h;
+  }
+  if(rest.toLowerCase().trim()===c.answer.toLowerCase()){
     done[c.id]=true;localStorage.setItem('cs_labs',JSON.stringify(done));
     if(window._spawnConfetti){var cw=document.getElementById('cw');if(cw)window._spawnConfetti(cw.scrollLeft+cw.clientWidth/2,cw.scrollTop+cw.clientHeight/2)}
-    return '✓ CORRECT! "'+c.title+'" completed! Flag accepted.\n+50 XP earned!';
+    var n=Object.keys(done).length;
+    return '✓ CORRECT! "'+c.title+'" solved! +50 XP\n\nProgress: '+n+'/'+CTF_CHALLENGES.length+' solved.\nRun "challenge" to see the next one.';
   }
-  return '✗ INCORRECT. Try again.\nHint: '+c.hint;
+  return '✗ That answer is not correct.\n\nWork through it again:\n'+c.steps.map(function(s){return '  • '+s}).join('\n')+'\n\nStuck? Get a hint: challenge '+c.id+' hint';
 },
 hydra:function(args){
   if(!args)return 'Hydra v9.5 (c) 2023 by van Hauser/THC\n\nUsage: hydra -l <user> -P <wordlist> <target> <service>\n\nExamples:\n  hydra -l admin -P wordlist.txt 192.168.1.1 ssh\n  hydra -l root -P rockyou.txt 10.0.0.1 ftp\n\nCommon services: ssh, ftp, http-post-form, mysql, smb';
@@ -803,7 +1237,7 @@ var CMD_HINTS={
   grep:'grep [options] <pattern> [file]  — e.g. grep password rockyou.txt',
   base64:'base64 encode <text> | base64 decode <base64>',
   hashcat:'hashcat -m <mode> <hashfile> <wordlist>  — modes: -m 0 (MD5), -m 100 (SHA1), -m 1400 (SHA256)',
-  challenge:'challenge             list challenges\nchallenge <id>       view challenge\nchallenge <id> <ans> submit answer',
+  challenge:'challenge                  show how-to-play + list\nchallenge <id>            open a challenge\nchallenge <id> hint       get a hint\nchallenge <id> <answer>   submit your answer',
   python:'python3 -c "<code>"  or  python3 script.py',
   ls:'ls [options]  — e.g. ls -l  |  ls -a',
   traceroute:'traceroute [-n] <host>  — e.g. traceroute -n google.com',
