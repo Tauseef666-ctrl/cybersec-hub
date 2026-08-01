@@ -7,6 +7,6 @@ on:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    if: true
+    if: ${{ github.event_name == 'push' }}
     steps:
-      - run: echo probe-iftrue-ok
+      - run: echo probe-ctx-ok
