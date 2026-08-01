@@ -8,8 +8,6 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: check secret
-        env:
-          MY_SECRET: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        run: |
-          if [ -z "$MY_SECRET" ]; then echo "SECRET_IS_EMPTY"; else echo "SECRET_IS_SET"; fi
+      - name: step if secret
+        if: ${{ secrets.NETLIFY_AUTH_TOKEN != '' }}
+        run: echo step-if-secret-ok
