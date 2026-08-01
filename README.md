@@ -40,11 +40,11 @@ Built as a single-page vanilla HTML/CSS/JS web application wrapped in an Android
 
 | Platform | Format | Link |
 |----------|--------|------|
-| Android | APK | [**Download v3.2.0**](../../releases/latest) |
-| Windows | Portable EXE | [**Download v3.2.0**](../../releases/latest) |
-| Windows | Installer (NSIS) | [**Download v3.2.0**](../../releases/latest) |
-| Linux | AppImage | [**Download v3.2.0**](../../releases/latest) |
-| Linux | DEB | [**Download v3.2.0**](../../releases/latest) |
+| Android | APK | [**Download v4.0.0**](../../releases/latest) |
+| Windows | Portable EXE | [**Download v4.0.0**](../../releases/latest) |
+| Windows | Installer (NSIS) | [**Download v4.0.0**](../../releases/latest) |
+| Linux | AppImage | [**Download v4.0.0**](../../releases/latest) |
+| Linux | DEB | [**Download v4.0.0**](../../releases/latest) |
 
 > **Android**: Requires Android 5.0+ (Lollipop). Install the APK directly.
 > **Windows 11/10**: Download the portable archive, extract it, and run `CyberSec Hub.exe`. No installation needed.
@@ -260,7 +260,15 @@ npm start
 
 ## Version History
 
-### v3.2.0 (Latest)
+### v4.0.0 (Latest)
+- 200 quiz questions (8 per section) with explanations and streak tracking
+- 25 quick-reference (cheat sheet) tables, one per section
+- Searchable security glossary with 90+ terms
+- Keyboard shortcuts: Ctrl+G glossary, Ctrl+1-9 quick navigation, Ctrl+K search, Ctrl+` terminal
+- New terminal commands: `glossary <term>` and `cheatsheet <section>`
+- Home screen Quick Reference block
+
+### v3.2.0
 - Full course restructure with subtopics, embedded videos, and notes
 - Boot sound effect and splash screen improvements
 - Video panel with YouTube integration

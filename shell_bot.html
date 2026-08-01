@@ -13,6 +13,8 @@
   <div class="shortcut-box">
     <h3>&#9881; Keyboard Shortcuts</h3>
     <div class="shortcut-row"><span class="sc-label">Search</span><kbd>Ctrl + K</kbd></div>
+    <div class="shortcut-row"><span class="sc-label">Quick nav 1-9</span><kbd>Ctrl + 1-9</kbd></div>
+    <div class="shortcut-row"><span class="sc-label">Glossary</span><kbd>Ctrl + G</kbd></div>
     <div class="shortcut-row"><span class="sc-label">Terminal</span><kbd>Ctrl + `</kbd></div>
     <div class="shortcut-row"><span class="sc-label">Previous section</span><kbd>Alt + &#8592;</kbd></div>
     <div class="shortcut-row"><span class="sc-label">Next section</span><kbd>Alt + &#8594;</kbd></div>
@@ -125,6 +127,7 @@ function toast(msg,type,icon){
   tc.appendChild(t);
   setTimeout(function(){if(t.parentElement){t.classList.add('out');setTimeout(function(){t.remove()},300)}},4000);
 }
+window._toast=toast;
 
 function updateStreakUI(){
   var el=document.getElementById('quizStreak');
@@ -150,6 +153,7 @@ function nav(sid){
     if(sid==='home'&&window._replayCounters)setTimeout(window._replayCounters,200);
     if(sid==='labs'&&window.renderLabs)window.renderLabs();
     if(sid==='progress'&&window.Progress)window.Progress.render();
+    if(sid==='glossary'&&window.renderGlossary)window.renderGlossary();
   },180);
   document.querySelectorAll('.n-it').forEach(n=>n.classList.remove('act'));
   let navEl=document.querySelector('.n-it[data-s="'+sid+'"]');
@@ -162,6 +166,7 @@ function nav(sid){
     var tab=b.dataset.tab;
     var active=false;
     if(sid==='home'&&tab==='home')active=true;
+    else if(sid==='glossary'&&tab==='home')active=true;
     else if(sid==='labs'&&tab==='labs')active=true;
     else if(sid==='progress'&&tab==='progress')active=true;
     else if(sid!=='home'&&sid!=='labs'&&sid!=='progress'&&tab==='modules')active=true;
@@ -185,6 +190,7 @@ function update(){
   let bc=document.getElementById('bc');
   if(cur==='labs'){bc.innerHTML='<span class="bc">'+(sec?sec.t:'Home')+'</span><span class="bc-s">/</span><span>Lab Center</span>'}
   else if(cur==='progress'){bc.innerHTML='<span class="bc">'+(sec?sec.t:'Home')+'</span><span class="bc-s">/</span><span>My Progress</span>'}
+  else if(cur==='glossary'){bc.innerHTML='<span class="bc" style="cursor:pointer" onclick="window.S(\'home\')">Home</span><span class="bc-s">/</span><span>Security Glossary</span>'}
   else if(sec&&sec.p!=='home'){
     bc.innerHTML='<span class="bc" style="cursor:pointer" onclick="window.S(\'home\')">'+sec.t.split('.')[0]+'</span><span class="bc-s">/</span><span>'+sec.t.replace(/^\d+\.\s*/,'')+'</span>';
   }else{
@@ -960,7 +966,7 @@ var CTF_CHALLENGES=[
 ];
 
 var TERM_CMDS={
-help:'Available commands:\n  help       - Show this help\n  clear      - Clear terminal\n  whoami     - Current user info\n  uname      - System information\n  ls         - List files\n  cat        - Read file contents\n  pwd        - Print working directory\n  echo       - Echo text\n  date       - Current date/time\n  id         - User identity\n  history    - Command history\n  tree       - Directory tree\n  score      - Quiz statistics\n  sudo       - Execute as superuser\n  man        - Manual pages\n  challenge  - CTF challenges\n  hint       - Command usage hints\n  hints      - Toggle auto-hints\n  -- Network --\n  ping       - Ping a host\n  nmap       - Network mapper\n  ifconfig   - Network interface info\n  ip         - IP address info\n  ss         - Socket statistics\n  netstat    - Network connections\n  curl       - Transfer URL\n  wget       - Download file\n  ssh        - SSH connection\n  traceroute - Trace network path\n  dig        - DNS lookup\n  host       - DNS lookup\n  nslookup   - DNS lookup\n  whois      - Domain/IP information\n  -- Security Tools --\n  hydra      - Brute force login\n  john       - Password cracker\n  sqlmap     - SQL injection tool\n  gobuster   - Directory brute force\n  nikto      - Web server scanner\n  -- System --\n  ps         - Running processes\n  tcpdump    - Packet capture\n  nc         - Netcat connection\n  grep       - Search text\n  base64     - Base64 encode/decode\n  python     - Python interpreter\n  hashcat    - Hash cracker\n  exit       - Exit terminal',
+help:'Available commands:\n  help       - Show this help\n  clear      - Clear terminal\n  whoami     - Current user info\n  uname      - System information\n  ls         - List files\n  cat        - Read file contents\n  pwd        - Print working directory\n  echo       - Echo text\n  date       - Current date/time\n  id         - User identity\n  history    - Command history\n  tree       - Directory tree\n  score      - Quiz statistics\n  sudo       - Execute as superuser\n  man        - Manual pages\n  challenge  - CTF challenges\n  hint       - Command usage hints\n  hints      - Toggle auto-hints\n  glossary   - Search the security glossary\n  cheatsheet - Open a section quick reference\n  -- Network --\n  ping       - Ping a host\n  nmap       - Network mapper\n  ifconfig   - Network interface info\n  ip         - IP address info\n  ss         - Socket statistics\n  netstat    - Network connections\n  curl       - Transfer URL\n  wget       - Download file\n  ssh        - SSH connection\n  traceroute - Trace network path\n  dig        - DNS lookup\n  host       - DNS lookup\n  nslookup   - DNS lookup\n  whois      - Domain/IP information\n  -- Security Tools --\n  hydra      - Brute force login\n  john       - Password cracker\n  sqlmap     - SQL injection tool\n  gobuster   - Directory brute force\n  nikto      - Web server scanner\n  -- System --\n  ps         - Running processes\n  tcpdump    - Packet capture\n  nc         - Netcat connection\n  grep       - Search text\n  base64     - Base64 encode/decode\n  python     - Python interpreter\n  hashcat    - Hash cracker\n  exit       - Exit terminal',
 clear:null,
 whoami:'visitor@cybersec-hub',
 uname:'Linux cybersec-hub 5.15.0-kali1-amd64 x86_64 GNU/Linux',
@@ -1004,9 +1010,30 @@ score:function(){
   var total=SEC.length-1;
   var completed=Object.keys(done).length;
   var pct=total?Math.round(completed/total*100):0;
-  return '=== Quiz Statistics ===\nSections completed: '+completed+'/'+total+' ('+pct+'%)\nTotal questions: '+totalQuizzes+'\nCorrect answers: '+correctQuizzes+'\nCurrent streak: '+quizStreak+'\nAccuracy: '+(totalQuizzes?Math.round(correctQuizzes/totalQuizzes*100):0)+'%';
-},
-cat:function(args){
+    return '=== Quiz Statistics ===\nSections completed: '+completed+'/'+total+' ('+pct+'%)\nTotal questions: '+totalQuizzes+'\nCorrect answers: '+correctQuizzes+'\nCurrent streak: '+quizStreak+'\nAccuracy: '+(totalQuizzes?Math.round(correctQuizzes/totalQuizzes*100):0)+'%';
+  },
+  glossary:function(args){
+    if(!args)return 'glossary - searchable security term index\n\nUsage:\n  glossary <term>      Look up a term (e.g. glossary xss)\n  glossary             Show this help\n\nTry: CVE, SIEM, XSS, IDOR, MITRE, OSINT, EDR, TTP, MITM, PKI';
+    var q=args.toLowerCase();
+    var m=GLOSSARY.filter(function(g){return g[0].toLowerCase().indexOf(q)>=0||g[2].toLowerCase().indexOf(q)>=0||g[1].toLowerCase().indexOf(q)>=0});
+    if(!m.length)return 'glossary: no terms matching "'+args+'"';
+    return m.slice(0,8).map(function(g){
+      var sec=SEC.filter(function(s){return s.s===g[1]})[0];
+      return g[0]+'  ['+g[1]+']\n  '+g[2]+(sec?'  (see: '+sec.t.replace(/^\d+\.\s*/,'')+')':'');
+    }).join('\n')+(m.length>8?'\n... and '+m.length+' more.':'\n'+m.length+' match(es). Try Ctrl+G for the full glossary.');
+  },
+  cheatsheet:function(args){
+    if(!args)return 'cheatsheet - open a section quick reference\n\nUsage:\n  cheatsheet <section>   e.g. cheatsheet linux, cheatsheet websecurity\n\nSections: foundations, linux, termux, networking, recon, scanning, ethicalhack, exploitation, bugbounty, tools, privesc, postexp, websecurity, ossecurity, malware, forensics, wireless, crypto, cloud, mobile, redteam, blueteam, homelab, career, legal';
+    var sid=args.toLowerCase().trim();
+    if(!document.getElementById('sec-'+sid))return 'cheatsheet: no section "'+args+'"';
+    nav(sid);
+    setTimeout(function(){
+      var sec=document.getElementById('sec-'+sid),cs=sec?sec.querySelector('.cs-block'):null;
+      if(cs){cs.scrollIntoView({behavior:'smooth',block:'start'});cs.classList.add('cs-flash');setTimeout(function(){cs.classList.remove('cs-flash')},1600)}
+    },350);
+    return 'Opening quick reference for "'+sid+'"...';
+  },
+  cat:function(args){
   if(!args)return'cat: missing file operand';
   var files={'notes.txt':'# Security Notes\n- Always get written permission before testing\n- Document everything\n- Use VPN during recon','exploit.db':'Database loaded: 1,337 exploits\n[1] vsftpd_backdoor - vsftpd 2.3.4\n[2] ms17_010_eternalblue - SMB\n[3] shellshock_cve_2014_6271 - Bash','recon.sh':'#!/bin/bash\necho "[*] Starting recon..."\nnmap -sV -sC -O -A $1\necho "[*] Done."','exploit.py':'#!/usr/bin/env python3\nimport socket\n\ndef exploit(target, port):\n    payload = b"\\x90" * 64\n    print(f"[*] Sending to {target}:{port}")\n    return payload','payload.bin':'\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\n\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\\x90\n[shellcode] nop sled + reverse shell payload\nArch: x64 | Size: 256 bytes','rockyou.txt':'[rockyou.txt truncated — 14,344,391 lines]\n123456\n12345\n123456789\npassword\niloveyou\nprincess\n1234567\nrockyou\n12345678\nabc123\n...','common.txt':'admin\nlogin\nwp-admin\nadministrator\nroot\nbackup\nadmin123\nmanager\ncontrol\nadmin1\n...'};
   var f=args.split(' ').pop();
@@ -1499,6 +1526,15 @@ document.addEventListener('keydown',function(e){
     var sm=document.getElementById('sm');sm.classList.add('show');
     setTimeout(function(){document.getElementById('sInput2').focus()},100);
   }
+  if((e.ctrlKey||e.metaKey)&&!e.shiftKey&&!e.altKey&&e.key>='1'&&e.key<='9'&&!e.target.matches('input,textarea,select')){
+    e.preventDefault();
+    var idx=parseInt(e.key);
+    if(SEC[idx]&&SEC[idx].s!=='home')nav(SEC[idx].s);
+  }
+  if((e.ctrlKey||e.metaKey)&&(e.key||'').toLowerCase()==='g'){
+    e.preventDefault();
+    nav('glossary');
+  }
   if(e.key==='Escape'){
     var sm=document.getElementById('sm');if(sm.classList.contains('show')){sm.classList.remove('show');return}
     var sc=document.getElementById('shortcutModal');if(sc.classList.contains('show')){sc.classList.remove('show');return}
@@ -1565,7 +1601,31 @@ window._openVidPanel=function(secId,vidId){_openYoutube(vidId)};
 window._openYoutube=_openYoutube;
 
 window.S=nav;
-buildNav();initSearch();initNav();initCollapsibles();initCopyButtons();initQuizzes();initTerminal();initHomeCards();initExercises();initBoot();initBottomNav();initReadingTime();initSync();
+var GLOSSARY=[["CIA Triad", "foundations", "Confidentiality, Integrity, and Availability — the core model of information security."], ["AAA", "foundations", "Authentication, Authorization, and Accounting: verify identity, grant permissions, log activity."], ["Defense in Depth", "foundations", "Layered security controls (physical, network, host, app, data) so no single failure is fatal."], ["Risk", "foundations", "Threat x Vulnerability x Impact; managed via mitigate, transfer, accept, or avoid."], ["Zero-day", "exploitation", "A vulnerability unknown to the vendor, so no patch exists yet."], ["Kill Chain", "ethicalhack", "Lockheed Martin model of attack stages: Recon, Weaponize, Deliver, Exploit, Install, C2, Actions."], ["NIST CSF", "foundations", "Framework with five functions: Identify, Protect, Detect, Respond, Recover."], ["ISO 27001", "foundations", "International standard for Information Security Management Systems (ISMS)."], ["SOC 2", "foundations", "Audit framework for service providers' security, availability, and confidentiality controls."], ["GDPR", "legal", "EU regulation protecting personal data; breach notification within 72 hours."], ["Root", "linux", "The superuser account with unrestricted system control on Unix-like systems."], ["Sudo", "linux", "Run a command as another user (usually root) with logged authorization."], ["SUID", "privesc", "Set-user-ID permission bit that runs a program with the file owner's privileges."], ["Kernel", "linux", "Core OS component managing hardware, processes, and memory."], ["SSH", "networking", "Secure Shell — encrypted remote login and command execution on port 22."], ["TCP/IP", "networking", "The fundamental protocol suite of the internet: reliable transport over IP."], ["DNS", "networking", "Domain Name System — resolves hostnames to IP addresses on port 53."], ["OSI Model", "networking", "Seven-layer conceptual model: Physical, Data Link, Network, Transport, Session, Presentation, Application."], ["Subnet Mask", "networking", "Defines the network/host boundary of an IP address (e.g. /24 = 255.255.255.0)."], ["VPN", "networking", "Encrypted tunnel that hides traffic and changes apparent location."], ["Proxy", "networking", "Intermediary that forwards requests, hiding the client and enabling interception."], ["TLS", "crypto", "Transport Layer Security — encrypts and authenticates HTTPS, SMTP, and more."], ["OSINT", "recon", "Open Source Intelligence: gathering data from public sources."], ["Footprinting", "recon", "Passive information gathering about a target before active interaction."], ["Fingerprinting", "scanning", "Identifying OS and services from their responses and banners."], ["Port Scanning", "scanning", "Probing hosts to discover open ports and services (e.g. with Nmap)."], ["Enumeration", "scanning", "Extracting detailed info (users, shares, versions) from open services."], ["Banner Grabbing", "scanning", "Reading service banners to identify software versions."], ["Shodan", "recon", "Search engine for internet-exposed devices and banners."], ["Google Dorking", "recon", "Using advanced search operators to find sensitive/exposed data."], ["OWASP", "websecurity", "Open Web Application Security Project — publishes the Top 10 web risks."], ["XSS", "websecurity", "Cross-Site Scripting — injecting scripts that run in victims' browsers."], ["SQL Injection", "websecurity", "Manipulating SQL queries via user input to access/alter data."], ["IDOR", "websecurity", "Insecure Direct Object Reference — accessing objects via changed IDs."], ["CSRF", "websecurity", "Cross-Site Request Forgery — forcing a victim's session to act."], ["RCE", "exploitation", "Remote Code Execution — running arbitrary code on a target."], ["LFI", "websecurity", "Local File Inclusion — reading server files via path traversal."], ["SSRF", "websecurity", "Server-Side Request Forgery — making the server fetch internal resources."], ["WAF", "websecurity", "Web Application Firewall — filters malicious HTTP traffic."], ["Metasploit", "exploitation", "Offensive framework with modules for exploiting and post-exploitation."], ["Payload", "exploitation", "Code delivered and run after a vulnerability is triggered."], ["Shellcode", "exploitation", "Machine code injected to execute commands (often spawning a shell)."], ["Reverse Shell", "postexp", "Target connects back to the attacker's listener — bypasses inbound firewalls."], ["Bind Shell", "postexp", "Attacker connects to a listener opened on the target."], ["Persistence", "postexp", "Techniques that keep access across reboots (cron, services, keys)."], ["Pivoting", "postexp", "Routing through a compromised host to reach internal networks."], ["C2", "redteam", "Command and Control — attacker's channel to manage compromised hosts."], ["Mimikatz", "postexp", "Tool that dumps Windows credentials from memory (Kerberos, NTLM)."], ["SIEM", "blueteam", "Security Information and Event Management — central log collection and alerts."], ["EDR", "blueteam", "Endpoint Detection and Response — monitors endpoints for threats."], ["IDS / IPS", "blueteam", "Intrusion Detection/Prevention System — network traffic monitoring."], ["SOC", "blueteam", "Security Operations Center — the team monitoring and responding to threats."], ["IoC", "blueteam", "Indicator of Compromise — evidence like IPs, hashes, or domains of an intrusion."], ["SOAR", "blueteam", "Security Orchestration, Automation and Response."], ["Honeypot", "blueteam", "Decoy system designed to lure and study attackers."], ["Sandbox", "malware", "Isolated environment for safely executing and analyzing malware."], ["Malware", "malware", "Malicious software: viruses, worms, trojans, ransomware, spyware, rootkits."], ["Ransomware", "malware", "Malware that encrypts data and demands payment for the key."], ["Botnet", "malware", "Network of compromised machines under attacker control."], ["Rootkit", "malware", "Malware that hides itself and maintains privileged access."], ["Encryption", "crypto", "Transforming data so only key holders can read it."], ["Hashing", "crypto", "One-way function producing a fixed digest; used for integrity."], ["Symmetric Cipher", "crypto", "Uses the same key to encrypt and decrypt (e.g. AES)."], ["Asymmetric Cipher", "crypto", "Uses a public/private key pair (e.g. RSA, ECC)."], ["PKI", "crypto", "Public Key Infrastructure — certificates, CAs, and trust."], ["Certificate", "crypto", "Digital credential binding a public key to an identity."], ["Salt", "crypto", "Random data added to passwords before hashing to defeat rainbow tables."], ["CVE", "exploitation", "Common Vulnerabilities and Exposures — public identifier for a specific flaw."], ["CVSS", "exploitation", "Common Vulnerability Scoring System — rates severity from 0-10."], ["WEP / WPA / WPA2", "wireless", "WiFi encryption standards; WEP is broken, WPA2-AES is the baseline, WPA3 adds SAE."], ["Evil Twin", "wireless", "Rogue access point impersonating a legitimate network to intercept traffic."], ["Deauth Attack", "wireless", "Forcing clients offline to capture handshakes or disrupt service."], ["Bluejacking", "wireless", "Sending unsolicited messages to nearby Bluetooth devices."], ["Red Team", "redteam", "Offensive team simulating real adversaries to test defenses."], ["Blue Team", "blueteam", "Defensive team detecting and responding to attacks."], ["Purple Team", "redteam", "Red and blue teams collaborating to improve security together."], ["TTP", "redteam", "Tactics, Techniques, and Procedures — how an adversary operates."], ["MITRE ATT&CK", "redteam", "Knowledge base of adversary tactics and techniques."], ["Pentest", "ethicalhack", "Penetration test — authorized simulated attack to find weaknesses."], ["Bug Bounty", "bugbounty", "Vendor program paying researchers for reported vulnerabilities."], ["Responsible Disclosure", "legal", "Privately reporting flaws and allowing time to fix before public release."], ["CFAA", "legal", "US Computer Fraud and Abuse Act — criminalizes unauthorized access."], ["MFA", "ossecurity", "Multi-Factor Authentication — requires two+ proofs of identity."], ["Phishing", "foundations", "Social engineering via fake messages to steal credentials or install malware."], ["Social Engineering", "foundations", "Manipulating people to divulge secrets or perform actions."], ["MITM", "networking", "Man-in-the-Middle — attacker relays/alters traffic between two parties."], ["DDoS", "networking", "Distributed Denial of Service — overwhelming a service with traffic."], ["Brute Force", "tools", "Trying many passwords/keys until one succeeds."], ["Credential Stuffing", "tools", "Reusing leaked username/password pairs across sites."]];
+
+function renderGlossary(){
+  var list=document.getElementById('glossList');
+  if(!list)return;
+  var input=document.getElementById('glossSearch');
+  var count=document.getElementById('glossCount');
+  var q=(input?input.value.toLowerCase().trim():'');
+  var matched=GLOSSARY.filter(function(g){
+    return !q||g[0].toLowerCase().indexOf(q)>=0||g[2].toLowerCase().indexOf(q)>=0||g[1].toLowerCase().indexOf(q)>=0;
+  });
+  if(count)count.textContent=matched.length+' of '+GLOSSARY.length+' terms';
+  list.innerHTML=matched.map(function(g){
+    var sec=SEC.filter(function(s){return s.s===g[1]})[0];
+    var secName=sec?sec.t.replace(/^\d+\.\s*/,''):g[1];
+    return '<div class="gloss-item"><span class="g-term">'+g[0]+'</span><span class="g-tag">'+g[1]+'</span><div class="g-def">'+g[2]+'</div><span class="g-sec" onclick="window.S(\''+g[1]+'\')">&#8594; '+secName+'</span></div>';
+  }).join('')||'<div class="gloss-empty">No terms match your search.</div>';
+}
+function initGlossary(){
+  var input=document.getElementById('glossSearch');
+  if(input)input.addEventListener('input',renderGlossary);
+  renderGlossary();
+}
+window.renderGlossary=renderGlossary;
+buildNav();initSearch();initNav();initCollapsibles();initCopyButtons();initQuizzes();initTerminal();initHomeCards();initExercises();initBoot();initBottomNav();initReadingTime();initGlossary();initSync();
 migrateLegacyXp();updateXpBadge();
 // Progress module
 var RANKS=[
@@ -1690,11 +1750,12 @@ nav(cur);update();
   if(t.id==='termClose'||t.closest('#termClose')){e.preventDefault();if(window._closeTerminal)window._closeTerminal();return}
   if(t.id==='termMin'||t.closest('#termMin')){e.preventDefault();if(window._toggleTermMinimize)window._toggleTermMinimize();return}
 },{passive:false});
-window._toast=toast;
 })();
 
+
+
 function initSync(){
-  window._toast=toast;
+  var toast=window._toast;
   var panel=document.getElementById('syncPanel');
   var status=document.getElementById('syncStatus');
   var linkEl=document.getElementById('syncLink');
