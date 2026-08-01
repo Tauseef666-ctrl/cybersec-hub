@@ -5,10 +5,6 @@ on:
     branches: [master]
   workflow_dispatch:
 
-concurrency:
-  group: netlify-deploy
-  cancel-in-progress: true
-
 permissions:
   contents: read
 
@@ -16,7 +12,6 @@ jobs:
   deploy:
     name: Build and deploy site
     runs-on: ubuntu-latest
-    if: ${{ secrets.NETLIFY_AUTH_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -31,4 +26,9 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: bbf5c4dd-a26a-4515-a8b7-bc01aaa75a28
-        run: python3 scripts/netlify_deploy.py deploy
+        run: |
+          if [ -n "$NETLIFY_AUTH_TOKEN" ]; then
+            python3 scripts/netlify_deploy.py deploy
+          else
+            echo "NETLIFY_AUTH_TOKEN not set - skipping deploy"
+          fi
