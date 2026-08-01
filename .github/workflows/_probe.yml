@@ -7,6 +7,9 @@ on:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' }}
     steps:
-      - run: echo probe-ctx-ok
+      - name: check secret
+        env:
+          MY_SECRET: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: |
+          if [ -z "$MY_SECRET" ]; then echo "SECRET_IS_EMPTY"; else echo "SECRET_IS_SET"; fi
